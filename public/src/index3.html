@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="./index.css" rel="stylesheet" />
+    <style>
+        .box {
+            /* border : 2px solid red; */
+            height: 17rem;
+            width: 15rem;
+            border-radius:50% 50% 0 0/100% 100% 0 0;
+            background-color: #48abe0;
+            transform: rotate(100deg);
+            
+        }
+        .box1 {
+            /* border: 2px solid green; */
+            height: 10rem;
+            width: 15rem;
+            /* margin-top: 6px; */
+            border-radius:50% 50% 0 0/100% 100% 0 0;
+            background-color: #48abe0;
+            transform: rotate(-70deg);
+        }
+        .bo{
+            border : 2px solid black;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            width: 300px;
+            justify-content: space-between;
+        }
+    </style>
+  </head>
+<body class="bo relative">
+    <img src="./assets/img/team-1.png" alt="">
+  <div class='box absolute left-0 -z-10 bg-green-300'></div>
+  <div class='box1 absolute -right-5 bottom-5 bg-red-200 -z-10'></div>
+  
+</body>
+</html>

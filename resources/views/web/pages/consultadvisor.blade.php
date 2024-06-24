@@ -1,0 +1,1438 @@
+@extends('web.layouts.app')
+
+@section('maincontent')
+    <div class="bg-[#FFFFFF] relative overflow-x-hidden">
+        <!-- Header -->
+        @include('web.components.header')
+
+
+
+        <!-- main -->
+        <div
+            class="flex flex-col lg:flex-row gap-[15px] lg:gap-[25px] mt-[10px] lg:mt-[20px] w-[90%] md:w-[95%] lg:w-[90%] mx-auto">
+            <!-- search box for moblie screen -->
+            <div
+                class="flex p-3 mx-auto lg:hidden bg-white border border-[#EAEAEA] rounded-[40px] justify-between w-full md:w-[80%]">
+                <input class="bg-white rounded-[40px]" placeholder="Search Advisor" type="text" />
+                <button
+                    class="flex items-center bg-[#EDF6DB] px-[12px] py-[10px] md:px-[32px] rounded-[40px] md:py-[12px] gap-1 md:gap-5">
+                    <i class="fa-solid fa-magnifying-glass fa-xs" style="color: #000000"></i>
+                    <p class="font-[500] text-[10px] lg:text-[16px]">Find Advisor</p>
+                </button>
+            </div>
+            <!-- left -->
+            <div class="flex gap-[26px] w-full lg:w-[15%]">
+                <div class="w-full">
+                    <span class="font-[500] hidden lg:flex text-[16px]">
+                        Home /<span class="font-[600]"> Consult Advisor</span></span>
+                    <h3 class="font-[500] text-[16px] flex lg:hidden lg:mt-[5px]">
+                        Filter
+                    </h3>
+                    <h2 class="font-[500] text-[16px] hidden lg:flex lg:mt-[45px]">
+                        Filter by:
+                    </h2>
+                    <div class="flex flex-row gap-[12px] lg:gap-0 lg:flex-col mt-[4px] lg:mt-[0px] items-center w-full">
+                        <!-- dropdown 1 -->
+                        <form class="w-full lg:mt-[12px] mx-auto">
+                            <label for="underline_select" class="sr-only">Business Functions</label>
+                            <select id="underline_select" class="w-full bg-[#FFF6F6] drop-shadow-lg p-3 rounded-[12px]">
+                                <option selected class="font-[500] text-[16px]">
+                                    Business Functions
+                                </option>
+                                <option value="US">Ecommerce</option>
+                                <option value="CA">Finances</option>
+                                <option value="FR">Digital Market</option>
+                            </select>
+                        </form>
+                        <!-- dropdown 2 -->
+                        <form class="w-full lg:mt-[12px] mx-auto">
+                            <label for="underline_select" class="sr-only">Industry</label>
+                            <select id="underline_select" class="w-full bg-[#FFF6F6] p-3 drop-shadow-lg rounded-[12px]">
+                                <option selected>Industry</option>
+                                <option value="US">Ecommerce</option>
+                                <option value="CA">Finances</option>
+                                <option value="FR">Digital Market</option>
+                            </select>
+                        </form>
+                        <!-- dropdown 3 -->
+                        <form class="w-full lg:mt-[12px] mx-auto">
+                            <label for="underline_select" class="sr-only">Location</label>
+                            <select id="underline_select" class="w-full bg-[#FFF6F6] p-3 drop-shadow-lg rounded-[12px]">
+                                <option selected>Location</option>
+                                <option value="US">Ecommerce</option>
+                                <option value="CA">Finances</option>
+                                <option value="FR">Digital Market</option>
+                            </select>
+                        </form>
+                        <!-- price range -->
+                        <div class="bg-[#FFF6F6] hidden lg:flex w-full gap-3 p-3 drop-shadow-lg rounded-[12px] mt-[12px]">
+                            <p class="font-[500] text-[16px]">Price</p>
+                            <div class="">
+                                <div class="">
+                                    <input type="range" id="price-range" class="w-full accent-[#C95555]" min="0"
+                                        max="1000" value="500" oninput="updatePrice(this.value)" />
+                                </div>
+                                <div class="flex justify-between text-gray-500">
+                                    <span id="minPrice">₹0</span>
+                                    <span id="maxPrice">₹1000</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- location -->
+                        <div
+                            class="w-full mt-[12px] hidden lg:flex p-3 drop-shadow-lg rounded-[12px] bg-[#FFF6F6] justify-between">
+                            <p>Available</p>
+                            <input type="checkbox" name="" id="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- right -->
+            <div class="lg:w-[90%] mx-auto w-full">
+                <!-- serach box  for lg screen-->
+                <div
+                    class="lg:flex hidden p-3  mx-auto bg-white border border-[#EAEAEA] rounded-[50px] justify-between w-[80%]">
+                    <input class="bg-white rounded-[50px] w-full px-4" placeholder="Search Advisor" type="text" />
+                    <button class="flex items-center w-[300px] bg-[#EDF6DB] px-[32px] rounded-[40px] py-[8px] gap-5">
+                        <i class="fa-solid fa-magnifying-glass" style="color: #000000"></i>
+                        <p>Find Advisor</p>
+                    </button>
+                </div>
+                <!-- advisors row -->
+                <div class="flex flex-col mt-[0px] lg:mt-[5px] gap-5">
+                    <!-- 1st row for Advisors -->
+                    <div class="w-full flex flex-wrap lg:flex-nowrap gap-[35px]">
+                        <!-- 1st  -->
+                        <div
+                            class="flex w-full lg:w-[50%] border hover:border-red-500 shadow-xl rounded-[24px] shadow-[#00000026]  flex-col">
+                            <a href="./advisor.html">
+                                <div class="bg-[#FFFACA] py-2 rounded-[24px] px-2 flex justify-between">
+                                    <p class="text-[12px] font-[500] text-[#B58300]">
+                                        Super Advisor
+                                    </p>
+                                    <div class="flex gap-1 items-center">
+                                        <i class="fa-solid fa-circle fa-xs" style="color: #6a9023"></i>
+                                        <p class="text-[12px] font-[600] text-[#6a9023]">
+                                            Available
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex w-full gap-[12px]">
+                                    <img class="w-[120px] h-[120px]" src="../src/assets/auth/Rectangle 65.png"
+                                        alt="" />
+                                    <div class="flex flex-col gap-[12px]">
+                                        <div class="flex w-full items-center justify-between">
+                                            <p class="text-[16px] font-[600] text-[#2A2A2A]">
+                                                Catherine Paize
+                                            </p>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-star fa-xs" style="color: #ffb800"></i>
+                                                <p class="text-[12px] font-[500] text-[#3A3A3A]">4.9</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex w-full justify-between gap-[4px] items-center">
+                                            <div class="flex flex-col gap-[4px]">
+                                                <div class="flex gap-1 items-center">
+                                                    <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                    <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                        Web application
+                                                    </p>
+                                                </div>
+                                                <div class="flex gap-1 items-center">
+                                                    <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                    <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                        UI/UX
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="w-[1px] h-[70%] border border-[#E5E5E5]"></div>
+                                            <div class="flex flex-col gap-[4px]">
+                                                <div class="flex gap-1 items-center">
+                                                    <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                    <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                        Business coaching
+                                                    </p>
+                                                </div>
+                                                <div class="flex gap-1 items-center">
+                                                    <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                    <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                        Leadership coaching
+                                                    </p>
+                                                </div>
+                                                <div class="flex gap-1 items-center">
+                                                    <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                    <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                        Executive coaching
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex w-full relative justify-between  px-4 pb-4 gap-[4px]">
+                                    <img class="w-[100px] h-[100px] md:w-[120px] md:h-[120px] absolute bottom-[-5px] right-[-5px]"
+                                        src="../src/assets/Stamp.png" alt="" />
+                                    <div class="flex flex-col gap-[4px]">
+                                        <div class="flex gap-1 items-center">
+                                            <img class="w-[20px] h-[20px]" src="../src/assets/icons/Discovery call.png"
+                                                alt="" />
+                                            <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                                Discovery call
+                                            </p>
+                                        </div>
+                                        <div class="flex gap-1 items-center">
+                                            <img class="w-[20px] h-[20px]" src="../src/assets/icons/Consultation call.png"
+                                                alt="" />
+                                            <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                                Consultation call
+                                            </p>
+                                        </div>
+                                        <div class="flex gap-1 items-center">
+                                            <img class="w-[20px] h-[20px]" src="../src/assets/icons/Chat.png"
+                                                alt="" />
+                                            <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                                Chat
+                                            </p>
+                                        </div>
+                                        <div class="flex gap-1 items-center">
+                                            <img class="w-[20px] h-[20px]" src="../src/assets/icons/Book Appointment.png"
+                                                alt="" />
+                                            <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                                Book Appointment
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col gap-[4px]">
+                                        <div class="flex gap-1 items-center">
+                                            <img class="w-[20px] h-[20px]" src="../src/assets/icons/hindi.png"
+                                                alt="" />
+                                            <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                                Hindi, English
+                                            </p>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <img class="w-[20px] h-[20px]" src="../src/assets/icons/33.png"
+                                                alt="" />
+                                            <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                                33/min
+                                            </p>
+                                        </div>
+                                        <div class="flex gap-1 items-center">
+                                            <img class="w-[20px] h-[20px]" src="../src/assets/icons/location.png"
+                                                alt="" />
+                                            <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                                Delhi, India
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col gap-[4px]">
+                                        <div class="flex gap-1 items-center">
+                                            <i class="fa-regular fa-bell fa-xs" style="color: #c95555"></i>
+                                            <p class="text-[12px] font-[500] text-[#C95555]">
+                                                Notify me
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- 2nd  -->
+                        <div
+                            class="flex w-full lg:w-[50%] border hover:border-red-500 shadow-xl rounded-[24px] shadow-[#00000026]  flex-col">
+                            <a href="./advisor.html">
+                                <div class="bg-[#FFFACA] py-2 rounded-[24px] px-2 flex justify-between">
+                                    <p class="text-[12px] font-[500] text-[#B58300]">
+                                        Super Advisor
+                                    </p>
+                                    <div class="flex gap-1 items-center">
+                                        <i class="fa-solid fa-circle fa-xs" style="color: #6a9023"></i>
+                                        <p class="text-[12px] font-[600] text-[#6a9023]">
+                                            Available
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex w-full gap-[12px]">
+                                    <img class="w-[120px] h-[120px]" src="../src/assets/auth/Rectangle 65 (1).png"
+                                        alt="" />
+                                    <div class="flex flex-col gap-[12px]">
+                                        <div class="flex w-full items-center justify-between">
+                                            <p class="text-[16px] font-[600] text-[#2A2A2A]">
+                                                Catherine Paize
+                                            </p>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-star fa-xs" style="color: #ffb800"></i>
+                                                <p class="text-[12px] font-[500] text-[#3A3A3A]">4.9</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex w-full justify-between gap-[4px] items-center">
+                                            <div class="flex flex-col gap-[4px]">
+                                                <div class="flex gap-1 items-center">
+                                                    <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                    <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                        Web application
+                                                    </p>
+                                                </div>
+                                                <div class="flex gap-1 items-center">
+                                                    <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                    <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                        UI/UX
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="w-[1px] h-[70%] border border-[#E5E5E5]"></div>
+                                            <div class="flex flex-col gap-[4px]">
+                                                <div class="flex gap-1 items-center">
+                                                    <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                    <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                        Business coaching
+                                                    </p>
+                                                </div>
+                                                <div class="flex gap-1 items-center">
+                                                    <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                    <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                        Leadership coaching
+                                                    </p>
+                                                </div>
+                                                <div class="flex gap-1 items-center">
+                                                    <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                    <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                        Executive coaching
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex w-full relative justify-between  px-4 pb-4 gap-[4px]">
+                                    <img class="w-[100px] h-[100px] md:w-[120px] md:h-[120px] absolute bottom-[-5px] right-[-5px]"
+                                        src="../src/assets/Stamp.png" alt="" />
+                                    <div class="flex flex-col gap-[4px]">
+                                        <div class="flex gap-1 items-center">
+                                            <img class="w-[20px] h-[20px]" src="../src/assets/icons/Discovery call.png"
+                                                alt="" />
+                                            <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                                Discovery call
+                                            </p>
+                                        </div>
+                                        <div class="flex gap-1 items-center">
+                                            <img class="w-[20px] h-[20px]" src="../src/assets/icons/Consultation call.png"
+                                                alt="" />
+                                            <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                                Consultation call
+                                            </p>
+                                        </div>
+                                        <div class="flex gap-1 items-center">
+                                            <img class="w-[20px] h-[20px]" src="../src/assets/icons/Chat.png"
+                                                alt="" />
+                                            <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                                Chat
+                                            </p>
+                                        </div>
+                                        <div class="flex gap-1 items-center">
+                                            <img class="w-[20px] h-[20px]" src="../src/assets/icons/Book Appointment.png"
+                                                alt="" />
+                                            <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                                Book Appointment
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col gap-[4px]">
+                                        <div class="flex gap-1 items-center">
+                                            <img class="w-[20px] h-[20px]" src="../src/assets/icons/hindi.png"
+                                                alt="" />
+                                            <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                                Hindi, English
+                                            </p>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <img class="w-[20px] h-[20px]" src="../src/assets/icons/33.png"
+                                                alt="" />
+                                            <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                                33/min
+                                            </p>
+                                        </div>
+                                        <div class="flex gap-1 items-center">
+                                            <img class="w-[20px] h-[20px]" src="../src/assets/icons/location.png"
+                                                alt="" />
+                                            <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                                Delhi, India
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col gap-[4px]">
+                                        <div class="flex gap-1 items-center">
+                                            <i class="fa-regular fa-bell fa-xs" style="color: #c95555"></i>
+                                            <p class="text-[12px] font-[500] text-[#C95555]">
+                                                Notify me
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 2nd row for advisors -->
+                    <div class="w-full flex flex-wrap lg:flex-nowrap gap-[35px]">
+                        <!-- 1st  -->
+                        <div
+                            class="flex border hover:border-red-500 w-full lg:w-[50%] shadow-xl rounded-[24px] shadow-[#00000026] p-4 flex-col">
+                            <div class="flex justify-between">
+                                <p class="text-[12px] font-[500] text-[#B58300]">
+                                    Super Advisor
+                                </p>
+                                <div class="flex gap-1 items-center">
+                                    <i class="fa-solid fa-circle fa-xs" style="color: #6a9023"></i>
+                                    <p class="text-[12px] font-[600] text-[#6a9023]">Available</p>
+                                </div>
+                            </div>
+                            <div class="flex w-full gap-[12px]">
+                                <img class="w-[120px] h-[120px]" src="../src/assets/auth/Rectangle 65 (2).png"
+                                    alt="" />
+                                <div class="flex flex-col gap-[12px]">
+                                    <div class="flex w-full items-center justify-between">
+                                        <p class="text-[16px] font-[600] text-[#2A2A2A]">
+                                            Catherine Paize
+                                        </p>
+                                        <div class="flex gap-1 items-center">
+                                            <i class="fa-solid fa-star fa-xs" style="color: #ffb800"></i>
+                                            <p class="text-[12px] font-[500] text-[#3A3A3A]">4.9</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex w-full justify-between gap-[4px] items-center">
+                                        <div class="flex flex-col gap-[4px]">
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Web application
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    UI/UX
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="w-[1px] h-[70%] border border-[#E5E5E5]"></div>
+                                        <div class="flex flex-col gap-[4px]">
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Business coaching
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Leadership coaching
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Executive coaching
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex w-full justify-between gap-[4px]">
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Discovery call.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Discovery call
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Consultation call.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Consultation call
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Chat.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Chat
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Book Appointment.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Book Appointment
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <i class="fa-solid fa-language fa-xs" style="color: #3a3a3a"></i>
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                            Hindi, English
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/33.png" alt="" />
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">33/min</p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/location.png"
+                                            alt="" />
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                            Delhi, India
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <i class="fa-regular fa-bell fa-xs" style="color: #c95555"></i>
+                                        <p class="text-[12px] font-[500] text-[#C95555]">
+                                            Notify me
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 2nd  -->
+                        <div
+                            class="flex border hover:border-red-500 w-full lg:w-[50%] shadow-xl rounded-[24px] shadow-[#00000026] p-4 flex-col">
+                            <div class="flex justify-between">
+                                <p class="text-[12px] font-[500] text-[#B58300]">
+                                    Super Advisor
+                                </p>
+                                <div class="flex gap-1 items-center">
+                                    <i class="fa-solid fa-circle fa-xs" style="color: #6a9023"></i>
+                                    <p class="text-[12px] font-[600] text-[#6a9023]">Available</p>
+                                </div>
+                            </div>
+                            <div class="flex w-full gap-[12px]">
+                                <img class="w-[120px] h-[120px]" src="../src/assets/auth/Rectangle 65 (3).png"
+                                    alt="" />
+                                <div class="flex flex-col gap-[12px]">
+                                    <div class="flex w-full items-center justify-between">
+                                        <p class="text-[16px] font-[600] text-[#2A2A2A]">
+                                            Catherine Paize
+                                        </p>
+                                        <div class="flex gap-1 items-center">
+                                            <i class="fa-solid fa-star fa-xs" style="color: #ffb800"></i>
+                                            <p class="text-[12px] font-[500] text-[#3A3A3A]">4.9</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex w-full justify-between gap-[4px] items-center">
+                                        <div class="flex flex-col gap-[4px]">
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Web application
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    UI/UX
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="w-[1px] h-[70%] border border-[#E5E5E5]"></div>
+                                        <div class="flex flex-col gap-[4px]">
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Business coaching
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Leadership coaching
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Executive coaching
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex w-full justify-between gap-[4px]">
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Discovery call.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Discovery call
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Consultation call.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Consultation call
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Chat.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Chat
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Book Appointment.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Book Appointment
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <i class="fa-solid fa-language fa-xs" style="color: #3a3a3a"></i>
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                            Hindi, English
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/33.png" alt="" />
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">33/min</p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/location.png"
+                                            alt="" />
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                            Delhi, India
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <i class="fa-regular fa-bell fa-xs" style="color: #c95555"></i>
+                                        <p class="text-[12px] font-[500] text-[#C95555]">
+                                            Notify me
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3rd row for Advisors -->
+                    <div class="w-full flex flex-wrap lg:flex-nowrap gap-[35px]">
+                        <!-- 1st  -->
+                        <div
+                            class="flex border hover:border-red-500 w-full lg:w-[50%] shadow-xl rounded-[24px] shadow-[#00000026] p-4 flex-col">
+                            <div class="flex justify-between">
+                                <p class="text-[12px] font-[500] text-[#B58300]">
+                                    Super Advisor
+                                </p>
+                                <div class="flex gap-1 items-center">
+                                    <i class="fa-solid fa-circle fa-xs" style="color: #6a9023"></i>
+                                    <p class="text-[12px] font-[600] text-[#6a9023]">Available</p>
+                                </div>
+                            </div>
+                            <div class="flex w-full gap-[12px]">
+                                <img class="w-[120px] h-[120px]" src="../src/assets/auth/Rectangle 65 (4).png"
+                                    alt="" />
+                                <div class="flex flex-col gap-[12px]">
+                                    <div class="flex w-full items-center justify-between">
+                                        <p class="text-[16px] font-[600] text-[#2A2A2A]">
+                                            Catherine Paize
+                                        </p>
+                                        <div class="flex gap-1 items-center">
+                                            <i class="fa-solid fa-star fa-xs" style="color: #ffb800"></i>
+                                            <p class="text-[12px] font-[500] text-[#3A3A3A]">4.9</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex w-full justify-between gap-[4px] items-center">
+                                        <div class="flex flex-col gap-[4px]">
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Web application
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    UI/UX
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="w-[1px] h-[70%] border border-[#E5E5E5]"></div>
+                                        <div class="flex flex-col gap-[4px]">
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Business coaching
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Leadership coaching
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Executive coaching
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex w-full justify-between gap-[4px]">
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Discovery call.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Discovery call
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Consultation call.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Consultation call
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Chat.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Chat
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Book Appointment.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Book Appointment
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <i class="fa-solid fa-language fa-xs" style="color: #3a3a3a"></i>
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                            Hindi, English
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/33.png" alt="" />
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">33/min</p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/location.png"
+                                            alt="" />
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                            Delhi, India
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <i class="fa-regular fa-bell fa-xs" style="color: #c95555"></i>
+                                        <p class="text-[12px] font-[500] text-[#C95555]">
+                                            Notify me
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 2nd  -->
+                        <div
+                            class="flex border hover:border-red-500 w-full lg:w-[50%] shadow-xl rounded-[24px] shadow-[#00000026] p-4 flex-col">
+                            <div class="flex justify-between">
+                                <p class="text-[12px] font-[500] text-[#B58300]">
+                                    Super Advisor
+                                </p>
+                                <div class="flex gap-1 items-center">
+                                    <i class="fa-solid fa-circle fa-xs" style="color: #6a9023"></i>
+                                    <p class="text-[12px] font-[600] text-[#6a9023]">Available</p>
+                                </div>
+                            </div>
+                            <div class="flex w-full gap-[12px]">
+                                <img class="w-[120px] h-[120px]" src="../src/assets/auth/Rectangle 65 (5).png"
+                                    alt="" />
+                                <div class="flex flex-col gap-[12px]">
+                                    <div class="flex w-full items-center justify-between">
+                                        <p class="text-[16px] font-[600] text-[#2A2A2A]">
+                                            Catherine Paize
+                                        </p>
+                                        <div class="flex gap-1 items-center">
+                                            <i class="fa-solid fa-star fa-xs" style="color: #ffb800"></i>
+                                            <p class="text-[12px] font-[500] text-[#3A3A3A]">4.9</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex w-full justify-between gap-[4px] items-center">
+                                        <div class="flex flex-col gap-[4px]">
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Web application
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    UI/UX
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="w-[1px] h-[70%] border border-[#E5E5E5]"></div>
+                                        <div class="flex flex-col gap-[4px]">
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Business coaching
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Leadership coaching
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Executive coaching
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex w-full justify-between gap-[4px]">
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Discovery call.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Discovery call
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Consultation call.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Consultation call
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Chat.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Chat
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Book Appointment.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Book Appointment
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <i class="fa-solid fa-language fa-xs" style="color: #3a3a3a"></i>
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                            Hindi, English
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/33.png" alt="" />
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">33/min</p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/location.png"
+                                            alt="" />
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                            Delhi, India
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <i class="fa-regular fa-bell fa-xs" style="color: #c95555"></i>
+                                        <p class="text-[12px] font-[500] text-[#C95555]">
+                                            Notify me
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4th row for advisors -->
+                    <div class="w-full flex flex-wrap lg:flex-nowrap gap-[35px]">
+                        <!-- 1st  -->
+                        <div
+                            class="flex border hover:border-red-500 w-full lg:w-[50%] shadow-xl rounded-[24px] shadow-[#00000026] p-4 flex-col">
+                            <div class="flex justify-between">
+                                <p class="text-[12px] font-[500] text-[#B58300]">
+                                    Super Advisor
+                                </p>
+                                <div class="flex gap-1 items-center">
+                                    <i class="fa-solid fa-circle fa-xs" style="color: #6a9023"></i>
+                                    <p class="text-[12px] font-[600] text-[#6a9023]">Available</p>
+                                </div>
+                            </div>
+                            <div class="flex w-full gap-[12px]">
+                                <img class="w-[120px] h-[120px]" src="../src/assets/auth/Rectangle 65 (6).png"
+                                    alt="" />
+                                <div class="flex flex-col gap-[12px]">
+                                    <div class="flex w-full items-center justify-between">
+                                        <p class="text-[16px] font-[600] text-[#2A2A2A]">
+                                            Catherine Paize
+                                        </p>
+                                        <div class="flex gap-1 items-center">
+                                            <i class="fa-solid fa-star fa-xs" style="color: #ffb800"></i>
+                                            <p class="text-[12px] font-[500] text-[#3A3A3A]">4.9</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex w-full justify-between gap-[4px] items-center">
+                                        <div class="flex flex-col gap-[4px]">
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Web application
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    UI/UX
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="w-[1px] h-[70%] border border-[#E5E5E5]"></div>
+                                        <div class="flex flex-col gap-[4px]">
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Business coaching
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Leadership coaching
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Executive coaching
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex w-full justify-between gap-[4px]">
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Discovery call.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Discovery call
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Consultation call.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Consultation call
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Chat.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Chat
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Book Appointment.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Book Appointment
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <i class="fa-solid fa-language fa-xs" style="color: #3a3a3a"></i>
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                            Hindi, English
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/33.png" alt="" />
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">33/min</p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/location.png"
+                                            alt="" />
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                            Delhi, India
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <i class="fa-regular fa-bell fa-xs" style="color: #c95555"></i>
+                                        <p class="text-[12px] font-[500] text-[#C95555]">
+                                            Notify me
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 2nd  -->
+                        <div
+                            class="flex border hover:border-red-500 w-full lg:w-[50%] shadow-xl rounded-[24px] shadow-[#00000026] p-4 flex-col">
+                            <div class="flex justify-between">
+                                <p class="text-[12px] font-[500] text-[#B58300]">
+                                    Super Advisor
+                                </p>
+                                <div class="flex gap-1 items-center">
+                                    <i class="fa-solid fa-circle fa-xs" style="color: #6a9023"></i>
+                                    <p class="text-[12px] font-[600] text-[#6a9023]">Available</p>
+                                </div>
+                            </div>
+                            <div class="flex w-full gap-[12px]">
+                                <img class="w-[120px] h-[120px]" src="../src/assets/auth/Rectangle 65 (7).png"
+                                    alt="" />
+                                <div class="flex flex-col gap-[12px]">
+                                    <div class="flex w-full items-center justify-between">
+                                        <p class="text-[16px] font-[600] text-[#2A2A2A]">
+                                            Catherine Paize
+                                        </p>
+                                        <div class="flex gap-1 items-center">
+                                            <i class="fa-solid fa-star fa-xs" style="color: #ffb800"></i>
+                                            <p class="text-[12px] font-[500] text-[#3A3A3A]">4.9</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex w-full justify-between gap-[4px] items-center">
+                                        <div class="flex flex-col gap-[4px]">
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Web application
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    UI/UX
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="w-[1px] h-[70%] border border-[#E5E5E5]"></div>
+                                        <div class="flex flex-col gap-[4px]">
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Business coaching
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Leadership coaching
+                                                </p>
+                                            </div>
+                                            <div class="flex gap-1 items-center">
+                                                <i class="fa-solid fa-circle-check fa-xs" style="color: #b197fc"></i>
+                                                <p class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                    Executive coaching
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex w-full justify-between gap-[4px]">
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Discovery call.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Discovery call
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Consultation call.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Consultation call
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Chat.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Chat
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Book Appointment.png"
+                                            alt="" />
+                                        <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                            Book Appointment
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <i class="fa-solid fa-language fa-xs" style="color: #3a3a3a"></i>
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                            Hindi, English
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/33.png" alt="" />
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">33/min</p>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/location.png"
+                                            alt="" />
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                            Delhi, India
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex gap-1 items-center">
+                                        <i class="fa-regular fa-bell fa-xs" style="color: #c95555"></i>
+                                        <p class="text-[12px] font-[500] text-[#C95555]">
+                                            Notify me
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- bottom menu bar -->
+        <div class="bg-[#FFFFFF] left-0 z-20 shadow-2xl h-[80px] fixed md:hidden bottom-0 w-full">
+            <div class="h-full w-[85%] mx-auto flex justify-between items-center">
+                <div class="flex flex-col items-center justify-center gap-1">
+                    <a href="../Home.html">
+                        <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="../src/assets/bottomNavbar/home.png"
+                            alt="" />
+                    </a>
+                    <p class="font-semibold text-xs sm:text-sm text-[#C95555] hidden">
+                        Home
+                    </p>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-1">
+                    <a href="./consultadvisor.html">
+                        <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer"
+                            src="../src/assets/bottomNavbar/activeConsultadvisor.png" alt="" />
+                    </a>
+                    <p class="font-semibold text-xs sm:text-sm text-[#C95555]">
+                        Consult Advisor
+                    </p>
+                </div>
+                <div></div>
+                <div class="flex flex-col items-center justify-center gap-1">
+                    <a href="./advisorbooking.html">
+                        <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="../src/assets/bottomNavbar/booking.png"
+                            alt="" />
+                    </a>
+                    <p class="font-semibold text-xs sm:text-sm text-[#C95555] hidden">
+                        Booking
+                    </p>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-1">
+                    <a href="./userProfile.html">
+                        <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="../src/assets/bottomNavbar/profile.png"
+                            alt="" />
+                    </a>
+                    <p class="font-semibold text-xs sm:text-sm text-[#C95555] hidden">
+                        My Profile
+                    </p>
+                </div>
+            </div>
+
+            <div
+                class="absolute left-1/2 top-[-80%] translate-y-1/2 -translate-x-1/2 w-[80px] h-[80px] bg-[#FFFFFF] flex items-center justify-center rounded-[4rem]">
+                <a href="./featuredadvisor.html" class="flex flex-col items-center justify-center gap-1">
+                    <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="../src/assets/bottomNavbar/advisor.png"
+                        alt="" />
+                    <p class="font-semibold text-xs sm:text-sm text-[#DA9000] hidden">
+                        Featured Advisor
+                    </p>
+                </a>
+            </div>
+        </div>
+
+        <!-- side bar -->
+        <div
+            class="sidebar absolute md:hidden flex justify-end z-20 top-0 transition-all left-full w-full min-h-screen h-full bottom-0">
+            <div class="w-[70%] sm:w-[60%] bg-[#FFFFFF] h-full">
+                <div class="w-[90%]s mx-auto flexs flex-col gap-4 py-[2rem]">
+                    <div class="flex justify-between items-center">
+                        <a href="../Client pages/userProfile.html">
+                            <div class="flex items-center gap-1 bg-[#FFF4ED] px-6 py-3 rounded-r-[30px]">
+                                <img class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[3rem]"
+                                    src="../src/assets/img/profileImage.png" alt="" />
+                                <div>
+                                    <h2 class="text-sm sm:text-base text-[#2A2A2A] font-medium">
+                                        Radhika Sharma
+                                    </h2>
+                                    <h3 class="text-xs sm:text-sm text-[#828282] font-medium">
+                                        radhikasharma@abc.com
+                                    </h3>
+                                </div>
+                            </div>
+                        </a>
+                        <div>
+                            <img id="hideSideMenu" class="w-7 sm:w-8 cursor-pointer" src="../src/assets/img/cross.png"
+                                alt="" />
+                        </div>
+                    </div>
+
+                    <div class="mt-[2rem] border-t border-b border-[#E5E5E5] py-2 my-2">
+                        <a href="../auth/advisornominationform.html">
+                            <div class="ml-[2rem] flex items-center gap-4">
+                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/img/phone.png"
+                                    alt="" />
+                                <h2 class="font-medium text-sm sm:text-base text-[#BE7D00]">
+                                    Become an Advisor
+                                </h2>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="px-[2rem] py-2 flex flex-col gap-6">
+                        <a href="../Client pages/consultadvisor.html">
+                            <div class="flex items-center gap-4">
+                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                                    src="../src/assets/img/Consult Advisor.png" alt="" />
+                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                                    Consult Advisor
+                                </h2>
+                            </div>
+                        </a>
+                        <a href="../Client pages/featuredadvisor.html">
+                            <div class="flex items-center gap-4">
+                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                                    src="../src/assets/img/FeaturedAdvisor.png" alt="" />
+                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                                    Featured Advisor
+                                </h2>
+                            </div>
+                        </a>
+                        <a href="../Client pages/advisorbooking.html">
+                            <div class="flex items-center gap-4">
+                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                                    src="../src/assets/img/MyBookings.png" alt="" />
+                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                                    My Bookings
+                                </h2>
+                            </div>
+                        </a>
+                        <a href="../Client pages/mywallet.html">
+                            <div class="flex items-center gap-4">
+                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/img/Wallet.png"
+                                    alt="" />
+                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                                    Wallet
+                                </h2>
+                            </div>
+                        </a>
+                        <a href="../Client pages/blog.html">
+                            <div class="flex items-center gap-4">
+                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/img/Blogs.png"
+                                    alt="" />
+                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                                    Blogs
+                                </h2>
+                            </div>
+                        </a>
+                        <a href="../Client pages/aboutus.html">
+                            <div class="flex items-center gap-4">
+                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/img/Aboutus.png"
+                                    alt="" />
+                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                                    About us
+                                </h2>
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="flex items-center gap-4">
+                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                                    src="../src/assets/img/Customersupport.png" alt="" />
+                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                                    Customer support
+                                </h2>
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="flex items-center gap-4">
+                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/img/Logout.png"
+                                    alt="" />
+                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                                    Logout
+                                </h2>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="px-[2rem] py-2">
+                    <h3 class="text-sm sm:text-base text-[#2A2A2A] my-[1rem]">
+                        Find us on:
+                    </h3>
+                    <div class="flex gap-5">
+                        <img class="w-[30px] h-[30px]" src="../src/assets/img/instagram.png" alt="" />
+                        <img class="w-[30px] h-[30px]" src="../src/assets/img/facebook.png" alt="" />
+                        <img class="w-[30px] h-[30px]" src="../src/assets/img/linkedin.png" alt="" />
+                        <img class="w-[30px] h-[30px]" src="../src/assets/img/youtube.png" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="hidden md:block bg-[#FFFFFF] shadow-2xl border border-transparent mt-[2rem]">
+            <div class="md:w-[95%] lg:w-[90%] mx-auto my-[2rem]">
+                <div class="w-full flex items-start gap-[2rem] lg:gap-[4rem] font-Roboto">
+                    <div class="font-semibold text-xl lg:text-2xl flex flex-col gap-2 items-start justify-starts">
+                        <a href="../Home.html">
+                            <img class="w-[200px]" src="../src/assets/logo/AdvisatorLogo.png" alt="" />
+                        </a>
+                        <p class="text-sm lg:text-base text-[#3A3A3A] font-normal text-start">
+                            Business & Digital Expert Advice
+                        </p>
+                        <div class="flex items-center gap-2">
+                            <img class="w-3 h-4" src="../src/assets/img/call.png" alt="" />
+                            <p class="text-sm text-[#3A3A3A] font-normal">+91 1234567890</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <img class="w-3 h-4" src="../src/assets/img/location.png" alt="" />
+                            <p class="text-sm text-[#3A3A3A] font-normal">Delhi, India</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-base text-[#3A3A3A] text-start my-2 px-4">
+                            Subscribe to Newsletter
+                        </h4>
+                        <div
+                            class="h-fit max-w-[40rem] mx-auto border border-[#DADADA] px-2 xl:px-4 py-2 rounded-[24px] shadow-md flex justify-between items-center gap-x-2 font-Roboto font-normal text-sm lg:text-base text-[#2A2A2A]">
+                            <div>
+                                <input
+                                    class="font-medium text-sm w-full lg:text-base text-[#AFAFAF] placeholder:text-[#AFAFAF] outline-none bg-[#FFFFFF]"
+                                    type="email" placeholder="Email address" />
+                            </div>
+
+                            <div class="py-2 px-[2rem] flex items-center gap-x-2 rounded-[2rem] bg-[#EDF6DB] shadow-md">
+                                <button class="font-Roboto text-nowrap font-semibold text-sm lg:text-base text-[#2A2A2A]">
+                                    Subscribe
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul
+                        class="flex items-start flex-col gap-2 font-Roboto font-normal text-sm lg:text-base text-[#828282]">
+                        <li class="text-[#3A3A3A]">Quick Links</li>
+                        <li>
+                            <a href="../Home.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="">Browse Mentors</a>
+                        </li>
+                        <li>
+                            <a href="">Featured Mentors</a>
+                        </li>
+                        <li>
+                            <a href="./blog.html">Blogs</a>
+                        </li>
+                    </ul>
+                    <ul
+                        class="flex flex-col items-start gap-2 font-Roboto font-normal text-sm lg:text-base text-[#828282]">
+                        <li class="text-[#3A3A3A]">About</li>
+                        <li>
+                            <a href="./aboutus.html">About us</a>
+                        </li>
+                        <li>
+                            <a href="./contactus.html">Contact us</a>
+                        </li>
+                        <li>
+                            <a href="">Terms of services</a>
+                        </li>
+                    </ul>
+                    <ul
+                        class="flex flex-col items-start gap-2 font-Roboto font-normal text-sm lg:text-base text-[#828282]">
+                        <li class="text-[#3A3A3A]">Social Media</li>
+                        <li>
+                            <a href="">Instagram</a>
+                        </li>
+                        <li>
+                            <a href="">Facebook</a>
+                        </li>
+                        <li>
+                            <a href="">Twitter</a>
+                        </li>
+                        <li>
+                            <a href="">Linkedin</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="border border-[#EAEAEA] my-4 w-full"></div>
+
+                <div class="w-full flex items-center justify-between">
+                    <h3 class="text-[#3A3A3A] font-normal text-base text-start">
+                        © 2024 Advisator. All rights reserved.
+                    </h3>
+                    <h3 class="text-[#3A3A3A] font-normal text-base text-start">
+                        info@advisator.in
+                    </h3>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script>
+        function updatePrice(value) {
+            document.getElementById("minPrice").textContent = "₹" + value;
+        }
+    </script>
+    <script>
+        // JavaScript to toggle sidebar
+        // const toggleBtn = document.querySelector('.toggleBtn');
+        const hideSideMenu = document.getElementById("hideSideMenu");
+        const showSideMenu = document.getElementById("showSideMenu");
+
+        // console.log(toggleBtn)
+        console.log(hideSideMenu, showSideMenu);
+        const sidebar = document.querySelector(".sidebar");
+
+        hideSideMenu.addEventListener("click", () => {
+            sidebar.classList.add("left-full");
+        });
+        showSideMenu.addEventListener("click", () => {
+            sidebar.classList.remove("left-full");
+        });
+    </script>
+@endsection

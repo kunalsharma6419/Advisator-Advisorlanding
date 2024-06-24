@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+
+    <style>
+        .tools {
+            text-align: center;
+            }
+
+            .tools select, .tools input {
+            font-size: 1.2em;
+            padding: 0.2em 0.4em;
+            }
+
+    </style>
+</head>
+<body>
+    <div class="w-full min-h-screen h-full relative overflow-hidden">
+        <!-- header -->
+        <div class="w-full h-[80px] shadow-md">
+            <div class="h-full w-[90%] md:w-[95%] lg:w-[90%] mx-auto flex justify-between items-center">
+
+                <!-- logo -->
+                <div>
+                    <a href="../Home.html">
+                        <img
+                          class="w-[180px]"
+                          src="../src/assets/logo/AdvisatorLogo.png"
+                          alt=""
+                        />
+                      </a>
+                </div>
+                <div class="hidden md:flex xl:w-[75%] xl:justify-between gap-8d md:gap-x-10 xl:gap-[60px]">
+                    <ul class="font-Roboto font-normal text-[#3A3A3A] grow xl:justify-center gap-4 text-sm lg:text-lg xl:gap-5 flex  items-center">
+                        <li class="font-bold text-[#2A2A2A] cursor-pointer">Home</li>
+                        <li class="cursor-pointer">
+                            <a href="../src/Advisor pages/consultadvisor.html">Consult Advisor</a>
+                        </li>
+                        <li class="cursor-pointer">About us</li>
+                        <li class="cursor-pointer">Blog</li>
+                        <li class="cursor-pointer">Contact us</li>
+                    </ul>
+
+                    <ul class=" text-sm lg:text-lg font-Roboto flex items-center gap-2 lg:gap-6">
+                        <li class="cursor-pointer font-normal text-[#3A3A3A]">Become an Advisor</li>
+                        <li class="cursor-pointer font-medium text-[#2A2A2A]">
+                            <a class="underline-none" href="../src/auth/login.html">Login</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="md:hidden w-[40%] gap-2 flex items-center justify-between">
+                    <div class="border border-[#DB9206]  bg-[#FFF3DB] rounded sm:rounded-lg px-2 py-1 sm:py-2 sm:px-4">
+                            <a class="cursor-pointer flex items-center gap-2" href="../src/Advisor pages/wallet.html">
+                            <img class="h-5 w-5" src="../src/assets/img/iconWallet.png" alt="">
+                          
+                            
+                            <div class="flex items-center font-Roboto text-sm sm:text-base text-[#DB9206] font-semibold">
+                                &#8377;
+                                <p>1,229</p>
+                            </div>  
+                            </a>                       
+                        </div>
+                    <div id="showSideMenu" class="w-[24px] h-[24px] sm:w-7 sm:h-7 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                        
+                        
+                        
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="font-Roboto w-[90%] md:w-[90%] lg:w-[85%] mx-auto">
+
+
+            <!-- page name -->
+            <div class="bg-[#FEFFF6] hidden w-full mt-[1.5rem] lg:mt-[2.5rem] md:flex items-center justify-between">
+                <div class="py-2 px-6 lg:px-10 flex items-center justify-center gap-1  md:gap-2 rounded-lg bg-transparent cursor-pointer">
+                    <a href="../Advisor pages/advisordashboard.html">
+                        <p class="text-base lg:text-xl text-[#828282]">Dashboard</p>
+                    </a>
+                </div>
+                <div class="py-2 px-2 lg:px-4 flex items-center justify-center  gap-1  md:gap-2 rounded-lg bg-transparent cursor-pointer">
+                    <p class="text-base lg:text-xl text-[#828282]">My Profile</p>
+                </div>
+                <div class="py-2 px-2 lg:px-4 flex items-center justify-center  gap-1  md:gap-2 rounded-lg bg-transparent cursor-pointer">
+                    <p class="text-base lg:text-xl text-[#828282]">My Wallet</p>
+                </div>
+                <div class="py-2 px-2 lg:px-4 flex items-center justify-center  gap-1  md:gap-2 rounded-lg bg-transparent cursor-pointer">
+                    <a href="../Advisor pages/advisorbooking.html">
+                        <p class="text-base lg:text-xl text-[#828282]">My Bookings</p>
+                    </a>
+                </div>
+                
+                <div class="py-2 px-2 lg:px-4 flex items-center justify-center  gap-1  md:gap-2 rounded-lg bg-[#6A9023] cursor-pointer">
+                    <a href="../Advisor pages/advisorMyearning.html">
+                        <p class="text-base lg:text-xl text-[#FFFFFF]">My Earning</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- serarch bar -->
+            <div class="flex justify-between items-center gap-2 mt-[2rem]">
+                <h2 class= "text-base lg:text-lg text-[#2A2A2A] font-medium hidden md:block">All Transaction history</h2>
+
+
+
+                <div class="lg:w-[60%]">
+                    <div class="max-w-[40rem] mx-auto border border-[#DADADA] px-2 xl:px-4 py-2 rounded-[24px] shadow-md flex  justify-between items-center gap-x-2 font-Roboto font-normal text-sm lg:text-base text-[#2A2A2A]">
+                        
+                        <div>
+                            <input 
+                            class="font-medium text-sm w-full lg:text-base text-[#AFAFAF] placeholder:text-[#AFAFAF] outline-none bg-[#FFFFFF]"
+                             type="text" placeholder="Search Transaction">
+                        </div>
+    
+                        <div class="px-[1rem] py-1 md:py-2 md:px-[2rem] flex items-center gap-x-2  rounded-[2rem] bg-[#EDF6DB] shadow-md">
+                            <svg class="w-5 h-5 text-[#000000]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>
+                            
+                            <button class="font-Roboto text-nowrap font-semibold text-sm lg:text-base text-[#2A2A2A]">Find Advisor</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="hidden md:block w-fit font-medium rounded-lg bg-[#FFE2E2] shadow-md p-2">
+                    <select
+                        id="underline_select"
+                        class="outline-none bg-transparent w-full lg:pr-[1rem] text-[#3A3A3A]"
+                        
+                        >
+                        <option selected>All</option>
+                        <option value="+92">Before 1 month</option>
+                        <option value="+92">Before 6 month</option>
+                        <option value="+94">Before 1 year</option>
+                        </select>
+                </div>
+
+                <img class="w-8 h-8 cursor-pointer md:hidden" src="../src/assets/icons/Book Appointment.png" alt="book appointment">
+
+            </div>
+
+        </div>
+
+        <!-- table  -->
+        <div class="w-[98%] sm:w-[90%] mx-auto mt-[2rem] bg-[#FAFAFA] p-1 shadow-sm mb-[5rem] md:mb-[1rem]">
+            <table class="table-fixed w-full border-separate text-[Generate invoice] border-spacing-y-3">
+                <thead class="text-[#2A2A2A] font-medium text-base lg:text-lg ">
+                    <tr>
+                        <th class="hidden md:block text-left align-top">sr.no</th>
+                        <th class="text-left align-top">Date</th>
+                        <th class="hidden md:block text-left align-top">Time</th>
+                        <th class="text-left align-top">Status</th>
+                        <th class="text-left align-top">Method</th>
+                        <th class="text-left align-top">Amount</th>
+                        <th class="text-left align-top">Total Wallet Balance</th>
+                        <th class="text-left align-top">Invoice</th>
+                    </tr>
+                </thead>
+                <tbody class="text-sm lg:text-base border-spacing-y-10">
+                    <tr>
+                        <td class="hidden md:block">01</td>
+                        <td>15/04/2024</td>
+                        <td class="hidden md:block">10:48 am</td>
+                        <td>Withdraw</td>
+                        <td>Credit card</td>
+                        <td class="text-[#FF3131]">₹360</td>
+                        <td>₹1249</td>
+                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
+                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
+                    </tr>
+                    <tr>
+                        <td class="hidden md:block">01</td>
+                        <td>15/04/2024</td>
+                        <td class="hidden md:block">10:48 am</td>
+                        <td>Credited</td>
+                        <td>Credit card</td>
+                        <td class="text-[#6A9023]">₹199</td>
+                        <td>₹1449</td>
+                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
+                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
+                    </tr>
+                    <tr>
+                        <td class="hidden md:block">01</td>
+                        <td>15/04/2024</td>
+                        <td class="hidden md:block">10:48 am</td>
+                        <td>Withdraw</td>
+                        <td>Credit card</td>
+                        <td class="text-[#FF3131]">₹360</td>
+                        <td>₹1249</td>
+                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
+                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
+                    </tr>
+                    <tr>
+                        <td class="hidden md:block">01</td>
+                        <td>15/04/2024</td>
+                        <td class="hidden md:block">10:48 am</td>
+                        <td>Credited</td>
+                        <td>Credit card</td>
+                        <td class="text-[#6A9023]">₹199</td>
+                        <td>₹1449</td>
+                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
+                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
+                    </tr>
+                    <tr>
+                        <td class="hidden md:block">01</td>
+                        <td>15/04/2024</td>
+                        <td class="hidden md:block">10:48 am</td>
+                        <td>Withdraw</td>
+                        <td>Credit card</td>
+                        <td class="text-[#FF3131]">₹360</td>
+                        <td>₹1249</td>
+                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
+                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
+                    </tr>
+                    <tr>
+                        <td class="hidden md:block">01</td>
+                        <td>15/04/2024</td>
+                        <td class="hidden md:block">10:48 am</td>
+                        <td>Credited</td>
+                        <td>Credit card</td>
+                        <td class="text-[#6A9023]">₹199</td>
+                        <td>₹1449</td>
+                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
+                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
+                    </tr>
+                    <tr>
+                        <td class="hidden md:block">01</td>
+                        <td>15/04/2024</td>
+                        <td class="hidden md:block">10:48 am</td>
+                        <td>Withdraw</td>
+                        <td>Credit card</td>
+                        <td class="text-[#FF3131]">₹360</td>
+                        <td>₹1249</td>
+                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
+                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
+                    </tr>
+                    <tr>
+                        <td class="hidden md:block">01</td>
+                        <td>15/04/2024</td>
+                        <td class="hidden md:block">10:48 am</td>
+                        <td>Credited</td>
+                        <td>Credit card</td>
+                        <td class="text-[#6A9023]">₹199</td>
+                        <td>₹1449</td>
+                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
+                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
+                    </tr>
+                    <tr>
+                        <td class="hidden md:block">01</td>
+                        <td>15/04/2024</td>
+                        <td class="hidden md:block">10:48 am</td>
+                        <td>Withdraw</td>
+                        <td>Credit card</td>
+                        <td class="text-[#FF3131]">₹360</td>
+                        <td>₹1249</td>
+                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
+                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
+                    </tr>
+                    <tr>
+                        <td class="hidden md:block">01</td>
+                        <td>15/04/2024</td>
+                        <td class="hidden md:block">10:48 am</td>
+                        <td>Credited</td>
+                        <td>Credit card</td>
+                        <td class="text-[#6A9023]">₹199</td>
+                        <td>₹1449</td>
+                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
+                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
+                    </tr>
+                
+                </tbody>
+            </table>
+
+        </div>
+
+        <!-- side bar -->
+        <div class="sidebar absolute md:hidden flex justify-end z-20 top-0 transition-all left-full w-full min-h-screen h-full bottom-0" >
+            <div class="w-[70%] sm:w-[60%] bg-[#FFFFFF] h-full">  
+                <div class="w-[90%]s mx-auto flexs flex-col gap-4 py-[2rem]">
+                    <div class="flex justify-between items-center">
+                        <a href="./advisorProfile.html">
+                            <div class=" flex items-center gap-1 bg-[#FFF4ED] px-6 py-3 rounded-r-[30px]">
+                                <img class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[3rem]" src="../src/assets/img/profileImage.png" alt="">
+                                <div>
+                                    <h2 class="text-sm sm:text-base text-[#2A2A2A] font-medium">Radhika Sharma</h2>
+                                    <h3 class="text-xs sm:text-sm text-[#828282] font-medium">radhikasharma@abc.com</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <div>
+                            <img id="hideSideMenu" class=" w-7 sm:w-8 cursor-pointer" src="../src/assets/img/cross.png" alt="">
+                        </div>
+                    </div>
+
+                    <a href="../auth/client.html">
+                        <div class="mt-[2rem] border-t border-b border-[#E5E5E5] py-2 my-2">
+                            <a href="">
+                                <div class=" ml-[2rem] flex items-center gap-4">
+                                    <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/sidebar/userImg.png" alt="">
+                                    <h2 class="font-medium text-sm sm:text-base text-[#BE7D00]">Switch to Client</h2>
+                                </div>
+                            </a>
+                        </div>
+                    </a>
+
+                    <div class="px-[2rem] py-2 flex flex-col gap-6">
+                        <a href="../Advisor pages/advisorbooking.html">
+                            <div class="flex items-center gap-4">
+                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/sidebar/MyBookings.png" alt="">
+                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">My Bookings</h2>
+                            </div>
+                        </a>
+                        <a href="../Advisor pages/advisorMyearning.html">
+                            <div class="flex items-center gap-4">
+                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/sidebar/money.png" alt="">
+                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">My Earnings</h2>
+                            </div>
+                        </a>
+                        <a href="../Advisor pages/advisortransactionhistory.html">
+                            <div class="flex items-center gap-4">
+                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/sidebar/tabler_transaction-rupee.png" alt="">
+                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">My Transactions</h2>
+                            </div>
+                        </a>
+                        <a href="../Advisor pages/blog.html">
+                            <div class="flex items-center gap-4">
+                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/sidebar/Blogs.png" alt="">
+                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">Blogs</h2>
+                            </div>
+                        </a>
+                        <a href="../Advisor pages/aboutus.html">
+                            <div class="flex items-center gap-4">
+                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/sidebar/Aboutus.png" alt="">
+                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">About us</h2>
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="flex items-center gap-4">
+                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/sidebar/Customersupport.png" alt="">
+                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">Customer support</h2>
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="flex items-center gap-4">
+                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/sidebar/Logout.png" alt="">
+                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">Logout</h2>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="px-[2rem] py-2">
+                    <h3 class="text-sm sm:text-base text-[#2A2A2A] my-[1rem]">Find us on:</h3>
+                    <div class="flex gap-5">
+                        <img class="w-[30px] h-[30px]" src="../src/assets/sidebar/instagram.png"  alt="">
+                        <img class="w-[30px] h-[30px]" src="../src/assets/sidebar/facebook.png"  alt="">
+                        <img class="w-[30px] h-[30px]" src="../src/assets/sidebar/linkedin.png"  alt="">
+                        <img class="w-[30px] h-[30px]" src="../src/assets/sidebar/youtube.png"  alt="">
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+
+        
+        <footer
+            class="hidden md:block bg-[#FFFFFF] shadow-2xl border border-transparent mt-[2rem]"
+            >
+            <div class="border border-[#EAEAEA] mb-4 w-full"></div>
+            <div class="md:w-[95%] lg:w-[90%] mx-auto my-[2rem]">
+            <div class="w-full flex items-center justify-between">
+                <h3 class="text-[#3A3A3A] font-normal text-base text-start">
+                © 2024 Advisator. All rights reserved.
+                </h3>
+                <h3 class="text-[#3A3A3A] font-normal text-base text-start">
+                info@advisator.in
+                </h3>
+            </div>
+            </div>
+        </footer>
+   
+
+             <!-- bottom menu bar -->
+             <div class="bg-[#FFFFFF] left-0 z-20 shadow-2xl h-[80px] fixed md:hidden bottom-0 w-full">
+                <div class="h-full w-[85%] mx-auto flex justify-between items-center" >
+                    <div class="flex flex-col items-center justify-center gap-1">
+                        <a href="../Advisor pages/advisordashboard.html">
+                            <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="../src/assets/bottomNavbar/home.png" alt="">
+                        </a>
+                        <p class="font-semibold text-xs sm:text-sm text-[#C95555] hidden">Home</p>
+                    </div>
+                    <div class="flex flex-col items-center justify-center gap-1">
+                        <a href="../Advisor pages/advisorbooking.html">
+                            <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="../src/assets/bottomNavbar/booking.png" alt="">
+                        </a>
+                        <p class="font-semibold text-xs sm:text-sm text-[#C95555] hidden">Bookings</p>
+                    </div>
+                    <div></div>
+                    <div class="flex flex-col items-center justify-center gap-1">
+                        <a href="../Advisor pages/advisortransactionhistory.html">
+                            <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="../src/assets/bottomNavbar/activeTransactions.png" alt="">
+                        </a>
+                        <p class="font-semibold text-xs sm:text-sm text-[#C95555]">Transactions</p>
+                    </div>
+                    <div class="flex flex-col items-center justify-center gap-1">
+                        <a href="../Advisor pages/advisorProfile.html">
+                            <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="../src/assets/bottomNavbar/profile.png" alt="">
+                        </a>
+                        <p class="font-semibold text-xs sm:text-sm text-[#C95555] hidden">My Profile</p>
+                    </div>
+                </div>
+                
+                <div class="absolute left-1/2 top-[-80%] translate-y-1/2 -translate-x-1/2 w-[80px] h-[80px] bg-[#FFFFFF] flex items-center justify-center rounded-[4rem]">
+                    <a  href="../Advisor pages/advisorMyearning.html" class="flex flex-col items-center justify-center gap-1">
+                        <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="../src/assets/bottomNavbar/earning.png" alt="">
+                    <p class="font-semibold text-xs sm:text-sm text-[#DA9000] hidden">My Earnings</p>
+                    </a>
+                </div>
+    
+            </div>
+
+
+    </div>
+
+    <script>
+        // JavaScript to toggle sidebar
+            // const toggleBtn = document.querySelector('.toggleBtn');
+            const hideSideMenu = document.getElementById('hideSideMenu')
+            const showSideMenu = document.getElementById('showSideMenu')
+
+            
+            // console.log(toggleBtn)
+            console.log(hideSideMenu, showSideMenu)
+            const sidebar = document.querySelector('.sidebar');
+
+            hideSideMenu.addEventListener('click', ()=>{
+                sidebar.classList.add('left-full');
+            })
+            showSideMenu.addEventListener('click', () => {
+                sidebar.classList.remove('left-full');
+            });
+    </script>
+
+
+</body>
+</html>

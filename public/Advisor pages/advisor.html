@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link href="../output.css" rel="stylesheet" /> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              Roboto: ["Roboto", "sans-serif"],
+            },
+            colors: {
+              clifford: "#da373d",
+            },
+          },
+        },
+      };
+    </script>
+    <script
+      src="https://kit.fontawesome.com/5c118959dd.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <style>
+      html,
+      body {
+        position: relative;
+        height: 100%;
+      }
+
+      body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+      }
+
+      .swiper {
+        width: 100%;
+        height: 100%;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        /* font-size: 18px; */
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* border: 4px solid red; */
+        height: fit-content;
+        width: fit-content;
+        /* width: 200px; */
+        /* height: 100px; */
+      }
+
+      /* .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+  
+      .swiper-slide {
+        width: 80%;
+      }
+  
+      .swiper-slide:nth-child(2n) {
+        width: 60%;
+      }
+  
+      .swiper-slide:nth-child(3n) {
+        width: 40%;
+      } */
+      .swiper-button-prev,
+      .swiper-button-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        color: #333;
+        font-size: 20px;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+        z-index: 10;
+        padding: 20px;
+        font-size: 5px;
+      }
+      .swiper-button-prev {
+        left: 10px;
+      }
+      .swiper-button-next {
+        right: 10px;
+      }
+      .swiper-button-prev:hover,
+      .swiper-button-next:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+      .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+        background-color: #ccc;
+        margin: 0 5px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .swiper-pagination-bullet-active {
+        background-color: #333;
+      }
+      .owl-controls {
+        position: absolute;
+        bottom: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+      }
+
+      .owl-controls .owl-nav {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        margin: 0 5px;
+        cursor: pointer;
+      }
+
+      .owl-controls .owl-nav div {
+        width: 40px;
+        height: 40px;
+        background-color: #eeeeee;
+        box-shadow: #0000001a;
+        border-radius: 50%;
+        line-height: 40px;
+        text-align: center;
+        color: #2a2a2a;
+      }
+    </style>
+  </head>
+  <body class="font-Roboto">
+    <div class="relative overflow-hidden w-full">
+      <!-- Header -->
+      <div class="w-full h-[80px]">
+        <div
+          class="h-full w-[90%] md:w-[95%] lg:w-[90%] mx-auto flex justify-between items-center"
+        >
+          <!-- logo -->
+          <div>
+            <img
+              class="w-[130px]"
+              src="../src/assets/img/advisatorLogo.png"
+              alt=""
+            />
+          </div>
+          <div
+            class="hidden md:flex xl:w-[75%] xl:justify-between gap-8d md:gap-x-10 xl:gap-[60px]"
+          >
+            <ul
+              class="font-Roboto font-normal text-[#3A3A3A] grow xl:justify-center gap-4 text-sm lg:text-lg xl:gap-5 flex items-center"
+            >
+              <li class="cursor-pointer">Home</li>
+              <li class="font-bold text-[#2A2A2A] cursor-pointer">
+                <a href="./consultadvisor.html"> Consult Advisor</a>
+              </li>
+              <li class="cursor-pointer">
+                <a href="./aboutus.html">About us</a>
+              </li>
+              <li class="cursor-pointer"><a href="./blog.html">Blog</a></li>
+              <li class="cursor-pointer">
+                <a href="./contactus.html">Contact us</a>
+              </li>
+            </ul>
+
+            <ul
+              class="text-sm lg:text-lg font-Roboto flex items-center gap-2 lg:gap-6"
+            >
+              <li class="cursor-pointer font-normal text-[#3A3A3A]">
+                Become an Advisor
+              </li>
+              <li class="cursor-pointer font-medium text-[#2A2A2A]">Account</li>
+            </ul>
+          </div>
+
+          <div
+            class="md:hidden w-[40%] gap-2 flex items-center justify-between"
+          >
+            <div
+              class="border border-[#DB9206] flex items-center gap-2 bg-[#FFF3DB] rounded sm:rounded-lg px-2 py-1 sm:py-2 sm:px-4"
+            >
+              <img
+                class="h-5 w-5"
+                src="../src/assets/img/iconWallet.png"
+                alt=""
+              />
+
+              <div
+                class="flex items-center font-Roboto text-sm sm:text-base text-[#DB9206] font-semibold"
+              >
+                &#8377;
+                <p>1,229</p>
+              </div>
+            </div>
+            <div
+              id="showSideMenu"
+              class="w-[24px] h-[24px] sm:w-7 sm:h-7 cursor-pointer"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-7 h-7"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- main lg design -->
+
+      <div
+        class="hidden lg:flex flex-col w-[90%] md:w-[95%] lg:w-[90%] mx-auto mt-[24px]"
+      >
+         <!-- serach box  for lg screen-->
+         <div
+         class="lg:flex hidden p-3  mx-auto bg-white border border-[#EAEAEA] rounded-[50px] justify-between w-[80%]"
+       >
+         <input
+           class="bg-white rounded-[50px] w-full px-4"
+           placeholder="Search Advisor"
+           type="text"
+         />
+         <button
+           class="flex items-center w-[300px] bg-[#EDF6DB] px-[32px] rounded-[40px] py-[8px] gap-5"
+         >
+           <i class="fa-solid fa-magnifying-glass" style="color: #000000"></i>
+           <p>Find Advisor</p>
+         </button>
+       </div>
+        <!-- image swipper -->
+        <div class="w-full mt-[30px]">
+          <!-- Swiper -->
+          <div class="swiper mySwiper1">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div>
+                  <img
+                    class="w-[239px] h-[180px] shadow shadow-[#00000026]"
+                    src="../src/assets/Rectangle 66.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div>
+                  <img
+                    class="w-[239px] h-[180px] shadow shadow-[#00000026]"
+                    src="../src/assets/Rectangle 67.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div>
+                  <img
+                    class="w-[239px] h-[180px] shadow shadow-[#00000026]"
+                    src="../src/assets/Rectangle 68.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div>
+                  <img
+                    class="w-[239px] h-[180px] shadow shadow-[#00000026]"
+                    src="../src/assets/Rectangle 69.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div>
+                  <img
+                    class="w-[239px] h-[180px] shadow shadow-[#00000026]"
+                    src="../src/assets/Rectangle 70.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div>
+                  <img
+                    class="w-[239px] h-[180px] shadow shadow-[#00000026]"
+                    src="../src/assets/Rectangle 66.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div>
+                  <img
+                    class="w-[239px] h-[180px] shadow shadow-[#00000026]"
+                    src="../src/assets/Rectangle 67.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- next buttons -->
+          <!-- <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div> -->
+        </div>
+        <!-- content section -->
+        <div class="w-full flex gap-[20px]">
+          <!-- left -->
+          <div class="w-[22%] flex flex-col">
+            <!-- profle -->
+            <div
+              class="flex w-full shadow-xl rounded-[24px] shadow-[#00000026]  mt-[12px] flex-col"
+            >
+              <div class="flex bg-[#FFFACA] rounded-[24px] py-2 px-1 justify-between">
+                <p class="text-[12px] font-[500] text-[#B58300]">
+                  Super Advisor
+                </p>
+                <div class="flex gap-1 items-center">
+                  <i
+                    class="fa-solid fa-circle fa-sm"
+                    style="color: #6a9023"
+                  ></i>
+                  <p class="text-[12px] font-[600] text-[#6a9023]">Available</p>
+                </div>
+              </div>
+              <div class="flex flex-col px-4 pb-4 w-full gap-[12px]">
+                <img
+                  class="w-[360px] h-[230px]"
+                  src="../src/assets/Rectangle 65.png"
+                  alt=""
+                />
+                <div class="flex flex-col gap-[4px]">
+                  <div class="flex gap-1 items-center">
+                    <img
+                      class="w-[20px] h-[20px]"
+                      src="../src/assets/icons/Notify me.png"
+                      alt=""
+                    />
+
+                    <p class="lg:text-[16px] text-[10px] font-[500] text-[#C95555]">
+                      Notify me
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex w-full justify-between mt-[12px] px-4 pb-4 gap-[4px]">
+                <div class="flex flex-col gap-[4px]">
+                  <div class="flex gap-1 items-center">
+                    <img
+                      class="w-[20px] h-[20px]"
+                      src="../src/assets/icons/Discovery call.png"
+                      alt=""
+                    />
+
+                    <p
+                      class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]"
+                    >
+                      Discovery call
+                    </p>
+                  </div>
+                  <div class="flex gap-1 items-center">
+                    <img
+                      class="w-[20px] h-[20px]"
+                      src="../src/assets/icons/Consultation call.png"
+                      alt=""
+                    />
+
+                    <p
+                      class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]"
+                    >
+                      Consultation call
+                    </p>
+                  </div>
+                  <div class="flex gap-1 items-center">
+                    <img
+                      class="w-[20px] h-[20px]"
+                      src="../src/assets/icons/Chat.png"
+                      alt=""
+                    />
+
+                    <p
+                      class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]"
+                    >
+                      Chat
+                    </p>
+                  </div>
+                  <div class="flex gap-1 items-center">
+                    <img
+                      class="w-[20px] h-[20px]"
+                      src="../src/assets/icons/Book Appointment.png"
+                      alt=""
+                    />
+
+                    <p
+                      class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]"
+                    >
+                      Book Appointment
+                    </p>
+                  </div>
+                </div>
+                <!-- border -->
+                <div class="border border-[#E5E5E5] h-full w-[1px]"></div>
+                <div class="flex flex-col gap-[4px]">
+                  <div class="flex gap-1 items-center">
+                    <img
+                      class="w-[20px] h-[20px]"
+                      src="../src/assets/icons/hindi.png"
+                      alt=""
+                    />
+
+                    <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                      Hindi, English
+                    </p>
+                  </div>
+                  <div class="flex gap-1 items-center">
+                    <img
+                      class="w-[20px] h-[20px]"
+                      src="../src/assets/icons/33.png"
+                      alt=""
+                    />
+
+                    <p class="text-[12px] font-[500] text-[#3A3A3A]">33/min</p>
+                  </div>
+                  <div class="flex gap-1 items-center">
+                    <img
+                      class="w-[20px] h-[20px]"
+                      src="../src/assets/icons/location.png"
+                      alt=""
+                    />
+
+                    <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                      Delhi, India
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- dropdown -->
+            <div class="relative inline-block w-full text-left">
+              <div
+                class="flex justify-between items-center rounded-[18px] my-[12px] bg-[#FFF6F6] w-full p-2"
+              >
+                <button
+                  id="dropdown-button"
+                  onclick="toggleDropdown()"
+                  class="dropbtn text-[#3A3A3A] px-4 py-2 rounded-md text-[16px] font-[500] focus:outline-none flex items-center"
+                >
+                  Availability
+                </button>
+
+                <i
+                  id="dropdown-icon"
+                  onclick="toggleDropdown()"
+                  class="fas fa-chevron-down cursor-pointer"
+                ></i>
+              </div>
+
+              <div
+                id="dropdown-menu"
+                class="dropdown-content absolute bg-white z-10 hidden rounded-md shadow-md w-full"
+              >
+                <div
+                  class="flex text-[#FF0000] text-[15px] font-[400] justify-between items-center w-full px-4 py-2"
+                >
+                  <p class="mx-2">Sunday</p>
+                  <p class="mx-2">Day off</p>
+                </div>
+                <div
+                  class="flex text-[#864444] text-[15px] font-[400] justify-between items-center w-full px-4 py-2"
+                >
+                  <p class="mx-2">Monday</p>
+                  <p class="mx-2">9:00am- 6:00pm</p>
+                </div>
+                <div
+                  class="flex text-[#864444] text-[15px] font-[400] justify-between items-center w-full px-4 py-2"
+                >
+                  <p class="mx-2">Tuesday</p>
+                  <p class="mx-2">9:00am- 6:00pm</p>
+                </div>
+                <div
+                  class="flex text-[#864444] text-[15px] font-[400] justify-between items-center w-full px-4 py-2"
+                >
+                  <p class="mx-2">Wednesday</p>
+                  <p class="mx-2">9:00am- 6:00pm</p>
+                </div>
+                <div
+                  class="flex text-[#864444] text-[15px] font-[400] justify-between items-center w-full px-4 py-2"
+                >
+                  <p class="mx-2">Thursday</p>
+                  <p class="mx-2">9:00am- 6:00pm</p>
+                </div>
+                <div
+                  class="flex text-[#864444] text-[15px] font-[400] justify-between items-center w-full px-4 py-2"
+                >
+                  <p class="mx-2">Friday</p>
+                  <p class="mx-2">9:00am- 6:00pm</p>
+                </div>
+                <div
+                  class="flex text-[#864444] text-[15px] font-[400] justify-between items-center w-full px-4 py-2"
+                >
+                  <p class="mx-2">Saturday</p>
+                  <p class="mx-2">9:00am- 6:00pm</p>
+                </div>
+              </div>
+            </div>
+            <!-- testimonial slider -->
+            <p class="font-[400] text-[14px] lg:text-[18px] text-[#2A2A2A]">
+              Reviews:
+            </p>
+            <div class="bg-[#F6F8FD] rounded-[24px]">
+              <div class="container mx-auto">
+                <div class="w-full max-w-xl mx-auto relative">
+                  <div class="testimonial-bg relative">
+                    <div id="testimonial-slider" class="owl-carousel">
+                      <div class="testimonial">
+                        <div class="p-2 w-full flex flex-col gsp-2">
+                          <div class="flex gap-3">
+                            <img
+                              style="height: 60px; width: 60px"
+                              src="../src/assets/Ellipse 4.png"
+                              alt=""
+                            />
+                            <div class="flex flex-col">
+                              <h2>Lisa Miles</h2>
+                              <div class="flex gap-1">
+                                <i
+                                  class="fa-solid fa-star"
+                                  style="color: #ffd43b"
+                                ></i>
+                                <h5>4.9/5</h5>
+                              </div>
+                            </div>
+                          </div>
+                          <p class="text-[18px] font-[400]">
+                            "Catherine's positivity and enthusiasm are
+                            infectious! As an advisor, she goes above and beyond
+                            to support her clients in achieving their goals.
+                            Incredible Insight and Guidance. Their expertise and
+                            insights have helped me navigate complex challenges
+                            and identify new opportunities for growth. Highly
+                            recommend."
+                          </p>
+                        </div>
+                      </div>
+                      <div class="testimonial">
+                        <div class="p-2 w-full flex flex-col gsp-2">
+                          <div class="flex gap-3">
+                            <img
+                              style="height: 60px; width: 60px"
+                              src="../src/assets/Ellipse 5.png"
+                              alt=""
+                            />
+                            <div class="flex flex-col">
+                              <h2>Lisa Miles</h2>
+                              <div class="flex gap-1">
+                                <i
+                                  class="fa-solid fa-star"
+                                  style="color: #ffd43b"
+                                ></i>
+                                <h5>4.9/5</h5>
+                              </div>
+                            </div>
+                          </div>
+                          <p class="text-[18px] font-[400]">
+                            "Catherine's positivity and enthusiasm are
+                            infectious! As an advisor, she goes above and beyond
+                            to support her clients in achieving their goals.
+                            Incredible Insight and Guidance. Their expertise and
+                            insights have helped me navigate complex challenges
+                            and identify new opportunities for growth. Highly
+                            recommend."
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="owl-controls">
+                    <div class="owl-nav">
+                      <div class="owl-prev">
+                        <i class="fas fa-chevron-left"></i>
+                      </div>
+                      <div class="owl-next">
+                        <i class="fas fa-chevron-right"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+              <script>
+                $(document).ready(function () {
+                  $("#testimonial-slider").owlCarousel({
+                    items: 1,
+                    itemsDesktop: [3000, 1],
+                    itemsDesktopSmall: [979, 1],
+                    itemsTablet: [768, 1],
+                    pagination: false,
+                    navigation: true,
+                    navigationText: ["", ""],
+                    autoplay: true,
+                    loop: true, // Enable looping
+                  });
+
+                  $(".owl-prev").click(function () {
+                    $("#testimonial-slider").trigger("prev.owl.carousel");
+                  });
+
+                  $(".owl-next").click(function () {
+                    $("#testimonial-slider").trigger("next.owl.carousel");
+                  });
+                });
+              </script>
+            </div>
+          </div>
+          <!-- right -->
+          <div class="w-[78%] flex flex-col gap-2">
+            <!-- 1st row  -->
+            <div class="flex mt-[30px] justify-between gap-2">
+              <div class="flex flex-col gap-1">
+                <h3 class="font-[500] text-[12px] lg:text-[16px]">
+                  Business Functions:
+                </h3>
+                <div class="flex gap-1">
+                  <h4
+                    class="text-[10px] p-2 rounded-[40px] bg-[#F7EAEA] border border-[#FFD3D3] lg:text-[14px] font-[400]"
+                  >
+                    Business coaching
+                  </h4>
+                </div>
+              </div>
+              <div class="border-[2px] border-[#E5E5E5] w-[1px] h-full"></div>
+              <div class="flex flex-col gap-1">
+                <h3 class="font-[500] text-[12px] lg:text-[16px]">
+                  Sub-Business Functions:
+                </h3>
+                <div class="flex gap-1">
+                  <h4
+                    class="text-[10px] p-2 rounded-[40px] bg-[#F7EAEA] border border-[#FFD3D3] lg:text-[14px] font-[400]"
+                  >
+                    Leadership coaching
+                  </h4>
+                  <h4
+                    class="text-[10px] p-2 rounded-[40px] bg-[#F7EAEA] border border-[#FFD3D3] lg:text-[14px] font-[400]"
+                  >
+                    Executive coaching
+                  </h4>
+                </div>
+              </div>
+              <div class="border-[2px] border-[#E5E5E5] w-[1px] h-full"></div>
+              <div class="flex flex-col gap-1">
+                <h3 class="font-[500] text-[12px] lg:text-[16px]">Industry:</h3>
+                <div class="flex gap-1">
+                  <h4
+                    class="text-[10px] p-2 rounded-[40px] bg-[#F7EAEA] border border-[#FFD3D3] lg:text-[14px] font-[400]"
+                  >
+                    Web application
+                  </h4>
+                </div>
+              </div>
+              <div class="border-[2px] border-[#E5E5E5] w-[1px] h-full"></div>
+              <div class="flex flex-col gap-1">
+                <h3 class="font-[500] text-[12px] lg:text-[16px]">
+                  Geography:
+                </h3>
+                <div class="flex gap-1">
+                  <h4
+                    class="text-[10px] p-2 rounded-[40px] bg-[#F7EAEA] border border-[#FFD3D3] lg:text-[14px] font-[400]"
+                  >
+                    India
+                  </h4>
+                </div>
+              </div>
+              <div class="border-[2px] border-[#E5E5E5] w-[1px] h-full"></div>
+            </div>
+            <!-- 2nd row  -->
+            <div class="flex flex-col bg-[#F5F5F5] relative gap-3 p-3">
+              <img
+                class="w-[100px] h-[100px] md:w-[120px] md:h-[120px] absolute top-[0px] right-[20px]"
+                src="../src/assets/Stamp.png"
+                alt=""
+              />
+
+              <!-- title name  -->
+              <div class="flex gap-3 items-center">
+                <h2 class="text-[14px] lg:text-[18px] font-[600]">
+                  Catherine Paize
+                </h2>
+                <!-- rating -->
+                <div class="flex gap-1 items-center">
+                  <i class="fa-solid fa-star" style="color: #ffd43b"></i>
+                  <p
+                    class="lg:text-[16px] lg:font-[500] text-[10px] font-[700]"
+                  >
+                    4.9
+                  </p>
+                </div>
+              </div>
+              <h3 class="lg;text-[16px] font-[400] text-[12px]">
+                Founder, XYZ company
+              </h3>
+              <h4 class="text-[12px] lg:text-[16px] font-[400]">About</h4>
+              <p class="text-[12px] lg:text-[16px] font-[400]">
+                Welcome to my profile! With 7 years of experience in the
+                business industry, I am passionate about helping entrepreneurs
+                and businesses thrive. As a seasoned business advisor, I
+                specialize in [mention areas of expertise such as business
+                strategy, marketing, finance, etc.]. My mission is to empower
+                individuals and organizations to overcome challenges, capitalize
+                on opportunities, and achieve sustainable growth.
+                <br />
+                I believe in a personalized approach to mentorship, tailoring
+                strategies and solutions to meet the unique needs and goals of
+                each client. Through collaborative partnerships and strategic
+                guidance, I work closely with my clients to develop actionable
+                plans and drive tangible results.
+                <br />
+                My expertise extends across various industries, including [list
+                relevant industries or sectors], and I have had the privilege of
+                working with clients ranging from startups to established
+                corporations. Whether you're navigating a specific business
+                challenge, planning for growth, or seeking strategic insights, I
+                am here to provide the support and guidance you need to succeed.
+              </p>
+            </div>
+            <!-- 3rd row  -->
+            <div class="flex flex-col bg-[#F5F5F5] gap-3 p-3">
+              <h4 class="text-[12px] lg:text-[16px] font-[400]">
+                Awards & Recognition
+              </h4>
+
+              <div>
+                <li class="lg:text-[16px] text-[12px] font-[400]">
+                  Industry Excellence Award-2021
+                </li>
+                <li class="lg:text-[16px] text-[12px] font-[400]">
+                  Entrepreneurial Spirit Award- 2020
+                </li>
+                <li class="lg:text-[16px] text-[12px] font-[400]">
+                  Best Consulting Firm- 2020
+                </li>
+                <li class="lg:text-[16px] text-[12px] font-[400]">
+                  Community Impact Award- 2019
+                </li>
+              </div>
+            </div>
+            <!-- 4th row  -->
+
+            <div class="flex flex-col bg-[#F5F5F5] gap-3 p-3">
+              <h4 class="text-[12px] lg:text-[16px] font-[400]">Services</h4>
+
+              <div>
+                <li class="lg:text-[16px] text-[12px] font-[400]">
+                  Industry Excellence Award-2021
+                </li>
+                <li class="lg:text-[16px] text-[12px] font-[400]">
+                  Entrepreneurial Spirit Award- 2020
+                </li>
+              </div>
+            </div>
+
+            <!-- 5th videos -->
+            <div class="flex gap-5">
+              <img
+                class="w-[360px] h-[230px]"
+                src="../src/assets/vad1.png"
+                alt=""
+              />
+              <img
+                class="w-[360px] h-[230px]"
+                src="../src/assets/vad2.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- small screen design -->
+      <div class="flex lg:hidden flex-col p-[20px] mb-[5rem]">
+        <!-- slider  -->
+        <div class="swiper mySwiper1 bg-[#F4F9EF] p-[18px]">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div>
+                <img
+                  class="w-[100px] h-[80px] shadow shadow-[#00000026]"
+                  src="../src/assets/Rectangle 66.png"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div>
+                <img
+                  class="w-[100px] h-[80px] shadow shadow-[#00000026]"
+                  src="../src/assets/Rectangle 67.png"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div>
+                <img
+                  class="w-[100px] h-[80px] shadow shadow-[#00000026]"
+                  src="../src/assets/Rectangle 68.png"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div>
+                <img
+                  class="w-[100px] h-[80px] shadow shadow-[#00000026]"
+                  src="../src/assets/Rectangle 69.png"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div>
+                <img
+                  class="w-[100px] h-[80px] shadow shadow-[#00000026]"
+                  src="../src/assets/Rectangle 70.png"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div>
+                <img
+                  class="w-[100px] h-[80px] shadow shadow-[#00000026]"
+                  src="../src/assets/Rectangle 66.png"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div>
+                <img
+                  class="w-[100px] h-[80px] shadow shadow-[#00000026]"
+                  src="../src/assets/Rectangle 67.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- proflie  -->
+        <div
+          class="flex w-full shadow-xl rounded-[24px] shadow-[#00000026] p-4 flex-col"
+        >
+          <div class="flex rounded-[24px] bg-white p-1 justify-between">
+            <p class="text-[12px] font-[500] text-[#B58300]">Super Advisor</p>
+            <div class="flex gap-1 items-center">
+              <i class="fa-solid fa-circle fa-sm" style="color: #6a9023"></i>
+              <p class="text-[12px] font-[600] text-[#6a9023]">Available</p>
+            </div>
+          </div>
+          <div class="flex mt-[8px] gap-1 md:gap-4 w-full">
+            <!-- 1st col  -->
+            <div class="flex flex-col shrink-0 w-fit gap-[12px]">
+              <img
+                class="w-[100px] h-[80px] sm:w-[160px] shrink-0 sm:h-[130px]"
+                src="../src/assets/Rectangle 65.png"
+                alt=""
+              />
+              <div class="flex flex-col gap-[4px]">
+                <div class="flex gap-1 items-center">
+                  <img
+                    class="w-[20px] h-[20px]"
+                    src="../src/assets/icons/Notify me.png"
+                    alt=""
+                  />
+
+                  <p class="text-[12px] font-[500] text-[#C95555]">Notify me</p>
+                </div>
+                <div class="flex flex-col gap-[4px]">
+                  <div class="flex gap-1 items-center">
+                    <img
+                      class="w-[20px] h-[20px]"
+                      src="../src/assets/icons/Discovery call.png"
+                      alt=""
+                    />
+
+                    <p
+                      class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]"
+                    >
+                      Discovery call
+                    </p>
+                  </div>
+                  <div class="flex gap-1 items-center">
+                    <img
+                      class="w-[20px] h-[20px]"
+                      src="../src/assets/icons/Consultation call.png"
+                      alt=""
+                    />
+
+                    <p
+                      class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]"
+                    >
+                      Consultation call
+                    </p>
+                  </div>
+                  <div class="flex gap-1 items-center">
+                    <img
+                      class="w-[20px] h-[20px]"
+                      src="../src/assets/icons/Chat.png"
+                      alt=""
+                    />
+
+                    <p
+                      class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]"
+                    >
+                      Chat
+                    </p>
+                  </div>
+                  <div class="flex gap-1 items-center">
+                    <img
+                      class="w-[20px] h-[20px]"
+                      src="../src/assets/icons/Book Appointment.png"
+                      alt=""
+                    />
+
+                    <p
+                      class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]"
+                    >
+                      Book Appointment
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 2nd col  -->
+            <!-- options choosen -->
+            <div class="flex w-full justify-between relative">
+              <img
+                class="w-[100px] h-[100px] md:w-[120px] md:h-[120px] absolute bottom-[0px] right-0 sm:right-[10px]"
+                src="../src/assets/Stamp.png"
+                alt=""
+              />
+
+              <div class="flex flex-col w-full gap-[12px]">
+                <!-- title name  -->
+                <div class="flex flex-col w-full gap-[4px] relative">
+                  <div class="flex justify-between items-center">
+                    <h2 class="tetx-[14px] lg:text-[18px] font-[600]">
+                      Catherine Paize
+                    </h2>
+                    <!-- rating -->
+                    <div class="flex gap-1 items-center">
+                      <i class="fa-solid fa-star" style="color: #ffd43b"></i>
+                      <p
+                        class="lg:text-[16px] lg:font-[500] text-[10px] font-[700]"
+                      >
+                        4.9
+                      </p>
+                    </div>
+                  </div>
+                  <h3 class="lg;text-[16px] font-[400] text-[12px]">
+                    Founder, XYZ company
+                  </h3>
+                </div>
+                <!-- dropdown options selected  -->
+                <div class="flex flex-col justify-between">
+                  <div class="flex flex-col gap-1">
+                    <h3 class="font-[500] text-[12px] lg:text-[16px]">
+                      Business Functions:
+                    </h3>
+                    <div class="flex gap-1">
+                      <h4
+                        class="text-[10px] p-1 rounded-[40px] bg-[#F7EAEA] border border-[#FFD3D3] lg:text-[14px] font-[400]"
+                      >
+                        Business coaching
+                      </h4>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-col gap-1">
+                    <h3 class="font-[500] text-[12px] lg:text-[16px]">
+                      Sub-Business Functions:
+                    </h3>
+                    <div class="flex gap-1">
+                      <h4
+                        class="text-[10px] p-1 rounded-[40px] bg-[#F7EAEA] border border-[#FFD3D3] lg:text-[14px] font-[400]"
+                      >
+                        Leadership coaching
+                      </h4>
+                      <h4
+                        class="text-[10px] p-1 rounded-[40px] bg-[#F7EAEA] border border-[#FFD3D3] lg:text-[14px] font-[400]"
+                      >
+                        Executive coaching
+                      </h4>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-col gap-1">
+                    <h3 class="font-[500] text-[12px] lg:text-[16px]">
+                      Geography:
+                    </h3>
+                    <div class="flex gap-1">
+                      <h4
+                        class="text-[10px] p-1 rounded-[40px] bg-[#F7EAEA] border border-[#FFD3D3] lg:text-[14px] font-[400]"
+                      >
+                        India
+                      </h4>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-[4px]">
+                    <div class="flex gap-1 items-center">
+                      <img
+                        class="sm:w-[20px] sm:h-[20px] w-[15px] h-[15px]"
+                        src="../src/assets/icons/hindi.png"
+                        alt=""
+                      />
+
+                      <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                        Hindi, English
+                      </p>
+                    </div>
+                    <div class="flex gap-1 items-center">
+                      <img
+                        class="sm:w-[20px] sm:h-[20px] w-[15px] h-[15px]"
+                        src="../src/assets/icons/33.png"
+                        alt=""
+                      />
+
+                      <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                        33/min
+                      </p>
+                    </div>
+                    <div class="flex gap-1 items-center">
+                      <img
+                        class="sm:w-[20px] sm:h-[20px] w-[15px] h-[15px]"
+                        src="../src/assets/icons/location.png"
+                        alt=""
+                      />
+
+                      <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                        Delhi, India
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- dropdown -->
+        <div class="relative inline-block w-full text-left">
+          <div
+            class="flex items-center justify-between bg-[#FFF6F6] mt-[12px] rounded-[18px] w-full p-2"
+          >
+            <button
+              id="new-dropdown-button"
+              onclick="toggleNewDropdown()"
+              class="new-dropbtn text-[#3A3A3A] px-4 py-2 rounded-md text-[16px] font-[500] focus:outline-none flex items-center"
+            >
+              Availability
+            </button>
+            <i
+              id="new-dropdown-icon"
+              onclick="toggleNewDropdown()"
+              class="fas fa-chevron-down   cursor-pointer"
+            ></i>
+          </div>
+
+          <div
+            id="new-dropdown-menu"
+            class="new-dropdown-content absolute bg-white z-10 hidden rounded-md shadow-md w-full"
+          >
+            <div
+              class="flex text-[#FF0000] text-[15px] font-[400] justify-between items-center w-full px-4 py-2"
+            >
+              <p class="mx-2">Sunday</p>
+              <p class="mx-2">Day off</p>
+            </div>
+            <div
+              class="flex text-[#864444] text-[15px] font-[400] justify-between items-center w-full px-4 py-2"
+            >
+              <p class="mx-2">Monday</p>
+              <p class="mx-2">9:00am- 6:00pm</p>
+            </div>
+            <div
+              class="flex text-[#864444] text-[15px] font-[400] justify-between items-center w-full px-4 py-2"
+            >
+              <p class="mx-2">Tuesday</p>
+              <p class="mx-2">9:00am- 6:00pm</p>
+            </div>
+            <div
+              class="flex text-[#864444] text-[15px] font-[400] justify-between items-center w-full px-4 py-2"
+            >
+              <p class="mx-2">Wednesday</p>
+              <p class="mx-2">9:00am- 6:00pm</p>
+            </div>
+            <div
+              class="flex text-[#864444] text-[15px] font-[400] justify-between items-center w-full px-4 py-2"
+            >
+              <p class="mx-2">Thursday</p>
+              <p class="mx-2">9:00am- 6:00pm</p>
+            </div>
+            <div
+              class="flex text-[#864444] text-[15px] font-[400] justify-between items-center w-full px-4 py-2"
+            >
+              <p class="mx-2">Friday</p>
+              <p class="mx-2">9:00am- 6:00pm</p>
+            </div>
+            <div
+              class="flex text-[#864444] text-[15px] font-[400] justify-between items-center w-full px-4 py-2"
+            >
+              <p class="mx-2">Saturday</p>
+              <p class="mx-2">9:00am- 6:00pm</p>
+            </div>
+          </div>
+        </div>
+        <!-- about  -->
+        <div
+          class="flex flex-col gap-[5px] bg-[#F5F5F5] p-3 mt-[12px] rounded-[12px]"
+        >
+          <h4 class="text-[12px] lg:text-[16px] font-[400]">About</h4>
+          <p class="text-[12px] lg:text-[16px] font-[400]">
+            Welcome to my profile! With 7 years of experience in the business
+            industry, I am passionate about helping entrepreneurs and businesses
+            thrive. As a seasoned business advisor, I specialize in [mention
+            areas of expertise such as business strategy, marketing, finance,
+            etc.]. My mission is to empower individuals and organizations to
+            overcome challenges, capitalize on opportunities, and achieve
+            sustainable growth.
+            <br />
+            <br />
+            I believe in a personalized approach to mentorship, tailoring
+            strategies and solutions to meet the unique needs and goals of each
+            client. Through collaborative partnerships and strategic guidance, I
+            work closely with my clients to develop actionable plans and drive
+            tangible results.
+            <br />
+            <br />
+            My expertise extends across various industries, including [list
+            relevant industries or sectors], and I have had the privilege of
+            working with clients ranging from startups to established
+            corporations. Whether you're navigating a specific business
+            challenge, planning for growth, or seeking strategic insights, I am
+            here to provide the support and guidance you need to succeed.
+          </p>
+        </div>
+        <!-- 3rd row  -->
+        <div
+          class="flex flex-col mt-[12px] rounded-[12px] bg-[#F5F5F5] gap-3 p-3"
+        >
+          <h4 class="text-[12px] lg:text-[16px] font-[400]">
+            Awards & Recognition
+          </h4>
+
+          <div>
+            <li class="lg:text-[16px] text-[12px] font-[400]">
+              Industry Excellence Award-2021
+            </li>
+            <li class="lg:text-[16px] text-[12px] font-[400]">
+              Entrepreneurial Spirit Award- 2020
+            </li>
+            <li class="lg:text-[16px] text-[12px] font-[400]">
+              Best Consulting Firm- 2020
+            </li>
+            <li class="lg:text-[16px] text-[12px] font-[400]">
+              Community Impact Award- 2019
+            </li>
+          </div>
+        </div>
+        <!-- 4th row  -->
+
+        <div
+          class="flex flex-col mt-[12px] rounded-[12px] bg-[#F5F5F5] gap-3 p-3"
+        >
+          <h4 class="text-[12px] lg:text-[16px] font-[400]">Services</h4>
+
+          <div>
+            <li class="lg:text-[16px] text-[12px] font-[400]">
+              Industry Excellence Award-2021
+            </li>
+            <li class="lg:text-[16px] text-[12px] font-[400]">
+              Entrepreneurial Spirit Award- 2020
+            </li>
+          </div>
+        </div>
+        <!-- 5th videos -->
+        <div
+          class="flex flex-wrap items-center justify-center sm:flex-row gap-5"
+        >
+          <img
+            class="sm:w-[200px] sm:h-[200px] lg:w-[160px] w-full lg:h-[130px]"
+            src="../src/assets/vad1.png"
+            alt=""
+          />
+          <img
+            class="sm:w-[200px] sm:h-[200px] lg:w-[160px] w-full lg:h-[130px]"
+            src="../src/assets/vad2.png"
+            alt=""
+          />
+        </div>
+        <!-- testimonial slider -->
+        <p
+          class="font-[400] mt-[12px] text-[14px] lg:text-[18px] text-[#2A2A2A]"
+        >
+          Reviews:
+        </p>
+
+        <!-- swipper js  -->
+        <div
+          class="swiper mySwiper1 bg-[#F4F9EF] flex items-center justify-center p-[18px]"
+        >
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="p-2 w-full flex flex-col gsp-2">
+                <div class="flex gap-3">
+                  <img
+                    style="height: 60px; width: 60px"
+                    src="../src/assets/Ellipse 4.png"
+                    alt=""
+                  />
+                  <div class="flex flex-col">
+                    <h2>Lisa Miles</h2>
+                    <div class="flex gap-1">
+                      <i class="fa-solid fa-star" style="color: #ffd43b"></i>
+                      <h5>4.9/5</h5>
+                    </div>
+                  </div>
+                </div>
+                <p class="text-[18px] font-[400]">
+                  "Catherine's positivity and enthusiasm are infectious! As an
+                  advisor, she goes above and beyond to support her clients in
+                  achieving their goals. Incredible Insight and Guidance. Their
+                  expertise and insights have helped me navigate complex
+                  challenges and identify new opportunities for growth. Highly
+                  recommend."
+                </p>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="p-2 w-full flex flex-col gsp-2">
+                <div class="flex gap-3">
+                  <img
+                    style="height: 60px; width: 60px"
+                    src="../src/assets/Ellipse 5.png"
+                    alt=""
+                  />
+                  <div class="flex flex-col">
+                    <h2>Lisa Miles</h2>
+                    <div class="flex gap-1">
+                      <i class="fa-solid fa-star" style="color: #ffd43b"></i>
+                      <h5>4.9/5</h5>
+                    </div>
+                  </div>
+                </div>
+                <p class="text-[18px] font-[400]">
+                  "Catherine's positivity and enthusiasm are infectious! As an
+                  advisor, she goes above and beyond to support her clients in
+                  achieving their goals. Incredible Insight and Guidance. Their
+                  expertise and insights have helped me navigate complex
+                  challenges and identify new opportunities for growth. Highly
+                  recommend."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer
+        class="hidden md:block bg-[#FFFFFF] shadow-2xl border border-transparent mt-[2rem]"
+      >
+        <div class="md:w-[95%] lg:w-[90%] mx-auto my-[2rem]">
+          <div
+            class="w-full flex items-start gap-[2rem] lg:gap-[4rem] font-Roboto"
+          >
+            <div
+              class="font-semibold text-xl lg:text-2xl flex flex-col gap-2 items-start justify-starts"
+            >
+              <h1 class="text-[#FF3131]">
+                ADVIS<span class="text-[#6A9023]">ATOR</span>
+              </h1>
+              <p
+                class="text-sm lg:text-base text-[#3A3A3A] font-normal text-start"
+              >
+                Business & Digital Expert Advice
+              </p>
+              <div class="flex items-center gap-2">
+                <img class="w-3 h-4" src="../src/assets/img/call.png" alt="" />
+                <p class="text-sm text-[#3A3A3A] font-normal">+91 1234567890</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <img
+                  class="w-3 h-4"
+                  src="../src/assets/img/location.png"
+                  alt=""
+                />
+                <p class="text-sm text-[#3A3A3A] font-normal">Delhi, India</p>
+              </div>
+            </div>
+
+            <div>
+              <h4
+                class="font-bold text-base text-[#3A3A3A] text-start my-2 px-4"
+              >
+                Subscribe to Newsletter
+              </h4>
+              <div
+                class="h-fit max-w-[40rem] mx-auto border border-[#DADADA] px-2 xl:px-4 py-2 rounded-[24px] shadow-md flex justify-between items-center gap-x-2 font-Roboto font-normal text-sm lg:text-base text-[#2A2A2A]"
+              >
+                <div>
+                  <input
+                    class="font-medium text-sm w-full lg:text-base text-[#AFAFAF] placeholder:text-[#AFAFAF] outline-none bg-[#FFFFFF]"
+                    type="email"
+                    placeholder="Email address"
+                  />
+                </div>
+
+                <div
+                  class="py-2 px-[2rem] flex items-center gap-x-2 rounded-[2rem] bg-[#EDF6DB] shadow-md"
+                >
+                  <button
+                    class="font-Roboto text-nowrap font-semibold text-sm lg:text-base text-[#2A2A2A]"
+                  >
+                    Subscribe
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <ul
+              class="flex items-start flex-col gap-2 font-Roboto font-normal text-sm lg:text-base text-[#828282]"
+            >
+              <li class="text-[#3A3A3A]">Quick Links</li>
+              <li>
+                <a href="">Home</a>
+              </li>
+              <li>
+                <a href="">Browse Mentors</a>
+              </li>
+              <li>
+                <a href="">Featured Mentors</a>
+              </li>
+              <li>
+                <a href="">Blogs</a>
+              </li>
+            </ul>
+            <ul
+              class="flex flex-col items-start gap-2 font-Roboto font-normal text-sm lg:text-base text-[#828282]"
+            >
+              <li class="text-[#3A3A3A]">About</li>
+              <li>
+                <a href="">About us</a>
+              </li>
+              <li>
+                <a href="">Contact us</a>
+              </li>
+              <li>
+                <a href="">Terms of services</a>
+              </li>
+            </ul>
+            <ul
+              class="flex flex-col items-start gap-2 font-Roboto font-normal text-sm lg:text-base text-[#828282]"
+            >
+              <li class="text-[#3A3A3A]">Social Media</li>
+              <li>
+                <a href="">Instagram</a>
+              </li>
+              <li>
+                <a href="">Facebook</a>
+              </li>
+              <li>
+                <a href="">Twitter</a>
+              </li>
+              <li>
+                <a href="">Linkedin</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="border border-[#EAEAEA] my-4 w-full"></div>
+
+          <h3 class="text-[#3A3A3A] font-normal text-base text-start">
+            © 2024 Advisator. All rights reserved.
+          </h3>
+        </div>
+      </footer>
+      <!-- bottom menu bar -->
+      <div
+        class="bg-[#FFFFFF] z-20 shadow-2xl h-[60px] fixed md:hidden bottom-0 w-full"
+      >
+        <div class="h-full w-[85%] mx-auto flex justify-between items-center">
+          <img
+            class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer"
+            src="../src/assets/Homemob.png"
+            alt=""
+          />
+          <img
+            class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer"
+            src="../src/assets/Contsultmob.png"
+            alt=""
+          />
+          <img
+            class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer"
+            src="../src/assets/img/teenyicons_appointment.png"
+            alt=""
+          />
+          <img
+            class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer"
+            src="../src/assets/img/typcn_user.png"
+            alt=""
+          />
+        </div>
+
+        <div
+          class="absolute left-1/2 top-[-60%] translate-y-1/2 -translate-x-1/2 w-[40px] h-[40px] bg-[#FFFFFF] flex items-center justify-center rounded-[2rem] shadow-2xl"
+        >
+          <img
+            class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer"
+            src="../src/assets/img/mingcute_user-star-fill.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <!-- side bar -->
+      <div
+        class="sidebar absolute md:hidden flex justify-end z-20 top-0 transition-all left-full w-full min-h-screen h-full bottom-0"
+      >
+        <div class="w-[70%] sm:w-[60%] bg-[#FFFFFF] h-full">
+          <div class="w-[90%]s mx-auto flexs flex-col gap-4 py-[2rem]">
+            <div class="flex justify-between items-center">
+              <div
+                class="flex items-center gap-1 bg-[#FFF4ED] px-2 py-3 rounded-r-[30px]"
+              >
+                <img
+                  class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[3rem]"
+                  src="../src/assets/img/profileImage.png"
+                  alt=""
+                />
+                <div>
+                  <h2 class="text-sm sm:text-base text-[#2A2A2A] font-medium">
+                    Radhika Sharma
+                  </h2>
+                  <h3 class="text-xs sm:text-sm text-[#828282] font-medium">
+                    radhikasharma@abc.com
+                  </h3>
+                </div>
+              </div>
+              <div>
+                <img
+                  id="hideSideMenu"
+                  class="w-7 sm:w-8 mr-2 cursor-pointer"
+                  src="../src/assets/img/cross.png"
+                  alt=""
+                />
+              </div>
+            </div>
+
+            <div class="mt-[2rem] border-t border-b border-[#E5E5E5] py-2 my-2">
+              <div class="ml-[2rem] flex items-center gap-4">
+                <img
+                  class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                  src="../src/assets/img/phone.png"
+                  alt=""
+                />
+                <h2 class="font-medium text-sm sm:text-base text-[#BE7D00]">
+                  Become an Advisor
+                </h2>
+              </div>
+            </div>
+
+            <div class="px-[2rem] py-2 flex flex-col gap-6">
+              <div class="flex items-center gap-4">
+                <img
+                  class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                  src="../src/assets/img/Consult Advisor.png"
+                  alt=""
+                />
+                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                  Consult Advisor
+                </h2>
+              </div>
+              <div class="flex items-center gap-4">
+                <img
+                  class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                  src="../src/assets/img/FeaturedAdvisor.png"
+                  alt=""
+                />
+                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                  Featured Advisor
+                </h2>
+              </div>
+              <div class="flex items-center gap-4">
+                <img
+                  class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                  src="../src/assets/img/MyBookings.png"
+                  alt=""
+                />
+                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                  My Bookings
+                </h2>
+              </div>
+              <div class="flex items-center gap-4">
+                <img
+                  class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                  src="../src/assets/img/Wallet.png"
+                  alt=""
+                />
+                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                  Wallet
+                </h2>
+              </div>
+              <div class="flex items-center gap-4">
+                <img
+                  class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                  src="../src/assets/img/Blogs.png"
+                  alt=""
+                />
+                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                  Blogs
+                </h2>
+              </div>
+              <div class="flex items-center gap-4">
+                <img
+                  class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                  src="../src/assets/img/Aboutus.png"
+                  alt=""
+                />
+                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                  About us
+                </h2>
+              </div>
+              <div class="flex items-center gap-4">
+                <img
+                  class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                  src="../src/assets/img/Customersupport.png"
+                  alt=""
+                />
+                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                  Customer support
+                </h2>
+              </div>
+              <div class="flex items-center gap-4">
+                <img
+                  class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                  src="../src/assets/img/Logout.png"
+                  alt=""
+                />
+                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                  Logout
+                </h2>
+              </div>
+            </div>
+          </div>
+
+          <div class="px-[2rem] py-2">
+            <h3 class="text-sm sm:text-base text-[#2A2A2A] my-[1rem]">
+              Find us on:
+            </h3>
+            <div class="flex gap-5">
+              <img
+                class="w-[30px] h-[30px]"
+                src="../src/assets/img/instagram.png"
+                alt=""
+              />
+              <img
+                class="w-[30px] h-[30px]"
+                src="../src/assets/img/facebook.png"
+                alt=""
+              />
+              <img
+                class="w-[30px] h-[30px]"
+                src="../src/assets/img/linkedin.png"
+                alt=""
+              />
+              <img
+                class="w-[30px] h-[30px]"
+                src="../src/assets/img/youtube.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    var swiper = new Swiper(".mySwiper1", {
+      slidesPerView: "auto",
+      spaceBetween: 40,
+    });
+  </script>
+  <script>
+    // JavaScript to toggle sidebar
+    // const toggleBtn = document.querySelector('.toggleBtn');
+    const hideSideMenu = document.getElementById("hideSideMenu");
+    const showSideMenu = document.getElementById("showSideMenu");
+
+    // console.log(toggleBtn)
+    console.log(hideSideMenu, showSideMenu);
+    const sidebar = document.querySelector(".sidebar");
+
+    hideSideMenu.addEventListener("click", () => {
+      sidebar.classList.add("left-full");
+    });
+    showSideMenu.addEventListener("click", () => {
+      sidebar.classList.remove("left-full");
+    });
+  </script>
+  <!-- testimonial script  -->
+  <script>
+    $(document).ready(function () {
+      $("#testimonial-slider").owlCarousel({
+        items: 1,
+        itemsDesktop: [3000, 1],
+        itemsDesktopSmall: [979, 1],
+        itemsTablet: [768, 1],
+        pagination: false,
+        navigation: true,
+        navigationText: ["", ""],
+        autoplay: true,
+        loop: true, // Enable looping
+      });
+
+      $(".owl-prev").click(function () {
+        $("#testimonial-slider").trigger("prev.owl.carousel");
+      });
+
+      $(".owl-next").click(function () {
+        $("#testimonial-slider").trigger("next.owl.carousel");
+      });
+    });
+  </script>
+  <!-- downdrop button for lg screen  -->
+  <script>
+    function toggleDropdown() {
+      const dropdownMenu = document.getElementById("dropdown-menu");
+      const dropdownIcon = document.getElementById("dropdown-icon");
+
+      if (dropdownMenu.classList.contains("hidden")) {
+        dropdownMenu.classList.remove("hidden");
+        dropdownIcon.classList.remove("hidden");
+      } else {
+        dropdownMenu.classList.add("hidden");
+        dropdownIcon.classList.add("hidden");
+      }
+    }
+
+    window.onclick = function (event) {
+      if (
+        !event.target.matches(".dropbtn") &&
+        !event.target.matches("#dropdown-icon")
+      ) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (!openDropdown.classList.contains("hidden")) {
+            openDropdown.classList.add("hidden");
+            const dropdownIcon = document.getElementById("dropdown-icon");
+            dropdownIcon.classList.add("hidden");
+          }
+        }
+      }
+    };
+  </script>
+  <!-- dropdown for small screen -->
+  <script>
+    function toggleNewDropdown() {
+      const dropdownMenu = document.getElementById("new-dropdown-menu");
+      const dropdownIcon = document.getElementById("new-dropdown-icon");
+
+      if (dropdownMenu.classList.contains("hidden")) {
+        dropdownMenu.classList.remove("hidden");
+        dropdownIcon.classList.remove("hidden");
+      } else {
+        dropdownMenu.classList.add("hidden");
+        dropdownIcon.classList.add("hidden");
+      }
+    }
+
+    window.onclick = function (event) {
+      if (
+        !event.target.matches(".new-dropbtn") &&
+        !event.target.matches("#new-dropdown-icon")
+      ) {
+        var dropdowns = document.getElementsByClassName("new-dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (!openDropdown.classList.contains("hidden")) {
+            openDropdown.classList.add("hidden");
+            const dropdownIcon = document.getElementById("new-dropdown-icon");
+            dropdownIcon.classList.add("hidden");
+          }
+        }
+      }
+    };
+  </script>
+</html>

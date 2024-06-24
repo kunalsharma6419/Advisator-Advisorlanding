@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advisor Nomination</title>
+    <!-- <link href="../output.css" rel="stylesheet"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        Roboto: "Roboto",
+                    },
+                    colors: {
+                        clifford: "#da373d",
+                    },
+                },
+            },
+        };
+    </script>
+    <script src="https://kit.fontawesome.com/5c118959dd.js" crossorigin="anonymous"></script>
+
+    <!-- checkbox -->
+    <style>
+        #myCheckbox {
+            accent-color: #6a9023;
+        }
+    </style>
+    <!-- for active button -->
+
+    <style>
+        .checked {
+            background-color: #db5001;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div
+        class="flex font-Roboto lg:px-[60px] lg:py-[40px] text-[#2A2A2A] w-full flex-row justify-between items-center lg:gap-[56px]">
+        <!-- 1 row -->
+        <div class="hidden lg:flex flex-col items-center w-full">
+            <div class="relative">
+                <img class="w-[573px] h-full" src="../src/assets/Group 750.png" />
+            </div>
+        </div>
+        <!-- 2nd row -->
+        <div class="flex flex-col bg-[#F6F8F1] px-[20px] lg:px-[30px] rounded-[18px] py-[30px] w-full">
+            <!-- welcome -->
+            <div class="flex w- flex-col gap-[4px]">
+                <img class="w-[154px] h-[72px]" src="../src/assets/auth/Rectangle 546.png" alt="" />
+                <p class="font-[400] text-[16px]">
+                    Advisor Nomination form. Please fill in the details below for
+                    Advisor signup
+                </p>
+            </div>
+            <form class="flex flex-col mt-[35px] gap-[28px] px-30">
+                <input placeholder="Full Name" class="w-full px-[18px] py-[14px] h-[60px] rounded-[8px] shadow-lg"
+                    type="text" name="" id="" />
+                <input placeholder="Email Address"
+                    class="w-full mt-[12px] h-[60px] px-[18px] py-[14px] rounded-[8px] shadow-lg" type="text"
+                    name="" id="" />
+                <!-- phone number -->
+                <div class="p-[18px] mt-[18px] w-full flex gap-[12px] rounded-[12px] bg-white">
+                    <!-- dropdown number -->
+                    <div class="flex gap-[12px]">
+                        <label for="underline_select" class="sr-only">+91</label>
+                        <select id="underline_select">
+                            <option selected>+91</option>
+                            <option value="US">+92</option>
+                            <option value="CA">+93</option>
+                            <option value="FR">+94</option>
+                        </select>
+                    </div>
+                    <!-- border div  -->
+                    <!-- <div class="w-[1.5px] border border-[#D6D6D6]"></div> -->
+
+                    <div class="">
+                        <input class="" placeholder="Moblie Number" type="tel" />
+                    </div>
+                </div>
+                <input placeholder="Location" class="px-[18px] w-full h-[60px] rounded-[8px] shadow-lg" type="text"
+                    name="" id="" />
+                <!-- Linkedin Proflie Link -->
+                <div class="p-[18px] mt-[18px] w-full flex gap-[12px] rounded-[12px] bg-white">
+                    <input class="w-full" placeholder="LinkedIn Profile link" type="link" />
+                    <i class="fa-solid fa-paperclip" style="color: #3a3a3a"></i>
+                </div>
+
+                <div class="border w-full border-1 mt-[18px] border-[#AFAFAF]"></div>
+                <h2 class="font-[500] text-[16px]">Areas of interests</h2>
+                <!-- dropdown -->
+                <div class="flex flex-col gap-[28px]">
+                    <!-- dropdown1 -->
+                    <div class="w-full mx-auto">
+                        <label for="underline_select" class="sr-only">Areas of interests</label>
+                        <select id="underline_select" class="w-full p-2 rounded-[12px]">
+                            <option selected>Choose Areas of interests</option>
+                            <option value="US">Business coaching</option>
+                            <option value="CA">Leadership coaching</option>
+                            <option value="FR">Executive coaching</option>
+                        </select>
+                    </div>
+                    <div class="border border-gray-400 border-1 my-30"></div>
+                    <!-- dropdown2 -->
+                    <div class="w-full mx-auto">
+                        <label for="underline_select" class="sr-only">Industry</label>
+                        <select id="underline_select" class="w-full p-2 rounded-[12px]">
+                            <option selected class="">Industry</option>
+                            <option value="US">Ecommerce</option>
+                            <option value="CA">Finances</option>
+                            <option value="FR">Digital Market</option>
+                        </select>
+                    </div>
+                    <div class="border border-1 my-30 border-[#AFAFAF]"></div>
+                    <!-- dropdown3 -->
+                    <div class="w-full mx-auto">
+                        <label for="underline_select" class="sr-only">Geography</label>
+                        <select id="underline_select" class="w-full p-2 rounded-[12px]">
+                            <option selected>Geography</option>
+                            <option value="US">India</option>
+                            <option value="CA">Singapore</option>
+                            <option value="FR">Australia</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Availability button  -->
+                <div class="border w-full border-1 mt-[18px] border-[#AFAFAF]"></div>
+                <div class="flex flex-col gap-[12px]">
+                    <h3 class="text-[18px] font-[500]">Availability</h3>
+                    <div class="flex items-center justify-between">
+                        <p class="text-[16px] font-[500] text-[#828282]">
+                            Please choose your availability
+                        </p>
+                        <button id="myBtn"
+                            class="text-[16px] font-[600] rounded-[18px] text-center w-[200px] py-[10px] text-white bg-[#6A9023]">
+                            Choose Availability
+                        </button>
+                    </div>
+                </div>
+                <div class="border w-full border-1 mt-[18px] border-[#AFAFAF]"></div>
+                <!-- choose plan  -->
+                <div class="flex flex-col gap-[12px]">
+                    <div class="flex justify-between">
+                        <h4 class="text-[16px] font-[400]">
+                            Set Your Advisory Price (per minute)
+                        </h4>
+                        <div
+                            class="flex justify-between border border-[#828282] gap-[8px] w-[220px] rounded-[8px] px-3 bg-white py-2">
+                            <button id="btnLondon"
+                                class="tabButton bg-red-500 text-white px-4 py-2 text-[16px] rounded-[8px] font-[500]"
+                                onclick="openContent('London', event)">
+                                Minute
+                            </button>
+                            <button id="btnParis"
+                                class="tabButton bg-white text-black px-4 py-2 text-[16px] rounded-[8px]  font-[500]"
+                                onclick="openContent('Paris', event)">
+                                Hour
+                            </button>
+                        </div>
+                    </div>
+                    <!--  calls -->
+                    <!-- calls for minutes  -->
+                    <div id="London" class="city w-full" style="display: block">
+                        <!-- London content -->
+                        <div class="flex items-center w-full justify-between">
+                            <!-- 1st call  -->
+                            <div class="flex flex-col gap-[12px]">
+                                <h2 class="text-[16px] font-[500]">Discovery call</h2>
+                                <div class="flex justify-between">
+                                    <p class="text-[16px] font-[400] text-[#828282]">
+                                        Currency
+                                    </p>
+                                    <p class="text-[16px] font-[400] text-[#828282]">Price</p>
+                                </div>
+                                <div class="flex items-center gap-[12px] justify-between">
+                                    <h2 class="text-[16px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]">
+                                        INR (₹)
+                                    </h2>
+                                    <div class="h-[1px] w-[24px] border border-[#000000]"></div>
+
+                                    <h2 class="text-[16px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]">
+                                        20
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="h-[188px] w-[1px] border border-[#000000]"></div>
+                            <!-- 2nd call  -->
+                            <div class="flex flex-col gap-[12px]">
+                                <h2 class="text-[16px] font-[500]">Conference call</h2>
+                                <div class="flex justify-between">
+                                    <p class="text-[16px] font-[400] text-[#828282]">
+                                        Currency
+                                    </p>
+                                    <p class="text-[16px] font-[400] text-[#828282]">Price</p>
+                                </div>
+                                <div class="flex items-center gap-[12px] justify-between">
+                                    <h2 class="text-[16px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]">
+                                        INR (₹)
+                                    </h2>
+                                    <div class="h-[1px] w-[24px] border border-[#000000]"></div>
+
+                                    <h2 class="text-[16px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]">
+                                        30
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex w-full justify-between">
+                            <!-- 3rd call  -->
+                            <div class="flex flex-col gap-[12px]">
+                                <h2 class="text-[16px] font-[500]">Chat</h2>
+                                <div class="flex justify-between">
+                                    <p class="text-[16px] font-[400] text-[#828282]">
+                                        Currency
+                                    </p>
+                                    <p class="text-[16px] font-[400] text-[#828282]">Price</p>
+                                </div>
+                                <div class="flex items-center gap-[12px] justify-between">
+                                    <h2 class="text-[16px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]">
+                                        INR (₹)
+                                    </h2>
+                                    <div class="h-[1px] w-[24px] border border-[#000000]"></div>
+
+                                    <h2 class="text-[16px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]">
+                                        50
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- calls for hour  -->
+                    <div id="Paris" class="city w-full" style="display: none">
+                        <!-- Paris content -->
+                        <div class="flex items-center w-full justify-between">
+                            <!-- 1st call  -->
+                            <div class="flex flex-col gap-[12px]">
+                                <h2 class="text-[16px] font-[500]">Discovery call</h2>
+                                <div class="flex justify-between">
+                                    <p class="text-[16px] font-[400] text-[#828282]">
+                                        Currency
+                                    </p>
+                                    <p class="text-[16px] font-[400] text-[#828282]">Price</p>
+                                </div>
+                                <div class="flex items-center gap-[12px] justify-between">
+                                    <h2 class="text-[16px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]">
+                                        INR (₹)
+                                    </h2>
+                                    <div class="h-[1px] w-[24px] border border-[#000000]"></div>
+
+                                    <h2 class="text-[16px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]">
+                                        20
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="h-[188px] w-[1px] border border-[#000000]"></div>
+                            <!-- 2nd call  -->
+                            <div class="flex flex-col gap-[12px]">
+                                <h2 class="text-[16px] font-[500]">Conference call</h2>
+                                <div class="flex justify-between">
+                                    <p class="text-[16px] font-[400] text-[#828282]">
+                                        Currency
+                                    </p>
+                                    <p class="text-[16px] font-[400] text-[#828282]">Price</p>
+                                </div>
+                                <div class="flex items-center gap-[12px] justify-between">
+                                    <h2 class="text-[16px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]">
+                                        INR (₹)
+                                    </h2>
+                                    <div class="h-[1px] w-[24px] border border-[#000000]"></div>
+
+                                    <h2 class="text-[16px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]">
+                                        30
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex w-full justify-between">
+                            <!-- 3rd call  -->
+                            <div class="flex flex-col gap-[12px]">
+                                <h2 class="text-[16px] font-[500]">Chat</h2>
+                                <div class="flex justify-between">
+                                    <p class="text-[16px] font-[400] text-[#828282]">
+                                        Currency
+                                    </p>
+                                    <p class="text-[16px] font-[400] text-[#828282]">Price</p>
+                                </div>
+                                <div class="flex items-center gap-[12px] justify-between">
+                                    <h2 class="text-[16px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]">
+                                        INR (₹)
+                                    </h2>
+                                    <div class="h-[1px] w-[24px] border border-[#000000]"></div>
+
+                                    <h2 class="text-[16px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]">
+                                        10
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-[18px] mt-[18px] w-full justify-between flex gap-[12px] rounded-[12px] bg-white">
+                        <p class="text-[18px] font-[500]">Attach Documents (optional)</p>
+                        <i class="fa-solid fa-paperclip" style="color: #3a3a3a"></i>
+                    </div>
+                </div>
+                <button
+                    class="mt-[40px] text-[#2A2A2A] rounded-[18px] font-[600] text-center w-full py-[10px] bg-gradient-to-r from-[#EDF6DB] via-[#dce8c4] to-[#C5D5A7]">
+                    Proceed
+                </button>
+            </form>
+        </div>
+    </div>
+    <!-- model for avability -->
+    <div id="myModal" class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center hidden">
+        <!-- Background Overlay -->
+        <div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div>
+
+        <div class="modal-content w-[90%] lg:w-[80%] bg-white p-8 rounded shadow-lg relative z-10">
+            <span id="closeBtn" class="close absolute top-0 right-0 p-4">&times;</span>
+            <!-- Calender for lg screen  -->
+            <div class="bg-white hidden lg:block p-1 lg:p-8">
+                <h2 class="text-[20px] font-[500] text-[#526E1C]">
+                    Choose your Availability
+                </h2>
+                <table class="w-full mt-[30px]">
+                    <tbody class=" ">
+                        <!-- time row  -->
+                        <tr>
+                            <td>
+                                <div class="flex lg:text-[18px] font-[500] text-[#864444] text-[12px] flex-col">
+                                    <p style="display: none">Time ></p>
+                                    <p style="display: none">Days ></p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>9AM</p>
+                                    <p>-</p>
+                                    <p>10AM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>10AM</p>
+                                    <p>-</p>
+                                    <p>11AM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>11AM</p>
+                                    <p>-</p>
+                                    <p>12AM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>12AM</p>
+                                    <p>-</p>
+                                    <p>1PM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>1PM</p>
+                                    <p>-</p>
+                                    <p>2PM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>2PM</p>
+                                    <p>-</p>
+                                    <p>3PM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>3PM</p>
+                                    <p>-</p>
+                                    <p>4PM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>4PM</p>
+                                    <p>-</p>
+                                    <p>5PM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>5PM</p>
+                                    <p>-</p>
+                                    <p>6PM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>6PM</p>
+                                    <p>-</p>
+                                    <p>7PM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>7PM</p>
+                                    <p>-</p>
+                                    <p>8PM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>8PM</p>
+                                    <p>-</p>
+                                    <p>9PM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>9PM</p>
+                                    <p>-</p>
+                                    <p>10PM</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- monday  -->
+                        <tr class="text-[#2A2A2A] bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>Mon</td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- tue  -->
+                        <tr class="text-[#2A2A2A] bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>Tue</td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- wed  -->
+                        <tr class="text-[#2A2A2A] bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>Wed</td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- thu  -->
+                        <tr class="text-[#2A2A2A] bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>Thu</td>
+
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- fri  -->
+                        <tr class="text-[#2A2A2A] bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>Fri</td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- sat -->
+                        <tr class="text-[#2A2A2A] bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>Sat</td>
+
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- sun -->
+                        <tr class="text-[#2A2A2A] bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>Sun</td>
+
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- for small screen calender  -->
+            <div class="bg-white p-2 block h-[90vh] lg:h-full lg:hidden">
+                <h2 class="text-[20px] font-[500] text-[#526E1C]">
+                    Choose your Availability
+                </h2>
+                <table class="w-full mt-[30px]">
+                    <tbody class=" ">
+                        <!-- time row  -->
+                        <tr class="flex items-center w-full justify-between">
+                            <td>
+                                <div class="flex lg:text-[18px] gap-2 font-[500] text-[#864444] text-[12px] flex-col">
+                                    <p style="display: none">Time ></p>
+                                    <p style="display: none">Days ></p>
+                                </div>
+                            </td>
+                            <td class="text-[#2A2A2A] lg:text-[18px] text-[12px] font-[500]">
+                                Mon
+                            </td>
+                            <td class="text-[#2A2A2A] lg:text-[18px] text-[12px] font-[500]">
+                                Tue
+                            </td>
+                            <td class="text-[#2A2A2A] lg:text-[18px] text-[12px] font-[500]">
+                                wed
+                            </td>
+                            <td class="text-[#2A2A2A] lg:text-[18px] text-[12px] font-[500]">
+                                Thus
+                            </td>
+                            <td class="text-[#2A2A2A] lg:text-[18px] text-[12px] font-[500]">
+                                Fri
+                            </td>
+                            <td class="text-[#2A2A2A] lg:text-[18px] text-[12px] font-[500]">
+                                Sat
+                            </td>
+                            <td class="text-[#2A2A2A] lg:text-[18px] text-[12px] font-[500]">
+                                Sun
+                            </td>
+                        </tr>
+                        <!-- 9AM-10AM -->
+                        <tr
+                            class="text-[#2A2A2A] flex items-center w-full justify-between bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>9AM</p>
+                                    <p>-</p>
+                                    <p>10AM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- 9AM-10AM -->
+                        <tr
+                            class="text-[#2A2A2A] flex items-center w-full justify-between bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>9AM</p>
+                                    <p>-</p>
+                                    <p>10AM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- 9AM-10AM -->
+                        <tr
+                            class="text-[#2A2A2A] flex items-center w-full justify-between bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>9AM</p>
+                                    <p>-</p>
+                                    <p>10AM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- 9AM-10AM -->
+                        <tr
+                            class="text-[#2A2A2A] flex items-center w-full justify-between bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>9AM</p>
+                                    <p>-</p>
+                                    <p>10AM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- 9AM-10AM -->
+                        <tr
+                            class="text-[#2A2A2A] flex items-center w-full justify-between bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>9AM</p>
+                                    <p>-</p>
+                                    <p>10AM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- 9AM-10AM -->
+                        <tr
+                            class="text-[#2A2A2A] flex items-center w-full justify-between bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>9AM</p>
+                                    <p>-</p>
+                                    <p>10AM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- 9AM-10AM -->
+                        <tr
+                            class="text-[#2A2A2A] flex items-center w-full justify-between bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>9AM</p>
+                                    <p>-</p>
+                                    <p>10AM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- 9AM-10AM -->
+                        <tr
+                            class="text-[#2A2A2A] flex items-center w-full justify-between bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>9AM</p>
+                                    <p>-</p>
+                                    <p>10AM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- 9AM-10AM -->
+                        <tr
+                            class="text-[#2A2A2A] flex items-center w-full justify-between bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>9AM</p>
+                                    <p>-</p>
+                                    <p>10AM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- 9AM-10AM -->
+                        <tr
+                            class="text-[#2A2A2A] flex items-center w-full justify-between bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>9AM</p>
+                                    <p>-</p>
+                                    <p>10AM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- 9AM-10AM -->
+                        <tr
+                            class="text-[#2A2A2A] flex items-center w-full justify-between bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>9AM</p>
+                                    <p>-</p>
+                                    <p>10AM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- 9AM-10AM -->
+                        <tr
+                            class="text-[#2A2A2A] flex items-center w-full justify-between bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>9AM</p>
+                                    <p>-</p>
+                                    <p>10AM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                        <!-- 9AM-10AM -->
+                        <tr
+                            class="text-[#2A2A2A] flex items-center w-full justify-between bg-[#F4F4F4] rounded-[12px] lg:text-[18px] text-[12px] font-[500]">
+                            <td>
+                                <div class="flex lg:text-[14px] font-[600] text-[#C95555] text-[10px] flex-col">
+                                    <p>9AM</p>
+                                    <p>-</p>
+                                    <p>10AM</p>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                            <td>
+                                <input class="w-[34px] h-[34px]" type="checkbox" id="myCheckbox" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- model -->
+<script>
+    // model
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("myBtn");
+    var span = document.getElementById("closeBtn");
+
+    btn.addEventListener("click", function(event) {
+        event.preventDefault();
+        modal.classList.remove("hidden");
+    });
+
+    span.addEventListener("click", function() {
+        modal.classList.add("hidden");
+    });
+
+    window.addEventListener("click", function(event) {
+        if (event.target == modal) {
+            modal.classList.add("hidden");
+        }
+    });
+</script>
+<!-- script for calls -->
+
+<script>
+    function openContent(cityName, event) {
+        event.preventDefault(); // Prevent page reload
+        var i;
+        var x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        document.getElementById(cityName).style.display = "block";
+
+        // Reset all button styles
+        var buttons = document.getElementsByClassName("tabButton");
+        for (i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove(
+                "bg-red-500",
+                "bg-white",
+                "text-black",
+                "text-white"
+            );
+            buttons[i].classList.add("bg-white", "text-black");
+        }
+
+        // Set styles for active button
+        document
+            .getElementById("btn" + cityName)
+            .classList.add("bg-red-500", "text-white");
+        document
+            .getElementById("btn" + cityName)
+            .classList.remove("bg-white", "text-black");
+    }
+</script>
+
+</html>

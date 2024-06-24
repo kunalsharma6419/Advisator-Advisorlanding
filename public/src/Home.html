@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="./output.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <style>
+        .counter {
+            font-size: 2rem;
+        }
+        .count {
+            display: inline-block;
+            width: 3rem;
+            text-align: center;
+            animation: count-up 2s ease-out forwards;
+        }
+        @keyframes count-up {
+            from {
+                transform: translateY(50%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+    
+    <title>Home</title>
+    <style>
+        html,
+        body {
+          position: relative;
+          height: 100%;
+        }
+    
+        body {
+          background: #eee;
+          font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+          font-size: 14px;
+          color: #000;
+          margin: 0;
+          padding: 0;
+        }
+    
+        .swiper {
+          width: 100%;
+          height: 100%;
+        }
+    
+        .swiper-slide {
+          text-align: center;
+          background: #fff;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: fit-content;
+          width: fit-content;
+        }
+
+      </style>
+</head>
+<body>
+    <div class="bg-[#FFFFFF] relative overflow-x-hidden">
+
+        <!-- header -->
+        <div class="w-full h-[80px]">
+            <div class="h-full w-[90%] md:w-[95%] lg:w-[90%] mx-auto flex justify-between items-center">
+                <!-- logo -->
+                <div>
+                    <a href="./Home.html">
+                        <img class="w-[130px]" src="./assets/img/advisatorLogo.png" alt="">
+                    </a>
+                </div>
+                <div class="hidden md:flex xl:w-[75%] xl:justify-between gap-8d md:gap-x-10 xl:gap-[60px]">
+                    <ul class="font-sans font-normal text-[#3A3A3A] grow xl:justify-center gap-4 text-sm lg:text-lg xl:gap-5 flex  items-center">
+                        <li class="font-bold text-[#2A2A2A] cursor-pointer">Home</li>
+                        <li class="cursor-pointer">
+                            <a href="../src/Advisor pages/consultadvisor.html">Consult Advisor</a>
+                        </li>
+                        <li class="cursor-pointer">About us</li>
+                        <li class="cursor-pointer">Blog</li>
+                        <li class="cursor-pointer">Contact us</li>
+                    </ul>
+
+                    <ul class=" text-sm lg:text-lg font-sans flex items-center gap-2 lg:gap-6">
+                        <li class="cursor-pointer font-normal text-[#3A3A3A]">Become an Advisor</li>
+                        <li class="cursor-pointer font-medium text-[#2A2A2A]">
+                            <a class="underline-none" href="../src/auth/login.html">Login</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="md:hidden w-[40%] gap-2 flex items-center justify-between">
+                    <div class="border border-[#DB9206]  bg-[#FFF3DB] rounded sm:rounded-lg px-2 py-1 sm:py-2 sm:px-4">
+                            <a class="cursor-pointer flex items-center gap-2" href="../src/Advisor pages/wallet.html">
+                            <img class="h-5 w-5" src="./assets/img/iconWallet.png" alt="">
+                          
+                            
+                            <div class="flex items-center font-sans text-sm sm:text-base text-[#DB9206] font-semibold">
+                                &#8377;
+                                <p>1,229</p>
+                            </div>  
+                            </a>                       
+                        </div>
+                    <div id="showSideMenu" class="w-[24px] h-[24px] sm:w-7 sm:h-7 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                        
+                        
+                        
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- sign up -->
+        <div class="hidden md:flex font-sans my-6 h-full w-[90%] md:w-[95%] lg:w-[90%] mx-auto gap-x-5 justify-between items-center">
+
+            <div>
+                <p class="font-normal text-sm lg:text-base text-[#3A3A3A]">Unlock your business potential with personalized consultation. <span class="text-[#6A9023] font-bold">Sign Up Now!</span> </p>
+            </div>
+            <div class="border border-[#DADADA] px-2 xl:px-4 py-2 rounded-[24px] shadow-md">
+                <input 
+                class="font-medium text-sm lg:text-base text-[#AFAFAF] placeholder:text-[#AFAFAF] outline-none bg-[#FFFFFF]"
+                type="email" placeholder="Email" >
+            </div>
+            <div class="border border-[#DADADA] px-2 xl:px-4 py-2 rounded-[24px] shadow-md flex gap-x-2 font-sans font-normal text-sm lg:text-base text-[#2A2A2A]">
+                <div class=" flex items-center gap-2">
+                    <!-- +91(IN) -->
+                    <!-- <div class="flex gap-[12px]"> -->
+        
+                        <label for="underline_select" class="sr-only">+91</label>
+                      
+                        <select
+                          id="underline_select"
+                          class="outline-none"
+                         
+                        >
+                          <option selected>+91</option>
+                          <option value="+92">+92</option>
+                          <option value="+92">+93</option>
+                          <option value="+94">+94</option>
+                        </select>
+                      <!-- </div> -->
+                    <!-- <svg class="w-5 h-5 text-[#3A3A3A]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                    </svg> -->
+                    
+                </div>
+                <div class="text-[#D6D6D6]">|</div>
+                <div>
+                    <input 
+                    class="font-medium text-sm lg:text-base text-[#AFAFAF] placeholder:text-[#AFAFAF] outline-none bg-[#FFFFFF]"
+                     type="text" placeholder="Mobile number">
+                </div>
+            </div>
+            <div class="py-2 px-[3rem] lg:px-[6rem] rounded-[2rem] bg-gradient-to-r from-[#D1E8A7] to-[#6A9023] shadow-md">
+                <a 
+                    href="../src/auth/signup.html"
+                    class="font-sans text-nowrap font-semibold text-sm lg:text-base text-[#2A2A2A]  cursor-pointer">Sign Up</a>
+            </div>
+            
+
+        </div>
+
+
+
+        <!-- content rest form  -->
+        <div class="bg-[#FAFCF6] mt-4 lg:mt-8 h-full font-sans font-bold  text-center">
+        
+            
+            <div class="mt-[1rem] md:mt-[3rem] lg:mt-[5rem] w-[90%] font-sans md:w-[95%] lg:w-[90%] mx-auto flex flex-col md:flex-row gap-2 lg:gap-[2rem]">
+
+                <!-- here will our video part -->
+                <div class="md:w-[50%]  md:h-[280px] lg:h-[390px] h-[390px]s">
+                    <img src="./assets/img/videoImage.png" class="rounded-xl md:h-full lg:w-full" alt="">
+
+                </div>
+
+                <!-- here is my rest part -->
+                <div class=  "mt-[1rem] md:mt-0 flex flex-col justify-around items-center md:w-[50%] gap-y-[1rem]">
+
+                    <div class="w-[90%] md:w-[95%] lg:w-[90%] mx-auto text-[20px] lg:text-[38px]">
+                        <h2 class="text-[#FF3131] items-center text-start leading-7 md:leading-10">Engage with handpicked experts to grow your business !</h2>
+                    </div>
+
+                    <div class="flex justify-between items-center gap-2 w-full md:mx-4 lg:w-[95%] mx-auto">
+                        <div class="border-2 border-[#D5D0A7] rounded-[18px] w-full px-4 py-2 sm:py-4 lg:px-5 lg:py-5 flex flex-col items-center gap-1 shadow-sm">
+                            <h1 class="font-medium md:whitespace-nowrap text-xs sm:text-base lg:text-lg text-[#3A3A3A]">Functional Experts</h1>
+                            <h2 class="font-normal text-base sm:text-xl lg:text-2xl text-[#B8681D]"> <span class="count" id="counter">0</span>+</h2>
+                        </div>
+                        <div class="border-2 border-[#D5D0A7] rounded-[18px] w-full px-4 py-2 sm:py-4 lg:px-5 lg:py-5 flex flex-col items-center gap-1 shadow-sm">
+                            <h1 class="font-medium text-xs sm:text-base lg:text-lg text-[#3A3A3A]">Industries</h1>
+                            <h2 class="font-normal text-base sm:text-xl lg:text-2xl text-[#B8681D]"> <span class="count" id="industeries">0</span>+</h2>
+                        </div>
+                        <div class="border-2 border-[#D5D0A7] rounded-[18px] w-full px-4 py-2 sm:py-4 lg:px-5 lg:py-5 flex flex-col items-center gap-1 shadow-sm">
+                            <h1 class="font-medium text-xs sm:text-base lg:text-lg text-[#3A3A3A]">Clients</h1>
+                            <h2 class="font-normal text-base sm:text-xl lg:text-2xl text-[#B8681D]"> <span class="count" id="client">0</span>+</h2>
+                        </div>
+
+                    </div>
+                    <div class="w-[90%] md:w-[95%] lg:w-[90%] mx-auto ">
+                        <div class="max-w-[40rem] mx-auto border border-[#DADADA] px-2 xl:px-4 py-2 rounded-[24px] shadow-md flex  justify-between items-center gap-x-2 font-sans font-normal text-sm lg:text-base text-[#2A2A2A]">
+                            
+                            <div>
+                                <input 
+                                class="font-medium text-sm w-full lg:text-base text-[#AFAFAF] placeholder:text-[#AFAFAF] outline-none bg-[#FFFFFF]"
+                                    type="text" placeholder="Search an Advisor">
+                            </div>
+        
+                            <div class="py-2 px-[2rem] flex items-center gap-x-2  rounded-[2rem] bg-gradient-to-r from-[#D1E8A7] to-[#6A9023] shadow-md">
+                                <svg class="w-4 h-4 text-[#000000]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                </svg>
+                                
+                                <button class="font-sans text-nowrap font-semibold text-sm lg:text-base text-[#2A2A2A]">Find Advisor</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class=" w-[90%] md:w-[95%] lg:w-[80%] mx-auto mt-[3rem] md:mt-[4rem] md:h-[12rem] lg:h-[12rem]">
+                <!-- Swiper -->
+                <div class="swiper mySwiper1">
+                    <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="md:border border-[#FF3131] overflow-hidden bg-[#FFFFFF] p-2 rounded-xl flex flex-col items-center justify-between gap-2 w-[70px] sm:w-[90px] md:w-[110px] lg:w-[124px] h-fit md:h-[150px] hover:h-my-4 md:hover:h-[170px] md:hover:bg-[#FFF6F6] transition-all">
+                            <div class="flex items-center justify-center h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:w-[90px] md:h-[70px] lg:w-[100px] lg:h-[75px]  overflow-hidden border border-[#FF3131] rounded-[12px] md:border-none">
+                                <img class="w-fit h-fit" src="./assets/img/AI&Analytics.png" alt="">
+                            </div>
+                            <h2 class=" text-xs md:text-base text-[#828282] text-wrap text-center">AI & Analytics</h2>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="md:border border-[#FF3131] overflow-hidden bg-[#FFFFFF] p-2 rounded-xl flex flex-col items-center justify-between gap-2 w-[70px] sm:w-[90px] md:w-[110px] lg:w-[124px] h-fit md:h-[150px] hover:h-my-4 md:hover:h-[170px] md:hover:bg-[#FFF6F6] transition-all">
+                            <div class="flex items-center justify-center h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:w-[90px] md:h-[70px] lg:w-[100px] lg:h-[75px] overflow-hidden border border-[#FF3131] rounded-[12px] md:border-none">
+                                <img class="w-fit h-fit" src="./assets/img/BusinessLegal.png" alt="">
+                            </div>
+                            <h2 class=" text-xs md:text-base text-[#828282] text-wrap text-center">Business Legal</h2>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="md:border border-[#FF3131] overflow-hidden bg-[#FFFFFF] p-2 rounded-xl flex flex-col items-center justify-between gap-2 w-[70px] sm:w-[90px] md:w-[110px] lg:w-[124px] h-fit md:h-[150px] hover:h-my-4 md:hover:h-[170px] md:hover:bg-[#FFF6F6] transition-all">
+                            <div class="flex items-center justify-center h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:w-[90px] md:h-[70px] lg:w-[100px] lg:h-[75px] overflow-hidden border border-[#FF3131] rounded-[12px] md:border-none">
+                                <img class="w-fit h-fit" src="./assets/img/FundRaise.png" alt="">
+                            </div>
+                            <h2 class=" text-xs md:text-base text-[#828282] text-wrap text-center">AI & Analytics</h2>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="md:border border-[#FF3131] overflow-hidden bg-[#FFFFFF] p-2 rounded-xl flex flex-col items-center justify-between gap-2 w-[70px] sm:w-[90px] md:w-[110px] lg:w-[124px] h-fit md:h-[150px] hover:h-my-4 md:hover:h-[170px] md:hover:bg-[#FFF6F6] transition-all">
+                            <div class="flex items-center justify-center h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:w-[90px] md:h-[70px] lg:w-[100px] lg:h-[75px] overflow-hidden border border-[#FF3131] rounded-[12px] md:border-none">
+                                <img class="w-fit h-fit" src="./assets/img/IT&Cloud.png" alt="">
+                            </div>
+                            <h2 class=" text-xs md:text-base text-[#828282] text-wrap text-center">IT & Cloud</h2>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="md:border border-[#FF3131] overflow-hidden bg-[#FFFFFF] p-2 rounded-xl flex flex-col items-center justify-between gap-2 w-[70px] sm:w-[90px] md:w-[110px] lg:w-[124px] h-fit md:h-[150px] hover:h-my-4 md:hover:h-[170px] md:hover:bg-[#FFF6F6] transition-all">
+                            <div class="flex items-center justify-center h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:w-[90px] md:h-[70px] lg:w-[100px] lg:h-[75px] overflow-hidden border border-[#FF3131] rounded-[12px] md:border-none">
+                                <img class="w-fit h-fit" src="./assets/img/MarketResearch.png" alt="">
+                            </div>
+                            <h2 class=" text-xs md:text-base text-[#828282] text-wrap text-center">Market Research</h2>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="md:border border-[#FF3131] overflow-hidden bg-[#FFFFFF] p-2 rounded-xl flex flex-col items-center justify-between gap-2 w-[70px] sm:w-[90px] md:w-[110px] lg:w-[124px] h-fit md:h-[150px] hover:h-my-4 md:hover:h-[170px] md:hover:bg-[#FFF6F6] transition-all">
+                            <div class="flex items-center justify-center h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:w-[90px] md:h-[70px] lg:w-[100px] lg:h-[75px] overflow-hidden border border-[#FF3131] rounded-[12px] md:border-none">
+                                <img class="w-fit h-fit" src="./assets/img/Marketing.png" alt="">
+                            </div>
+                            <h2 class=" text-xs md:text-base text-[#828282] text-wrap text-center">Marketing</h2>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="md:border border-[#FF3131] overflow-hidden bg-[#FFFFFF] p-2 rounded-xl flex flex-col items-center justify-between gap-2 w-[70px] sm:w-[90px] md:w-[110px] lg:w-[124px] h-fit md:h-[150px] hover:h-my-4 md:hover:h-[170px] md:hover:bg-[#FFF6F6] transition-all">
+                            <div class="flex items-center justify-center h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:w-[90px] md:h-[70px] lg:w-[100px] lg:h-[75px] overflow-hidden border border-[#FF3131] rounded-[12px] md:border-none">
+                                <img class="w-fit h-fit" src="./assets/img/BusinessGrowth.png" alt="">
+                            </div>
+                            <h2 class=" text-xs md:text-base text-[#828282] text-wrap text-center">Business Growth</h2>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="md:border border-[#FF3131] overflow-hidden bg-[#FFFFFF] p-2 rounded-xl flex flex-col items-center justify-between gap-2 w-[70px] sm:w-[90px] md:w-[110px] lg:w-[124px] h-fit md:h-[150px] hover:h-my-4 md:hover:h-[170px] md:hover:bg-[#FFF6F6] transition-all">
+                            <div class="flex items-center justify-center h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:w-[90px] md:h-[70px] lg:w-[100px] lg:h-[75px] overflow-hidden border border-[#FF3131] rounded-[12px] md:border-none">
+                                <img class="w-fit h-fit" src="./assets/img/Otherfunctions.png" alt="">
+                            </div>
+                            <h2 class=" text-xs md:text-base text-[#828282] text-wrap text-center">Other functions</h2>
+                        </div>
+                    </div>
+                    
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="mt-[2rem] w-[90%] font-sans md:w-[80%] lg:w-[90%] max-w-[40rem] lg:max-w-[55rem] mx-auto">
+                <div class="my-4 flex gap-4 md:gap-6 justify-around w-full ">
+                        <button class="bg-gradient-to-r from-[#6AA300] to-[#3F5713] px-6 py-2  lg:px-4 lg:py-4 w-full  rounded-[2rem] lg:rounded-[12px] font-semibold text-xs sm:text-sm md:text-base lg:text-xl border-[#6A9023] shadow-lg text-[#FFFFFF]">
+                            Explore Advisor
+                        </button>
+                        <button class="bg-gradient-to-r from-[#6AA300] to-[#3F5713] px-6 py-2  lg:px-4 lg:py-4 w-full rounded-[2rem] lg:rounded-[12px] font-semibold text-xs sm:text-sm md:text-base lg:text-xl text-[#FFFFFF] border border-[#6A9023] shadow-lg">
+                            Lets help you search
+                        </button>
+                    </div>
+            </div>
+
+            <div class="w-[90%] font-sans md:w-[95%] lg:w-[90%] mx-auto mt-[4rem] md:mt-[5rem]">
+                <h1 class="font-extrabold text-lg md:text-4xl my-[2rem]">Let us help you find the right <span class="text-[#FF3131]">Adv</span><span class="text-[#6A9023]">isor !</span></h1>
+
+                <div class="grid grid-cols-2 lg:grid-cols-3 justify-items-center gap-y-6">
+                    <div class="w-[120px] sm:w-[200px] md:w-[290px] h-fit">
+                        <img src="./assets/img/FindAdviosr1.png" class="h-[110px] sm:h-[170px] md:h-[260px]" alt="">
+                        <h4 class="font-medium text-xs sm:text-base md:text-lg text-[#2A2A2A]  text-start py-2  px-2">Want to automate business with technology?</h4>
+                    </div>
+                    <div class="w-[120px] sm:w-[200px] md:w-[290px] h-fit">
+                        <img src="./assets/img/FindAdviosr2.png" class="h-[110px] sm:h-[170px] md:h-[260px]" alt="">
+                        <h4 class="font-medium text-xs sm:text-base md:text-lg text-[#2A2A2A]  text-start py-2  px-2">Looking for strategy in launching products or service?</h4>
+                    </div>
+                    <div class="w-[120px] sm:w-[200px] md:w-[290px] h-fit">
+                        <img src="./assets/img/FindAdviosr3.png" class="h-[110px] sm:h-[170px] md:h-[260px]" alt="">
+                        <h4 class="font-medium text-xs sm:text-base md:text-lg text-[#2A2A2A]  text-start py-2  px-2">Need feedback in ideation stage?</h4>
+                    </div>
+                    <div class="w-[120px] sm:w-[200px] md:w-[290px] h-fit">
+                        <img src="./assets/img/FindAdviosr4.png" class="h-[110px] sm:h-[170px] md:h-[260px]" alt="">
+                        <h4 class="font-medium text-xs sm:text-base md:text-lg text-[#2A2A2A]  text-start py-2  px-2">Want to automate business with technology?</h4>
+                    </div>
+                    <div class="w-[120px] sm:w-[200px] md:w-[290px] h-fit">
+                        <img src="./assets/img/FindAdviosr5.png" class="h-[110px] sm:h-[170px] md:h-[260px]" alt="">
+                        <h4 class="font-medium text-xs sm:text-base md:text-lg text-[#2A2A2A]  text-start py-2  px-2">Stuck with legal complexities?</h4>
+                    </div>
+                    <div class="w-[120px] sm:w-[200px] md:w-[290px] h-fit">
+                        <img src="./assets/img/FindAdviosr6.png" class="h-[110px] sm:h-[170px] md:h-[260px]" alt="">
+                        <h4 class="font-medium text-xs sm:text-base md:text-lg text-[#2A2A2A]  text-start py-2 px-2">Looking help to raise funds?</h4>
+                    </div>
+                    
+                </div>
+
+                <div class="w-full flex h-fit justify-end mt-4">
+                    <button class="w-[80%] mx-auto md:mx-0 md:w-fit font-medium text-xs sm:text-base md:text-xl text-[#3A3A3A] border border-[#6A9023] px-[4rem] py-2 bg-[#FAFCF6] rounded-3xl">
+                        Let us help you
+                    </button>
+
+                </div>
+            </div>
+
+            <div class="bg-[#FEF1F1] md:bg-[#FFFFFF]">
+                
+            <div class="w-[90%] font-sans md:w-[95%] lg:w-[90%] mx-auto mt-[4rem] md:mt-[5rem]" >
+                <h1 class="font-extrabold text-lg md:text-4xl my-[2rem]">How does it <span class="text-[#FF3131]">Wo</span><span class="text-[#6A9023]">rk</span></h1>
+                <p class="font-normal text-sm sm:text-base md:text-lg text-[#3A3A3A] mb-[2rem]">Discover and connect with experts who can help you overcome challenges of operating a business in the digital era. Here’s how you can do that</p>
+
+
+                <!-- yha pr work nehi kr rha h -->
+                <div class="grid gap-4 md:grid-cols-2 border-spacing-6 bg-[#FEF1F1] rounded-3xl p-4">
+                    
+                    <div class="w-full flex gap-3 items-center">
+                        <div class="relative w-[120px] h-[100px] shrink-0 sm:w-[140px] sm:h-[120px] lg:w-[200px] lg:h-[180px]  rounded-xl shadow-sm">
+                            <img src="./assets/img/howWork1.png" class="h-full w-full" alt="">
+                            <h4 class="absolute  z-20 top-0 right-0  w-[30px] h-[30px] lg:w-[45px] lg:h-[45px] rounded-[2rem] bg-[#FFFFFF] border border-[#00000033] flex items-center justify-center shadow-sm">1</h4>
+                        </div>
+                        
+                        <div class="px-2">
+                            <h1 class="text-start font-semibold text-[#2A2A2A] text-base sm:text-lg md:text-xl lg:text-2xl py-2">Register</h1>
+                            <p class="text-start font-normal text-[#3A3A3A] text-xs sm:text-sm md:text-base lg:text-lg">Create an account & business profile for hassle free brwosing.</p>
+                        </div>
+                    </div>
+                    <div class="w-full flex gap-3 items-center">
+                        <div class="relative w-[120px] h-[100px] shrink-0 sm:w-[140px] sm:h-[120px] lg:w-[200px] lg:h-[180px]  rounded-xl shadow-sm">
+                            <img src="./assets/img/howWork2.png" class="h-full w-full" alt="">
+                            <h4 class="absolute  z-20 top-0 right-0  w-[30px] h-[30px] lg:w-[45px] lg:h-[45px] rounded-[2rem] bg-[#FFFFFF] border border-[#00000033] flex items-center justify-center shadow-sm">2</h4>
+                        </div>
+                        
+                        <div class="">
+                            <h1 class="text-start font-semibold text-[#2A2A2A] text-base sm:text-lg md:text-xl lg:text-2xl py-2">Recharge Wallet </h1>
+                            <p class="text-start font-normal text-[#3A3A3A] text-xs sm:text-sm md:text-base lg:text-lg">To connect with advisor, recharge your advisator wallet with minimum amount of INR 500.</p>
+                        </div>
+                    </div>
+                    <div class="w-full flex gap-3 items-center">
+                        <div class="relative w-[120px] h-[100px] shrink-0 sm:w-[140px] sm:h-[120px] lg:w-[200px] lg:h-[180px]  rounded-xl shadow-sm">
+                            <img src="./assets/img/howWork3.png" class="h-full w-full object-cover" alt="">
+                            <h4 class="absolute  z-20 top-0 right-0  w-[30px] h-[30px] lg:w-[45px] lg:h-[45px] rounded-[2rem] bg-[#FFFFFF] border border-[#00000033] flex items-center justify-center shadow-sm">3</h4>
+                        </div>
+                        
+                        <div class="">
+                            <h1 class="text-start font-semibold text-[#2A2A2A] text-base sm:text-lg md:text-xl lg:text-2xl py-2">Choose Advisor</h1>
+                            <p class="text-start font-normal text-[#3A3A3A] text-xs sm:text-sm md:text-base lg:text-lg">i) Use the filters on “Consult Advisor” page to narrow down your choice of advisor that best fits your circumstances. ii) You can also reach out to Advisator team to help you find the right advisor</p>
+                        </div>
+                    </div>
+                    <div class="w-full flex gap-3 items-center">
+                        <div class="relative w-[120px] h-[100px] shrink-0 sm:w-[140px] sm:h-[120px] lg:w-[200px] lg:h-[180px]  rounded-xl shadow-sm">
+                            <img src="./assets/img/howWork4.png" class="h-full w-full" alt="">
+                            <h4 class="absolute  z-20 top-0 right-0  w-[30px] h-[30px] lg:w-[45px] lg:h-[45px] rounded-[2rem] bg-[#FFFFFF] border border-[#00000033] flex items-center justify-center shadow-sm">4</h4>
+                        </div>
+                        
+                        <div class="">
+                            <h1 class="text-start font-semibold text-[#2A2A2A] text-base sm:text-lg md:text-xl lg:text-2xl py-2">Connect with experts</h1>
+                            <p class="text-start font-normal text-[#3A3A3A] text-xs sm:text-sm md:text-base lg:text-lg">Connect with experts either by calling advisor or booking an appointment as per their availability.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            </div>
+
+            <div class="w-[90%] font-sans md:w-[95%] lg:w-[85%] mx-auto mt-[4rem] flex items-center justify-between">
+
+                <div class="py-2 px-4 md:px-10 flex items-center justify-center  gap-1  md:gap-2 rounded-3xl bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] cursor-pointer">
+                    <img class="h-4 w-4 sm:w-6 sm:h-6 md:h-8 md:w-8 lg:w-10 lg:h-10" src="./assets/img/Discoverycall.png" alt="">
+                    <p class="text-[10px] sm:text-sm md:text-base text-[#000000]">Discovery call</p>
+                </div>
+                <div class="py-2 px-4 md:px-10 flex items-center justify-center  gap-1  md:gap-2 rounded-3xl bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] cursor-pointer">
+                    <img class="h-4 w-4 sm:w-6 sm:h-6 md:h-8 md:w-8 lg:w-10 lg:h-10" src="./assets/img/Consultationcall.png" alt="">
+                    <p class="text-[10px] sm:text-sm md:text-base text-[#000000]">Consultation call</p>
+                </div>
+                <div class="py-2 px-4 md:px-10 flex items-center justify-center  gap-1  md:gap-2 rounded-3xl bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] cursor-pointer">
+                    <img class="h-4 w-4 sm:w-6 sm:h-6 md:h-8 md:w-8 lg:w-10 lg:h-10" src="./assets/img/BookAppointment.png" alt="">
+                    <p class="text-[10px] sm:text-sm md:text-base text-[#000000]">Book Appointment</p>
+                </div>
+                <div class="py-2 px-4 md:px-10 flex items-center justify-center gap-1  md:gap-2 rounded-3xl bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] cursor-pointer">
+                    <img class="h-4 w-4 sm:w-6 sm:h-6 md:h-8 md:w-8 lg:w-10 lg:h-10" src="./assets/img/chat.png" alt="">
+                    <p class="text-[10px] sm:text-sm md:text-base text-[#000000]">Chat</p>
+                </div>
+            </div>
+
+
+
+
+
+            <!-- meet the team  -->
+            <div class="w-[90%] font-sans md:w-[95%] lg:w-[90%] mx-auto mt-[4rem] md:mt-[5rem] lg:mt-[6rem]" >
+                <h1 class="font-extrabold text-lg md:text-4xl my-[2rem]">Meet our Top Notch <span class="text-[#FF3131]">Advi</span><span class="text-[#6A9023]">sors</span></h1>
+                <p class="font-normal text-sm sm:text-base md:text-lg text-[#3A3A3A] mb-[2rem]">Connect with our carefully selected advisors who can assist you in strategizing and digitalizing of your business.</p>
+
+
+                <!-- Swiper -->
+                <div class="swiper mySwiper1 bg-[#F9FFEF]">
+                    <div class="swiper-wrapper font-medium text-[#828282] text-sm sm:text-base md:text-lg">
+                        <div class="swiper-slide">
+                            <p class="font-bold text-[#3F5713] border-b-2 border-[#6A9023] py-2">AI & Analytics</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <p class="border-b-2 border-transparent py-2">Business Legal</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <p class="border-b-2 border-transparent py-2">Business Growth</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <p class="border-b-2 border-transparent py-2">Fund Raise</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <p class="border-b-2 border-transparent py-2">IT &Cloud</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <p class="border-b-2 border-transparent py-2">Market Research</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <p class="border-b-2 border-transparent py-2">Marketing</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <p class="border-b-2 border-transparent py-2">Other Functions</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-[2rem]">
+                    <div class="swiper swiper-meet-team h-[17rem] sm:h-[22rem] lg:h-[35rem]">
+                        <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="flex flex-col items-center w-[140px] sm:w-[200px] lg:w-[290px] xl:w-[350px] h-[220px] sm:h-[300px] lg:h-[500px] rounded-xl">
+                                <div style="background-image: url('../src/assets/meetTeam1.png')" class="w-full flex items-center justify-center">
+                                    <img class="w-fit h-[110px] sm:h-[150px] lg:h-[300px]" src="./assets/img/team-1.png" alt="">
+                                </div>
+                                <div class="flex flex-col justify-between p-1 sm:p-2 grow w-full">
+                                    <div class="flex items-center justify-between text-xs">
+                                        <h2 class="text-[#2A2A2A] sm:text-base lg:text-xl">Riddima Singh</h2>
+                                        <div class="flex gap-2 items-center">
+                                                <svg class="w-5 h-5 lg:w-6 lg:h-6" xmlns="http://www.w3.org/2000/svg" fill="#FFE500" viewBox="0 0 24 24" class="w-6 h-6">
+                                                    <path d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+                                                </svg>
+                                            
+                                            <p class="text-[#3A3A3A] smLtext-sm lg:text-base">4.9</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-start text-[10px] sm:text-sm lg:text-base text-[#3A3A3A] font-normal mt-1s">Ai & Analytics</p>
+                                    <div class="flex items-center sm:text-sm lg:text-base justify-between text-[10px] text-[#3A3A3A] font-medium">
+                                        <p>Experience B</p>
+                                        <p>Menters : 100+</p>
+                                    </div>
+                                    <button class="mt-2 font-medium text-[10px] sm:text-sm lg:text-base text-[#000000] w-full bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] rounded-3xl py-2">
+                                        Discovery call
+                                    </button>
+        
+                                </div>
+        
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="flex flex-col items-center w-[140px] sm:w-[200px] lg:w-[290px] xl:w-[350px] h-[220px] sm:h-[300px] lg:h-[500px] rounded-xl">
+                                <div style="background-image: url('../src/assets/meetTeam2.png')" class="w-full flex items-center justify-center">
+                                    <img class="w-fit h-[110px] sm:h-[150px] lg:h-[300px]" src="./assets/img/team-2.png" alt="">
+                                </div>
+                                <div class="flex flex-col justify-between p-1 sm:p-2 grow w-full">
+                                    <div class="flex items-center justify-between text-xs">
+                                        <h2 class="text-[#2A2A2A] sm:text-base lg:text-xl">Andrew Anders</h2>
+                                        <div class="flex gap-2 items-center">
+                                            
+                                                <svg class="w-5 h-5 lg:w-6 lg:h-6" xmlns="http://www.w3.org/2000/svg" fill="#FFE500" viewBox="0 0 24 24" class="w-6 h-6">
+                                                    <path d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+                                                </svg>
+                                            
+                                            <p class="text-[#3A3A3A] smLtext-sm lg:text-base">4.9</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-start text-[10px] sm:text-sm lg:text-base text-[#3A3A3A] font-normal mt-1s">Ai & Analytics</p>
+                                    <div class="flex items-center sm:text-sm lg:text-base justify-between text-[10px] text-[#3A3A3A] font-medium">
+                                        <p>Experience B</p>
+                                        <p>Menters : 100+</p>
+                                    </div>
+                                    <button class="mt-2 font-medium text-[10px] sm:text-sm lg:text-base text-[#000000] w-full bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] rounded-3xl py-2">
+                                        Discovery call
+                                    </button>
+        
+                                </div>
+        
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="flex flex-col items-center w-[140px] sm:w-[200px] lg:w-[290px] xl:w-[350px] h-[220px] sm:h-[300px] lg:h-[500px] rounded-xl">
+                                <div class="w-full flex items-center justify-center" style="background-image: url('../src/assets/meetTeam3.png')">
+                                    <img class="w-fit h-[110px] sm:h-[150px] lg:h-[300px]" src="./assets/img/team-3.png" alt="">
+                                </div>
+                                <div class="flex flex-col justify-between p-1 sm:p-2 grow w-full">
+                                    <div class="flex items-center justify-between text-xs">
+                                        <h2 class="text-[#2A2A2A] sm:text-base lg:text-xl">Rajiv sharma</h2>
+                                        <div class="flex gap-2 items-center">
+                                            
+                                                <svg class="w-5 h-5 lg:w-6 lg:h-6" xmlns="http://www.w3.org/2000/svg" fill="#FFE500" viewBox="0 0 24 24" class="w-6 h-6">
+                                                    <path d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+                                                </svg>
+                                            
+                                            <p class="text-[#3A3A3A] smLtext-sm lg:text-base">4.9</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-start text-[10px] sm:text-sm lg:text-base text-[#3A3A3A] font-normal mt-1s">Ai & Analytics</p>
+                                    <div class="flex items-center sm:text-sm lg:text-base justify-between text-[10px] text-[#3A3A3A] font-medium">
+                                        <p>Experience B</p>
+                                        <p>Menters : 100+</p>
+                                    </div>
+                                    <button class="mt-2 font-medium text-[10px] sm:text-sm lg:text-base text-[#000000] w-full bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] rounded-3xl py-2">
+                                        Discovery call
+                                    </button>
+        
+                                </div>
+        
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="flex flex-col items-center w-[140px] sm:w-[200px] lg:w-[290px] xl:w-[350px] h-[220px] sm:h-[300px] lg:h-[500px] rounded-xl">
+                                <div class="w-full flex items-center justify-center" style="background-image: url('../src/assets/meetTeam1.png')">
+                                    <img class="w-fit h-[110px] sm:h-[150px] lg:h-[300px]" src="./assets/img/team-1.png" alt="">
+                                </div>
+                                <div class="flex flex-col justify-between p-1 sm:p-2 grow w-full">
+                                    <div class="flex items-center justify-between text-xs">
+                                        <h2 class="text-[#2A2A2A] sm:text-base lg:text-xl">Riddima Singh</h2>
+                                        <div class="flex gap-2 items-center">
+                                            
+                                                <svg class="w-5 h-5 lg:w-6 lg:h-6" xmlns="http://www.w3.org/2000/svg" fill="#FFE500" viewBox="0 0 24 24" class="w-6 h-6">
+                                                    <path d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+                                                </svg>
+                                            
+                                            <p class="text-[#3A3A3A] smLtext-sm lg:text-base">4.9</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-start text-[10px] sm:text-sm lg:text-base text-[#3A3A3A] font-normal mt-1s">Ai & Analytics</p>
+                                    <div class="flex items-center sm:text-sm lg:text-base justify-between text-[10px] text-[#3A3A3A] font-medium">
+                                        <p>Experience B</p>
+                                        <p>Menters : 100+</p>
+                                    </div>
+                                    <button class="mt-2 font-medium text-[10px] sm:text-sm lg:text-base text-[#000000] w-full bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] rounded-3xl py-2">
+                                        Discovery call
+                                    </button>
+        
+                                </div>
+        
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="flex flex-col items-center w-[140px] sm:w-[200px] lg:w-[290px] xl:w-[350px] h-[220px] sm:h-[300px] lg:h-[500px] rounded-xl">
+                                <div class="w-full flex items-center justify-center" style="background-image: url('../src/assets/meetTeam1.png')">
+                                    <img class="w-fit h-[110px] sm:h-[150px] lg:h-[300px]" src="./assets/img/team-2.png" alt="">
+                                </div>
+                                <div class="flex flex-col justify-between p-1 sm:p-2 grow w-full">
+                                    <div class="flex items-center justify-between text-xs">
+                                        <h2 class="text-[#2A2A2A] sm:text-base lg:text-xl">Andrew Anders</h2>
+                                        <div class="flex gap-2 items-center">
+                                            
+                                                <svg class="w-5 h-5 lg:w-6 lg:h-6" xmlns="http://www.w3.org/2000/svg" fill="#FFE500" viewBox="0 0 24 24" class="w-6 h-6">
+                                                    <path d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+                                                </svg>
+                                            
+                                            <p class="text-[#3A3A3A] smLtext-sm lg:text-base">4.9</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-start text-[10px] sm:text-sm lg:text-base text-[#3A3A3A] font-normal mt-1s">Ai & Analytics</p>
+                                    <div class="flex items-center sm:text-sm lg:text-base justify-between text-[10px] text-[#3A3A3A] font-medium">
+                                        <p>Experience B</p>
+                                        <p>Menters : 100+</p>
+                                    </div>
+                                    <button class="mt-2 font-medium text-[10px] sm:text-sm lg:text-base text-[#000000] w-full bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] rounded-3xl py-2">
+                                        Discovery call
+                                    </button>
+        
+                                </div>
+        
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="flex flex-col items-center w-[140px] sm:w-[200px] lg:w-[290px] xl:w-[350px] h-[220px] sm:h-[300px] lg:h-[500px] rounded-xl">
+                                <div class="w-full flex items-center justify-center" style="background-image: url('../src/assets/meetTeam3.png')">
+                                    <img class="w-fit h-[110px] sm:h-[150px] lg:h-[300px]" src="./assets/img/team-3.png" alt="">
+                                </div>
+                                <div class="flex flex-col justify-between p-1 sm:p-2 grow w-full">
+                                    <div class="flex items-center justify-between text-xs">
+                                        <h2 class="text-[#2A2A2A] sm:text-base lg:text-xl">Rajiv sharma</h2>
+                                        <div class="flex gap-2 items-center">
+                                            
+                                                <svg class="w-5 h-5 lg:w-6 lg:h-6" xmlns="http://www.w3.org/2000/svg" fill="#FFE500" viewBox="0 0 24 24" class="w-6 h-6">
+                                                    <path d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+                                                </svg>
+                                            
+                                            <p class="text-[#3A3A3A] smLtext-sm lg:text-base">4.9</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-start text-[10px] sm:text-sm lg:text-base text-[#3A3A3A] font-normal mt-1s">Ai & Analytics</p>
+                                    <div class="flex items-center sm:text-sm lg:text-base justify-between text-[10px] text-[#3A3A3A] font-medium">
+                                        <p>Experience B</p>
+                                        <p>Menters : 100+</p>
+                                    </div>
+                                    <button class="mt-2 font-medium text-[10px] sm:text-sm lg:text-base text-[#000000] w-full bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] rounded-3xl py-2">
+                                        Discovery call
+                                    </button>
+        
+                                </div>
+        
+                            </div>
+                        </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+                <div>
+                </div>
+            </div>
+            <!-- Discover experts from various Industry Verticals ! -->
+            <div class="w-[90%] font-sans md:w-[95%] lg:w-[90%] mx-auto mt-[4rem]" >
+                <h1 class="font-extrabold text-lg md:text-4xl my-[3rem]">Discover experts from various Industry <span class="text-[#FF3131]">Verti</span><span class="text-[#6A9023]">cals !</span></h1>
+
+
+                <div class="mt-[2rem]">
+                    <div class="swiper swiper-verticals-geography  h-[10rem] sm:h-[13rem] lg:h-[19rem]">
+                        <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="h-[120px] w-[120px] sm:w-[150px] sm:h-[150px] lg:w-[250px] lg:h-[250px] rounded-xl overflow-hidden relative">
+                                <img class="w-full h-full" src="./assets/img/Agriculture.png" alt="">
+                                <h3 class="absolute bottom-0 w-full bg-[#00000099] text-xs sm:text-sm md:text-base lg:text-lg text-[#FFFFFF] font-medium py-2">Agriculture</h3>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="h-[120px] w-[120px] sm:w-[150px] sm:h-[150px] lg:w-[250px] lg:h-[250px] rounded-xl overflow-hidden relative">
+                                <img class="w-full h-full" src="./assets/img/Automotive.png" alt="">
+                                <h3 class="absolute bottom-0 w-full bg-[#00000099] text-xs sm:text-sm md:text-base lg:text-lg text-[#FFFFFF] font-medium py-2">Automotive</h3>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="h-[120px] w-[120px] sm:w-[150px] sm:h-[150px] lg:w-[250px] lg:h-[250px] rounded-xl overflow-hidden relative">
+                                <img class="w-full h-full" src="./assets/img/Banking.png" alt="">
+                                <h3 class="absolute bottom-0 w-full bg-[#00000099] text-xs sm:text-sm md:text-base lg:text-lg text-[#FFFFFF] font-medium py-2">Banking</h3>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="h-[120px] w-[120px] sm:w-[150px] sm:h-[150px] lg:w-[250px] lg:h-[250px] rounded-xl overflow-hidden relative">
+                                <img class="w-full h-full" src="./assets/img/Telecommunications.png" alt="">
+                                <h3 class="absolute bottom-0 w-full bg-[#00000099] text-xs sm:text-sm md:text-base lg:text-lg text-[#FFFFFF] font-medium py-2">Telecommunications</h3>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="h-[120px] w-[120px] sm:w-[150px] sm:h-[150px] lg:w-[250px] lg:h-[250px] rounded-xl overflow-hidden relative">
+                                <img class="w-full h-full" src="./assets/img/Agriculture.png" alt="">
+                                <h3 class="absolute bottom-0 w-full bg-[#00000099] text-xs sm:text-sm md:text-base lg:text-lg text-[#FFFFFF] font-medium py-2">Agriculture</h3>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="h-[120px] w-[120px] sm:w-[150px] sm:h-[150px] lg:w-[250px] lg:h-[250px] rounded-xl overflow-hidden relative">
+                                <img class="w-full h-full" src="./assets/img/Automotive.png" alt="">
+                                <h3 class="absolute bottom-0 w-full bg-[#00000099] text-xs sm:text-sm md:text-base lg:text-lg text-[#FFFFFF] font-medium py-2">Automotive</h3>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="h-[120px] w-[120px] sm:w-[150px] sm:h-[150px] lg:w-[250px] lg:h-[250px] rounded-xl overflow-hidden relative">
+                                <img class="w-full h-full" src="./assets/img/Banking.png" alt="">
+                                <h3 class="absolute bottom-0 w-full bg-[#00000099] text-xs sm:text-sm md:text-base lg:text-lg text-[#FFFFFF] font-medium py-2">Banking</h3>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="h-[120px] w-[120px] sm:w-[150px] sm:h-[150px] lg:w-[250px] lg:h-[250px] rounded-xl overflow-hidden relative">
+                                <img class="w-full h-full" src="./assets/img/Telecommunications.png" alt="">
+                                <h3 class="absolute bottom-0 w-full bg-[#00000099] text-xs sm:text-sm md:text-base lg:text-lg text-[#FFFFFF] font-medium py-2">Telecommunications</h3>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+
+                <div>
+
+
+                </div>
+
+
+                
+
+            </div>
+
+            <!-- Looking to expand business in different Geography ? -->
+            <div class="w-[90%] font-sans md:w-[95%] lg:w-[90%] mx-auto mt-[4rem]" >
+                <h1 class="font-extrabold text-lg md:text-4xl my-[3rem]">Looking to expand business in different  <span class="text-[#FF3131]">Geog</span><span class="text-[#6A9023]">raphy </span>?</h1>
+
+
+                <div class="mt-[2rem]">
+                    <div class="swiper swiper-verticals-geography  h-[10rem] sm:h-[13rem] lg:h-[19rem]">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="h-[120px] w-[120px] sm:w-[150px] sm:h-[150px] lg:w-[250px] lg:h-[250px] rounded-xl overflow-hidden relative">
+                                    <img class="w-full h-full" src="./assets/img/india.png" alt="">
+                                    <h3 class="absolute bottom-0 w-full bg-[#00000099] text-xs sm:text-sm md:text-base lg:text-lg text-[#FFFFFF] font-medium py-2">India</h3>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="h-[120px] w-[120px] sm:w-[150px] sm:h-[150px] lg:w-[250px] lg:h-[250px] rounded-xl overflow-hidden relative">
+                                    <img class="w-full h-full" src="./assets/img/Australia.png" alt="">
+                                    <h3 class="absolute bottom-0 w-full bg-[#00000099] text-xs sm:text-sm md:text-base lg:text-lg text-[#FFFFFF] font-medium py-2">Australia</h3>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="h-[120px] w-[120px] sm:w-[150px] sm:h-[150px] lg:w-[250px] lg:h-[250px] rounded-xl overflow-hidden relative">
+                                    <img class="w-full h-full" src="./assets/img/Singapore.png" alt="">
+                                    <h3 class="absolute bottom-0 w-full bg-[#00000099] text-xs sm:text-sm md:text-base lg:text-lg text-[#FFFFFF] font-medium py-2">Singapore</h3>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="h-[120px] w-[120px] sm:w-[150px] sm:h-[150px] lg:w-[250px] lg:h-[250px] rounded-xl overflow-hidden relative">
+                                    <img class="w-full h-full" src="./assets/img/China.png" alt="">
+                                    <h3 class="absolute bottom-0 w-full bg-[#00000099] text-xs sm:text-sm md:text-base lg:text-lg text-[#FFFFFF] font-medium py-2">China</h3>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="h-[120px] w-[120px] sm:w-[150px] sm:h-[150px] lg:w-[250px] lg:h-[250px] rounded-xl overflow-hidden relative">
+                                    <img class="w-full h-full" src="./assets/img/india.png" alt="">
+                                    <h3 class="absolute bottom-0 w-full bg-[#00000099] text-xs sm:text-sm md:text-base lg:text-lg text-[#FFFFFF] font-medium py-2">India</h3>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="h-[120px] w-[120px] sm:w-[150px] sm:h-[150px] lg:w-[250px] lg:h-[250px] rounded-xl overflow-hidden relative">
+                                    <img class="w-full h-full" src="./assets/img/Australia.png" alt="">
+                                    <h3 class="absolute bottom-0 w-full bg-[#00000099] text-xs sm:text-sm md:text-base lg:text-lg text-[#FFFFFF] font-medium py-2">Australia</h3>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="h-[120px] w-[120px] sm:w-[150px] sm:h-[150px] lg:w-[250px] lg:h-[250px] rounded-xl overflow-hidden relative">
+                                    <img class="w-full h-full" src="./assets/img/Singapore.png" alt="">
+                                    <h3 class="absolute bottom-0 w-full bg-[#00000099] text-xs sm:text-sm md:text-base lg:text-lg text-[#FFFFFF] font-medium py-2">Singapore</h3>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="h-[120px] w-[120px] sm:w-[150px] sm:h-[150px] lg:w-[250px] lg:h-[250px] rounded-xl overflow-hidden relative">
+                                    <img class="w-full h-full" src="./assets/img/China.png" alt="">
+                                    <h3 class="absolute bottom-0 w-full bg-[#00000099] text-xs sm:text-sm md:text-base lg:text-lg text-[#FFFFFF] font-medium py-2">China</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+                <div>
+                </div>
+            </div>
+
+
+            <!-- faq -->
+            <!-- Looking to expand business in different Geography ? -->
+            <div class="w-[90%] font-sans md:w-[95%] lg:w-[90%] mx-auto mt-[4rem]" >
+                <h1 class="font-extrabold text-lg md:text-4xl mb-[1rem] md:my-[3rem]"><span class="text-[#FF3131]">FA</span><span class="text-[#6A9023]">Qs </span></h1>
+
+
+                <div class="flex flex-col md:flex-row gap-4">
+
+
+                    <div class="flex flex-col gap-4 w-full md:w-[50%]">
+                        <div
+                            class="transition-all duration-200 bg-[#F5F5F5] rounded-3xl  shadow-lg cursor-pointer hover:bg-gray-50">
+                            <button type="button" id="question1" data-state="closed" class="flex items-center justify-between w-full px-2 lg:px-4 py-3 sm:p-3">
+                                <span class="flex text-sm sm:text-base lg:text-lg text-start font-semibold text-[#3A3A3A]">Q: How do I sign up to be an advisor or client?</span>
+                                <svg id="arrow1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    class="h-4 w-4 md:w-6 md:h-6 text-[#3A3A3A]">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="answer1" style="display:none" class="px-4 pb-5 sm:px-6 sm:pb-6">
+                                <p class="text-start text-sm sm:text-base lg:text-lg font-semibold text-[#828282]">
+                                    To become an advisor or client, visit the platform's website and follow the sign-up process, providing necessary information such as contact details and preferences.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="transition-all duration-200 bg-[#F5F5F5] rounded-3xl  shadow-lg cursor-pointer hover:bg-gray-50">
+                            <button type="button" id="question2" data-state="closed" class="flex items-center justify-between w-full px-2 lg:px-4 py-3 sm:p-3">
+                                <span class="flex text-start text-sm sm:text-base lg:text-lg font-semibold text-[#3A3A3A]">Q: What kind of mentorship relationships does the platform support?</span>
+                                <svg id="arrow1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    class="h-4 w-4 md:w-6 md:h-6 text-[#3A3A3A]">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="answer2" style="display:none" class="px-4 pb-5 sm:px-6 sm:pb-6">
+                                <p class="text-start text-sm sm:text-base lg:text-lg font-semibold text-[#828282]">
+                                    The platform supports various mentorship relationships, including career guidance, skill development, entrepreneurship, and personal growth coaching.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="transition-all duration-200 bg-[#F5F5F5] rounded-3xl  shadow-lg cursor-pointer hover:bg-gray-50">
+                            <button type="button" id="question3" data-state="closed" class="flex items-center justify-between w-full px-2 lg:px-4 py-3 sm:p-3">
+                                <span class="flex text-start text-sm sm:text-base lg:text-lg font-semibold text-[#3A3A3A]">Q: How does communication between mentors and mentees happen?</span>
+                                <svg id="arrow1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    class="h-4 w-4 md:w-6 md:h-6 text-[#3A3A3A]">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="answer3" style="display:none" class="px-4 pb-5 sm:px-6 sm:pb-6">
+                                <p class="text-start text-sm sm:text-base lg:text-lg font-semibold text-[#3A3A3A]">
+                                    Communication between mentors and mentees typically occurs through messaging within the platform, video calls, phone calls, or in-person meetings, depending on the preferences and availability of both parties.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="hidden md:flex items-center justify-center ">
+                        <img class="w-[200px] lg:w-[230px]" src="./assets/img/Faq.png" alt="">
+                    </div>
+
+                    <div class="flex flex-col gap-4 w-full md:w-[50%]">
+                        
+
+                        <div
+                            class="transition-all duration-200 bg-[#F5F5F5] rounded-3xl  shadow-lg cursor-pointer hover:bg-gray-50">
+                            <button type="button" id="question4" data-state="closed" class="flex items-center justify-between w-full px-2 lg:px-4 py-3 sm:p-3">
+                                <span class="flex text-start text-sm sm:text-base lg:text-lg font-semibold text-[#3A3A3A]">Q: What kind of mentorship relationships does the platform support?</span>
+                                <svg id="arrow1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    class="h-4 w-4 md:w-6 md:h-6 text-[#3A3A3A]">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="answer4" style="display:none" class="px-4 pb-5 sm:px-6 sm:pb-6">
+                                <p class="text-start text-sm sm:text-base lg:text-lg font-semibold text-[#828282]">
+                                    The platform supports various mentorship relationships, including career guidance, skill development, entrepreneurship, and personal growth coaching.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="transition-all duration-200 bg-[#F5F5F5] rounded-3xl  shadow-lg cursor-pointer hover:bg-gray-50">
+                            <button type="button" id="question5" data-state="closed" class="flex items-center justify-between w-full px-2 lg:px-4 py-3 sm:p-3">
+                                <span class="flex text-start text-sm sm:text-base lg:text-lg font-semibold text-[#3A3A3A]">Q: How does communication between mentors and mentees happen?</span>
+                                <svg id="arrow1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    class="h-4 w-4 md:w-6 md:h-6 text-[#3A3A3A]">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="answer5" style="display:none" class="px-4 pb-5 sm:px-6 sm:pb-6">
+                                <p class="text-start text-sm sm:text-base lg:text-lg font-semibold text-[#828282]">
+                                    Communication between mentors and mentees typically occurs through messaging within the platform, video calls, phone calls, or in-person meetings, depending on the preferences and availability of both parties.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="transition-all duration-200 bg-[#F5F5F5] rounded-3xl  shadow-lg cursor-pointer hover:bg-gray-50">
+                            <button type="button" id="question6" data-state="closed" class="flex items-center justify-between w-full px-2 lg:px-4 py-3 sm:p-3">
+                                <span class="flex text-start text-sm sm:text-base lg:text-lg font-semibold text-[#3A3A3A]">Q: How do I sign up to be an advisor or client?</span>
+                                <svg id="arrow1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    class="h-4 w-4 md:w-6 md:h-6 text-[#3A3A3A]">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="answer6" style="display:none" class="px-4 pb-5 sm:px-6 sm:pb-6">
+                                <p class="text-start text-sm sm:text-base lg:text-lg font-semibold text-[#828282]">
+                                    To become an advisor or client, visit the platform's website and follow the sign-up process, providing necessary information such as contact details and preferences.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                
+            </div>
+
+
+            <!-- reader zone -->
+            <div class="w-[90%] font-sans md:w-[95%] lg:w-[90%] mx-auto mt-[4rem] lg:mt-[6rem] mb-[6rem] md:mb-0" >
+                <h1 class="font-extrabold text-lg md:text-4xl mb-[1rem] md:my-[3rem]"><span class="text-[#FF3131]">Rea</span><span class="text-[#6A9023]">ders</span> Zone</h1>
+
+                <div class="mt-[2rem]">
+                    <div class="swiper swiper-meet-team h-[25rem] sm:h-[30rem] md:h-[32rem] lg:h-[38rem]">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="flex flex-col items-center w-[180px] sm:w-[240px] md:w-[320px] lg:w-[290px] xl:w-[350px] h-[350px] sm:h-[420px] md:h-[460px] lg:h-[550px] rounded-xl">
+                                    <div>
+                                        <img class="h-full sh-[340px]  w-full sw-full" src="./assets/img/reader1.png" alt="">
+                                    </div>
+                                
+                                    <div class="flex flex-col justify-between p-1 sm:p-2 px-3 grow w-full">
+                                        <h4 class="text-[#2A2A2A] font-medium text-xs sm:text-sm md:text-base lg:text-lg text-start">The Power of Mentorship: How Mentors Can Transform Your Career</h4>
+                                        <p class="font-normal text-[#828282] text-[10px] sm:text-xs md:text-sm lg:text-base text-start">Learn about the benefits of mentorship and how having the right mentor can propel your career forward.</p>
+                                        <button class="mt-2 font-medium text-[10px] sm:text-sm lg:text-base text-[#000000] w-full bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] rounded-3xl py-2">
+                                            Learn More
+                                        </button>
+                                    </div>
+            
+                                </div>
+                            </div>
+                        
+                            <div class="swiper-slide">
+                                <div class="flex flex-col items-center w-[180px] sm:w-[240px] md:w-[320px] lg:w-[290px] xl:w-[350px] h-[350px] sm:h-[420px] md:h-[460px] lg:h-[550px] rounded-xl">
+                                    <div>
+                                        <img class="h-full sh-[340px]  w-full sw-full" src="./assets/img/reader2.png" alt="">
+                                    </div>
+                                
+                                    <div class="flex flex-col justify-between p-1 sm:p-2 px-3 grow w-full">
+                                        <h4 class="text-[#2A2A2A] font-medium text-xs sm:text-sm md:text-base lg:text-lg text-start">Building a Successful Startup: Lessons from Seasoned Entrepreneurs</h4>
+                                        <p class="font-normal text-[#828282] text-[10px] sm:text-xs md:text-sm lg:text-base text-start">Discover insights from successful entrepreneurs to help you challenge of building and scaling your startup.</p>
+                                        <button class="mt-2 font-medium text-[10px] sm:text-sm lg:text-base text-[#000000] w-full bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] rounded-3xl py-2">
+                                            Learn More
+                                        </button>
+                                    </div>
+            
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="flex flex-col items-center w-[180px] sm:w-[240px] md:w-[320px] lg:w-[290px] xl:w-[350px] h-[350px] sm:h-[420px] md:h-[460px] lg:h-[550px] rounded-xl">
+                                    <div>
+                                        <img class="h-full sh-[340px]  w-full sw-full" src="./assets/img/reader3.png" alt="">
+                                    </div>
+                                
+                                    <div class="flex flex-col justify-between p-1 sm:p-2 px-3 grow w-full">
+                                        <h4 class="text-[#2A2A2A] font-medium text-xs sm:text-sm md:text-base lg:text-lg text-start">Navigating Career Transitions: Tips for Smooth Career Changes</h4>
+                                        <p class="font-normal text-[#828282] text-[10px] sm:text-xs md:text-sm lg:text-base text-start">Get practical advice on making successful career transitions and navigating changes in your professional journey.</p>
+                                        <button class="mt-2 font-medium text-[10px] sm:text-sm lg:text-base text-[#000000] w-full bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] rounded-3xl py-2">
+                                            Learn More
+                                        </button>
+                                    </div>
+            
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="flex flex-col items-center w-[180px] sm:w-[240px] md:w-[320px] lg:w-[290px] xl:w-[350px] h-[350px] sm:h-[420px] md:h-[460px] lg:h-[550px] rounded-xl">
+                                    <div>
+                                        <img class="h-full sh-[340px]  w-full sw-full" src="./assets/img/reader1.png" alt="">
+                                    </div>
+                                
+                                    <div class="flex flex-col justify-between p-1 sm:p-2 px-3 grow w-full">
+                                        <h4 class="text-[#2A2A2A] font-medium text-xs sm:text-sm md:text-base lg:text-lg text-start">The Power of Mentorship: How Mentors Can Transform Your Career</h4>
+                                        <p class="font-normal text-[#828282] text-[10px] sm:text-xs md:text-sm lg:text-base text-start">Learn about the benefits of mentorship and how having the right mentor can propel your career forward.</p>
+                                        <button class="mt-2 font-medium text-[10px] sm:text-sm lg:text-base text-[#000000] w-full bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] rounded-3xl py-2">
+                                            Learn More
+                                        </button>
+                                    </div>
+            
+                                </div>
+                            </div>
+                        
+                            <div class="swiper-slide">
+                                <div class="flex flex-col items-center w-[180px] sm:w-[240px] md:w-[320px] lg:w-[290px] xl:w-[350px] h-[350px] sm:h-[420px] md:h-[460px] lg:h-[550px] rounded-xl">
+                                    <div>
+                                        <img class="h-full sh-[340px]  w-full sw-full" src="./assets/img/reader2.png" alt="">
+                                    </div>
+                                
+                                    <div class="flex flex-col justify-between p-1 sm:p-2 px-3 grow w-full">
+                                        <h4 class="text-[#2A2A2A] font-medium text-xs sm:text-sm md:text-base lg:text-lg text-start">Building a Successful Startup: Lessons from Seasoned Entrepreneurs</h4>
+                                        <p class="font-normal text-[#828282] text-[10px] sm:text-xs md:text-sm lg:text-base text-start">Discover insights from successful entrepreneurs to help you challenge of building and scaling your startup.</p>
+                                        <button class="mt-2 font-medium text-[10px] sm:text-sm lg:text-base text-[#000000] w-full bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] rounded-3xl py-2">
+                                            Learn More
+                                        </button>
+                                    </div>
+            
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="flex flex-col items-center w-[180px] sm:w-[240px] md:w-[320px] lg:w-[290px] xl:w-[350px] h-[350px] sm:h-[420px] md:h-[460px] lg:h-[550px] rounded-xl">
+                                    <div>
+                                        <img class="h-full sh-[340px]  w-full sw-full" src="./assets/img/reader3.png" alt="">
+                                    </div>
+                                
+                                    <div class="flex flex-col justify-between p-1 sm:p-2 px-3 grow w-full">
+                                        <h4 class="text-[#2A2A2A] font-medium text-xs sm:text-sm md:text-base lg:text-lg text-start">Navigating Career Transitions: Tips for Smooth Career Changes</h4>
+                                        <p class="font-normal text-[#828282] text-[10px] sm:text-xs md:text-sm lg:text-base text-start">Get practical advice on making successful career transitions and navigating changes in your professional journey.</p>
+                                        <button class="mt-2 font-medium text-[10px] sm:text-sm lg:text-base text-[#000000] w-full bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] rounded-3xl py-2">
+                                            Learn More
+                                        </button>
+                                    </div>
+            
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+                <div>
+                </div>
+            </div>
+
+            <footer class="hidden md:block bg-[#FFFFFF] shadow-2xl border border-transparent mt-[2rem]">
+                <div class="md:w-[95%] lg:w-[90%] mx-auto my-[2rem]">
+
+                    <div class="w-full flex items-start gap-[2rem] lg:gap-[4rem] font-sans">
+                        <div class="font-semibold text-xl lg:text-2xl flex flex-col gap-2 items-start justify-starts">
+                            <h1 class="text-[#FF3131]">ADVIS<span class="text-[#6A9023]">ATOR</span></h1>
+                            <p class="text-sm lg:text-base text-[#3A3A3A] font-normal text-start">Business & Digital Expert Advice</p>
+                            <div class="flex items-center gap-2">
+                                <img class="w-3 h-4" src="./assets/img/call.png" alt="">
+                                <p class="text-sm text-[#3A3A3A] font-normal">+91 1234567890</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <img class="w-3 h-4" src="./assets/img/location.png" alt="">
+                                <p class="text-sm text-[#3A3A3A] font-normal">Delhi, India</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-base text-[#3A3A3A] text-start my-2 px-4">Subscribe to Newsletter</h4>
+                            <div class="h-fit max-w-[40rem] mx-auto border border-[#DADADA] px-2 xl:px-4 py-2 rounded-[24px] shadow-md flex  justify-between items-center gap-x-2 font-sans font-normal text-sm lg:text-base text-[#2A2A2A]">
+                            
+                                <div>
+                                    <input 
+                                    class="font-medium text-sm w-full lg:text-base text-[#AFAFAF] placeholder:text-[#AFAFAF] outline-none bg-[#FFFFFF]"
+                                    type="email" placeholder="Email address">
+                                </div>
+            
+                                <div class="py-2 px-[2rem] flex items-center gap-x-2  rounded-[2rem] bg-[#EDF6DB] shadow-md">
+                                
+                                    <button class="font-sans text-nowrap font-semibold text-sm lg:text-base text-[#2A2A2A]">Subscribe</button>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <ul class="flex items-start flex-col gap-2 font-sans font-normal text-sm lg:text-base text-[#828282]">
+                            <li class="text-[#3A3A3A]">Quick Links</li>
+                            <li>
+                                <a href="">Home</a>
+                            </li>
+                            <li>
+                                <a href="">Browse Mentors</a>
+                            </li>
+                            <li>
+                                <a href="">Featured Mentors</a>
+                            </li>
+                            <li>
+                                <a href="">Blogs</a>
+                            </li>
+                        </ul>
+                        <ul class="flex  flex-col items-start gap-2 font-sans font-normal text-sm lg:text-base text-[#828282]">
+                            <li class="text-[#3A3A3A]">About</li>
+                            <li>
+                                <a href="">About us</a>
+                            </li>
+                            <li>
+                                <a href="">Contact us</a>
+                            </li>
+                            <li>
+                                <a href="">Terms of services</a>
+                            </li>
+                        </ul>
+                        <ul class="flex flex-col items-start gap-2 font-sans font-normal text-sm lg:text-base text-[#828282]">
+                            <li class="text-[#3A3A3A]">Social Media</li>
+                            <li>
+                                <a href="">Instagram</a>
+                            </li>
+                            <li>
+                                <a href="">Facebook</a>
+                            </li>
+                            <li>
+                                <a href="">Twitter</a>
+                            </li>
+                            <li>
+                                <a href="">Linkedin</a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <div class="border border-[#EAEAEA] my-4 w-full"></div>
+
+                    <h3 class="text-[#3A3A3A] font-normal text-base text-start">© 2024 Advisator. All rights reserved.</h3>
+
+                </div>
+            </footer>
+
+
+
+            <!-- bottom menu bar -->
+        <div class="bg-[#FFFFFF] z-20 shadow-2xl h-[80px] fixed md:hidden bottom-0 w-full">
+            <div class="h-full w-[85%] mx-auto flex justify-between items-center" >
+                <div class="flex flex-col items-center justify-center gap-1">
+                    <a href="../Home.html">
+                        <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="./assets/bottomNavbar/activeHome.png" alt="">
+                    </a>
+                    <p class="font-semibold text-xs sm:text-sm text-[#C95555]">Home</p>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-1">
+                    <a href="">
+                        <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="./assets/bottomNavbar/constultadvisor.png" alt="">
+                    </a>
+                    <p class="font-semibold text-xs sm:text-sm text-[#C95555] hidden">Consult Advisor</p>
+                </div>
+                <div></div>
+                <div class="flex flex-col items-center justify-center gap-1">
+                    <a href="">
+                        <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="./assets/bottomNavbar/booking.png" alt="">
+                    </a>
+                    <p class="font-semibold text-xs sm:text-sm text-[#C95555] hidden">Booking</p>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-1">
+                    <a href="">
+                        <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="./assets/bottomNavbar/profile.png" alt="">
+                    </a>
+                    <p class="font-semibold text-xs sm:text-sm text-[#C95555] hidden">My Profile</p>
+                </div>
+            </div>
+            
+            <div class="absolute left-1/2 top-[-80%] translate-y-1/2 -translate-x-1/2 w-[80px] h-[80px] bg-[#FFFFFF] flex items-center justify-center rounded-[4rem]">
+                <div class="flex flex-col items-center justify-center gap-1">
+                    <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="./assets/bottomNavbar/earning.png" alt="">
+                <p class="font-semibold text-xs sm:text-sm text-[#DA9000] hidden">Featured Advisor</p>
+                </div>
+            </div>
+
+        </div>
+        </div>
+
+        
+
+
+        <!-- side bar -->
+        <div class="sidebar absolute md:hidden flex justify-end z-20 top-0 transition-all left-full w-full min-h-screen h-full bottom-0" >
+            <div class="w-[70%] sm:w-[60%] bg-[#FFFFFF] h-full">  
+                <div class="w-[90%]s mx-auto flexs flex-col gap-4 py-[2rem]">
+                    <div class="flex justify-between items-center">
+                        <div class=" flex items-center gap-1 bg-[#FFF4ED] px-6 py-3 rounded-r-[30px]">
+                            <img class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[3rem]" src="./assets/img/profileImage.png" alt="">
+                            <div>
+                                <h2 class="text-sm sm:text-base text-[#2A2A2A] font-medium">Radhika Sharma</h2>
+                                <h3 class="text-xs sm:text-sm text-[#828282] font-medium">radhikasharma@abc.com</h3>
+                            </div>
+                        </div>
+                        <div>
+                            <img id="hideSideMenu" class=" w-7 sm:w-8 cursor-pointer" src="./assets/img/cross.png" alt="">
+                        </div>
+                    </div>
+
+                    <div class="mt-[2rem] border-t border-b border-[#E5E5E5] py-2 my-2">
+                        <div class=" ml-[2rem] flex items-center gap-4">
+                            <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="./assets/img/phone.png" alt="">
+                            <h2 class="font-medium text-sm sm:text-base text-[#BE7D00]">Become an Advisor</h2>
+                        </div>
+                    </div>
+
+                    <div class="px-[2rem] py-2 flex flex-col gap-6">
+                        <div class="flex items-center gap-4">
+                            <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="./assets/img/Consult Advisor.png" alt="">
+                            <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">Consult Advisor</h2>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="./assets/img/FeaturedAdvisor.png" alt="">
+                            <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">Featured Advisor</h2>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="./assets/img/MyBookings.png" alt="">
+                            <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">My Bookings</h2>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="./assets/img/Wallet.png" alt="">
+                            <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">Wallet</h2>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="./assets/img/Blogs.png" alt="">
+                            <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">Blogs</h2>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="./assets/img/Aboutus.png" alt="">
+                            <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">About us</h2>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="./assets/img/Customersupport.png" alt="">
+                            <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">Customer support</h2>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="./assets/img/Logout.png" alt="">
+                            <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">Logout</h2>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="px-[2rem] py-2">
+                    <h3 class="text-sm sm:text-base text-[#2A2A2A] my-[1rem]">Find us on:</h3>
+                    <div class="flex gap-5">
+                        <img class="w-[30px] h-[30px]" src="./assets/img/instagram.png"  alt="">
+                        <img class="w-[30px] h-[30px]" src="./assets/img/facebook.png"  alt="">
+                        <img class="w-[30px] h-[30px]" src="./assets/img/linkedin.png"  alt="">
+                        <img class="w-[30px] h-[30px]" src="./assets/img/youtube.png"  alt="">
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+
+
+        
+    </div>
+
+
+
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".mySwiper1", {
+            slidesPerView: "auto",
+            spaceBetween: 32,
+        });
+
+
+        var swiper = new Swiper('.swiper-verticals-geography', {
+        slidesPerView: 'auto', 
+            spaceBetween: 10,
+            slidesPerView: 3,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                640: {
+                slidesPerView: 3,
+                spaceBetween: 20
+                },
+                768: {
+                slidesPerView: 4,
+                spaceBetween: 30
+                },
+            }
+            });
+
+
+            var swiper = new Swiper('.swiper-meet-team', {
+            slidesPerView: 'auto', 
+                spaceBetween: 10,
+                slidesPerView: 2,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20
+                    },
+                    768: {
+                    slidesPerView: 3,
+                    spaceBetween: 30
+                    },
+                }
+                });
+
+
+            // JavaScript to toggle the answers and rotate the arrows
+            document.querySelectorAll('[id^="question"]').forEach(function(button, index) {
+                button.addEventListener('click', function() {
+                    var answer = document.getElementById('answer' + (index + 1));
+                    var arrow = document.getElementById('arrow' + (index + 1));
+
+                    if (answer.style.display === 'none' || answer.style.display === '') {
+                        answer.style.display = 'block';
+                        arrow.style.transform = 'rotate(0deg)';
+                    } else {
+                        answer.style.display = 'none';
+                        arrow.style.transform = 'rotate(-180deg)';
+                    }
+                });
+            });
+
+
+            // JavaScript to toggle sidebar
+            // const toggleBtn = document.querySelector('.toggleBtn');
+            const hideSideMenu = document.getElementById('hideSideMenu')
+            const showSideMenu = document.getElementById('showSideMenu')
+
+            
+            // console.log(toggleBtn)
+            console.log(hideSideMenu, showSideMenu)
+            const sidebar = document.querySelector('.sidebar');
+
+            hideSideMenu.addEventListener('click', ()=>{
+                sidebar.classList.add('left-full');
+            })
+            showSideMenu.addEventListener('click', () => {
+                sidebar.classList.remove('left-full');
+            });
+
+
+
+
+        
+        const target = 100; // Change this to your target number
+        const duration = 2000; // Animation duration in milliseconds
+        const step = Math.ceil(target / (duration / 60));
+        let current = 0;
+        
+        const counterElement = document.getElementById('counter');
+        const industeriesElement = document.getElementById('industeries');
+        const clientElement = document.getElementById('client');
+
+
+        const counter = setInterval(() => {
+            current += step;
+            if (current >= target) {
+                clearInterval(counter);
+                current = target;
+            }
+            counterElement.textContent = current.toLocaleString();
+            industeriesElement.textContent = current.toLocaleString();
+            clientElement.textContent = current.toLocaleString();
+        }, 1000 / 60); // 60 frames per second
+
+
+        
+
+      </script>
+</body>
+</html>

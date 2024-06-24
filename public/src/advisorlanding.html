@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link href="../output.css" rel="stylesheet" /> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              Roboto: "Roboto",
+            },
+            colors: {
+              clifford: "#da373d",
+            },
+          },
+        },
+      };
+    </script>
+    <script
+      src="https://kit.fontawesome.com/5c118959dd.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="font-Roboto">
+    <div class="relative overflow-x-hidden w-full">
+      <!-- Header -->
+      <div class="w-full h-[80px]">
+        <div
+          class="h-full min-[388px]:w-[99%] md:w-[95%] lg:w-[90%] mx-auto flex gap-4 min-[420px]:justify-between items-center"
+        >
+          <!-- logo -->
+          <div>
+            <a href="../Home.html">
+              <img
+                class="w-[180px]"
+                src="../src/assets/logo/AdvisatorLogo.png"
+                alt=""
+              />
+            </a>
+          </div>
+          <div
+            class="hidden md:flex xl:w-[75%] xl:justify-between gap-8d md:gap-x-10 xl:gap-[60px]"
+          >
+            <ul
+              class="font-sans font-normal text-[#3A3A3A] grow xl:justify-center gap-4 text-sm lg:text-lg xl:gap-5 flex items-center"
+            >
+              <li class="cursor-pointer"><a href="#">Home</a></li>
+              <li class="cursor-pointer">
+                <a href="#about">About us</a>
+              </li>
+              <li class="cursor-pointer">
+                <a href="#steps">Onboarding Steps</a>
+              </li>
+
+              <li class="cursor-pointer">
+                <a href="#Feature">Features</a>
+              </li>
+              <li class="cursor-pointer">
+                <a href="#Contact">Contact us</a>
+              </li>
+            </ul>
+
+            <ul
+              class="text-sm lg:text-lg font-sans flex items-center gap-2 lg:gap-6"
+            >
+              <li class="cursor-pointer font-normal text-[#3A3A3A]">
+                <a class="underline-none" href="../auth/signup.html"
+                  >Become an Advisor</a
+                >
+              </li>
+              <li class="cursor-pointer font-medium text-[#2A2A2A]">
+                <a class="underline-none" href="../auth/login.html">Login</a>
+              </li>
+            </ul>
+          </div>
+
+          <div
+            class="md:hidden w-[40%] gap-2 flex items-center justify-between"
+          >
+            <div
+              class="border border-[#DB9206] bg-[#FFF3DB] rounded sm:rounded-lg px-2 py-1 sm:py-2 sm:px-4"
+            >
+              <p>Login | SignUp</p>
+              <!-- <a
+                class="cursor-pointer flex items-center gap-2"
+                href="../Advisor pages/wallet.html"
+              >
+                <img
+                  class="h-5 w-5"
+                  src="./src/assets/img/iconWallet.png"
+                  alt=""
+                />
+
+                <div
+                  class="flex items-center font-sans text-sm sm:text-base text-[#DB9206] font-semibold"
+                >
+                  &#8377;
+                  <p>1,229</p>
+                </div>
+              </a> -->
+            </div>
+            <div
+              id="showSideMenu"
+              class="w-[24px] h-[24px] sm:w-7 sm:h-7 cursor-pointer"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-7 h-7"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- main -->
+      <div
+        class="flex flex-col font-sans text-[#2A2A2A] w-[90%] md:w-[95%] lg:w-[90%] mx-auto mt-[24px] pt-2 lg:pt-8 rounded"
+      >
+        <section
+          class="container mx-auto gap-[20px] lg:gap-[50px] flex flex-col items-center px-8 py-4 sm:flex-row-reverse sm:px-12 bg-gradient-to-r from-[#F7FFE9] to-[#fff] bg-center bg-cover rounded pt-[20px]"
+        >
+          <div class="mb-8 w-[100%] sm:mb-0 sm:w-1/2 sm:pl-4 md:pl-16 mt-8">
+            <img
+              alt="Hanging out with friends"
+              class="w-full xl:max-w-lg xl:mx-auto 2xl:origin-bottom 2xl:scale-110 rounded h-auto md:h-[490px]"
+              src="./src/assets/advisorbanner.jpg"
+            />
+          </div>
+          <div class="mr-4 w-full font-sans text-center sm:w-1/2 sm:text-left">
+            <h1
+              class="content-change text-[#FF3131] text-[45px] font-[700] text-start leading-[1.2] md:leading-[1.2] font-sans w-[100%] sm:w-[120%]"
+            >
+              Onboard ADVISATOR
+              <br />
+              <span class="text-[#6A9023] lowercase"
+                >to engage with Clients from diverse industries !</span
+              >
+            </h1>
+
+            <div class="mt-8">
+              <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+                <div
+                  class="flex flex-col items-center border p-2 rounded-lg shadow bg-[#fff]"
+                >
+                  <img
+                    src="./src/assets/4198125.jpg"
+                    alt="Diverse Clients"
+                    class="w-full h-auto rounded-lg"
+                  />
+                  <h3 class="mt-2 text-lg font-semibold text-center">
+                    Diverse Clients
+                  </h3>
+                </div>
+                <div
+                  class="flex flex-col items-center border p-2 rounded-lg shadow bg-[#fff]"
+                >
+                  <img
+                    src="./src/assets/leads.avif"
+                    alt="Prospective leads"
+                    class="w-full h-auto rounded-lg"
+                  />
+                  <h3 class="mt-2 text-lg font-semibold text-center">
+                    Prospective leads
+                  </h3>
+                </div>
+                <div
+                  class="flex flex-col items-center border p-2 rounded-lg shadow bg-[#fff]"
+                >
+                  <img
+                    src="./src/assets/professionaldevelopment.jpg"
+                    alt="Professional Development"
+                    class="w-full h-auto rounded-lg"
+                  />
+                  <h3 class="mt-2 text-lg font-semibold text-center">
+                    Professional Development
+                  </h3>
+                </div>
+                <div
+                  class="flex flex-col items-center border p-2 rounded-lg shadow bg-[#fff]"
+                >
+                  <img
+                    src="./src/assets/financialgrowth.avif"
+                    alt="Financial Growth"
+                    class="w-full h-auto rounded-lg"
+                  />
+                  <h3 class="mt-2 text-lg font-semibold text-center">
+                    Financial Growth
+                  </h3>
+                </div>
+                <div
+                  class="flex flex-col items-center border p-2 rounded-lg shadow bg-[#fff]"
+                >
+                  <img
+                    src="./src/assets/onboard.png"
+                    alt="No Onboarding Charges"
+                    class="w-full h-auto rounded-lg"
+                  />
+                  <h3 class="mt-2 text-lg font-semibold text-center">
+                    Free Onboarding
+                  </h3>
+                </div>
+                <div
+                  class="flex flex-col items-center border p-2 rounded-lg shadow bg-[#fff]"
+                >
+                  <img
+                    src="./src/assets/nolegal.jpg"
+                    alt="No Legal hassles"
+                    class="w-full h-auto rounded-lg"
+                  />
+                  <h3 class="mt-2 text-lg font-semibold text-center">
+                    No Legal hassles
+                  </h3>
+                </div>
+                <div
+                  class="flex flex-col items-center border p-2 rounded-lg shadow bg-[#fff]"
+                >
+                  <img
+                    src="./src/assets/freepromotion.jpg"
+                    alt="Free promotions"
+                    class="w-full h-auto rounded-lg"
+                  />
+                  <h3 class="mt-2 text-lg font-semibold text-center">
+                    Free promotions
+                  </h3>
+                </div>
+                <div
+                  class="flex flex-col items-center border p-2 rounded-lg shadow bg-[#fff]"
+                >
+                  <img
+                    src="./src/assets/consult.avif"
+                    alt="Consult at convenience"
+                    class="w-full h-auto rounded-lg"
+                  />
+                  <h3 class="mt-2 text-lg font-semibold text-center">
+                    Consult at convenience
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div
+          class="w-full block min-[2000px]:hidden 2xl: items-center max-w-7xl md:px-12 px-8 pb-8 bg-gradient-to-r from-[#F7FFE9] to-[#fff] bg-center bg-cover"
+        >
+          <div class="relative items-center">
+            <div class="w-full justify-between lg:inline-flex lg:items-center">
+              <div
+                class="flex flex-col space-y-3 w-full lg:w-[50%] md:flex-row md:space-x-2 md:space-y-0"
+              >
+                <button
+                  class="rounded-lg border-0 bg-[#ff3033] w-full px-8 py-4 text-lg text-white shadow-lg shadow-slate-300 transition hover:bg-[#b99c9c] hover:text-slate-900 dark:shadow-sm sm:py-3"
+                >
+                  Get Started
+                </button>
+                <button
+                  class="px-8 py-4 text-lg bg-gradient-to-r w-full from-[#6AA300] to-[#3F5713] rounded-lg text-white flex items-center justify-center"
+                >
+                  Contact us
+                </button>
+              </div>
+
+              <div class="max-w-xl mt-[20px] lg:mt-0">
+                <div
+                  class="flex space-x-2 items-center animate-out zoom-in duration-200 delay-300"
+                >
+                  <div class="flex lg:block">
+                    <div
+                      class="font-semibold text-center md:text-left text-[30px]"
+                    >
+                      Trusted by 100+ other Advisors
+                    </div>
+                    <div
+                      class="flex space-x-2 items-center flex-col md:flex-row"
+                    >
+                      <div class="flex -space-x-2 overflow-hidden p-2">
+                        <img
+                          class="inline-block h-10 w-10 rounded-full ring-2 ring-gray-200 hover:scale-105 tranform duration-100"
+                          src="https://randomuser.me/api/portraits/men/51.jpg"
+                          alt=""
+                        />
+                        <img
+                          class="inline-block h-10 w-10 rounded-full ring-2 ring-gray-200 hover:scale-105 tranform duration-100"
+                          src="https://randomuser.me/api/portraits/women/4.jpg"
+                          alt=""
+                        />
+                        <img
+                          class="inline-block h-10 w-10 rounded-full ring-2 ring-gray-200 hover:scale-105 tranform duration-100"
+                          src="https://randomuser.me/api/portraits/men/34.jpg"
+                          alt=""
+                        />
+                        <img
+                          class="inline-block h-10 w-10 rounded-full ring-2 ring-gray-200 hover:scale-105 tranform duration-100"
+                          src="https://randomuser.me/api/portraits/women/6.jpg"
+                          alt=""
+                        />
+                        <img
+                          class="inline-block h-10 w-10 rounded-full ring-2 ring-gray-200 hover:scale-105 tranform duration-100"
+                          src="https://randomuser.me/api/portraits/men/9.jpg"
+                          alt=""
+                        />
+                        <img
+                          class="inline-block h-10 w-10 rounded-full ring-2 ring-gray-200 hover:scale-105 tranform duration-100"
+                          src="https://randomuser.me/api/portraits/women/9.jpg"
+                          alt=""
+                        />
+                      </div>
+                      <!-- <div>Join 100+ other Advisors</div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section
+          class="flex flex-col items-center border-t border-b border-red-600 py-6 mx-auto w-full lg:max-w-screen-lg px-4 mt-[4rem]"
+        >
+          <h1
+            class="text-[28px] lg:text-[38px] mb-[2rem] font-bold font-sans text-center md:text-left"
+          >
+            Follow us on <span class="text-[#FF3131]">Social</span
+            ><span class="text-[#6A9023]">Media</span>
+          </h1>
+          <div
+            class="flex flex-col lg:flex-row justify-around items-center w-full space-y-4 lg:space-y-0 lg:space-x-4"
+          >
+            <a
+              href="https://www.facebook.com/Shift180.world/"
+              target="_blank"
+              rel="noopener"
+            >
+              <img
+                src="./src/assets/facebook.webp"
+                alt="Facebook"
+                class="w-24 h-24"
+              />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/shift180/"
+              target="_blank"
+              rel="noopener"
+            >
+              <img
+                src="./src/assets/linkedin.webp"
+                alt="LinkedIn"
+                class="w-24 h-24"
+              />
+            </a>
+            <a
+              href="https://www.instagram.com/shift180world"
+              target="_blank"
+              rel="noopener"
+            >
+              <img
+                src="./src/assets/instagram.webp"
+                alt="Instagram"
+                class="w-24 h-24"
+              />
+            </a>
+            <a
+              href="http://www.youtube.com/@Shift180AdvisoryServices"
+              target="_blank"
+              rel="noopener"
+            >
+              <img
+                src="./src/assets/youtube.webp"
+                alt="YouTube"
+                class="w-30 h-24"
+              />
+            </a>
+          </div>
+        </section>
+        <section id="about" class="pt-16 overflow-hidden lg:pt-28 ">
+          <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+            <div class="flex flex-col md:flex-row items-start font-sans">
+              <div class="flex-1 md:pr-8">
+                <h1
+                  class="text-[28px] lg:text-[38px] mb-[2rem] font-bold font-sans text-center md:text-left"
+                >
+                  About <span class="text-[#FF3131]">U</span
+                  ><span class="text-[#6A9023]">S</span> ?
+                </h1>
+                <p
+                  class="max-w-lg mt-3 text-xl leading-relaxed mx-auto md:mx-0 text-center md:text-left"
+                >
+                  Advisator is a platform introduced by Shift180
+                  (www.shift180.in) to help clients discover
+                  <span class="font-bold">reliable</span> and
+                  <span class="font-bold">affordable</span> digital and business
+                  experts at different stages of their business.
+                </p>
+
+                <p
+                  class="max-w-lg mt-3 text-xl leading-relaxed mx-auto md:mx-0 text-center md:text-left"
+                >
+                  Advisator has onboarded experts in different domains - AI &
+                  Analytics, Business growth, Business legal, Fund Raise, IT &
+                  Cloud, Market Research, Marketing, Business Strategy,
+                  Financial Management.
+                </p>
+
+                <p
+                  class="max-w-lg mt-3 text-xl leading-relaxed mx-auto md:mx-0 text-center md:text-left"
+                >
+                  Over 100+ advisors who are business leaders and founders have
+                  onboarded ADVISATOR. Be one of them by filling the nomination
+                  form!
+                </p>
+                <button
+                  class="rounded-lg border-0 bg-[#ff3033] w-full md:w-auto px-6 py-4 mt-[20px] text-lg text-white shadow-lg shadow-slate-300 transition hover:bg-[#b99c9c] hover:text-slate-900 dark:shadow-sm sm:py-3"
+                >
+                  Get Started Now
+                </button>
+              </div>
+              <div class="flex-1 text-center md:text-right">
+                <img
+                  class="relative w-full xl:mx-auto lg:h-[550px] xl:h-auto mt-8 md:mt-0 rounded"
+                  src="./src/assets/advisorabout.jpg"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!--How It Works-->
+        <div id="steps" class="bg-[#Fffff] md:bg-[#FFFFFF] my-[1rem] py-[3rem]">
+          <div
+            class="container relative flex flex-col justify-between h-full max-w-6xl px-10 mx-auto xl:px-0 mt-5"
+          >
+            <h1
+              class="text-[28px] lg:text-[38px] my-[2rem] font-extrabold mx-auto"
+            >
+              How does it <span class="text-[#FF3131]">Wo</span
+              ><span class="text-[#6A9023]">rk</span> ?
+            </h1>
+            <p
+              class="text-start md:text-center sm:text-base md:text-xl text-[#3A3A3A] mb-[2rem]"
+            >
+              You are eligible, if you have more than 5+ years of experience in
+              a particular domain
+            </p>
+            <div
+              class="w-full bg-gradient-to-r from-[#F7FFE9] to-[#fff] px-2 md:px-12 rounded-xl my-[1rem] py-[3rem] shadow-md"
+            >
+              <div class="flex flex-col w-full mb-10 sm:flex-row">
+                <div class="w-full mb-10 sm:mb-0 sm:w-1/2">
+                  <div class="relative h-full ml-0 mr-0 sm:mr-10">
+                    <span
+                      class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-[#ff3131] rounded-lg"
+                    ></span>
+                    <div
+                      class="relative h-full p-5 bg-white items-center justify-center border-2 border-[#ff3131] rounded-lg text-center"
+                    >
+                      <div class="flex justify-center items-center -mt-1">
+                        <h3
+                          class="my-2 ml-3 text-lg font-extrabold text-[#3F5713]"
+                        >
+                          STEP 1 : NOMINATE
+                        </h3>
+                      </div>
+                      <div class="flex justify-center items-center my-4">
+                        <img
+                          src="./src/assets/17.png"
+                          alt="Nominate"
+                          class="w-[200px] h-[150px] rounded"
+                        />
+                      </div>
+                      <p
+                        class="mt-3 mb-1 text-xs font-medium text-indigo-500 uppercase"
+                      >
+                        ------------
+                      </p>
+                      <p class="mb-2 text-gray-600 md:text-xl">
+                        Register your account and nominate yourself by filling
+                        the nomination form
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-full sm:w-1/2">
+                  <div class="relative h-full ml-0 md:mr-10">
+                    <span
+                      class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-[#ff3131] rounded-lg"
+                    ></span>
+                    <div
+                      class="relative h-full p-5 bg-white items-center justify-center border-2 border-[#ff3131] rounded-lg text-center"
+                    >
+                      <div class="flex justify-center items-center -mt-1">
+                        <h3
+                          class="my-2 ml-3 uppercase text-lg font-extrabold text-[#3F5713]"
+                        >
+                          Step 2 : Evaluation
+                        </h3>
+                      </div>
+                      <div class="flex justify-center items-center my-4">
+                        <img
+                          src="./src/assets/18.png"
+                          alt="Nominate"
+                          class="w-[200px] h-[150px] rounded"
+                        />
+                      </div>
+                      <p
+                        class="mt-3 mb-1 text-xs font-medium text-purple-500 uppercase"
+                      >
+                        ------------
+                      </p>
+                      <p class="mb-2 text-gray-600 md:text-xl">
+                        Your Profile will be evaluated by our selection team
+                        basis certain criterias such as Experience, Expertise,
+                        Recommendations, Awards and Thought Leadership
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col w-full mb-5 sm:flex-row">
+                <div class="w-full mb-10 sm:mb-0 sm:w-1/2">
+                  <div class="relative h-full ml-0 mr-0 sm:mr-10">
+                    <span
+                      class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-[#ff3131] rounded-lg"
+                    ></span>
+                    <div
+                      class="relative h-full p-5 bg-white items-center justify-center border-2 border-[#ff3131] rounded-lg text-center"
+                    >
+                      <div class="flex justify-center items-center -mt-1">
+                        <h3
+                          class="my-2 ml-3 text-lg uppercase font-extrabold text-[#3F5713]"
+                        >
+                          Step 3 : Profile Listing
+                        </h3>
+                      </div>
+                      <div class="flex justify-center items-center my-4">
+                        <img
+                          src="./src/assets/19.png"
+                          alt="Nominate"
+                          class="w-[200px] h-[150px] rounded"
+                        />
+                      </div>
+                      <p
+                        class="mt-3 mb-1 text-xs font-medium text-blue-400 uppercase"
+                      >
+                        ------------
+                      </p>
+                      <p class="mb-2 text-gray-600 md:text-xl">
+                        In case selected you will be notified to onboard
+                        ADVISATOR. Your profile will be listed on our platform
+                        and accessible by our clients. No onboarding charges
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-full mb-10 sm:mb-0 sm:w-1/2">
+                  <div class="relative h-full ml-0 mr-0 sm:mr-10">
+                    <span
+                      class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-[#ff3131] rounded-lg"
+                    ></span>
+                    <div
+                      class="relative h-full p-5 bg-white items-center justify-center border-2 border-[#ff3131] rounded-lg text-center"
+                    >
+                      <div class="flex justify-center items-center -mt-1">
+                        <h3
+                          class="my-2 ml-3 text-lg uppercase font-extrabold text-[#3F5713]"
+                        >
+                          Step 4 : Client Session
+                        </h3>
+                      </div>
+                      <div class="flex justify-center items-center my-4">
+                        <img
+                          src="./src/assets/20.png"
+                          alt="Nominate"
+                          class="w-[200px] h-[150px] rounded"
+                        />
+                      </div>
+                      <p
+                        class="mt-3 mb-1 text-xs font-medium text-yellow-400 uppercase"
+                      >
+                        ------------
+                      </p>
+                      <p class="mb-2 text-gray-600 md:text-xl">
+                        Client reaches out to you by calling or booking
+                        appointment via ADVISATOR
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-full sm:w-1/2">
+                  <div class="relative h-full ml-0 md:mr-10">
+                    <span
+                      class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-[#ff3131] rounded-lg"
+                    ></span>
+                    <div
+                      class="relative h-full p-5 bg-white items-center justify-center border-2 border-[#ff3131] rounded-lg text-center"
+                    >
+                      <div class="flex justify-center items-center -mt-1">
+                        <h3
+                          class="my-2 ml-3 text-lg font-extrabold uppercase text-[#3F5713]"
+                        >
+                          Step 5 : Payout
+                        </h3>
+                      </div>
+                      <div class="flex justify-center items-center my-4">
+                        <img
+                          src="./src/assets/21.png"
+                          alt="Nominate"
+                          class="w-[200px] h-[150px] rounded"
+                        />
+                      </div>
+                      <p
+                        class="mt-3 mb-1 text-xs font-medium text-green-500 uppercase"
+                      >
+                        ------------
+                      </p>
+                      <p class="mb-2 text-gray-600 md:text-xl">
+                        Advisory fees will be credited to your bank account
+                        within 3 working days from the session date after
+                        deducting 20% as platform fees
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section
+          id="Feature"
+          class="pt-8 lg:pt-20 bg-[url('./src/assets/1691055810.png')] sm:bg-[url('./src/assets/1691055810.png')] bg-center bg-cover"
+        >
+          <div
+            class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative text-center mb-10"
+          >
+            <h1
+              class="max-w-2xl mx-auto text-center font-manrope font-bold text-4xl text-[#3F5713] mb-5 md:text-5xl leading-[50px] leading-[1.3] md:leading-[1.3]"
+            >
+              Manage your profile, client's booking, your availiability and
+              earnings with a 
+              <span class="text-[#ff3131]">Dashboard </span>
+            </h1>
+            <p
+              class="max-w-sm mx-auto text-center text-base font-normal leading-7 text-black-500 mb-9"
+            >
+              Monetize experience and expertise by being an advisor on
+              <span class="text-[#FF3131]">ADVIS</span
+              ><span class="text-[#6A9023]">ATOR</span>
+            </p>
+            <a
+              href="javascript:;"
+              class="w-full md:w-auto mb-14 inline-flex items-center justify-center py-3 px-7 text-base font-semibold text-center text-white rounded-full bg-[#ff3033] shadow-xs hover:bg-[#ff3033] transition-all duration-500"
+            >
+              Create an account
+              <svg
+                class="ml-2"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+            <div class="flex justify-center">
+              <img
+                class="h-[255px] lg:h-auto"
+                src="./src/assets/1691054543.png"
+                alt="Dashboard image"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="Contact"
+          class="text-gray-600 body-font bg-gradient-to-r from-[#F7FFE9] to-[#fff]"
+        >
+          <form action="https://fabform.io/f/xxxxx" method="post">
+            <div
+              class="container flex flex-col md:flex-row lg:max-w-5xl w-full px-5 py-12 md:py-24 mx-auto section"
+              id="contact-form"
+            >
+              <div class="md:w-1/3 w-full">
+                <img
+                  class="w-[800px] h-[400px]"
+                  src="./src/assets/Landing_page/Conat.jpg"
+                  alt=""
+                />
+                <p class="leading-relaxed text-xl text-gray-900 mt-5">
+                  We're here to assist you! If you have any questions or need
+                  assistance, please feel free to reach out to us.
+                  <br /><br />
+
+                  <span
+                    class="inline-flex mt-6 justify-center sm:justify-start"
+                  >
+                  </span>
+                </p>
+              </div>
+
+              <div class="md:w-2/3 w-full mt-10 md:mt-0 pb-20 lg:pb-0 md:pl-28">
+                <h1
+                  class="text-[28px] text-center lg:text-left lg:text-[38px] font-extrabold mx-auto"
+                >
+                  Contact <span class="text-[#FF3131]">U</span
+                  ><span class="text-[#6A9023]">S</span>
+                </h1>
+                <form
+                  action="send-contact.php"
+                  method="post"
+                  id="submit-contact-form"
+                >
+                  <div class="p-2 w-full">
+                    <div class="relative">
+                      <label
+                        for="name"
+                        class="leading-7 py-4 text-lg text-gray-900"
+                        >Your Name</label
+                      >
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required=""
+                        class="w-full bg-white rounded border border-gray-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-900 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
+                      />
+                    </div>
+                  </div>
+                  <div class="p-2 w-full">
+                    <div class="relative">
+                      <label
+                        for="email"
+                        class="leading-7 py-4 text-lg text-gray-900"
+                        >Your Email</label
+                      >
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required=""
+                        class="w-full bg-white rounded border border-gray-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-900 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
+                      />
+                    </div>
+                  </div>
+                  <div class="p-2 w-full">
+                    <div class="relative">
+                      <label
+                        for="message"
+                        class="leading-7 py-4 text-lg text-gray-900"
+                        >Your Message</label
+                      >
+                      <textarea
+                        id="message"
+                        name="message"
+                        required=""
+                        class="w-full bg-white rounded border border-gray-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 h-32 text-base outline-none text-gray-900 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                      ></textarea>
+                    </div>
+                  </div>
+                  <div class="p-2 w-full">
+                    <button
+                      class="rounded-lg flex items-center justify-center border-0 bg-[#ff3033] text-[28px] mt-[20px] px-6 py-3 text-white shadow-lg shadow-slate-300 transition hover:bg-[#b99c9c] hover:text-slate-900 dark:shadow-sm sm:py-2"
+                    >
+                      Send Message ✉
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <!-- bottom menu bar -->
+
+        <!-- bottom menu bar -->
+        <div
+          class="bg-[#FFFFFF] left-0 z-20 shadow-2xl h-[80px] fixed md:hidden bottom-0 w-full"
+        >
+          <div class="h-full w-full mx-auto px-2 flex justify-between items-center">
+            <div class="flex flex-col items-center justify-center gap-1">
+              <a href="../Home.html">
+                <img
+                  class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer"
+                  src="../src/assets/bottomNavbar/activeHome.png"
+                  alt=""
+                />
+              </a>
+              <p class="font-semibold text-xs sm:text-sm text-[#C95555]">
+                Home
+              </p>
+            </div>
+            <div class="flex flex-col items-center justify-center gap-1">
+              <a href="#about">
+                <img
+                  class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer"
+                  src="./src/assets/Landing_page/About.png"
+                  alt=""
+                />
+              </a>
+              <p class="font-semibold text-xs sm:text-sm text-[#C95555]">
+                About
+              </p>
+            </div>
+            <div></div>
+            <div class="flex flex-col items-center justify-center gap-1">
+              <a href="#Feature">
+                <img
+                  class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer"
+                  src="./src/assets/Landing_page/Features.png"
+                  alt=""
+                />
+              </a>
+              <p class="font-semibold text-xs sm:text-sm text-[#C95555]">
+                Features
+              </p>
+            </div>
+            <div class="flex flex-col items-center justify-center gap-1">
+              <a href="#Contact">
+                <img
+                  class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer"
+                  src="./src/assets/Landing_page/Contact.png"
+                  alt=""
+                />
+              </a>
+              <p class="font-semibold text-xs sm:text-sm text-[#C95555]">
+                Contact
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="absolute left-[48%] top-[-80%] translate-y-1/2 -translate-x-1/2 w-[80px] h-[80px] bg-[#6a9023] flex items-center justify-center rounded-[4rem]"
+          >
+            <a
+              href="#steps"
+              class="flex flex-col items-center justify-center gap-1"
+            >
+              <img
+                class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer"
+                src="./src/assets/Landing_page/steps.png"
+                alt=""
+              />
+              <p class="font-semibold text-xs sm:text-sm text-[#fff]">
+                Steps
+              </p>
+            </a>
+          </div>
+        </div>
+
+        <!-- side bar -->
+        <div
+          class="sidebar absolute md:hidden flex justify-end z-20 top-0 transition-all left-full w-full min-h-screen h-full bottom-0"
+        >
+          <div class="w-[70%] sm:w-[60%] bg-[#FFFFFF] h-full">
+            <div class="w-[90%]s mx-auto flexs flex-col gap-4 py-[2rem]">
+              <div class="flex justify-between items-center">
+                <a href="./advisorProfile.html">
+                  <div
+                    class="flex items-center gap-1 bg-[#FFF4ED] px-6 py-3 rounded-r-[30px]"
+                  >
+                    <img
+                      class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[3rem]"
+                      src="../src/assets/img/profileImage.png"
+                      alt=""
+                    />
+                    <div>
+                      <h2
+                        class="text-sm sm:text-base text-[#2A2A2A] font-medium"
+                      >
+                        Radhika Sharma
+                      </h2>
+                      <h3 class="text-xs sm:text-sm text-[#828282] font-medium">
+                        radhikasharma@abc.com
+                      </h3>
+                    </div>
+                  </div>
+                </a>
+                <div>
+                  <img
+                    id="hideSideMenu"
+                    class="w-7 sm:w-8 cursor-pointer"
+                    src="../src/assets/img/cross.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+
+              <a href="../auth/client.html">
+                <div
+                  class="mt-[2rem] border-t border-b border-[#E5E5E5] py-2 my-2"
+                >
+                  <a href="">
+                    <div class="ml-[2rem] flex items-center gap-4">
+                      <img
+                        class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                        src="../src/assets/sidebar/userImg.png"
+                        alt=""
+                      />
+                      <h2
+                        class="font-medium text-sm sm:text-base text-[#BE7D00]"
+                      >
+                        Dashboard
+                      </h2>
+                    </div>
+                  </a>
+                </div>
+              </a>
+
+              <div class="px-[2rem] py-2 flex flex-col gap-6">
+                <a href="../Advisor pages/advisorbooking.html">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                      src="./src/assets/Landing_page/Terms.png"
+                      alt=""
+                    />
+                    <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                      Terms of Services
+                    </h2>
+                  </div>
+                </a>
+                <a href="../Advisor pages/advisorMyearning.html">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                      src="./src/assets/Landing_page/Privacy.png"
+                      alt=""
+                    />
+                    <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                      Privacy Policy
+                    </h2>
+                  </div>
+                </a>
+                <a href="../Advisor pages/advisortransactionhistory.html">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                      src="./src/assets/Landing_page/Onboard.png"
+                      alt=""
+                    />
+                    <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                      Onboarding Policy
+                    </h2>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="px-[2rem] py-2">
+              <h3 class="text-sm sm:text-base text-[#2A2A2A] my-[1rem]">
+                Find us on:
+              </h3>
+              <div class="flex gap-5">
+                <img
+                  class="w-[30px] h-[30px]"
+                  src="../src/assets/sidebar/instagram.png"
+                  alt=""
+                />
+                <img
+                  class="w-[30px] h-[30px]"
+                  src="../src/assets/sidebar/facebook.png"
+                  alt=""
+                />
+                <img
+                  class="w-[30px] h-[30px]"
+                  src="../src/assets/sidebar/linkedin.png"
+                  alt=""
+                />
+                <img
+                  class="w-[30px] h-[30px]"
+                  src="../src/assets/sidebar/youtube.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer
+        class="hidden md:block bg-[#FFFFFF] shadow-2xl border border-transparent mt-[2rem]"
+      >
+        <div class="md:w-[95%] lg:w-[90%] mx-auto my-[2rem]">
+          <div
+            class="w-full flex items-start gap-[2rem] lg:gap-[4rem] font-Roboto"
+          >
+            <div
+              class="font-semibold text-xl lg:text-2xl flex flex-col gap-2 items-start justify-starts"
+            >
+              <a href="../Home.html">
+                <img
+                  class="w-[200px]"
+                  src="../src/assets/logo/AdvisatorLogo.png"
+                  alt=""
+                />
+              </a>
+              <p
+                class="text-sm lg:text-base text-[#3A3A3A] font-normal text-start"
+              >
+                Business & Digital Expert Advice
+              </p>
+              <div class="flex items-center gap-2">
+                <img class="w-3 h-4" src="../src/assets/img/call.png" alt="" />
+                <p class="text-sm text-[#3A3A3A] font-normal"><a href="telto:+91-9667707712"
+                  >+91 9667707712</a></p>
+              </div>
+              <div class="flex items-center gap-2">
+                <img
+                  class="w-3 h-4"
+                  src="../src/assets/img/location.png"
+                  alt=""
+                />
+                <p class="text-sm text-[#3A3A3A] font-normal">Pune, India</p>
+              </div>
+            </div>
+
+            <div>
+              <h4
+                class="font-bold text-base text-[#3A3A3A] text-start my-2 px-4"
+              >
+                Subscribe to Newsletter
+              </h4>
+              <div
+                class="h-fit max-w-[40rem] mx-auto border border-[#DADADA] px-2 xl:px-4 py-2 rounded-[24px] shadow-md flex justify-between items-center gap-x-2 font-Roboto font-normal text-sm lg:text-base text-[#2A2A2A]"
+              >
+                <div>
+                  <input
+                    class="font-medium text-sm w-full lg:text-base text-[#AFAFAF] placeholder:text-[#AFAFAF] outline-none bg-[#FFFFFF]"
+                    type="email"
+                    placeholder="Email address"
+                  />
+                </div>
+
+                <div
+                  class="py-2 px-[2rem] flex items-center gap-x-2 rounded-[2rem] bg-[#EDF6DB] shadow-md"
+                >
+                  <button
+                    class="font-Roboto text-nowrap font-semibold text-sm lg:text-base text-[#2A2A2A]"
+                  >
+                    Subscribe
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <ul
+              class="flex items-start flex-col gap-2 font-Roboto font-normal text-sm lg:text-base text-[#828282]"
+            >
+              <li class="text-[#3A3A3A]">Quick Links</li>
+              <li>
+                <a href="./advisorlanding.html">Home</a>
+              </li>
+              <li>
+                <a href="#about">About us</a>
+              </li>
+              <li>
+                <a href="#steps"> Onboarding Steps</a>
+              </li>
+              <li>
+                <a href="#Feature">Features</a>
+              </li>
+              <li>
+                <a href="#Contact">Contact us</a>
+              </li>
+            </ul>
+            <ul
+              class="flex flex-col items-start gap-2 font-Roboto font-normal text-sm lg:text-base text-[#828282]"
+            >
+              <li class="text-[#3A3A3A]">Our Policies</li>
+              <li>
+                <a href=""
+                  ><div class="flex items-center gap-4">
+                    <img
+                      class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                      src="./src/assets/Landing_page/Terms.png"
+                      alt=""
+                    />
+                    <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                      Terms of Services
+                    </h2>
+                  </div></a
+                >
+              </li>
+              <li>
+                <a href=""
+                  ><div class="flex items-center gap-4">
+                    <img
+                      class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                      src="./src/assets/Landing_page/Privacy.png"
+                      alt=""
+                    />
+                    <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                      Privacy Policy
+                    </h2>
+                  </div></a
+                >
+              </li>
+              <li>
+                <a href=""
+                  ><div class="flex items-center gap-4">
+                    <img
+                      class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                      src="./src/assets/Landing_page/Onboard.png"
+                      alt=""
+                    />
+                    <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                      Onboarding Policy
+                    </h2>
+                  </div></a
+                >
+              </li>
+            </ul>
+            <ul
+              class="flex flex-col items-start gap-2 font-Roboto font-normal text-sm lg:text-base text-[#828282]"
+            >
+              <li class="text-[#3A3A3A]">Social Media</li>
+              <li>
+                <a href="https://www.instagram.com/shift180world"
+                  ><div class="flex items-center gap-4">
+                    <span
+                      class="[&>svg]:h-7 [&>svg]:w-7 [&>svg]:fill-[#c13584]"
+                    >
+                      <svg
+                        class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512"
+                      >
+                        <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
+                        <path
+                          d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+                        />
+                      </svg>
+                    </span>
+                    <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                      Instagram
+                    </h2>
+                  </div></a
+                >
+              </li>
+              <li>
+                <a href="https://www.facebook.com/Shift180.world/"
+                  ><div class="flex items-center gap-4">
+                    <span
+                      class="[&>svg]:h-7 [&>svg]:w-7 [&>svg]:fill-[#1877f2]"
+                    >
+                      <svg
+                        class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512"
+                      >
+                        <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
+                        <path
+                          d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"
+                        />
+                      </svg>
+                    </span>
+                    <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                      Facebook
+                    </h2>
+                  </div></a
+                >
+              </li>
+              <li>
+                <a href="http://www.youtube.com/@Shift180AdvisoryServices"
+                  ><div class="flex items-center gap-4">
+                    <span
+                      class="[&>svg]:h-7 [&>svg]:w-7 [&>svg]:fill-[#ff0000]"
+                    >
+                      <svg
+                        class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 576 512"
+                      >
+                        <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
+                        <path
+                          d="M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z"
+                        />
+                      </svg>
+                    </span>
+                    <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                      Youtube
+                    </h2>
+                  </div></a
+                >
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/company/shift180/"
+                  ><div class="flex items-center gap-4">
+                    <span
+                      class="[&>svg]:h-7 [&>svg]:w-7 [&>svg]:fill-[#0077b5]"
+                    >
+                      <svg
+                        class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512"
+                      >
+                        <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
+                        <path
+                          d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z"
+                        />
+                      </svg>
+                    </span>
+                    <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                      Linkedin
+                    </h2>
+                  </div></a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="border border-[#EAEAEA] my-4 w-full"></div>
+
+          <div class="w-full flex items-center justify-between">
+            <h3 class="text-[#3A3A3A] font-normal text-base text-start">
+              © 2024 Advisator. All rights reserved.
+            </h3>
+            <h3 class="text-[#3A3A3A] font-normal text-base text-start">
+              <a href="mailto:advisory@shift180.in"
+                  >advisory@shift180.in</a>
+            </h3>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+
+  <script>
+    // JavaScript to toggle sidebar
+    // const toggleBtn = document.querySelector('.toggleBtn');
+    const hideSideMenu = document.getElementById("hideSideMenu");
+    const showSideMenu = document.getElementById("showSideMenu");
+
+    // console.log(toggleBtn)
+    console.log(hideSideMenu, showSideMenu);
+    const sidebar = document.querySelector(".sidebar");
+
+    hideSideMenu.addEventListener("click", () => {
+      sidebar.classList.add("left-full");
+    });
+    showSideMenu.addEventListener("click", () => {
+      sidebar.classList.remove("left-full");
+    });
+  </script>
+</html>
