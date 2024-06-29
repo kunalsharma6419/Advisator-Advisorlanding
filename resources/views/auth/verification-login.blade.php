@@ -78,84 +78,78 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    // $(document).ready(function() {
-    //     $('#otp-form').submit(function(e) {
-    //         e.preventDefault();
-
-    //         var formData = $(this).serialize();
-
-    //         $.ajax({
-    //             url: "{{ route('verifyloginotp') }}",
-    //             type: "POST",
-    //             data: formData,
-    //             success: function(res) {
-    //                 if (res.success) {
-    //                     alert(res.msg);
-    //                     window.open("/", "_self");
-    //                 } else {
-    //                     $('#message_error').text(res.msg);
-    //                     setTimeout(() => {
-    //                         $('#message_error').text('');
-    //                     }, 3000);
-    //                 }
-    //             }
-    //         });
-    //     });
-
-    //     $('#resendOtpVerification').click(function() {
-    //         $(this).text('Wait...');
-    //         var userMail = @json($user->email);
-
-    //         $.ajax({
-    //             url: "{{ route('resendOtp') }}",
-    //             type: "GET",
-    //             data: {
-    //                 email: userMail
-    //             },
-    //             success: function(res) {
-    //                 $('#resendOtpVerification').text('Resend Verification OTP');
-    //                 if (res.success) {
-    //                     timer();
-    //                     $('#message_success').text(res.msg);
-    //                     setTimeout(() => {
-    //                         $('#message_success').text('');
-    //                     }, 3000);
-    //                 } else {
-    //                     $('#message_error').text(res.msg);
-    //                     setTimeout(() => {
-    //                         $('#message_error').text('');
-    //                     }, 3000);
-    //                 }
-    //             }
-    //         });
-    //     });
-    // });
     $(document).ready(function() {
-        $('#otp-form').submit(function(e) {
+        // $('#otp-form').submit(function(e) {
+        //     e.preventDefault();
+
+        //     var formData = $(this).serialize();
+
+        //     $.ajax({
+        //         url: "{{ route('verifyloginotp') }}",
+        //         type: "POST",
+        //         data: formData,
+        //         success: function(res) {
+        //             if (res.success) {
+        //                 Swal.fire({
+        //                     icon: 'success',
+        //                     title: 'Success',
+        //                     text: res.msg
+        //                 }).then(() => {
+        //                     window.open("/", "_self");
+        //                 });
+        //             } else {
+        //                 Swal.fire({
+        //                     icon: 'error',
+        //                     title: 'Error',
+        //                     text: res.msg
+        //                 });
+        //             }
+        //         }
+        //     });
+        // });
+        $('#otp-form').on('submit', function(e) {
             e.preventDefault();
 
             var formData = $(this).serialize();
-
             $.ajax({
                 url: "{{ route('verifyloginotp') }}",
                 type: "POST",
                 data: formData,
-                success: function(res) {
-                    if (res.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success',
-                            text: res.msg
-                        }).then(() => {
-                            window.open("/", "_self");
-                        });
+                success: function(response) {
+                    if (response.success) {
+                        if (response.redirect) {
+                            Swal.fire({
+                                icon: 'info',
+                                title: 'Action Required',
+                                text: response.msg
+                            }).then(function() {
+                                window.location.href = response.redirect;
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: response.msg.includes('Evaluation') ? 'info' : 'success',
+                                title: response.msg.includes('Evaluation') ? 'Evaluation Stage' : 'Success',
+                                text: response.msg
+                            }).then(function() {
+                                if (!response.msg.includes('Evaluation')) {
+                                    window.location.href = '/dashboard'; // Redirect to dashboard or desired page
+                                }
+                            });
+                        }
                     } else {
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: res.msg
+                            text: response.msg
                         });
                     }
+                },
+                error: function(xhr) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: xhr.responseJSON.message || 'An error occurred. Please try again.'
+                    });
                 }
             });
         });
@@ -217,6 +211,55 @@
 
     timer();
 </script>
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        $('#otp-form').on('submit', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: $(this).attr('method'),
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.success) {
+                        if (response.redirect) {
+                            Swal.fire({
+                                icon: 'info',
+                                title: 'Action Required',
+                                text: response.msg
+                            }).then(function() {
+                                window.location.href = response.redirect;
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: response.msg.includes('Evaluation') ? 'info' : 'success',
+                                title: response.msg.includes('Evaluation') ? 'Evaluation Stage' : 'Success',
+                                text: response.msg
+                            }).then(function() {
+                                if (!response.msg.includes('Evaluation')) {
+                                    window.location.href = '/dashboard'; // Redirect to dashboard or desired page
+                                }
+                            });
+                        }
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.msg
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: xhr.responseJSON.message || 'An error occurred. Please try again.'
+                    });
+                }
+            });
+        });
+    });
+</script> --}}
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         const form = document.getElementById("otp-form");

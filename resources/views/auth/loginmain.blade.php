@@ -52,7 +52,7 @@
             </div>
             <!-- add the toogle here -->
             <div class="flex flex-col gap-5 w-[80%] md:w-[400px] mx-auto  py-3 items-center mt-[50px] justify-center">
-                {{-- <div class="flex gap-[8px] w-full items-center justify-center rounded-[8px]  bg-white py-1">
+                <div class="flex gap-[8px] w-full items-center justify-center rounded-[8px]  bg-white py-1">
                     <div id="btnUser"
                         class="tabButton bg-red-500 text-white px-4 justify-center py-2 w-full items-center text-[16px] rounded-[8px] flex gap-3 font-[500]"
                         onclick="openContent('User')">
@@ -86,6 +86,13 @@
                                         class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
                                     <span class="ml-2 text-sm text-gray-600">Remember me</span>
                                 </label>
+
+                                {{-- @if (Route::has('password.request'))
+                                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                        href="{{ route('password.request') }}">
+                                        {{ __('Forgot your password?') }}
+                                    </a>
+                                @endif --}}
                             </div>
 
 
@@ -100,9 +107,9 @@
                             </div>
                         </form>
                     </div>
-                </div> --}}
+                </div>
                 <!-- Advisor content -->
-                <div id="Advisor" class="city w-full" style="display: block;">
+                <div id="Advisor" class="city w-full" style="display: none">
                     <div class="w-full  mt-[44] rounded-t-lg lg:rounded-none bg-[#F6F8F1]">
                         <h2 class="text-[#3A3A3A] font-[500] text-[16px] lg:text-[20px] mt-[3px]">
                             Advisor Login
@@ -120,6 +127,13 @@
                                         class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
                                     <span class="ml-2 text-sm text-gray-600">Remember me</span>
                                 </label>
+
+                                {{-- @if (Route::has('password.request'))
+                                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                        href="{{ route('password.request') }}">
+                                        {{ __('Forgot your password?') }}
+                                    </a>
+                                @endif --}}
                             </div>
 
 

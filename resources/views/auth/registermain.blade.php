@@ -52,7 +52,7 @@
             </div>
             <!-- add the toogle here -->
             <div class="flex flex-col gap-5 w-[80%] md:w-[400px] mx-auto  py-3 items-center mt-[50px] justify-center">
-                {{-- <div class="flex gap-[8px] w-full items-center justify-center rounded-[8px]  bg-white py-1">
+                <div class="flex gap-[8px] w-full items-center justify-center rounded-[8px]  bg-white py-1">
                     <div id="btnUser"
                         class="tabButton bg-red-500 text-white px-4 justify-center py-2 w-full items-center text-[16px] rounded-[8px] flex gap-3 font-[500]"
                         onclick="openContent('User')">
@@ -87,6 +87,21 @@
                                 :value="old('phone_number')" required autocomplete="phone_number" />
                             <!-- hidden input for usertype -->
                             <input type="hidden" id="usertype" name="usertype" value="0">
+                            {{-- <div class="p-[18px] mt-[18px] w-full flex gap-[12px] rounded-[12px] bg-white">
+                            <!-- dropdown -->
+                            <div class="flex gap-[12px]">
+                                <label for="underline_select" class="sr-only">+91</label>
+
+                                <select id="underline_select">
+                                    <option selected>+91</option>
+                                    <option value="US">+92</option>
+                                    <option value="CA">+93</option>
+                                    <option value="FR">+94</option>
+                                </select>
+                            </div>
+                            <!-- border div  -->
+                            <!-- <div class="w-[1.5px] border border-[#D6D6D6]"></div> -->
+                        </div> --}}
                             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                                 <div class="mt-4">
                                     <label for="terms" class="flex items-center">
@@ -125,14 +140,14 @@
                             </div>
                         </form>
                     </div>
-                </div> --}}
+                </div>
                 <!-- Advisor content -->
-                <div id="Advisor" class="city w-full" style="display: block">
+                <div id="Advisor" class="city w-full" style="display: none">
                     <div class="w-full mt-[44] rounded-t-lg lg:rounded-none bg-[#F6F8F1]">
                         <h2 class="text-[#3A3A3A] font-[500] text-[16px] lg:text-[20px] mt-[3px]">
                             Sign up Advisor
                         </h2>
-                        <form method="POST" action="{{ route('register') }}" id="registerForm">
+                        <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <!-- input fields -->
                             <input id="full_name" class="p-[18px] mt-[18px] w-full rounded-[12px]"
@@ -143,11 +158,25 @@
                                 required autocomplete="username" />
                             <!-- phone number input fields -->
                             <input id="phone_number" class="p-[12px] mt-[18px] w-full rounded-[12px]"
-                                placeholder="Moblie Number with Country Code" type="text" name="phone_number"
+                                placeholder="Moblie Number" type="text" name="phone_number"
                                 :value="old('phone_number')" required autocomplete="phone_number" />
                             <!-- hidden input for usertype -->
                             <input type="hidden" id="usertype" name="usertype" value="2">
+                            {{-- <div class="p-[18px] mt-[18px] w-full flex gap-[12px] rounded-[12px] bg-white">
+                            <!-- dropdown -->
+                            <div class="flex gap-[12px]">
+                                <label for="underline_select" class="sr-only">+91</label>
 
+                                <select id="underline_select">
+                                    <option selected>+91</option>
+                                    <option value="US">+92</option>
+                                    <option value="CA">+93</option>
+                                    <option value="FR">+94</option>
+                                </select>
+                            </div>
+                            <!-- border div  -->
+                            <!-- <div class="w-[1.5px] border border-[#D6D6D6]"></div> -->
+                        </div> --}}
                             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                                 <div class="mt-4">
                                     <label for="terms" class="flex items-center">
@@ -193,9 +222,7 @@
     </div>
 </body>
 <!-- toogle for User and Advisor -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-{{-- <script>
+<script>
     function openContent(cityName) {
         var i;
         var x = document.getElementsByClassName("city");
@@ -223,266 +250,8 @@
         activeButton.classList.remove("bg-white", "text-black");
         activeButton.querySelector("i").style.color = "#FFFFFF";
     }
-</script> --}}
-{{-- <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Display validation errors or other session errors if present
-    @if (session('error'))
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: '{{ session('error') }}'
-        });
-    @elseif ($errors->any())
-        Swal.fire({
-            icon: 'error',
-            title: 'Validation Error',
-            html: '<ul>' +
-                @foreach ($errors->all() as $error)
-                    '<li>{{ $error }}</li>' +
-                @endforeach
-            '</ul>'
-        });
-    @endif
-
-    // Handle form submission with AJAX
-    $('#registerForm').on('submit', function(e) {
-        e.preventDefault();
-
-        $.ajax({
-            type: $(this).attr('method'),
-            url: $(this).attr('action'),
-            data: $(this).serialize(),
-            success: function(response) {
-                if (response.status === 'exists') {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Account Exists',
-                        text: response.message
-                    }).then(function() {
-                        window.location.href = response.verification_url;
-                    });
-                } else if (response.status === 'success') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: response.message
-                    }).then(function() {
-                        window.location.href = response.verification_url;
-                    });
-                }
-            },
-            error: function(xhr) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: xhr.responseJSON.message || 'An error occurred. Please try again.'
-                });
-            }
-        });
-    });
-});
-</script> --}}
-{{-- <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Display validation errors or other session errors if present
-    @if (session('error'))
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: '{{ session('error') }}'
-        });
-    @elseif ($errors->any())
-        Swal.fire({
-            icon: 'error',
-            title: 'Validation Error',
-            html: '<ul>' +
-                @foreach ($errors->all() as $error)
-                    '<li>{{ $error }}</li>' +
-                @endforeach
-            '</ul>'
-        });
-    @endif
-
-    // Handle form submission with AJAX
-    $('#registerForm').on('submit', function(e) {
-        e.preventDefault();
-
-        $.ajax({
-            type: $(this).attr('method'),
-            url: $(this).attr('action'),
-            data: $(this).serialize(),
-            success: function(response) {
-                if (response.status === 'exists' || response.status === 'warning') {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Account Exists',
-                        text: response.message
-                    }).then(function() {
-                        window.location.href = response.verification_url;
-                    });
-                } else if (response.status === 'success') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: response.message
-                    }).then(function() {
-                        window.location.href = response.verification_url;
-                    });
-                }
-            },
-            error: function(xhr) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: xhr.responseJSON.message || 'An error occurred. Please try again.'
-                });
-            }
-        });
-    });
-});
-</script> --}}
-{{-- <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Display validation errors or other session errors if present
-    @if (session('error'))
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: '{{ session('error') }}'
-        });
-    @elseif ($errors->any())
-        Swal.fire({
-            icon: 'error',
-            title: 'Validation Error',
-            html: '<ul>' +
-                @foreach ($errors->all() as $error)
-                    '<li>{{ $error }}</li>' +
-                @endforeach
-            '</ul>'
-        });
-    @endif
-
-    // Handle form submission with AJAX
-    document.getElementById('registerForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const form = e.target;
-        const formData = new FormData(form);
-
-        fetch(form.action, {
-            method: form.method,
-            body: formData,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-        .then(response => response.json())
-        .then(response => {
-            if (response.status === 'success') {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: response.message
-                }).then(function() {
-                    window.location.href = response.verification_url;
-                });
-            } else if (response.status === 'exists' || response.status === 'warning') {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Account Exists',
-                    text: response.message
-                }).then(function() {
-                    window.location.href = response.verification_url;
-                });
-            }
-        })
-        .catch(error => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: error.message || 'An error occurred. Please try again.'
-            });
-        });
-    });
-});
-</script> --}}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Display validation errors or other session errors if present
-        @if (session('error'))
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: '{{ session('error') }}'
-            });
-        @elseif ($errors->any())
-            Swal.fire({
-                icon: 'error',
-                title: 'Validation Error',
-                html: '<ul>' +
-                    @foreach ($errors->all() as $error)
-                        '<li>{{ $error }}</li>' +
-                    @endforeach
-                '</ul>'
-            });
-        @endif
-
-        // Handle form submission with AJAX
-        document.getElementById('registerForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const form = e.target;
-            const formData = new FormData(form);
-
-            // Show loading indicator
-            Swal.fire({
-                title: 'Processing...',
-                text: 'Please wait a moment',
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
-            });
-
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: formData,
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                });
-
-                const result = await response.json();
-
-                if (result.status === 'success') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: result.message
-                    }).then(function() {
-                        window.location.href = result.verification_url;
-                    });
-                } else if (result.status === 'exists' || result.status === 'warning') {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Account Exists',
-                        text: result.message
-                    }).then(function() {
-                        window.location.href = result.verification_url;
-                    });
-                }
-            } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: error.message || 'An error occurred. Please try again.'
-                });
-            }
-        });
-    });
 </script>
+
 </html>
 
 {{-- <x-guest-layout>

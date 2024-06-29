@@ -41,7 +41,7 @@
             <form id="otp-form" method="post">
                 @csrf
                 <input type="hidden" name="email" value="{{ $email }}">
-                <div class="flex items-center justify-center gap-3">
+                <div class="flex items-center justify-center gap-1 md:gap-3 lg:gap-3">
                     <input type="text"
                         class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-white border-transparent appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                         maxlength="1" name="otp[]" />

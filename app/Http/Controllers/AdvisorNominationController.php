@@ -12,6 +12,8 @@ use App\Models\IndustryVertical;
 use App\Models\GeographyLocation;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\AdvisorNominationMail;
+use Illuminate\Support\Facades\Mail;
 
 class AdvisorNominationController extends Controller
 {
@@ -93,6 +95,9 @@ class AdvisorNominationController extends Controller
                 ]);
             }
         }
+
+        // Send email to advisor
+        Mail::to($advisor->email)->send(new AdvisorNominationMail($advisor));
 
         // return redirect()->back()->with('success', 'Nomination created successfully.');
         return response()->json(['success' => true,'msg'=> 'Nomination created successfully.', 'redirect' => route('home')]);
