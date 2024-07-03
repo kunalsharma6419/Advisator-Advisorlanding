@@ -10,7 +10,7 @@
             class="content-change text-[#FF3131] text-[45px] font-[700] text-start leading-[1.2] md:leading-[1.2] font-sans w-[100%] sm:w-[120%]">
             Onboard ADVISATOR
             <br />
-            <span class="text-[#6A9023] lowercase">to engage with Clients from diverse industries !</span>
+            <span class="text-[#6A9023] lowercase">to engage with Clients from diverse industries!</span>
         </h1>
 
         <div class="mt-8">

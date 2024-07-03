@@ -348,7 +348,7 @@ class AuthController extends Controller
                     if (!$nomination) {
                         return response()->json([
                             'success' => true,
-                            'msg' => 'Kindly Fill The Nomination Form in order to Nominate as an Advisor',
+                            'msg' => 'Kindly fill the nomination form to apply for the role of advisor',
                             'redirect' => route('advisor-nominations.create', ['userId' => $user->unique_id])
                         ]);
                     } elseif ($nomination->nomination_status == 'inprogress') {

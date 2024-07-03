@@ -27,8 +27,7 @@
                                 ------------
                             </p>
                             <p class="mb-2 text-gray-600 md:text-xl">
-                                Register your account and nominate yourself by filling
-                                the nomination form
+                                Create an account and nominate yourself by completing the nomination form
                             </p>
                         </div>
                     </div>
@@ -50,9 +49,8 @@
                                 ------------
                             </p>
                             <p class="mb-2 text-gray-600 md:text-xl">
-                                Your Profile will be evaluated by our selection team
-                                basis certain criterias such as Experience, Expertise,
-                                Recommendations, Awards and Thought Leadership
+                                Your profile will be evaluated by our selection team based on criteria such as
+                                experience, expertise, recommendations, awards, and thought leadership
                             </p>
                         </div>
                     </div>
@@ -76,9 +74,8 @@
                                 ------------
                             </p>
                             <p class="mb-2 text-gray-600 md:text-xl">
-                                In case selected you will be notified to onboard
-                                ADVISATOR. Your profile will be listed on our platform
-                                and accessible by our clients. No onboarding charges
+                                If chosen, your profile will be listed on Advisator. Clients seeking solutions can view
+                                your profile and contact you. There is no fees for listing profile.
                             </p>
                         </div>
                     </div>
@@ -100,8 +97,7 @@
                                 ------------
                             </p>
                             <p class="mb-2 text-gray-600 md:text-xl">
-                                Client reaches out to you by calling or booking
-                                appointment via ADVISATOR
+                                Clients can contact you by calling or booking appointments through ADVISATOR
                             </p>
                         </div>
                     </div>
@@ -123,9 +119,7 @@
                                 ------------
                             </p>
                             <p class="mb-2 text-gray-600 md:text-xl">
-                                Advisory fees will be credited to your bank account
-                                within 3 working days from the session date after
-                                deducting 20% as platform fees
+                                After deducting platform fees, advisory fees will be credited to your bank account
                             </p>
                         </div>
                     </div>

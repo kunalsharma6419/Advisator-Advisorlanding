@@ -3,7 +3,7 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative text-center mb-10">
         <h1
             class="max-w-2xl mx-auto text-center font-manrope font-bold text-4xl text-[#3F5713] mb-5 md:text-5xl leading-[50px] leading-[1.3] md:leading-[1.3]">
-            Manage your profile, client's booking, your availiability and
+            Manage your profile, client's booking, your availability and
             earnings with a
             <span class="text-[#ff3131]">Dashboard </span>
         </h1>

@@ -151,13 +151,12 @@
                             </svg>
                             <span
                                 class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-50 bg-[#6AA300] text-white text-center rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                For Multi Selection For Industry Press Shift or Ctrl key for MultiSelection(Web)
+                                To select multiple Industry verticals, use Ctrl + Click
                                 <span
                                     class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-5 border-solid border-transparent border-t-gray-700"></span>
                             </span>
                         </div>
-                        <p class="mt-[18px] " style="color: #db5001">Each nomination form allows an Advisor to choose at
-                            the most 3 industry Verticals</p>
+                        <p class="mt-[18px] " style="color: #db5001">Each nomination form allows an advisor to select at the most 3 Industry verticals.</p>
                         <select id="industry" name="industry[]" class="w-full p-2 rounded-[12px] mt-[18px]" multiple>
                             <option selected>Select Industry Verticals</option>
                             @foreach ($industries as $industry)
@@ -177,15 +176,12 @@
                             </svg>
                             <span
                                 class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-50 bg-[#6AA300] text-white text-center rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                For Multi Selection For Geography Press Shift or Ctrl key for MultiSelection(Web)
+                                To select multiple Geography locations, use Ctrl + Click
                                 <span
                                     class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-5 border-solid border-transparent border-t-gray-700"></span>
                             </span>
                         </div>
-                        <p class="mt-[18px] " style="color: #db5001">Each nomination form permits an advisor to
-                            indicate
-                            3 geographical regions where they possess
-                            expertise</p>
+                        <p class="mt-[18px] " style="color: #db5001">Each nomination form allows an advisor to select 3 geographical regions.</p>
                         <select id="geography" name="geography[]" class="w-full p-2 rounded-[12px] mt-[18px]"
                             multiple>
                             <option selected>Select Geography Locations</option>
