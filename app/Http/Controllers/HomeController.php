@@ -16,6 +16,7 @@ class HomeController extends Controller
         if($usertype=='1')
         {
             return view('admin.pages.dashboard');
+            // return redirect()->route('advisatoradmin.dashboard');
         } elseif($usertype=='2') {
             return view('advisaor.pages.dashboard');
         } else {

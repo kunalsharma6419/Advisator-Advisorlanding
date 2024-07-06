@@ -342,7 +342,7 @@ class AuthController extends Controller
                 if($user->usertype == 0 || $user->usertype == 1)
                 {
                     Auth::login($user);
-                    return response()->json(['success' => true,'msg'=> 'Login Success, Mail has been verified']);
+                    return response()->json(['success' => true, 'msg' => 'Login Success, Mail has been verified', 'usertype' => $user->usertype]);
                 } elseif ($user->usertype == 2) {
                     $nomination = AdvisorNomination::where('user_id', $user->unique_id)->first();
                     if (!$nomination) {

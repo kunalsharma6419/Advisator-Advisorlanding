@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\IndustryVertical;
+use App\Models\GeographyLocation;
 
 class AdvisorNomination extends Model
 {
@@ -42,5 +44,23 @@ class AdvisorNomination extends Model
     public function availabilities()
     {
         return $this->hasMany(Availabilities::class);
+    }
+
+    public function getIndustries()
+    {
+        $industryIds = $this->industry_ids;
+        return IndustryVertical::whereIn('id', $industryIds)->get();
+    }
+
+    public function getGeographies()
+    {
+        $geographyIds = $this->geography_ids;
+        return GeographyLocation::whereIn('id', $geographyIds)->get();
+    }
+
+    // Define the relationship
+    public function evaluations()
+    {
+        return $this->hasMany(AdvisorEvaluation::class);
     }
 }

@@ -1,11 +1,11 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <div class="text-center sidebar-brand-wrapper d-flex align-items-center">
-        <a class="sidebar-brand brand-logo" href="index.html"><img src="../../../admin/assets/images/logo.svg"
-                alt="logo" /></a>
-        <a class="sidebar-brand brand-logo-mini ps-4 pt-3" href="index.html"><img
-                src="../../../admin/assets/images/logo-mini.svg" alt="logo" /></a>
+        <a class="sidebar-brand brand-logo" href="{{ route('home') }}"><img src="../src/assets/logo/AdvisatorLogo.png"
+                alt="logo" style="width: 180px; height: 90px;" /></a>
+        <a class="sidebar-brand brand-logo-mini ps-4 pt-3" href="{{ route('home') }}"><img
+                src="../src/assets/logo/AdvisatorLogo.png" alt="logo" /></a>
     </div>
-    <ul class="nav">
+    <ul class="nav" style="margin-top: 10px;">
         <li class="nav-item nav-profile">
             <a href="#" class="nav-link">
                 <div class="nav-profile-image">
@@ -14,19 +14,31 @@
                     <!--change to offline or busy as needed-->
                 </div>
                 <div class="nav-profile-text d-flex flex-column pe-3">
-                    <span class="font-weight-medium mb-2">Henry Klein</span>
-                    <span class="font-weight-normal">$8,753.00</span>
+                    <span class="font-weight-medium mb-2">{{ Auth::user()->full_name }}</span>
+                    <span class="font-weight-normal">{{ Auth::user()->unique_id }}</span>
                 </div>
-                <span class="badge badge-danger text-white ms-3 rounded">3</span>
+                <span class="badge badge-danger text-white ms-3 rounded">{{ Auth::user()->id }}</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="{{ route('advisatoradmin.dashboard') }}">
                 <i class="mdi mdi-home menu-icon"></i>
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item {{ request()->routeIs('advisatoradmin.nominations.list') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('advisatoradmin.nominations.list') }}">
+                <i class="fa fa-users menu-icon"></i>
+                <span class="menu-title">Nominations</span>
+            </a>
+        </li>
+        <li class="nav-item {{ request()->routeIs('advisatoradmin.advisoraccounts.list') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('advisatoradmin.advisoraccounts.list') }}">
+                <i class="fa fa-address-book menu-icon"></i>
+                <span class="menu-title">Advisor Accounts</span>
+            </a>
+        </li>
+        {{-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
                 aria-controls="ui-basic">
                 <i class="mdi mdi-crosshairs-gps menu-icon"></i>
@@ -117,7 +129,7 @@
                         </a></li>
                 </ul>
             </div>
-        </li>
+        </li> --}}
         <li class="nav-item">
             <a class="nav-link" href="docs/documentation.html">
                 <i class="mdi mdi-file-document-box menu-icon"></i>
@@ -131,7 +143,15 @@
                         <p class="text-black">Notification</p>
                     </div>
                     <ul class="mt-4 ps-0">
-                        <li>Sign Out</li>
+                        <li><a href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                class="dropdown-item text-blue text-bold">
+                                <i class="mdi mdi-logout me-2 text-primary"></i>
+                                Sign out
+                            </a></li>
+                        <form method="post" id="logout-form" action="{{ route('logout') }}" style="display:none;">
+                            @csrf
+                        </form>
                     </ul>
                 </div>
             </div>

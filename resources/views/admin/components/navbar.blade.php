@@ -1,11 +1,11 @@
 <nav class="navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row">
     <div class="navbar-menu-wrapper d-flex align-items-stretch justify-content-between">
-        <a class="navbar-brand brand-logo-mini align-self-center d-lg-none" href="index.html"><img
-                src="../../../admin/assets/images/logo-mini.svg" alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini align-self-center d-lg-none" href="{{route('home')}}"><img
+                src="../src/assets/logo/AdvisatorLogo.png" alt="logo" style="width: 180px;"/></a>
         <button class="navbar-toggler navbar-toggler align-self-center me-2" type="button" data-toggle="minimize">
             <i class="mdi mdi-menu"></i>
         </button>
-        <ul class="navbar-nav">
+        {{-- <ul class="navbar-nav">
             <li class="nav-item dropdown">
                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
                     data-bs-toggle="dropdown">
@@ -93,9 +93,9 @@
                     </div>
                 </form>
             </li>
-        </ul>
+        </ul> --}}
         <ul class="navbar-nav navbar-nav-right ml-lg-auto">
-            <li class="nav-item dropdown d-none d-xl-flex border-0">
+            {{-- <li class="nav-item dropdown d-none d-xl-flex border-0">
                 <a class="nav-link dropdown-toggle" id="languageDropdown" href="#" data-bs-toggle="dropdown">
                     <i class="mdi mdi-earth"></i> English </a>
                 <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
@@ -104,12 +104,12 @@
                     <a class="dropdown-item" href="#"> Latin </a>
                     <a class="dropdown-item" href="#"> Japanese </a>
                 </div>
-            </li>
+            </li> --}}
             <li class="nav-item  nav-profile dropdown border-0">
                 <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown">
                     <img class="nav-profile-img me-2" alt=""
                         src="../../../admin/assets/images/faces/face1.jpg">
-                    <span class="profile-name">Henry Klein</span>
+                    <span class="profile-name">{{ Auth::user()->full_name }}</span>
                 </a>
                 <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
                     <a class="dropdown-item" href="#">

@@ -120,19 +120,38 @@
                         if (response.redirect) {
                             Swal.fire({
                                 icon: 'info',
-                                title: 'Action Required',
+                                title: 'Evaluation Pending',
                                 text: response.msg
                             }).then(function() {
                                 window.location.href = response.redirect;
                             });
                         } else {
                             Swal.fire({
-                                icon: response.msg.includes('Evaluation') ? 'info' : 'success',
-                                title: response.msg.includes('Evaluation') ? 'Evaluation Stage' : 'Success',
+                                icon: response.msg.includes('Evaluation') ? 'info' :
+                                    'success',
+                                title: response.msg.includes('Evaluation') ?
+                                    'Evaluation Stage' : 'Success',
                                 text: response.msg
                             }).then(function() {
                                 if (!response.msg.includes('Evaluation')) {
-                                    window.location.href = '/dashboard'; // Redirect to dashboard or desired page
+                                    // window.location.href = response.redirect; // Redirect to dashboard or desired page
+                                    if (response.msg.includes(
+                                            'Login Success, Mail has been verified'
+                                            )) {
+                                        let dashboardRoute =
+                                        '{{ route('home') }}'; // Default fallback route
+                                        if (response.usertype == 1) {
+                                            dashboardRoute =
+                                                '{{ route('advisatoradmin.dashboard') }}'; // Adjust the route as needed
+                                        } else if (response.usertype == 0) {
+                                            dashboardRoute =
+                                                '{{ route('user.dashboard') }}'; // Adjust the route as needed
+                                        } else if (response.usertype == 2) {
+                                            dashboardRoute =
+                                                '{{ route('advisor.dashboard') }}'; // Adjust the route as needed
+                                        }
+                                        window.location.href = dashboardRoute;
+                                    }
                                 }
                             });
                         }
@@ -148,7 +167,8 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: xhr.responseJSON.message || 'An error occurred. Please try again.'
+                        text: xhr.responseJSON.message ||
+                            'An error occurred. Please try again.'
                     });
                 }
             });

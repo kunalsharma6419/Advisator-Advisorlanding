@@ -6,6 +6,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdvisorNominationController;
 use App\Http\Controllers\AdvisorController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\NominationsController;
+use App\Http\Controllers\Admin\AdvisorsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,16 +73,26 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     //Admin Dashboard
     Route::prefix('advisatoradmin')->group(function () {
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('advisatoradmin.dashboard');
+
+        //Nominations Menu
+        Route::get('/nominations', [NominationsController::class, 'index'])->name('advisatoradmin.nominations.list');
+        Route::get('nominations/{id}', [NominationsController::class, 'show'])->name('advisatoradmin.nominations.show');
+        Route::get('nominations/{id}/evaluate', [NominationsController::class, 'showEvaluationForm'])->name('advisatoradmin.nominations.evaluate');
+        Route::post('nominations/{id}/evaluate/submit', [NominationsController::class, 'evaluateNomination'])->name('advisatoradmin.nominations.evaluate.submit');
+
+        //Advisor Accounts Menu
+        Route::get('/advisoraccounts', [AdvisorsController::class, 'index'])->name('advisatoradmin.advisoraccounts.list');
+        Route::get('advisoraccounts/{id}', [AdvisorsController::class, 'show'])->name('advisatoradmin.advisoraccounts.show');
     });
 
     //User Dashboard
-    // Route::prefix('user')->group(function () {
-    //     Route::get('dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
-    //     Route::get('my-profile', [UserController::class, 'myprofile'])->name('user.myprofile');
-    //     Route::get('my-wallet', [UserController::class, 'mywallet'])->name('user.mywallet');
-    //     Route::get('my-bookings', [UserController::class, 'mybookings'])->name('user.mybookings');
-    //     Route::get('transaction-history', [UserController::class, 'transactionhistory'])->name('user.transactionhistory');
-    // });
+    Route::prefix('user')->group(function () {
+        Route::get('dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
+        Route::get('my-profile', [UserController::class, 'myprofile'])->name('user.myprofile');
+        Route::get('my-wallet', [UserController::class, 'mywallet'])->name('user.mywallet');
+        Route::get('my-bookings', [UserController::class, 'mybookings'])->name('user.mybookings');
+        Route::get('transaction-history', [UserController::class, 'transactionhistory'])->name('user.transactionhistory');
+    });
 
     //Advisor Dashboard
     Route::prefix('advisor')->group(function () {
