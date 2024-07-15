@@ -1,7 +1,7 @@
 <div class="bg-[#FFFFFF] left-0 z-20 shadow-2xl h-[80px] fixed md:hidden bottom-0 w-full">
     <div class="h-full w-full mx-auto px-2 flex justify-between items-center">
         <div class="flex flex-col items-center justify-center gap-1">
-            <a href="../Home.html">
+            <a href="{{route('home')}}">
                 <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="../src/assets/bottomNavbar/activeHome.png"
                     alt="" />
             </a>

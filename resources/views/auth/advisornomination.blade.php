@@ -56,8 +56,7 @@
                 <a href="{{ route('home') }}"><img class="w-[154px] h-[72px]"
                         src="../../../src/assets/auth/Rectangle 546.png" alt="" /></a>
                 <p class="font-[400] text-[16px]">
-                    Advisor Nomination form. Please fill in the details below for
-                    Advisor signup
+                    Advisor Nomination form. Please fill in the details below
                 </p>
             </div>
 
@@ -96,16 +95,16 @@
                         <input class="px-[18px] w-full h-[60px] rounded-[8px] shadow-lg"
                             placeholder="LinkedIn Profile link" type="url" id="linkedin_profile"
                             name="linkedin_profile" />
-                        <i class="fa-solid fa-paperclip" style="color: #3a3a3a"></i>
+                        {{-- <i class="fa-solid fa-paperclip" style="color: #3a3a3a"></i> --}}
                     </div>
                 </div>
 
                 <div class="border w-full border-1 mt-[18px] border-[#AFAFAF]"></div>
                 <h2 class="font-[500] text-[16px]">Select Business Function ::</h2>
                 <p class="font-[400] text-[16px]" style="color: #db5001">
-                    Each nomination form allows an Advisor to choose one primary Business Function and two
-                    sub-functions. For instance, under Business Function, one could select "Digital Platforms," with
-                    sub-functions such as "Web & Apps" and "Softwares & Packages."
+                    Each nomination form allows an advisor to choose one primary business function and two
+                    sub-functions. For instance, under business function, one could select "digital platforms," with
+                    sub-functions such as "web & apps" and "softwares & packages."
                 </p>
 
                 <div class="flex flex-col gap-[28px]">
@@ -158,7 +157,7 @@
                         </div>
                         <p class="mt-[18px] " style="color: #db5001">Each nomination form allows an advisor to select at the most 3 Industry verticals.</p>
                         <select id="industry" name="industry[]" class="w-full p-2 rounded-[12px] mt-[18px]" multiple>
-                            <option selected>Select Industry Verticals</option>
+                            {{-- <option selected>Select Industry Verticals</option> --}}
                             @foreach ($industries as $industry)
                                 <option value="{{ $industry->id }}">{{ $industry->name }}</option>
                             @endforeach
@@ -167,7 +166,7 @@
                     <div class="border border-1 my-30 border-[#AFAFAF]"></div>
 
                     <div class="w-full mx-auto">
-                        <label for="geography">Select Geography Locations:</label>
+                        <label for="geography">Select Geographical Locations:</label>
                         <div class="relative inline-block border-b border-dotted border-black group">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 cursor-pointer"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -176,7 +175,7 @@
                             </svg>
                             <span
                                 class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-50 bg-[#6AA300] text-white text-center rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                To select multiple Geography locations, use Ctrl + Click
+                                To select multiple Geographical locations, use Ctrl + Click
                                 <span
                                     class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-5 border-solid border-transparent border-t-gray-700"></span>
                             </span>
@@ -184,7 +183,7 @@
                         <p class="mt-[18px] " style="color: #db5001">Each nomination form allows an advisor to select 3 geographical regions.</p>
                         <select id="geography" name="geography[]" class="w-full p-2 rounded-[12px] mt-[18px]"
                             multiple>
-                            <option selected>Select Geography Locations</option>
+                            {{-- <option selected>Select Geographical Locations</option> --}}
                             @foreach ($geographies as $geography)
                                 <option value="{{ $geography->id }}">{{ $geography->name }}</option>
                             @endforeach
@@ -192,7 +191,7 @@
                     </div>
                 </div>
 
-                <div class="border w-full border-1 mt-[18px] border-[#AFAFAF]"></div>
+                {{-- <div class="border w-full border-1 mt-[18px] border-[#AFAFAF]"></div> --}}
 
                 {{-- <div>
                     <label for="nominee_qualification">Nominee Qualification :</label>
@@ -336,7 +335,7 @@
                             <div class="h-[188px] w-[1px] border border-[#000000]"></div>
 
                             <div class="flex flex-col gap-[12px]">
-                                <h2 class="text-[16px] font-[500]">Conference call :</h2>
+                                <h2 class="text-[16px] font-[500]">Consultation call :</h2>
                                 <div class="flex justify-between">
                                     <p class="text-[16px] font-[400] text-[#828282]">Currency</p>
                                     <p class="text-[16px] font-[400] text-[#828282]">Price</p>
@@ -352,7 +351,7 @@
                             </div>
                         </div>
 
-                        <div class="flex w-full justify-between">
+                        {{-- <div class="flex w-full justify-between">
                             <div class="flex flex-col gap-[12px]">
                                 <h2 class="text-[16px] font-[500]">Chat :</h2>
                                 <div class="flex justify-between">
@@ -368,7 +367,7 @@
                                         step="0.01" step="0.01" name="chat_price_per_minute" value="20">
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div id="hour" class="city w-full" style="display: none">
@@ -392,7 +391,7 @@
                             <div class="h-[188px] w-[1px] border border-[#000000]"></div>
 
                             <div class="flex flex-col gap-[12px]">
-                                <h2 class="text-[16px] font-[500]">Conference call :</h2>
+                                <h2 class="text-[16px] font-[500]">Consultation call :</h2>
                                 <div class="flex justify-between">
                                     <p class="text-[16px] font-[400] text-[#828282]">Currency</p>
                                     <p class="text-[16px] font-[400] text-[#828282]">Price</p>
@@ -408,7 +407,7 @@
                             </div>
                         </div>
 
-                        <div class="flex w-full justify-between">
+                        {{-- <div class="flex w-full justify-between">
                             <div class="flex flex-col gap-[12px]">
                                 <h2 class="text-[16px] font-[500]">Chat</h2>
                                 <div class="flex justify-between">
@@ -424,7 +423,7 @@
                                         step="0.01" name="chat_price_per_hour" value="2000">
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 

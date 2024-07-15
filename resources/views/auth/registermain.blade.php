@@ -147,7 +147,7 @@
                         <h2 class="text-[#3A3A3A] font-[500] text-[16px] lg:text-[20px] mt-[3px]">
                             Sign up Advisor
                         </h2>
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('register') }}" id="registerForm">
                             @csrf
                             <!-- input fields -->
                             <input id="full_name" class="p-[18px] mt-[18px] w-full rounded-[12px]"
@@ -222,6 +222,8 @@
     </div>
 </body>
 <!-- toogle for User and Advisor -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function openContent(cityName) {
         var i;
@@ -251,6 +253,126 @@
         activeButton.querySelector("i").style.color = "#FFFFFF";
     }
 </script>
+{{-- <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Display validation errors or other session errors if present
+    @if (session('error'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '{{ session('error') }}'
+        });
+    @elseif ($errors->any())
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            html: '<ul>' +
+                @foreach ($errors->all() as $error)
+                    '<li>{{ $error }}</li>' +
+                @endforeach
+            '</ul>'
+        });
+    @endif
+
+    // Handle form submission with AJAX
+    $('#registerForm').on('submit', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: function(response) {
+                if (response.status === 'exists') {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Account Exists',
+                        text: response.message
+                    }).then(function() {
+                        window.location.href = response.verification_url;
+                    });
+                } else if (response.status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: response.message
+                    }).then(function() {
+                        window.location.href = response.verification_url;
+                    });
+                }
+            },
+            error: function(xhr) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: xhr.responseJSON.message || 'An error occurred. Please try again.'
+                });
+            }
+        });
+    });
+});
+</script> --}}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Display validation errors or other session errors if present
+    @if (session('error'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '{{ session('error') }}'
+        });
+    @elseif ($errors->any())
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            html: '<ul>' +
+                @foreach ($errors->all() as $error)
+                    '<li>{{ $error }}</li>' +
+                @endforeach
+            '</ul>'
+        });
+    @endif
+
+    // Handle form submission with AJAX
+    $('#registerForm').on('submit', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: function(response) {
+                if (response.status === 'exists' || response.status === 'warning') {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Account Exists',
+                        text: response.message
+                    }).then(function() {
+                        window.location.href = response.verification_url;
+                    });
+                } else if (response.status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: response.message
+                    }).then(function() {
+                        window.location.href = response.verification_url;
+                    });
+                }
+            },
+            error: function(xhr) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: xhr.responseJSON.message || 'An error occurred. Please try again.'
+                });
+            }
+        });
+    });
+});
+</script>
+
+
 
 </html>
 

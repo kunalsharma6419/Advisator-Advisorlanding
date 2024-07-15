@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AdvisorNomination;
 use App\Models\AdvisorEvaluation;
+use App\Models\AdvisorProfiles;
 
 class NominationsController extends Controller
 {
@@ -33,7 +34,7 @@ class NominationsController extends Controller
 
         // Order nominations by most recent (created_at DESC)
         $nominations->orderBy('created_at', 'DESC');
-        
+
         $nominations = $nominations->paginate($entriesPerPage);
         $inProgressCount = AdvisorNomination::where('nomination_status', 'inprogress')->count();
         $selectedCount = AdvisorNomination::where('nomination_status', 'selected')->count();
@@ -230,6 +231,29 @@ class NominationsController extends Controller
         // Update the status of the related AdvisorNomination
         if ($overall_score >= 3) {
             $nomination->nomination_status = 'selected';
+            $advisor = AdvisorProfiles::create([
+                'advisor_id' => $nomination->nominee_id,
+                'user_id' => $nomination->user_id,
+                'full_name' => $nomination->full_name,
+                'email' => $nomination->email,
+                'mobile_number' => $nomination->mobile_number,
+                'location' => $nomination->location,
+                'linkedin_profile' => $nomination->linkedin_profile,
+                'business_function_category_id' => $nomination->business_function_category_id,
+                'sub_function_category_id_1' => $nomination->sub_function_category_id_1,
+                'sub_function_category_id_2' => $nomination->sub_function_category_id_2,
+                'industry_ids' => $nomination->industry,
+                'geography_ids' => $nomination->geography,
+                'advisor_qualification' => $nomination->nominee_qualification,
+                'advisor_experience' => $nomination->nominee_experience,
+                'discovery_call_price_per_minute' => $nomination->discovery_call_price_per_minute,
+                'discovery_call_price_per_hour' => $nomination->discovery_call_price_per_hour,
+                'conference_call_price_per_minute' => $nomination->conference_call_price_per_minute,
+                'conference_call_price_per_hour' => $nomination->conference_call_price_per_hour,
+                'chat_price_per_minute' => $nomination->chat_price_per_minute,
+                'chat_price_per_hour' => $nomination->chat_price_per_hour,
+                'nomination_status' => $nomination->nomination_status,
+            ]);
         } else {
             $nomination->nomination_status = 'rejected';
         }

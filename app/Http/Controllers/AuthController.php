@@ -357,6 +357,12 @@ class AuthController extends Controller
                             'msg' => 'The Advisator team is currently reviewing your nomination. You will be notified if you are selected',
                             'redirect' => route('home')
                         ]);
+                    } elseif ($nomination->nomination_status == 'rejected') {
+                        return response()->json([
+                            'success' => true,
+                            'msg' => 'The Advisator team had done reviewing your nomination. You are not selected as per our evaluation criteria.',
+                            'redirect' => route('home')
+                        ]);
                     } else {
                         Auth::login($user);
                         return response()->json(['success' => true, 'msg' => 'Login Success, Mail has been verified']);

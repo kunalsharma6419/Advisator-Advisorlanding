@@ -22,7 +22,7 @@
                     <div class="flex items-center gap-4 bg-[#FFF4ED] px-6 py-3 rounded-[30px] shadow-md">
                         <div class="relative">
                             <img class="w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] rounded-full"
-                                src="../src/assets/img/profileImage.png" alt="Profile Image" />
+                                src="../src/assets/defaultuser.png" alt="Profile Image" />
                             <!-- SVG icon for verified badge -->
                             <svg class="absolute bottom-0 right-0 w-6 h-6 text-green-500 bg-white rounded-full p-1"
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">

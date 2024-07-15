@@ -235,7 +235,7 @@
         @include('advisor.components.footer')
 
         <!-- side bar -->
-        @include('advisor.components.footer')
+        @include('advisor.components.sidebar')
     </div>
 
     <script>

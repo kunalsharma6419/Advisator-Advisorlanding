@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\NominationsController;
 use App\Http\Controllers\Admin\AdvisorsController;
+use App\Http\Controllers\Advisor\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,7 +98,16 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     //Advisor Dashboard
     Route::prefix('advisor')->group(function () {
         Route::get('dashboard', [AdvisorController::class, 'dashboard'])->name('advisor.dashboard');
-        Route::get('my-profile', [AdvisorController::class, 'myprofile'])->name('advisor.myprofile');
+        //profile
+        Route::get('my-profile-info', [ProfileController::class, 'myprofile'])->name('advisor.myprofile');
+        Route::put('profile', [ProfileController::class, 'profileupdate'])->name('advisor.myprofile.update');
+        Route::get('advisorinfo/availability', [ProfileController::class, 'getAvailability'])
+            ->name('advisor.availability');
+        Route::post('updateVideos', [ProfileController::class, 'updateVideos'])->name('advisor.updateVideos');
+        Route::post('advisorinfo/availability/update', [ProfileController::class, 'updateAvailability'])->name('advisor.updateAvailability');
+        Route::post('/advisor/update-prices', [ProfileController::class, 'updatePrices'])->name('advisor.updatePrices');
+        Route::post('/advisor/bank-details', [ProfileController::class, 'bankstore'])->name('advisor.bankDetails.store');
+        Route::post('/tickets/store', [ProfileController::class, 'ticketstore'])->name('advisor.tickets.store');
         Route::get('reviews-summary', [AdvisorController::class, 'reviewssummary'])->name('advisor.reviewssummary');
         Route::get('my-bookings', [AdvisorController::class, 'mybookings'])->name('advisor.mybookings');
         Route::get('my-earnings', [AdvisorController::class, 'myearnings'])->name('advisor.myearnings');

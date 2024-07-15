@@ -7,7 +7,7 @@
     </div>
     <div class="mr-4 w-full font-sans text-center sm:w-1/2 sm:text-left">
         <h1
-            class="content-change text-[#FF3131] text-[45px] font-[700] text-start leading-[1.2] md:leading-[1.2] font-sans w-[100%] sm:w-[120%]">
+            class="content-change text-[#FF3131] text-[40px] font-[700] text-start leading-[1.2] md:leading-[1.2] font-sans w-[100%] sm:w-[120%]">
             Onboard ADVISATOR
             <br />
             <span class="text-[#6A9023] lowercase">to engage with Clients from diverse industries!</span>

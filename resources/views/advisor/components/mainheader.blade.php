@@ -2,14 +2,14 @@
     <div class="h-full w-[90%] md:w-[95%] lg:w-[90%] mx-auto flex justify-between items-center">
         <!-- logo -->
         <div>
-            <a href="../Home.html">
+            <a href="{{ route('home') }}">
                 <img class="w-[180px]" src="../src/assets/logo/AdvisatorLogo.png" alt="" />
             </a>
         </div>
         <div class="hidden md:flex xl:w-[75%] xl:justify-between gap-8d md:gap-x-10 xl:gap-[60px]">
             <ul
                 class="font-Roboto font-normal text-[#3A3A3A] grow xl:justify-center gap-4 text-sm lg:text-lg xl:gap-5 flex items-center">
-                <li class="font-bold text-[#2A2A2A] cursor-pointer">Home</li>
+                <li class="font-bold text-[#2A2A2A] cursor-pointer"><a href="{{ route('home') }}">Home</a></li>
                 <li class="cursor-pointer">
                     <a href="../src/Advisor pages/consultadvisor.html">Consult Advisor</a>
                 </li>

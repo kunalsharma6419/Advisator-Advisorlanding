@@ -3,16 +3,28 @@
     <div class="w-[70%] sm:w-[60%] bg-[#FFFFFF] h-full">
         <div class="w-[90%]s mx-auto flexs flex-col gap-4 py-[2rem]">
             <div class="flex justify-between items-center">
-                <a href="./advisorProfile.html">
+                <a href="#">
                     <div class="flex items-center gap-1 bg-[#FFF4ED] px-6 py-3 rounded-r-[30px]">
-                        <img class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[3rem]"
-                            src="../src/assets/img/profileImage.png" alt="" />
+                        @if (Auth::user()->profile_photo_path)
+                            <img class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[3rem]"
+                                src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}" alt="">
+                        @else
+                            <?php
+                            $fullName = Auth::user()->full_name;
+                            $initial = strtoupper(substr($fullName, 0, 1));
+                            ?>
+                            <img id="profilePhoto"
+                                src="https://via.placeholder.com/150/000000/FFFFFF/?text={{ $initial }}"
+                                alt="Profile Photo" width="100"
+                                class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[3rem]">
+                        @endif
+
                         <div>
                             <h2 class="text-sm sm:text-base text-[#2A2A2A] font-medium">
-                                Radhika Sharma
+                                {{ Auth::user()->full_name }}
                             </h2>
                             <h3 class="text-xs sm:text-sm text-[#828282] font-medium">
-                                radhikasharma@abc.com
+                                {{ Auth::user()->email }}
                             </h3>
                         </div>
                     </div>
@@ -96,9 +108,13 @@
                     <div class="flex items-center gap-4">
                         <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/sidebar/Logout.png"
                             alt="" />
-                        <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
-                            Logout
-                        </h2>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                                {{ __('Log Out') }}
+                            </button>
+
+                        </form>
                     </div>
                 </a>
             </div>

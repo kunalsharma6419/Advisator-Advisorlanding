@@ -11,10 +11,10 @@ class AdvisorController extends Controller
         return view('advisor.pages.dashboard');
     }
 
-    public function myprofile()
-    {
-        return view('advisor.pages.myprofile');
-    }
+    // public function myprofile()
+    // {
+    //     return view('advisor.pages.myprofile');
+    // }
 
     public function reviewssummary()
     {

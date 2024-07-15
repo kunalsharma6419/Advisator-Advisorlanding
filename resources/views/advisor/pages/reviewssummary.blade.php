@@ -83,50 +83,7 @@
             </div>
 
             <!-- bottom menu bar -->
-            <div class="bg-[#FFFFFF] left-0 z-20 shadow-2xl h-[80px] fixed md:hidden bottom-0 w-full">
-                <div class="h-full w-[85%] mx-auto flex justify-between items-center">
-                    <div class="flex flex-col items-center justify-center gap-1">
-                        <a href="../Advisor pages/advisordashboard.html">
-                            <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer"
-                                src="../src/assets/bottomNavbar/activeHome.png" alt="">
-                        </a>
-                        <p class="font-semibold text-xs sm:text-sm text-[#C95555]">Home</p>
-                    </div>
-                    <div class="flex flex-col items-center justify-center gap-1">
-                        <a href="../Advisor pages/advisorbooking.html">
-                            <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="../src/assets/bottomNavbar/booking.png"
-                                alt="">
-                        </a>
-                        <p class="font-semibold text-xs sm:text-sm text-[#C95555] hidden">Bookings</p>
-                    </div>
-                    <div></div>
-                    <div class="flex flex-col items-center justify-center gap-1">
-                        <a href="../Advisor pages/advisortransactionhistory.html">
-                            <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer"
-                                src="../src/assets/bottomNavbar/Transactions.png" alt="">
-                        </a>
-                        <p class="font-semibold text-xs sm:text-sm text-[#C95555] hidden">Transactions</p>
-                    </div>
-                    <div class="flex flex-col items-center justify-center gap-1">
-                        <a href="../Advisor pages/advisorProfile.html">
-                            <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="../src/assets/bottomNavbar/profile.png"
-                                alt="">
-                        </a>
-                        <p class="font-semibold text-xs sm:text-sm text-[#C95555] hidden">My Profile</p>
-                    </div>
-                </div>
-
-                <div
-                    class="absolute left-1/2 top-[-80%] translate-y-1/2 -translate-x-1/2 w-[80px] h-[80px] bg-[#FFFFFF] flex items-center justify-center rounded-[4rem]">
-                    <a href="../Advisor pages/advisorMyearning.html"
-                        class="flex flex-col items-center justify-center gap-1">
-                        <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="../src/assets/bottomNavbar/earning.png"
-                            alt="">
-                        <p class="font-semibold text-xs sm:text-sm text-[#DA9000] hidden">My Earnings</p>
-                    </a>
-                </div>
-
-            </div>
+            @include('advisor.components.bottommenu')
         </div>
 
         <!-- header for mobile view -->
@@ -365,123 +322,12 @@
         </div>
 
         <!-- side bar -->
-        <div
-            class="sidebar absolute md:hidden flex justify-end z-20 top-0 transition-all left-full w-full min-h-screen h-full bottom-0">
-            <div class="w-[70%] sm:w-[60%] bg-[#FFFFFF] h-full">
-                <div class="w-[90%]s mx-auto flexs flex-col gap-4 py-[2rem]">
-                    <div class="flex justify-between items-center">
-                        <a href="./advisorProfile.html">
-                            <div class=" flex items-center gap-1 bg-[#FFF4ED] px-6 py-3 rounded-r-[30px]">
-                                <img class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[3rem]"
-                                    src="../src/assets/img/profileImage.png" alt="">
-                                <div>
-                                    <h2 class="text-sm sm:text-base text-[#2A2A2A] font-medium">Radhika Sharma</h2>
-                                    <h3 class="text-xs sm:text-sm text-[#828282] font-medium">radhikasharma@abc.com</h3>
-                                </div>
-                            </div>
-                        </a>
-                        <div>
-                            <img id="hideSideMenu" class=" w-7 sm:w-8 cursor-pointer" src="../src/assets/img/cross.png"
-                                alt="">
-                        </div>
-                    </div>
-
-                    <a href="../auth/client.html">
-                        <div class="mt-[2rem] border-t border-b border-[#E5E5E5] py-2 my-2">
-                            <a href="">
-                                <div class=" ml-[2rem] flex items-center gap-4">
-                                    <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
-                                        src="../src/assets/sidebar/userImg.png" alt="">
-                                    <h2 class="font-medium text-sm sm:text-base text-[#BE7D00]">Switch to Client</h2>
-                                </div>
-                            </a>
-                        </div>
-                    </a>
-
-                    <div class="px-[2rem] py-2 flex flex-col gap-6">
-                        <a href="../Advisor pages/advisorbooking.html">
-                            <div class="flex items-center gap-4">
-                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
-                                    src="../src/assets/sidebar/MyBookings.png" alt="">
-                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">My Bookings</h2>
-                            </div>
-                        </a>
-                        <a href="../Advisor pages/advisorMyearning.html">
-                            <div class="flex items-center gap-4">
-                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
-                                    src="../src/assets/sidebar/money.png" alt="">
-                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">My Earnings</h2>
-                            </div>
-                        </a>
-                        <a href="../Advisor pages/advisortransactionhistory.html">
-                            <div class="flex items-center gap-4">
-                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
-                                    src="../src/assets/sidebar/tabler_transaction-rupee.png" alt="">
-                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">My Transactions</h2>
-                            </div>
-                        </a>
-                        <a href="../Advisor pages/blog.html">
-                            <div class="flex items-center gap-4">
-                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
-                                    src="../src/assets/sidebar/Blogs.png" alt="">
-                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">Blogs</h2>
-                            </div>
-                        </a>
-                        <a href="../Advisor pages/aboutus.html">
-                            <div class="flex items-center gap-4">
-                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
-                                    src="../src/assets/sidebar/Aboutus.png" alt="">
-                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">About us</h2>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="flex items-center gap-4">
-                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
-                                    src="../src/assets/sidebar/Customersupport.png" alt="">
-                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">Customer support</h2>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="flex items-center gap-4">
-                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
-                                    src="../src/assets/sidebar/Logout.png" alt="">
-                                <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">Logout</h2>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-
-                <div class="px-[2rem] py-2">
-                    <h3 class="text-sm sm:text-base text-[#2A2A2A] my-[1rem]">Find us on:</h3>
-                    <div class="flex gap-5">
-                        <img class="w-[30px] h-[30px]" src="../src/assets/sidebar/instagram.png" alt="">
-                        <img class="w-[30px] h-[30px]" src="../src/assets/sidebar/facebook.png" alt="">
-                        <img class="w-[30px] h-[30px]" src="../src/assets/sidebar/linkedin.png" alt="">
-                        <img class="w-[30px] h-[30px]" src="../src/assets/sidebar/youtube.png" alt="">
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
+       @include('advisor.components.sidebar')
 
 
     </div>
 
-    <footer class="hidden md:block bg-[#FFFFFF] shadow-2xl border border-transparent mt-[2rem]">
-        <div class="border border-[#EAEAEA] mb-4 w-full"></div>
-        <div class="md:w-[95%] lg:w-[90%] mx-auto my-[2rem]">
-            <div class="w-full flex items-center justify-between">
-                <h3 class="text-[#3A3A3A] font-normal text-base text-start">
-                    © 2024 Advisator. All rights reserved.
-                </h3>
-                <h3 class="text-[#3A3A3A] font-normal text-base text-start">
-                    info@advisator.in
-                </h3>
-            </div>
-        </div>
-    </footer>
+    @include('advisor.components.footer')
 
     <script>
         // JavaScript to toggle sidebar

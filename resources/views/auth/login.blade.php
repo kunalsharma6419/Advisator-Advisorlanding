@@ -47,7 +47,7 @@
                 <h2 class="w-full font-[600] text-center text-[16px] lg:text-[32px]">
                     Welcome to
                 </h2>
-                <a href="{{ url('/') }}"><img class="w-[110px] h-[51px] lg:w-[270px] lg:h-[120px]"
+                <a href="{{ url('/') }}"><img class="w-[180px] h-[90px] lg:w-[270px] lg:h-[120px]"
                         src="../src/assets/auth/Rectangle 547 (1).png" alt="" /></a>
             </div>
             <!-- add the toogle here -->
