@@ -99,7 +99,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::prefix('advisor')->group(function () {
         Route::get('dashboard', [AdvisorController::class, 'dashboard'])->name('advisor.dashboard');
         //profile
-        Route::get('my-profile-info', [ProfileController::class, 'myprofile'])->name('advisor.myprofile');
+        Route::get('myprofileinfo', [ProfileController::class, 'myprofile'])->name('advisor.myprofile');
         Route::put('profile', [ProfileController::class, 'profileupdate'])->name('advisor.myprofile.update');
         Route::get('advisorinfo/availability', [ProfileController::class, 'getAvailability'])
             ->name('advisor.availability');
