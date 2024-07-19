@@ -48,34 +48,7 @@
                             class="w-full">
                             @csrf
                             @method('PUT')
-                            {{-- <div>
-                                <label for="photo" class="block text-sm font-medium text-gray-700">Photo</label>
-                                <div class="mt-1 flex items-center">
-                                    @if (Auth::user()->profile_photo_path)
-                                        <img id="profilePhoto"
-                                            src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}"
-                                            alt="Profile Photo" width="100"
-                                            class="shrink-0 w-[70px] h-[70px] lg:w-[80px] lg:h-[80px] shadow-md rounded-full">
-                                    @else
-                                        <img id="profilePhoto" src="{{ generateInitialPhotoUrl(Auth::user()->full_name) }}"
-                                            alt="Profile Photo" width="100"
-                                            class="shrink-0 w-[70px] h-[70px] lg:w-[80px] lg:h-[80px] shadow-md rounded-full">
-                                    @endif
-                                    <input type="file" name="photo" id="photo" class="hidden"
-                                        onchange="previewPhoto()">
-                                </div>
-                                @error('photo')
-                                    <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
-                                @enderror
-                                <div class="mt-2 flex space-x-3">
-                                    <button type="button" onclick="document.getElementById('photo').click()"
-                                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg shadow-md">Select
-                                        a New Photo</button>
-                                    <button type="button" onclick="removePhoto()"
-                                        class="bg-red-200 hover:bg-red-300 text-red-700 font-semibold py-2 px-4 rounded-lg shadow-md">Remove
-                                        Photo</button>
-                                </div>
-                            </div> --}}
+
                             <div>
                                 <label for="photo" class="block text-sm font-medium text-gray-700">Photo</label>
                                 <div class="mt-1 flex items-center">
@@ -151,59 +124,7 @@
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                {{-- <div class="w-full mb-6">
-                                    <label class="text-[#828282] font-normal text-base" for="business_function">Business
-                                        functions</label>
-                                    <div id="business_function"
-                                        class="flex gap-2 items-center font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
-                                        <select id="business_function_category_id" name="business_function_category_id"
-                                            class="w-full p-2 rounded-[12px]" required>
-                                            <option selected>Choose Business Function Category</option>
-                                            @foreach ($businessFunctionCategories as $category)
-                                                <option value="{{ $category->id }}"
-                                                    {{ $category->id == $advisor->business_function_category_id ? 'selected' : '' }}>
-                                                    {{ $category->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
 
-                                <div class="w-full mb-6">
-                                    <label class="text-[#828282] font-normal text-base" for="sub_function_category_id_1">Sub
-                                        Business function 1</label>
-                                    <div id="sub_function_1"
-                                        class="flex gap-2 items-center font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
-                                        <select id="sub_function_category_id_1" name="sub_function_category_id_1"
-                                            class="w-full p-2 rounded-[12px]" required>
-                                            <option selected>Choose Sub Function 1</option>
-                                            @foreach ($subFunction1Options as $option)
-                                                <option value="{{ $option->id }}"
-                                                    {{ $option->id == $advisor->sub_function_category_id_1 ? 'selected' : '' }}>
-                                                    {{ $option->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="w-full mb-6">
-                                    <label class="text-[#828282] font-normal text-base" for="sub_function_category_id_2">Sub
-                                        Business function 2</label>
-                                    <div id="sub_function_2"
-                                        class="flex gap-2 items-center font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
-                                        <select id="sub_function_category_id_2" name="sub_function_category_id_2"
-                                            class="w-full p-2 rounded-[12px]" required>
-                                            <option selected>Choose Sub Function 2</option>
-                                            @foreach ($subFunction2Options as $option)
-                                                <option value="{{ $option->id }}"
-                                                    {{ $option->id == $advisor->sub_function_category_id_2 ? 'selected' : '' }}>
-                                                    {{ $option->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div> --}}
                                 <div class="w-full mb-6">
                                     <label class="text-[#828282] font-normal text-base"
                                         for="business_function_category_id">Business functions</label>
@@ -260,57 +181,7 @@
                                     </div>
                                 @endif
 
-                                {{-- <div class="w-full mb-6">
-                                    <label class="text-[#828282] font-normal text-base" for="industry">Industry</label>
-                                    <div id="industry"
-                                        class="flex gap-2 items-center font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
-                                        <select id="industry_select" class="outline-none w-full">
-                                            <option value="">Choose Industry</option>
-                                            @foreach ($industries as $industry)
-                                                <option value="{{ $industry->id }}">{{ $industry->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <button id="add_industry"
-                                            class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none">Add</button>
-                                    </div>
-                                    <div id="selected_industries" class="flex flex-wrap gap-2 mt-2">
-                                        @foreach ($advisor->getIndustries() as $industry)
-                                            <div id="industry_{{ $industry->id }}"
-                                                class="bg-blue-200 text-blue-800 px-2 py-1 rounded flex items-center">
-                                                <span>{{ $industry->name }}</span>
-                                                <button type="button"
-                                                    class="ml-2 text-red-600 hover:text-red-800 focus:outline-none"
-                                                    onclick="removeIndustry({{ $industry->id }})">x</button>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
 
-                                <div class="w-full mb-6">
-                                    <label class="text-[#828282] font-normal text-base" for="geography">Geography</label>
-                                    <div id="geography"
-                                        class="flex gap-2 items-center font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
-                                        <select id="geography_select" class="outline-none w-full">
-                                            <option value="">Choose Geography</option>
-                                            @foreach ($geographies as $geography)
-                                                <option value="{{ $geography->id }}">{{ $geography->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <button id="add_geography"
-                                            class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none">Add</button>
-                                    </div>
-                                    <div id="selected_geographies" class="flex flex-wrap gap-2 mt-2">
-                                        @foreach ($advisor->getGeographies() as $geography)
-                                            <div id="geography_{{ $geography->id }}"
-                                                class="bg-green-200 text-green-800 px-2 py-1 rounded flex items-center">
-                                                <span>{{ $geography->name }}</span>
-                                                <button type="button"
-                                                    class="ml-2 text-red-600 hover:text-red-800 focus:outline-none"
-                                                    onclick="removeGeography({{ $geography->id }})">x</button>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div> --}}
                                 <div class="w-full mb-6">
                                     <label class="text-[#828282] font-normal text-base" for="industry">Industry</label>
                                     <div id="industry"
@@ -368,202 +239,7 @@
                                     <input type="hidden" name="geographies" id="geographies"
                                         value="{{ json_encode($advisor->geography_ids) }}">
                                 </div>
-                                {{-- <div class="w-full mb-6">
-                                    <label class="text-[#828282] font-normal text-base"
-                                        for="description">Description</label>
-                                    <br>
-                                    <textarea
-                                        class="text-base font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2"
-                                        name="description" id="description">Enter Description</textarea>
-                                </div>
-                                <div class="w-full mb-6">
-                                    <label class="text-[#828282] font-normal text-base" for="linkedin">LinkedIn Profile
-                                        Link</label>
-                                    <div
-                                        class="flex items-center justify-between text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
-                                        <input type="url" placeholder="Enter LinkedIn Profile Link"
-                                            name="linkedin_profile" class="w-full outline-none bg-transparent">
-                                    </div>
-                                </div> --}}
-                                {{-- <!-- Highlighted Images -->
-                                <div class="mt-4">
-                                    <label for="highlighted_images"
-                                        class="block text-sm font-medium text-gray-700">Highlighted Images</label>
-                                    <input type="file" name="highlighted_images[]" id="highlighted_images"
-                                        accept="image/*" multiple
-                                        class="block w-full mt-1 rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                    @error('highlighted_images.*')
-                                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                                    @enderror
 
-                                    <!-- Display selected images -->
-                                    <div id="preview-images" class="mt-2 flex flex-wrap gap-4">
-                                        @if ($advisor->highlighted_images)
-                                            @foreach ($advisor->highlighted_images as $image)
-                                                @if (is_string($image))
-                                                    <div class="relative">
-                                                        <img src="{{ asset('storage/' . $image) }}" alt="Image"
-                                                            class="rounded-lg h-24">
-                                                        <input type="hidden" name="removed_images[]"
-                                                            value="{{ $image }}">
-                                                        <button type="button"
-                                                            class="absolute top-1 right-1 bg-red-500 text-white rounded-full h-6 w-6 flex items-center justify-center"
-                                                            onclick="removeImage(this, '{{ $image }}')">
-                                                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                                                stroke="currentColor">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                @endif
-                                            @endforeach
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <!-- Is Available -->
-                                <div class="mt-4">
-                                    <label for="is_available" class="block text-sm font-medium text-gray-700">Is
-                                        Available</label>
-                                    <input type="checkbox" name="is_available" id="is_available" value="1"
-                                        {{ old('is_available', $advisor->is_available ? 'checked' : '') }}
-                                        class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                    @error('is_available')
-                                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <!-- Language Known -->
-                                <div class="mt-4">
-                                    <label for="language_known" class="block text-sm font-medium text-gray-700">Language
-                                        Known</label>
-                                    <select name="language_known" id="language_known"
-                                        class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                                        <option value="">Select Language</option>
-                                        <option value="English"
-                                            {{ old('language_known', $advisor->language_known) === 'English' ? 'selected' : '' }}>
-                                            English</option>
-                                        <option value="Hindi"
-                                            {{ old('language_known', $advisor->language_known) === 'Hindi' ? 'selected' : '' }}>
-                                            Hindi</option>
-                                    </select>
-                                    @error('language_known')
-                                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <!-- Services -->
-                                <div class="mt-4">
-                                    <label for="services" class="block text-sm font-medium text-gray-700">Services</label>
-                                    <input type="text" name="services[]" id="services"
-                                        value="{{ old('services', is_array($advisor->services) ? implode(',', $advisor->services) : $advisor->services) }}"
-                                        class="block w-full mt-1 rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                    @error('services.*')
-                                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <!-- Awards and Recognition -->
-                                <div class="mt-4">
-                                    <label for="awards_recognition" class="block text-sm font-medium text-gray-700">Awards
-                                        & Recognition</label>
-                                    <input type="text" name="awards_recognition[]" id="awards_recognition"
-                                        value="{{ old('awards_recognition', is_array($advisor->awards_recognition) ? implode(',', $advisor->awards_recognition) : $advisor->awards_recognition) }}"
-                                        class="block w-full mt-1 rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                    @error('awards_recognition.*')
-                                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <!-- Video Upload (Max 2) -->
-                                <div class="mt-4">
-                                    <label for="video_upload" class="block text-sm font-medium text-gray-700">Video Upload
-                                        (Max 2)</label>
-                                    <input type="file" name="video_upload[]" id="video_upload" accept="video/*"
-                                        multiple
-                                        class="block w-full mt-1 rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                    @error('video_upload.*')
-                                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                                    @enderror
-
-                                    <!-- Display selected videos -->
-                                    <div id="preview-videos" class="mt-2 flex flex-wrap gap-4">
-                                        @if ($advisor->video_upload)
-                                            @foreach ($advisor->video_upload as $video)
-                                                <div class="relative">
-                                                    <video controls class="rounded-lg h-24">
-                                                        <source src="{{ asset('storage/' . $video) }}" type="video/mp4">
-                                                        Your browser does not support the video tag.
-                                                    </video>
-                                                    <input type="hidden" name="removed_videos[]"
-                                                        value="{{ $video }}">
-                                                    <button type="button"
-                                                        class="absolute top-1 right-1 bg-red-500 text-white rounded-full h-6 w-6 flex items-center justify-center"
-                                                        onclick="removeVideo(this, '{{ $video }}')">
-                                                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                                            stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <div class="h-2 mt-1 bg-green-500 rounded-md">
-                                                        <div id="progress-bar-{{ $loop->index }}"
-                                                            class="h-full bg-green-200 rounded-md"></div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        @endif
-                                    </div>
-                                </div>
-                                <!-- Progress Bars for Uploads -->
-                                <div id="progress-bars" class="mt-4 space-y-2"></div>
-
-                                <!-- About -->
-                                <div class="mt-4">
-                                    <label for="about" class="block text-sm font-medium text-gray-700">About</label>
-                                    <textarea id="about" name="about" rows="3"
-                                        class="block w-full mt-1 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md">{{ old('about', $advisor->about) }}</textarea>
-                                    @error('about')
-                                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <!-- Is Founder -->
-                                <div class="mt-4">
-                                    <label for="is_founder" class="block text-sm font-medium text-gray-700">Is
-                                        Founder</label>
-                                    <input type="checkbox" name="is_founder" id="is_founder" value="1"
-                                        {{ old('is_founder', $advisor->is_founder ? 'checked' : '') }}
-                                        class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                    @error('is_founder')
-                                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <!-- Company Name -->
-                                <div class="mt-4">
-                                    <label for="company_name" class="block text-sm font-medium text-gray-700">Company
-                                        Name</label>
-                                    <input type="text" name="company_name" id="company_name"
-                                        value="{{ old('company_name', $advisor->company_name) }}"
-                                        class="block w-full mt-1 rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                    @error('company_name')
-                                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <!-- Company Website -->
-                                <div class="mt-4">
-                                    <label for="company_website" class="block text-sm font-medium text-gray-700">Company
-                                        Website</label>
-                                    <input type="text" name="company_website" id="company_website"
-                                        value="{{ old('company_website', $advisor->company_website) }}"
-                                        class="block w-full mt-1 rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                    @error('company_website')
-                                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                                    @enderror
-                                </div> --}}
                                 <div class="w-full mb-6">
                                     <label for="highlighted_images"
                                         class="text-[#828282] font-normal text-base">Highlighted Images</label>
@@ -600,97 +276,7 @@
                                     </div>
                                 </div>
 
-                                <div class="w-full">
-                                    <label for="is_available" class="text-[#828282] font-normal text-base">Is
-                                        Available</label>
-                                    <div
-                                        class="flex items-center justify-between text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%]  p-2 ">
-                                        <p>Are you availiable?</p>
-                                        <input type="checkbox" name="is_available" id="is_available" value="1"
-                                            {{ old('is_available', $advisor->is_available ? 'checked' : '') }}
-                                            class="w-4 h-4 text-blue-600 outline-none bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                                        @error('is_available')
-                                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                                        @enderror
-                                    </div>
 
-                                    {{-- <div class="mt-4">
-                                    <label for="language_known" class="block text-sm font-medium text-gray-700">Language
-                                        Known</label>
-                                    <select name="language_known" id="language_known"
-                                        class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                                        <option value="">Select Language</option>
-                                        <option value="English"
-                                            {{ old('language_known', $advisor->language_known) === 'English' ? 'selected' : '' }}>
-                                            English</option>
-                                        <option value="Hindi"
-                                            {{ old('language_known', $advisor->language_known) === 'Hindi' ? 'selected' : '' }}>
-                                            Hindi</option>
-                                    </select>
-                                    @error('language_known')
-                                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="mt-4">
-                                    <label for="services" class="block text-sm font-medium text-gray-700">Services</label>
-                                    <input type="text" name="services[]" id="services"
-                                        value="{{ old('services', is_array($advisor->services) ? implode(',', $advisor->services) : $advisor->services) }}"
-                                        class="block w-full mt-1 rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                    @error('services.*')
-                                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="mt-4">
-                                    <label for="awards_recognition" class="block text-sm font-medium text-gray-700">Awards
-                                        & Recognition</label>
-                                    <input type="text" name="awards_recognition[]" id="awards_recognition"
-                                        value="{{ old('awards_recognition', is_array($advisor->awards_recognition) ? implode(',', $advisor->awards_recognition) : $advisor->awards_recognition) }}"
-                                        class="block w-full mt-1 rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                    @error('awards_recognition.*')
-                                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                                    @enderror
-                                </div> --}}
-
-                                    <!--Video Upload -->
-                                    {{-- <div class="w-full mb-6 mt-8">
-                                        <label for="video_upload" class="text-[#828282] font-normal text-base">Video
-                                            Upload
-                                            (Max 2)</label>
-                                        <input type="file" name="video_upload[]" id="video_upload" accept="video/*"
-                                            multiple
-                                            class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
-                                        @error('video_upload.*')
-                                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                                        @enderror
-
-                                        <!-- Display selected videos -->
-                                        <div id="preview-videos" class="mt-2 flex flex-wrap gap-4">
-                                            @if ($advisor->video_upload)
-                                                @foreach ($advisor->video_upload as $video)
-                                                    <div class="relative">
-                                                        <video controls class="rounded-lg h-24">
-                                                            <source src="{{ asset('storage/' . $video) }}"
-                                                                type="video/mp4">
-                                                            Your browser does not support the video tag.
-                                                        </video>
-                                                        <input type="hidden" name="removed_videos[]"
-                                                            value="{{ $video }}">
-                                                        <button type="button"
-                                                            class="absolute top-1 right-1 bg-red-500 text-white rounded-full h-6 w-6 flex items-center justify-center"
-                                                            onclick="removeVideo(this, '{{ $video }}')">
-                                                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                                                stroke="currentColor">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                @endforeach
-                                            @endif
-                                        </div>
-                                    </div> --}}
 
                                     <div class="w-full mb-6 mt-8">
                                         <label class="text-[#828282] font-normal text-base" for="about">About
@@ -756,55 +342,7 @@
 
                 </div>
             </div>
-            {{-- <div>
-                <div class="hidden md:flex mt-8">
-                    <div class="px-4 md:w-[12rem] shrink-0  lg:w-[20rem]  xl:w-[25rem]">
-                        <div
-                            class="flex flex-col  gap-3 text-[#2A2A2A] font-medium text-base lg:text-lg  w-full border shadow-sm p-4 bg-[#F5F5F5] rounded-xl">
-                            <div class="flex items-center justify-between">
-                                <h5>Availability</h5>
-                                <span class="text-lg lg:text-xl cursor-pointer">></span>
-                            </div>
-                            <p class="text-[#828282]">Choose your availability effortlessly.</p>
-                        </div>
-                    </div>
-                    <div class="grow border  shadow-sm p-5 rounded-xl ">
-                        <div class="flex gap-2 xl:gap-4 w-full flex-wrap">
-                            <p class="text-base text-[#2A2A2A] font-medium">Monday</p>
-                            <p class="text-base text-[#828282] font-medium">Tuesday</p>
-                            <p class="text-base text-[#828282] font-medium">Wednesday</p>
-                            <p class="text-base text-[#828282] font-medium">Wednesday</p>
-                            <p class="text-base text-[#828282] font-medium">Friday</p>
-                            <p class="text-base text-[#828282] font-medium">Saturday</p>
-                            <p class="text-base text-[#828282] font-medium">Sunday</p>
 
-                        </div>
-                        <div class="flex justify-between items-end mt-4">
-                            <div class="flex gap-4 items-end">
-                                <div class="flex flex-col gap-2 text-base">
-                                    <p class="text-[#828282] font-normal">Start time</p>
-                                    <p
-                                        class="text-base text-[#3A3A3A] font-semibold  py-2 px-3 bg-[#FFFFFF] border b order-[#E1E9D3] rounded-lg shadow-md">
-                                        10:00 am</p>
-                                </div>
-                                <div class="w-[1.5rem] mb-4 border border-[#000000e2]"></div>
-                                <div class="flex flex-col gap-2 text-base">
-                                    <p class="text-[#828282] font-normal">End time</p>
-                                    <p
-                                        class="text-base text-[#3A3A3A] font-semibold  py-2 px-3 bg-[#FFFFFF] border b order-[#E1E9D3] rounded-lg shadow-md">
-                                        05:00 px</p>
-                                </div>
-                            </div>
-                            <button onclick="openlargeCalender()"
-                                class="bg-[#6A9023] text-[#FFFFFF] px-4 py-2 lg:py-2 lg:px-6 rounded-[2rem] text-sm lg:text-base font-semibold">
-                                Choose Availability
-
-                            </button>
-
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
             <div>
                 <div class="hidden md:flex mt-8">
                     <div class="px-4 md:w-[12rem] shrink-0  lg:w-[20rem]  xl:w-[25rem]">
@@ -950,7 +488,7 @@
                                 </div>
                                 <div class="h-[6rem] border border-[#AFAFAF]"></div>
                                 <div class="flex flex-col gap-2">
-                                    <p class="text-base text-[#2A2A2A] font-medium">Conference call</p>
+                                    <p class="text-base text-[#2A2A2A] font-medium">Consultation call</p>
                                     <div class="flex gap-2 lg:gap-4 items-end">
                                         <div class="flex flex-col gap-2 text-base">
                                             <p class="text-[#828282] font-normal">Currency</p>
@@ -972,28 +510,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="h-[6rem] border border-[#AFAFAF]"></div>
-                                <div class="flex flex-col gap-2">
-                                    <p class="text-base text-[#2A2A2A] font-medium">Chat</p>
-                                    <div class="flex gap-2 lg:gap-4 items-end">
-                                        <div class="flex flex-col gap-2 text-base">
-                                            <p class="text-[#828282] font-normal">Currency</p>
-                                            <p
-                                                class="text-base text-[#3A3A3A] font-semibold py-1 lg:py-2 px-1 lg:px-3 bg-[#FFFFFF] border border-[#E1E9D3] rounded-lg shadow-md w-[77px]">
-                                                INR (₹)</p>
-                                        </div>
-                                        <div class="w-[1.5rem] mb-4 border border-[#000000e2]"></div>
-                                        <div class="flex flex-col gap-2 text-base">
-                                            <p class="text-[#828282] font-normal">Price</p>
-                                            <input type="number" name="chat_price_per_minute"
-                                                value="{{ $advisor->chat_price_per_minute }}" id="chat_price_per_minute"
-                                                class="text-base text-[#3A3A3A] font-semibold py-1 lg:py-2 px-1 lg:px-3 bg-[#FFFFFF] border border-[#E1E9D3] rounded-lg shadow-md w-[90px]">
-                                            <input type="number" name="chat_price_per_hour"
-                                                value="{{ $advisor->chat_price_per_hour }}" id="chat_price_per_hour"
-                                                class="text-base text-[#3A3A3A] font-semibold py-1 lg:py-2 px-1 lg:px-3 bg-[#FFFFFF] border border-[#E1E9D3] rounded-lg shadow-md hidden w-[100px]">
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                             <button type="submit"
                                 class="w-fit bg-[#6A9023] text-[#FFFFFF] py-2 px-6 rounded-[2rem] text-base font-semibold mt-6">Update
@@ -1064,28 +581,8 @@
 
                 </div>
             </div>
-            {{-- <div>
-                <div class="hidden md:flex mt-8">
-                    <div class="px-4 md:w-[12rem] shrink-0 lg:w-[20rem]  xl:w-[25rem]">
-                        <div
-                            class="flex flex-col  gap-3 text-[#2A2A2A] font-medium text-base lg:text-lg  w-full border shadow-sm p-4 bg-[#F5F5F5] rounded-xl">
-                            <div class="flex items-center justify-between">
-                                <h5>Payment Information</h5>
-                                <span class="text-lg lg:text-xl cursor-pointer">></span>
-                            </div>
-                            <p class="text-[#828282]">Safely store your preferred payment method for seamless transactions
-                                on your profile.</p>
-                        </div>
-                    </div>
-                    <div class="grow border flex flex-col justify-around  shadow-sm p-5 rounded-xl ">
-                        <p class="text-[#828282] text-base font-medium">Add your payment information.</p>
-                        <button class="w-fit bg-[#6A9023] text-[#FFFFFF] py-2 px-6 rounded-[2rem] text-base font-semibold">
-                            Add
-                        </button>
-                    </div>
-                </div>
-            </div> --}}
-            <div class="container mx-auto p-4">
+        
+            <div class="hidden md:block container mx-auto p-4">
                 <div class="hidden md:flex mt-8">
                     <div class="px-4 md:w-[12rem] shrink-0 lg:w-[20rem] xl:w-[25rem]">
                         <div
@@ -1559,7 +1056,7 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div
+                                            {{-- <div
                                                 class="bg-[#FAFAFA] my-[1rem]  shadow-md p-4 rounded-xl flex justify-between items-center  gap-2">
                                                 <p>Is Available</p>
                                                 <input type="checkbox" name="is_available" id="is_available"
@@ -1570,7 +1067,7 @@
                                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                                 @enderror
 
-                                            </div>
+                                            </div> --}}
                                             <div
                                                 class="bg-[#FAFAFA] my-[1rem]  shadow-md p-4 rounded-xl flex flex-col gap-2">
                                                 <label class="text-[#828282] font-normal text-xs sm:text-sm"
@@ -1730,7 +1227,7 @@
                                                 </div>
 
                                                 <div class="flex flex-col gap-2">
-                                                    <p class="text-sm sm:text-base text-[#2A2A2A] font-medium">Conference
+                                                    <p class="text-sm sm:text-base text-[#2A2A2A] font-medium">Consultation
                                                         call</p>
                                                     <div class="flex gap-4 items-end">
                                                         <div class="flex flex-col gap-2 text-sm sm:text-base">
@@ -1754,7 +1251,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="flex flex-col gap-2">
+                                                {{-- <div class="flex flex-col gap-2">
                                                     <p class="text-sm sm:text-base text-[#2A2A2A] font-medium">Chat</p>
                                                     <div class="flex gap-4 items-end">
                                                         <div class="flex flex-col gap-2 text-sm sm:text-base">
@@ -1776,7 +1273,7 @@
                                                                 class="text-sm sm:text-base text-[#3A3A3A] font-semibold py-1 lg:py-2 px-1 lg:px-3 bg-[#FFFFFF] border border-[#E1E9D3] rounded-lg shadow-md hidden w-[100px]">
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                         <button type="submit"
@@ -3430,12 +2927,12 @@
             const minuteElements = [
                 document.getElementById('mobile_discovery_call_price_per_minute'),
                 document.getElementById('mobile_conference_call_price_per_minute'),
-                document.getElementById('mobile_chat_price_per_minute')
+                // document.getElementById('mobile_chat_price_per_minute')
             ];
             const hourElements = [
                 document.getElementById('mobile_discovery_call_price_per_hour'),
                 document.getElementById('mobile_conference_call_price_per_hour'),
-                document.getElementById('mobile_chat_price_per_hour')
+                // document.getElementById('mobile_chat_price_per_hour')
             ];
 
             if (mode === 'minute') {

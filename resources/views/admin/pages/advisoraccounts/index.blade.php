@@ -111,13 +111,13 @@
                                         <tbody>
                                             @foreach ($advisors as $advisor)
                                                 <tr>
-                                                    <td>{{ $advisor->nominee_id }}</td>
+                                                    <td>{{ $advisor->advisor_id }}</td>
                                                     <td>{{ $advisor->user_id }}</td>
                                                     <td>{{ $advisor->full_name }}</td>
                                                     <td>{{ $advisor->email }}</td>
                                                     <td>{{ $advisor->mobile_number }}</td>
                                                     <td>{{ $advisor->location }}</td>
-                                                    <td>{{ $advisor->created_at->format('Y-m-d') }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($advisor->created_at)->isoFormat('Do MMMM YYYY') }}</td>
                                                     <td><a href="{{ $advisor->linkedin_profile }}"
                                                             target="_blank">{{ $advisor->linkedin_profile }}</a></td>
                                                     <td>
@@ -132,11 +132,11 @@
                                                                     href="{{ route('advisatoradmin.advisoraccounts.show', $advisor->id) }}">
                                                                     <i class="fa fa-eye me-1"></i>Show Details
                                                                 </a>
-                                                                {{-- <a class="dropdown-item"
-                                                                    href="{{ route('superadmin.advisorNominations.edit', $nomination->id) }}">
-                                                                    <i class="bx bx-edit-alt me-1"></i> Edit
+                                                                 <a class="dropdown-item"
+                                                                    href="{{ route('advisatoradmin.advisoraccounts.edit', $advisor->id) }}">
+                                                                    <i class="fa fa-edit me-1"></i> Edit Details
                                                                 </a>
-                                                                <a class="dropdown-item"
+                                                                {{--<a class="dropdown-item"
                                                                     onclick="return confirm('Are you sure to delete this?')"
                                                                     href="{{ route('superadmin.advisorNominations.destroy', $nomination->id) }}">
                                                                     <i class="bx bx-trash me-1"></i> Delete

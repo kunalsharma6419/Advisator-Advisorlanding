@@ -33,7 +33,7 @@
             class="flex flex-col bg-[#F6F8F1] gap-5 px-[20px] lg:px-[85px] w-full rounded-[18px] py-[40px] lg:py-[100px] xl:py-[250px]">
             <h2 class="font-[600] text-[32px] text-center">Verification</h2>
             <p class="font-[400] text-[16px] text-center">
-                Please enter the One time password sent to your Email address
+                Please enter the One time password sent to your E-mail address
             </p>
             <p id="message_error" class="text-red-500"></p>
             <p id="message_success" class="text-green-500"></p>

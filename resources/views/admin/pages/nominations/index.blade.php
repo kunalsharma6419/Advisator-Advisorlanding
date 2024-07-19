@@ -2,20 +2,11 @@
 
 @section('admincontent')
     <div class="container-scroller">
-        <!-- partial:partials/_sidebar.html -->
         @include('admin.components.sidebar')
-        <!-- partial -->
         <div class="container-fluid page-body-wrapper">
-            <!-- partial:partials/_navbar.html -->
             @include('admin.components.navbar')
-            <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
-                    {{-- @if(session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }} Nomination: {{ session('nomination_full_name') }} is now {{ session('nomination_status') }}.
-                        </div>
-                    @endif --}}
                     @if(session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }} Nomination: {{ session('nomination_full_name') }} is now {{ session('nomination_status') }}.
@@ -100,8 +91,15 @@
                                             class="w-100 d-flex justify-content-end align-items-center">
                                             <input type="text" class="form-control mr-2" name="search"
                                                 placeholder="Search Nominations" value="{{ $search }}">
-                                            <button class="btn btn-primary" type="submit"><i
-                                                    class="fa fa-search"></i></button>
+                                            <select name="status" id="status" class="form-control mr-2 w-auto" onchange="this.form.submit()">
+                                                <option value="">All Statuses</option>
+                                                <option value="inprogress" {{ request('status') == 'inprogress' ? 'selected' : '' }}>In Progress</option>
+                                                <option value="selected" {{ request('status') == 'selected' ? 'selected' : '' }}>Selected</option>
+                                                <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>Rejected</option>
+                                            </select>
+                                            <input type="date" class="form-control mr-2" name="date_from" placeholder="From Date" value="{{ request('date_from') }}">
+                                            <input type="date" class="form-control mr-2" name="date_to" placeholder="To Date" value="{{ request('date_to') }}">
+                                            <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
                                         </form>
                                     </div>
                                 </div>
@@ -110,13 +108,14 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
+                                                <th> Submission Date </th>
                                                 <th> Nomination Id </th>
                                                 <th> User Id </th>
                                                 <th> Full Name </th>
                                                 <th> Email </th>
                                                 <th> Phone Number </th>
                                                 <th> Location </th>
-                                                <th> Submission Date </th>
+                                                <th>Overall Score</th>
                                                 <th> Status </th>
                                                 <th> Action </th>
                                             </tr>
@@ -124,13 +123,21 @@
                                         <tbody>
                                             @foreach ($nominations as $nomination)
                                                 <tr>
+                                                    <td>{{ \Carbon\Carbon::parse($nomination->created_at)->isoFormat('Do MMMM YYYY') }}</td>
                                                     <td>{{ $nomination->nominee_id }}</td>
                                                     <td>{{ $nomination->user_id }}</td>
                                                     <td>{{ $nomination->full_name }}</td>
                                                     <td>{{ $nomination->email }}</td>
                                                     <td>{{ $nomination->mobile_number }}</td>
                                                     <td>{{ $nomination->location }}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($nomination->created_at)->isoFormat('Do MMMM YYYY') }}</td>
+                                                    @php
+                                                        $evaluation = App\Models\AdvisorEvaluation::where(
+                                                            'advisor_nomination_id',
+                                                            $nomination->nominee_id,
+                                                        )->first();
+                                                        $overallScore = $evaluation ? $evaluation->overall_score : null;
+                                                    @endphp
+                                                    <td>{{ $overallScore }}</td>
                                                     <td>{{ ucfirst($nomination->nomination_status) }}</td>
                                                     <td>
                                                         <div class="dropdown">
@@ -144,19 +151,9 @@
                                                                     href="{{ route('advisatoradmin.nominations.show', $nomination->id) }}">
                                                                     <i class="fa fa-eye me-1"></i>Show Details
                                                                 </a>
-                                                                {{-- <a class="dropdown-item"
-                                                                    href="{{ route('superadmin.advisorNominations.edit', $nomination->id) }}">
-                                                                    <i class="bx bx-edit-alt me-1"></i> Edit
-                                                                </a>
-                                                                <a class="dropdown-item"
-                                                                    onclick="return confirm('Are you sure to delete this?')"
-                                                                    href="{{ route('superadmin.advisorNominations.destroy', $nomination->id) }}">
-                                                                    <i class="bx bx-trash me-1"></i> Delete
-                                                                </a> --}}
                                                             </div>
                                                         </div>
                                                     </td>
-
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -176,12 +173,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- partial:partials/_footer.html -->
                 @include('admin.components.footer')
-                <!-- partial -->
             </div>
-            <!-- main-panel ends -->
         </div>
-        <!-- page-body-wrapper ends -->
     </div>
 @endsection

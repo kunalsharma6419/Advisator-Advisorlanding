@@ -48,7 +48,9 @@
                                                     {{-- Show re-evaluate button --}}
                                                     <a href="{{ route('advisatoradmin.nominations.evaluate', $nomination->id) }}"
                                                         class="btn btn-warning ml-2">Re-evaluate</a>
-                                                    <p>Overall Score: {{ $overallScore }}</p>
+                                                    {{-- <p>Overall Score: {{ $overallScore }}</p> --}}
+                                                    <button type="button"
+                                                        class="btn btn-primary btn-rounded btn-fw">Overall Score : {{ $overallScore }}</button>
                                                 @elseif ($nomination->nomination_status === 'rejected')
                                                     {{-- Show overall score --}}
                                                     @php
@@ -61,7 +63,8 @@
                                                     {{-- Show re-evaluate button --}}
                                                     <a href="{{ route('advisatoradmin.nominations.evaluate', $nomination->id) }}"
                                                         class="btn btn-warning ml-2">Re-evaluate</a>
-                                                    <p>Overall Score: {{ $overallScore }}</p>
+                                                    <button type="button"
+                                                        class="btn btn-primary btn-rounded btn-fw">Overall Score : {{ $overallScore }}</button>
                                                 @endif
                                             </div>
                                         </div>
@@ -144,13 +147,122 @@
                                                         class="btn btn-success btn-rounded btn-fw">{{ optional($nomination->subFunctionCategory2)->name }}</button>
                                                 </td>
                                             </tr>
+                                            @php
+                                                $buttonClasses = [
+                                                    'btn-primary',
+                                                    'btn-secondary',
+                                                    'btn-success',
+                                                    'btn-danger',
+                                                    'btn-warning',
+                                                    'btn-info',
+                                                    'btn-light',
+                                                    'btn-dark',
+                                                ];
+                                            @endphp
+                                            <tr>
+                                                <th>Industry Verticals:</th>
+                                                <td>
+                                                    @foreach ($industries as $industry)
+                                                        @php
+                                                            $randomClass = $buttonClasses[array_rand($buttonClasses)];
+                                                        @endphp
+                                                        <button type="button"
+                                                            class="btn btn-rounded btn-fw {{ $randomClass }}">{{ $industry->name }}</button>
+                                                    @endforeach
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Geographical Locations:</th>
+                                                <td>
+                                                    @foreach ($geographies as $geography)
+                                                        @php
+                                                            $randomClass = $buttonClasses[array_rand($buttonClasses)];
+                                                        @endphp
+                                                        <button type="button"
+                                                            class="btn btn-rounded btn-fw {{ $randomClass }}">{{ $geography->name }}</button>
+                                                    @endforeach
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Discovery Call:</th>
+                                                <td>
+                                                    <div class="card-body py-3 px-4">
+                                                        <p class="m-0 survey-head">Per Minute Pricing: </p>
+                                                        <div
+                                                            class="d-flex justify-content-between align-items-end flot-bar-wrapper">
+                                                            <div>
+                                                                <h3 class="m-0 survey-value">₹
+                                                                    {{ $nomination->discovery_call_price_per_minute }} /min
+                                                                </h3>
+                                                                <p class="text-success m-0">Current Rate</p>
+                                                            </div>
+                                                            <div id="discoveryCallChart" class="flot-chart"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
 
+                                                        <div class="card-body py-3 px-4">
+                                                            <p class="m-0 survey-head">Per Hour Pricing:</p>
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-end flot-bar-wrapper">
+                                                                <div>
+                                                                    <h3 class="m-0 survey-value">₹
+                                                                        {{ $nomination->discovery_call_price_per_hour }}
+                                                                        /hour</h3>
+                                                                    <p class="text-danger m-0">Current Rate</p>
+                                                                </div>
+                                                                <div id="hourlyPricingChart" class="flot-chart"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Consultation Call:</th>
+                                                <td>
+
+                                                    <div class="card-body py-3 px-4">
+                                                        <p class="m-0 survey-head">Per Minute Pricing: </p>
+                                                        <div
+                                                            class="d-flex justify-content-between align-items-end flot-bar-wrapper">
+                                                            <div>
+                                                                <h3 class="m-0 survey-value">₹
+                                                                    {{ $nomination->conference_call_price_per_minute }}
+                                                                    /min
+                                                                </h3>
+                                                                <p class="text-success m-0">Current Rate</p>
+                                                            </div>
+                                                            <div id="discoveryCallChart" class="flot-chart"></div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="col-sm-6">
+                                                        <div class="card-body py-3 px-4">
+                                                            <p class="m-0 survey-head">Per Hour Pricing:</p>
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-end flot-bar-wrapper">
+                                                                <div>
+                                                                    <h3 class="m-0 survey-value">₹
+                                                                        {{ $nomination->conference_call_price_per_hour }}
+                                                                        /hour
+                                                                    </h3>
+                                                                    <p class="text-danger m-0">Current Rate</p>
+                                                                </div>
+                                                                <div id="hourlyPricingChart" class="flot-chart"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
 
                                 </div>
                                 <hr>
-                                @php
+                                {{-- @php
                                     $buttonClasses = [
                                         'btn-primary',
                                         'btn-secondary',
@@ -199,10 +311,10 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                </div>
+                                </div> --}}
 
-                                <hr>
-                                <div class="row">
+                                {{-- <hr> --}}
+                                {{-- <div class="row">
                                     <h3>Discovery Call: </h3>
                                     <div class="col-sm-6">
                                         <div class="card mb-3">
@@ -309,7 +421,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 

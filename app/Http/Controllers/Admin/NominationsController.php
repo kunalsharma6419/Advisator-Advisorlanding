@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\AdvisorNomination;
 use App\Models\AdvisorEvaluation;
 use App\Models\AdvisorProfiles;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AdvisorSelected;
 
 class NominationsController extends Controller
 {
@@ -15,11 +17,42 @@ class NominationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function index()
+    // {
+    //     $entriesPerPage = request('entries', 10);
+    //     $search = request('search');
+    //     $nominations = AdvisorNomination::with('evaluations');
+
+    //     if ($search) {
+    //         $nominations->where(function ($query) use ($search) {
+    //             $query->where('nominee_id', 'LIKE', '%' . $search . '%')
+    //                 ->orWhere('full_name', 'LIKE', '%' . $search . '%')
+    //                 ->orWhere('email', 'LIKE', '%' . $search . '%')
+    //                 ->orWhere('mobile_number', 'LIKE', '%' . $search . '%')
+    //                 ->orWhere('location', 'LIKE', '%' . $search . '%')
+    //                 ->orWhere('user_id', 'LIKE', '%' . $search . '%');
+    //         });
+    //     }
+
+    //     // Order nominations by most recent (created_at DESC)
+    //     $nominations->orderBy('created_at', 'DESC');
+
+    //     $nominations = $nominations->paginate($entriesPerPage);
+    //     $inProgressCount = AdvisorNomination::where('nomination_status', 'inprogress')->count();
+    //     $selectedCount = AdvisorNomination::where('nomination_status', 'selected')->count();
+    //     $rejectedCount = AdvisorNomination::where('nomination_status', 'rejected')->count();
+
+    //     return view('admin.pages.nominations.index', compact('nominations', 'search', 'inProgressCount', 'selectedCount', 'rejectedCount'));
+    // }
     public function index()
     {
         $entriesPerPage = request('entries', 10);
         $search = request('search');
-        $nominations = AdvisorNomination::query();
+        $status = request('status');
+        $dateFrom = request('date_from');
+        $dateTo = request('date_to');
+
+        $nominations = AdvisorNomination::with('evaluations');
 
         if ($search) {
             $nominations->where(function ($query) use ($search) {
@@ -32,6 +65,18 @@ class NominationsController extends Controller
             });
         }
 
+        if ($status) {
+            $nominations->where('nomination_status', $status);
+        }
+
+        if ($dateFrom && $dateTo) {
+            $nominations->whereBetween('created_at', [$dateFrom, $dateTo]);
+        } elseif ($dateFrom) {
+            $nominations->whereDate('created_at', '>=', $dateFrom);
+        } elseif ($dateTo) {
+            $nominations->whereDate('created_at', '<=', $dateTo);
+        }
+
         // Order nominations by most recent (created_at DESC)
         $nominations->orderBy('created_at', 'DESC');
 
@@ -39,8 +84,11 @@ class NominationsController extends Controller
         $inProgressCount = AdvisorNomination::where('nomination_status', 'inprogress')->count();
         $selectedCount = AdvisorNomination::where('nomination_status', 'selected')->count();
         $rejectedCount = AdvisorNomination::where('nomination_status', 'rejected')->count();
-        return view('admin.pages.nominations.index', compact('nominations', 'search','inProgressCount', 'selectedCount', 'rejectedCount'));
+
+        return view('admin.pages.nominations.index', compact('nominations', 'search', 'status', 'dateFrom', 'dateTo', 'inProgressCount', 'selectedCount', 'rejectedCount'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -173,6 +221,7 @@ class NominationsController extends Controller
     public function evaluateNomination(Request $request, $id)
     {
         $nomination = AdvisorNomination::findOrFail($id);
+        // dd($nomination);
 
         // Check if an evaluation already exists for this nomination
         $existingEvaluation = AdvisorEvaluation::where('advisor_nomination_id', $nomination->nominee_id)->first();
@@ -242,8 +291,8 @@ class NominationsController extends Controller
                 'business_function_category_id' => $nomination->business_function_category_id,
                 'sub_function_category_id_1' => $nomination->sub_function_category_id_1,
                 'sub_function_category_id_2' => $nomination->sub_function_category_id_2,
-                'industry_ids' => $nomination->industry,
-                'geography_ids' => $nomination->geography,
+                'industry_ids' => $nomination->industry_ids,
+                'geography_ids' => $nomination->geography_ids,
                 'advisor_qualification' => $nomination->nominee_qualification,
                 'advisor_experience' => $nomination->nominee_experience,
                 'discovery_call_price_per_minute' => $nomination->discovery_call_price_per_minute,
@@ -254,6 +303,10 @@ class NominationsController extends Controller
                 'chat_price_per_hour' => $nomination->chat_price_per_hour,
                 'nomination_status' => $nomination->nomination_status,
             ]);
+
+            // Send the email
+            Mail::to($advisor->email)->send(new AdvisorSelected($advisor));
+
         } else {
             $nomination->nomination_status = 'rejected';
         }

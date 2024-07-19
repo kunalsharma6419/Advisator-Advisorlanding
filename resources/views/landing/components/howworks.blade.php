@@ -21,7 +21,7 @@
                                 </h3>
                             </div>
                             <div class="flex justify-center items-center my-4">
-                                <img src="./src/assets/17.png" alt="Nominate" class="w-[200px] h-[150px] rounded" />
+                                <img src="./src/assets/17.png" alt="Nominate" class="w-[200px] h-[150px] rounded-2xl" />
                             </div>
                             <p class="mt-3 mb-1 text-xs font-medium text-indigo-500 uppercase">
                                 ------------
@@ -43,7 +43,7 @@
                                 </h3>
                             </div>
                             <div class="flex justify-center items-center my-4">
-                                <img src="./src/assets/18.png" alt="Nominate" class="w-[200px] h-[150px] rounded" />
+                                <img src="./src/assets/18.png" alt="Nominate" class="w-[200px] h-[150px] rounded-2xl" />
                             </div>
                             <p class="mt-3 mb-1 text-xs font-medium text-purple-500 uppercase">
                                 ------------
@@ -68,7 +68,7 @@
                                 </h3>
                             </div>
                             <div class="flex justify-center items-center my-4">
-                                <img src="./src/assets/19.png" alt="Nominate" class="w-[200px] h-[150px] rounded" />
+                                <img src="./src/assets/19.png" alt="Nominate" class="w-[200px] h-[150px] rounded-2xl" />
                             </div>
                             <p class="mt-3 mb-1 text-xs font-medium text-blue-400 uppercase">
                                 ------------
@@ -91,7 +91,7 @@
                                 </h3>
                             </div>
                             <div class="flex justify-center items-center my-4">
-                                <img src="./src/assets/20.png" alt="Nominate" class="w-[200px] h-[150px] rounded" />
+                                <img src="./src/assets/20.png" alt="Nominate" class="w-[200px] h-[150px] rounded-2xl" />
                             </div>
                             <p class="mt-3 mb-1 text-xs font-medium text-yellow-400 uppercase">
                                 ------------
@@ -113,7 +113,7 @@
                                 </h3>
                             </div>
                             <div class="flex justify-center items-center my-4">
-                                <img src="./src/assets/21.png" alt="Nominate" class="w-[200px] h-[150px] rounded" />
+                                <img src="./src/assets/21.png" alt="Nominate" class="w-[200px] h-[150px] rounded-2xl" />
                             </div>
                             <p class="mt-3 mb-1 text-xs font-medium text-green-500 uppercase">
                                 ------------

@@ -188,7 +188,45 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-5 col-form-label">Published Content
+                                            and Thought Leadership (5%)</label>
+                                                <div class="col-sm-5 d-flex align-items-center">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <div class="form-check form-check-inline">
+                                                            <label class="form-check-label">
+                                                                <input type="radio" name="content_leadership_score"
+                                                                    class="form-check-input" value="{{ $i }}"
+                                                                    {{ $i == 5 ? 'checked' : '' }}>
+                                                                {{ $i }}
+                                                            </label>
+                                                        </div>
+                                                    @endfor
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-5 col-form-label">Connections and
+                                            Network (5%)</label>
+                                                <div class="col-sm-5 d-flex align-items-center">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <div class="form-check form-check-inline">
+                                                            <label class="form-check-label">
+                                                                <input type="radio" name="connections_score"
+                                                                    class="form-check-input" value="{{ $i }}"
+                                                                    {{ $i == 5 ? 'checked' : '' }}>
+                                                                {{ $i }}
+                                                            </label>
+                                                        </div>
+                                                    @endfor
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- <div class="form-group row">
                                         <label for="exampleInputUsername2" class="col-sm-6 col-form-label">Published Content
                                             and Thought Leadership (5%)</label>
                                         <div class="col-sm-6 d-flex align-items-center">
@@ -219,7 +257,7 @@
                                                 </div>
                                             @endfor
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <hr>
                                     <div align="center" style="margin-top: 30px;">
                                         <button type="submit" class="btn btn-md btn-primary me-2">Submit</button>

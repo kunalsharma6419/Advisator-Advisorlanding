@@ -6,19 +6,28 @@
             src="./src/assets/advisorbanner.jpg" />
     </div>
     <div class="mr-4 w-full font-sans text-center sm:w-1/2 sm:text-left">
-        <h1
+        {{-- <h1
             class="content-change text-[#FF3131] text-[40px] font-[700] text-start leading-[1.2] md:leading-[1.2] font-sans w-[100%] sm:w-[120%]">
             Onboard ADVISATOR
             <br />
-            <span class="text-[#6A9023] lowercase">to engage with Clients from diverse industries!</span>
+            
+            <span class="text-[#6A9023]"> Earn by consulting clients from various industries!</span>
+        </h1> --}}
+        <h1
+            class="content-change text-[#FF3131] text-[40px] font-[700] text-center md:text-start leading-[1.2] md:leading-[1.2] font-sans w-[100%] sm:w-[120%]">
+            Onboard ADVISATOR
+            <br />
+            {{-- <span class="text-[#6A9023] lowercase">to engage with Clients from diverse industries!</span> --}}
+            <span class="text-[#6A9023]"> Earn by consulting clients from various industries!</span>
         </h1>
+
 
         <div class="mt-8">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
                 <div class="flex flex-col items-center border p-2 rounded-lg shadow bg-[#fff]">
                     <img src="./src/assets/4198125.jpg" alt="Diverse Clients" class="w-full h-auto rounded-lg" />
                     <h3 class="mt-2 text-lg font-semibold text-center">
-                        Diverse Clients
+                        Diversified Clients
                     </h3>
                 </div>
                 <div class="flex flex-col items-center border p-2 rounded-lg shadow bg-[#fff]">

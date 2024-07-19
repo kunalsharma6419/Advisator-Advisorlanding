@@ -84,6 +84,13 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
         //Advisor Accounts Menu
         Route::get('/advisoraccounts', [AdvisorsController::class, 'index'])->name('advisatoradmin.advisoraccounts.list');
         Route::get('advisoraccounts/{id}', [AdvisorsController::class, 'show'])->name('advisatoradmin.advisoraccounts.show');
+        Route::get('advisoraccounts/{id}/edit', [AdvisorsController::class, 'edit'])->name('advisatoradmin.advisoraccounts.edit');
+        Route::put('/advisoraccounts/{id}/update', [AdvisorsController::class, 'update'])->name('advisatoradmin.advisoraccounts.update');
+        Route::get('advisoraccounts/{id}/availability', [AdvisorsController::class, 'getAvailability'])->name('advisatoradmin.advisoraccounts.availability');
+        Route::post('advisoraccounts/{id}/availability/update', [AdvisorsController::class, 'updateAvailability'])->name('advisatoradmin.advisoraccounts.updateAvailability');
+        Route::post('/advisoraccounts/{id}/update-prices', [AdvisorsController::class, 'updatePrices'])->name('advisatoradmin.advisoraccounts.updatePrices');
+        Route::post('/advisoraccounts/{id}/updateVideos', [AdvisorsController::class, 'updateVideos'])->name('advisatoradmin.advisoraccounts.updateVideos');
+        Route::post('/advisoraccounts/{id}/bank-details', [AdvisorsController::class, 'bankstore'])->name('advisatoradmin.advisoraccounts.bankDetails.store');
     });
 
     //User Dashboard

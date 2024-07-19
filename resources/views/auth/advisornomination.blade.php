@@ -155,7 +155,8 @@
                                     class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-5 border-solid border-transparent border-t-gray-700"></span>
                             </span>
                         </div>
-                        <p class="mt-[18px] " style="color: #db5001">Each nomination form allows an advisor to select at the most 3 Industry verticals.</p>
+                        <p class="mt-[18px] " style="color: #db5001">Each nomination form allows an advisor to select at
+                            the most 3 Industry verticals.</p>
                         <select id="industry" name="industry[]" class="w-full p-2 rounded-[12px] mt-[18px]" multiple>
                             {{-- <option selected>Select Industry Verticals</option> --}}
                             @foreach ($industries as $industry)
@@ -180,7 +181,8 @@
                                     class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-5 border-solid border-transparent border-t-gray-700"></span>
                             </span>
                         </div>
-                        <p class="mt-[18px] " style="color: #db5001">Each nomination form allows an advisor to select 3 geographical regions.</p>
+                        <p class="mt-[18px] " style="color: #db5001">Each nomination form allows an advisor to select
+                            3 geographical regions.</p>
                         <select id="geography" name="geography[]" class="w-full p-2 rounded-[12px] mt-[18px]"
                             multiple>
                             {{-- <option selected>Select Geographical Locations</option> --}}
@@ -315,8 +317,9 @@
                     </div>
 
                     <div id="minute" class="city w-full" style="display: block">
-                        <div class="flex items-center w-full justify-between">
-                            <div class="flex flex-col gap-[12px]">
+                        <div class="flex flex-col md:flex-row items-start md:items-center w-full justify-between">
+                            <!-- Discovery call section -->
+                            <div class="flex flex-col gap-[12px] mb-4 md:mb-0 md:mr-4 w-full md:w-auto">
                                 <h2 class="text-[16px] font-[500]">Discovery call :</h2>
                                 <div class="flex justify-between">
                                     <p class="text-[16px] font-[400] text-[#828282]">Currency</p>
@@ -332,9 +335,13 @@
                                 </div>
                             </div>
 
-                            <div class="h-[188px] w-[1px] border border-[#000000]"></div>
+                            <!-- Divider for larger screens -->
+                            <div
+                                class="h-[1px] w-full md:h-[188px] md:w-[1px] border border-[#000000] hidden md:block">
+                            </div>
 
-                            <div class="flex flex-col gap-[12px]">
+                            <!-- Consultation call section -->
+                            <div class="flex flex-col gap-[12px] mt-4 md:mt-0 w-full md:w-auto">
                                 <h2 class="text-[16px] font-[500]">Consultation call :</h2>
                                 <div class="flex justify-between">
                                     <p class="text-[16px] font-[400] text-[#828282]">Currency</p>
@@ -350,29 +357,12 @@
                                 </div>
                             </div>
                         </div>
-
-                        {{-- <div class="flex w-full justify-between">
-                            <div class="flex flex-col gap-[12px]">
-                                <h2 class="text-[16px] font-[500]">Chat :</h2>
-                                <div class="flex justify-between">
-                                    <p class="text-[16px] font-[400] text-[#828282]">Currency</p>
-                                    <p class="text-[16px] font-[400] text-[#828282]">Price</p>
-                                </div>
-                                <div class="flex items-center gap-[12px] justify-between">
-                                    <h2 class="text-[16px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]">INR
-                                        (₹)</h2>
-                                    <div class="h-[1px] w-[24px] border border-[#000000]"></div>
-                                    <input
-                                        class="text-[16px] w-[45px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]"
-                                        step="0.01" step="0.01" name="chat_price_per_minute" value="20">
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
 
                     <div id="hour" class="city w-full" style="display: none">
-                        <div class="flex items-center w-full justify-between">
-                            <div class="flex flex-col gap-[12px]">
+                        <div class="flex flex-col md:flex-row items-start md:items-center w-full justify-between">
+                            <!-- Discovery call section -->
+                            <div class="flex flex-col gap-[12px] mb-4 md:mb-0 md:mr-4 w-full md:w-auto">
                                 <h2 class="text-[16px] font-[500]">Discovery call :</h2>
                                 <div class="flex justify-between">
                                     <p class="text-[16px] font-[400] text-[#828282]">Currency</p>
@@ -388,9 +378,13 @@
                                 </div>
                             </div>
 
-                            <div class="h-[188px] w-[1px] border border-[#000000]"></div>
+                            <!-- Divider for larger screens -->
+                            <div
+                                class="h-[1px] w-full md:h-[188px] md:w-[1px] border border-[#000000] hidden md:block">
+                            </div>
 
-                            <div class="flex flex-col gap-[12px]">
+                            <!-- Consultation call section -->
+                            <div class="flex flex-col gap-[12px] mt-4 md:mt-0 w-full md:w-auto">
                                 <h2 class="text-[16px] font-[500]">Consultation call :</h2>
                                 <div class="flex justify-between">
                                     <p class="text-[16px] font-[400] text-[#828282]">Currency</p>
@@ -406,25 +400,8 @@
                                 </div>
                             </div>
                         </div>
-
-                        {{-- <div class="flex w-full justify-between">
-                            <div class="flex flex-col gap-[12px]">
-                                <h2 class="text-[16px] font-[500]">Chat</h2>
-                                <div class="flex justify-between">
-                                    <p class="text-[16px] font-[400] text-[#828282]">Currency</p>
-                                    <p class="text-[16px] font-[400] text-[#828282]">Price</p>
-                                </div>
-                                <div class="flex items-center gap-[12px] justify-between">
-                                    <h2 class="text-[16px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]">INR
-                                        (₹)</h2>
-                                    <div class="h-[1px] w-[24px] border border-[#000000]"></div>
-                                    <input
-                                        class="text-[16px] w-[55px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]"
-                                        step="0.01" name="chat_price_per_hour" value="2000">
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
+
                 </div>
 
                 <div class="p-[18px] mt-[18px] w-full justify-between flex gap-[12px] rounded-[12px] bg-white">
