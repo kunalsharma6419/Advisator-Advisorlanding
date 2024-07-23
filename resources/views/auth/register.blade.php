@@ -466,11 +466,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 } else if (result.status === 'exists' || result.status === 'warning') {
                     Swal.fire({
-                        icon: 'warning',
-                        title: 'Account Exists',
+                        icon: result.status === 'exists' ? 'warning' : 'info',
+                        title: 'Account Status',
                         text: result.message
                     }).then(function() {
-                        window.location.href = result.verification_url;
+                        if (result.redirect) {
+                            window.location.href = result.redirect;
+                        } else {
+                            window.location.href = result.verification_url;
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: result.message
                     });
                 }
             } catch (error) {
