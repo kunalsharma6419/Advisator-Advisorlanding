@@ -183,11 +183,42 @@ class AuthController extends Controller
                 // Extract user ID from exception message
                 $userId = substr($e->getMessage(), strlen('exists:'));
 
-                return response()->json([
-                    'status' => 'warning',
-                    'message' => 'Your account has already been created. Kindly proceed to the verification step.',
-                    'verification_url' => url('verification/' . $userId)
-                ]);
+                $user = User::find($userId);
+
+                if ($user && $user->is_verified) {
+                    $nomination = AdvisorNomination::where('user_id', $user->unique_id)->first();
+                    if (!$nomination) {
+                        return response()->json([
+                            'status' => 'warning',
+                            'message' => 'Kindly fill the nomination form to apply for the role of advisor',
+                            'redirect' => route('advisor-nominations.create', ['userId' => $user->unique_id])
+                        ]);
+                    } elseif ($nomination->nomination_status == 'inprogress') {
+                        return response()->json([
+                            'status' => 'warning',
+                            'message' => 'The Advisator team is currently reviewing your nomination. You will be notified if you are selected.',
+                            'redirect' => route('home')
+                        ]);
+                    } elseif ($nomination->nomination_status == 'rejected') {
+                        return response()->json([
+                            'status' => 'warning',
+                            'message' => 'The Advisator team had done reviewing your nomination. You are not selected as per our evaluation criteria.',
+                            'redirect' => route('home')
+                        ]);
+                    } else {
+                        return response()->json([
+                            'status' => 'warning',
+                            'message' => 'You Are Already Registered and Selected by our Advisator Team. Kindly Proceed to Login',
+                            'redirect' => route('login')
+                        ]);
+                    }
+                } else {
+                    return response()->json([
+                        'status' => 'warning',
+                        'message' => 'Your account has already been created. Kindly proceed to the verification step.',
+                        'verification_url' => url('verification/' . $userId)
+                    ]);
+                }
             } else {
                 return response()->json([
                     'status' => 'error',

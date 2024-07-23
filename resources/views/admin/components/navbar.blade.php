@@ -106,11 +106,25 @@
                 </div>
             </li> --}}
             <li class="nav-item  nav-profile dropdown border-0">
-                <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown">
-                    <img class="nav-profile-img me-2" alt=""
-                        src="../../../admin/assets/images/faces/face1.jpg">
-                    <span class="profile-name">{{ Auth::user()->full_name }}</span>
-                </a>
+                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                    <a class="nav-link dropdown-toggle" id="profileDropdown" href="{{ url('user/profile') }}"
+                        data-bs-toggle="dropdown">
+                        <img class="nav-profile-img me-2" alt="" src="{{ Auth::user()->profile_photo_url }}">
+                        <span class="profile-name">{{ Auth::user()->full_name }}</span>
+                    </a>
+                @else
+                    <span class="inline-flex rounded-md">
+                        <button type="button"
+                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                            {{ Auth::user()->full_name }}
+
+                            <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </button>
+                    </span>
+                @endif
                 <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
                     <a class="dropdown-item" href="#">
                         <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
