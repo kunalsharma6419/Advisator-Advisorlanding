@@ -12,7 +12,7 @@
             @include('advisor.components.dashmenu')
 
 
-            <div class="flex flex-col w-full h-[575px] my-[2rem] shadow-md bg-[#FFF6F6] rounded-xl">
+            {{-- <div class="flex flex-col w-full h-[575px] my-[2rem] shadow-md bg-[#FFF6F6] rounded-xl">
                 <div class="flex items-center justify-between p-[1rem]">
                     <h3 class="text-sm sm:text-base md:text-lg text-[#2A2A2A] font-medium">Total Earnings</h3>
                     <div class="bg-[#FFFFFF] rounded-lg p-2 flex gap-2 items-center">
@@ -46,16 +46,66 @@
                             class='font-bold'> Jan 2023 (80h)</span></li>
                 </ul>
                 <div id="earningChartdiv" class="w-full h-full"></div>
+            </div> --}}
+            <div class="flex flex-col w-full h-[575px] my-[2rem] shadow-md bg-[#FFF6F6] rounded-xl">
+                <div class="flex items-center justify-between p-[1rem]">
+                    <h3 class="text-sm sm:text-base md:text-lg text-[#2A2A2A] font-medium">Total Earnings</h3>
+                    <div class="bg-[#FFFFFF] rounded-lg p-2 flex gap-2 items-center">
+                        <div>
+                            <button
+                                class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">Daily</button>
+                        </div>
+                        <div>
+                            <button
+                                class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">Weekly</button>
+                        </div>
+                        <div>
+                            <button
+                                class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">Monthly</button>
+                        </div>
+                        <div>
+                            <button
+                                class="text-xs sm:text-sm md:text-base text-[#FFFFFF] font-bold rounded-xl bg-[#FF3131] py-1 px-2 md:p-2 md:px-3">Yearly</button>
+                        </div>
+                    </div>
+                </div>
+
+                @if ($earningsData && $earningsData->isNotEmpty())
+                    <!-- Display Earnings Data -->
+                    <ul
+                        class="list-disc flex flex-col md:flex-row items-start md:items-center justify-between px-[2rem] gap-2">
+                        <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">Average Monthly Earnings:
+                            <span class='font-bold'>₹ 2,083</span></li>
+                        <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">Most Advisory Hours Month:
+                            <span class='font-bold'>Oct 2023 (295h)</span></li>
+                        <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">Least Advisory Hours Month:
+                            <span class='font-bold'>Jan 2023 (80h)</span></li>
+                    </ul>
+                    <div id="earningChartdiv" class="w-full h-full">
+                        <!-- Placeholder for the chart or data visualization -->
+                    </div>
+                @else
+                    <!-- No Data Message -->
+                    <div class="flex flex-col items-center justify-center w-full h-full p-4">
+                        <svg class="w-32 h-32 mb-4 text-[#FF3131]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M3 12l2 2 4-4 4 4 6-6" />
+                        </svg>
+                        <p class="text-[#2A2A2A] text-lg font-semibold">No data to display</p>
+                    </div>
+                @endif
             </div>
 
-            <div class="w-full flex items-center justify-center mb-[4rem] ">
+
+            {{-- <div class="w-full flex items-center justify-center mb-[4rem] ">
                 <div class="bg-[#F5F5F5] rounded-xl flex justify-between items-center p-3 w-full md:max-w-[30rem]">
                     <h2 class="text-sm sm:text-base md:text-lg font-medium">Check all my earnings</h2>
                     <a href="../Advisor pages/advisortransactionhistory.html">
                         <span>></span>
                     </a>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
 

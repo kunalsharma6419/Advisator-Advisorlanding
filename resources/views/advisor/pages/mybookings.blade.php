@@ -62,441 +62,111 @@
         </div>
 
         <!-- table  -->
-        <div class=" w-[90%] mx-auto mt-[2rem] bg-[#FAFAFA] p-1 shadow-sm mb-[7rem] md:mb-[1rem]">
+        <div class="w-[90%] mx-auto mt-[2rem] bg-[#FAFAFA] p-1 shadow-sm mb-[7rem] md:mb-[1rem]">
 
-            <!-- table for tablet and desktop screen -->
-            <div class="hidden md:block">
-                <table class="table-fixed w-full border-separate text-[Generate invoice] border-spacing-y-3">
-                    <thead class="text-[#2A2A2A] font-medium text-base lg:text-lg ">
+    <!-- Table for tablet and desktop screen -->
+    <div class="hidden md:block">
+        <table class="table-fixed w-full border-separate text-[#2A2A2A] border-spacing-y-3">
+            <thead class="text-[#2A2A2A] font-medium text-base lg:text-lg">
+                <tr>
+                    <th class="hidden md:block text-left align-top">#</th>
+                    <th class="text-left align-top">Date</th>
+                    <th class="text-left align-top">Client</th>
+                    <th class="text-left align-top">Medium</th>
+                    <th class="text-left align-top">Status</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm lg:text-base border-spacing-y-10">
+                @if($bookings && $bookings->count() > 0)
+                    @foreach($bookings as $index => $booking)
                         <tr>
-                            <th class="hidden md:block text-left align-top">sr.no</th>
-                            <th class="text-left align-top">Date</th>
-                            <th class="text-left align-top">Client</th>
-                            <th class="text-left align-top">Medium</th>
-                            <th class="text-left align-top">Status</th>
+                            <td class="hidden md:block">{{ $index + 1 }}</td>
+                            <td>{{ $booking->date->format('d/m/Y') }}</td>
+                            <td>{{ $booking->client_name }}</td>
+                            <td>{{ $booking->medium }}</td>
+                            <td>{{ $booking->status }}</td>
                         </tr>
-                    </thead>
-                    <tbody class="text-sm lg:text-base border-spacing-y-10">
-                        <tr>
-                            <td class="hidden md:block">01</td>
-                            <td>15/04/2024</td>
-                            <td class="">Sarah Jade</td>
-                            <td>Discovery call</td>
-                            <td>Upcoming</td>
-                        </tr>
-                        <tr>
-                            <td class="hidden md:block">01</td>
-                            <td>15/04/2024</td>
-                            <td class="">Anonymous</td>
-                            <td>Consultation call</td>
-                            <td>Completed</td>
-                        </tr>
-                        <tr>
-                            <td class="hidden md:block">01</td>
-                            <td>15/04/2024</td>
-                            <td class="">Sarah Jade</td>
-                            <td>Chat</td>
-                            <td>Pending</td>
-                        </tr>
-                        <tr>
-                            <td class="hidden md:block">01</td>
-                            <td>15/04/2024</td>
-                            <td class="">Sarah Jade</td>
-                            <td>Discovery call</td>
-                            <td>Upcoming</td>
-                        </tr>
-                        <tr>
-                            <td class="hidden md:block">01</td>
-                            <td>15/04/2024</td>
-                            <td class="">Anonymous</td>
-                            <td>Consultation call</td>
-                            <td>Completed</td>
-                        </tr>
-                        <tr>
-                            <td class="hidden md:block">01</td>
-                            <td>15/04/2024</td>
-                            <td class="">Sarah Jade</td>
-                            <td>Chat</td>
-                            <td>Pending</td>
-                        </tr>
-                        <tr>
-                            <td class="hidden md:block">01</td>
-                            <td>15/04/2024</td>
-                            <td class="">Sarah Jade</td>
-                            <td>Discovery call</td>
-                            <td>Upcoming</td>
-                        </tr>
-                        <tr>
-                            <td class="hidden md:block">01</td>
-                            <td>15/04/2024</td>
-                            <td class="">Anonymous</td>
-                            <td>Consultation call</td>
-                            <td>Completed</td>
-                        </tr>
-                        <tr>
-                            <td class="hidden md:block">01</td>
-                            <td>15/04/2024</td>
-                            <td class="">Sarah Jade</td>
-                            <td>Chat</td>
-                            <td>Pending</td>
-                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="5" class="text-center py-4">
+                            <div class="flex flex-col items-center justify-center">
+                                <!-- SVG Illustration -->
+                                <svg class="w-32 h-32 mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M15 12H9" />
+                                    <path d="M12 9v6" />
+                                </svg>
+                                <!-- Message -->
+                                <p class="text-[#2A2A2A] text-lg font-semibold">No data to display</p>
+                            </div>
+                        </td>
+                    </tr>
+                @endif
+            </tbody>
+        </table>
+    </div>
 
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- for mobile screen -->
-            <div class="md:hidden">
-                <div class="flex items-center justify-around font-sm sm:font-base font-medium">
-                    <h2 id="myBooking" class="booking activebooking">My Booking</h2>
-                    <h2 id="bookingHistory" class="booking ">Booking History</h2>
-                </div>
-
-                <div class='w-full mt-[1rem]'>
-                    <div id="myBookingTable" class="flex flex-col gap-2">
-                        <div
-                            class="bg-[#FFFFFF] rounded-xl shadow-md p-4 sm:p-6 grid grid-cols-3 gap-y-2 justify-items-center">
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Client Name:</p>
-                                <p class="text-[#2A2A2A]">Catherine Paize</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Date:</p>
-                                <p class="text-[#2A2A2A]">20/04/2024</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Time:</p>
-                                <p class="text-[#2A2A2A]">13:30 pm</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Medium:</p>
-                                <p class="text-[#2A2A2A]">Discovery call</p>
-                            </div>
-                            <div></div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Status:</p>
-                                <p class="text-[#2A2A2A]">Upcoming</p>
-                            </div>
-
-
-                        </div>
-
-                        <div
-                            class="bg-[#FFFFFF] rounded-xl shadow-md p-4 sm:p-6 grid grid-cols-3 gap-y-2 justify-items-center">
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Client Name:</p>
-                                <p class="text-[#2A2A2A]">Catherine Paize</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Date:</p>
-                                <p class="text-[#2A2A2A]">20/04/2024</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Time:</p>
-                                <p class="text-[#2A2A2A]">13:30 pm</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Medium:</p>
-                                <p class="text-[#2A2A2A]">Discovery call</p>
-                            </div>
-                            <div></div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Status:</p>
-                                <p class="text-[#2A2A2A]">Upcoming</p>
-                            </div>
-
-
-                        </div>
-                        <div
-                            class="bg-[#FFFFFF] rounded-xl shadow-md p-4 sm:p-6 grid grid-cols-3 gap-y-2 justify-items-center">
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Client Name:</p>
-                                <p class="text-[#2A2A2A]">Catherine Paize</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Date:</p>
-                                <p class="text-[#2A2A2A]">20/04/2024</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Time:</p>
-                                <p class="text-[#2A2A2A]">13:30 pm</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Medium:</p>
-                                <p class="text-[#2A2A2A]">Discovery call</p>
-                            </div>
-                            <div></div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Status:</p>
-                                <p class="text-[#2A2A2A]">Upcoming</p>
-                            </div>
-
-
-                        </div>
-                        <div
-                            class="bg-[#FFFFFF] rounded-xl shadow-md p-4 sm:p-6 grid grid-cols-3 gap-y-2 justify-items-center">
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Client Name:</p>
-                                <p class="text-[#2A2A2A]">Catherine Paize</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Date:</p>
-                                <p class="text-[#2A2A2A]">20/04/2024</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Time:</p>
-                                <p class="text-[#2A2A2A]">13:30 pm</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Medium:</p>
-                                <p class="text-[#2A2A2A]">Discovery call</p>
-                            </div>
-                            <div></div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Status:</p>
-                                <p class="text-[#2A2A2A]">Upcoming</p>
-                            </div>
-
-
-                        </div>
-                        <div
-                            class="bg-[#FFFFFF] rounded-xl shadow-md p-4 sm:p-6 grid grid-cols-3 gap-y-2 justify-items-center">
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Client Name:</p>
-                                <p class="text-[#2A2A2A]">Catherine Paize</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Date:</p>
-                                <p class="text-[#2A2A2A]">20/04/2024</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Time:</p>
-                                <p class="text-[#2A2A2A]">13:30 pm</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Medium:</p>
-                                <p class="text-[#2A2A2A]">Discovery call</p>
-                            </div>
-                            <div></div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Status:</p>
-                                <p class="text-[#2A2A2A]">Upcoming</p>
-                            </div>
-
-
-                        </div>
-                        <div
-                            class="bg-[#FFFFFF] rounded-xl shadow-md p-4 sm:p-6 grid grid-cols-3 gap-y-2 justify-items-center">
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Client Name:</p>
-                                <p class="text-[#2A2A2A]">Catherine Paize</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Date:</p>
-                                <p class="text-[#2A2A2A]">20/04/2024</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Time:</p>
-                                <p class="text-[#2A2A2A]">13:30 pm</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Medium:</p>
-                                <p class="text-[#2A2A2A]">Discovery call</p>
-                            </div>
-                            <div></div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Status:</p>
-                                <p class="text-[#2A2A2A]">Upcoming</p>
-                            </div>
-
-
-                        </div>
-
-                    </div>
-
-                    <div id="bookingHistoryTable" class="hidden flex flex-col gap-2">
-                        <div
-                            class="bg-[#FFFFFF] rounded-xl shadow-md p-4 sm:p-6 grid grid-cols-3 gap-y-2 justify-items-center">
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Client Name:</p>
-                                <p class="text-[#2A2A2A]">Catherine Paize</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Date:</p>
-                                <p class="text-[#2A2A2A]">20/04/2024</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Time:</p>
-                                <p class="text-[#2A2A2A]">13:30 pm</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Medium:</p>
-                                <p class="text-[#2A2A2A]">Discovery call</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Duration:</p>
-                                <p class="text-[#2A2A2A]">10m 39s</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Status:</p>
-                                <p class="text-[#2A2A2A]">Upcoming</p>
-                            </div>
-
-
-                        </div>
-                        <div
-                            class="bg-[#FFFFFF] rounded-xl shadow-md p-4 sm:p-6 grid grid-cols-3 gap-y-2 justify-items-center">
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Client Name:</p>
-                                <p class="text-[#2A2A2A]">Catherine Paize</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Date:</p>
-                                <p class="text-[#2A2A2A]">20/04/2024</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Time:</p>
-                                <p class="text-[#2A2A2A]">13:30 pm</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Medium:</p>
-                                <p class="text-[#2A2A2A]">Discovery call</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Duration:</p>
-                                <p class="text-[#2A2A2A]">10m 39s</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Status:</p>
-                                <p class="text-[#2A2A2A]">Upcoming</p>
-                            </div>
-
-
-                        </div>
-                        <div
-                            class="bg-[#FFFFFF] rounded-xl shadow-md p-4 sm:p-6 grid grid-cols-3 gap-y-2 justify-items-center">
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Client Name:</p>
-                                <p class="text-[#2A2A2A]">Catherine Paize</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Date:</p>
-                                <p class="text-[#2A2A2A]">20/04/2024</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Time:</p>
-                                <p class="text-[#2A2A2A]">13:30 pm</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Medium:</p>
-                                <p class="text-[#2A2A2A]">Discovery call</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Duration:</p>
-                                <p class="text-[#2A2A2A]">10m 39s</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Status:</p>
-                                <p class="text-[#2A2A2A]">Upcoming</p>
-                            </div>
-
-
-                        </div>
-                        <div
-                            class="bg-[#FFFFFF] rounded-xl shadow-md p-4 sm:p-6 grid grid-cols-3 gap-y-2 justify-items-center">
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Client Name:</p>
-                                <p class="text-[#2A2A2A]">Catherine Paize</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Date:</p>
-                                <p class="text-[#2A2A2A]">20/04/2024</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Time:</p>
-                                <p class="text-[#2A2A2A]">13:30 pm</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Medium:</p>
-                                <p class="text-[#2A2A2A]">Discovery call</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Duration:</p>
-                                <p class="text-[#2A2A2A]">10m 39s</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Status:</p>
-                                <p class="text-[#2A2A2A]">Upcoming</p>
-                            </div>
-
-
-                        </div>
-                        <div
-                            class="bg-[#FFFFFF] rounded-xl shadow-md p-4 sm:p-6 grid grid-cols-3 gap-y-2 justify-items-center">
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Client Name:</p>
-                                <p class="text-[#2A2A2A]">Catherine Paize</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Date:</p>
-                                <p class="text-[#2A2A2A]">20/04/2024</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Time:</p>
-                                <p class="text-[#2A2A2A]">13:30 pm</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Medium:</p>
-                                <p class="text-[#2A2A2A]">Discovery call</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Duration:</p>
-                                <p class="text-[#2A2A2A]">10m 39s</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Status:</p>
-                                <p class="text-[#2A2A2A]">Upcoming</p>
-                            </div>
-
-
-                        </div>
-                        <div
-                            class="bg-[#FFFFFF] rounded-xl shadow-md p-4 sm:p-6 grid grid-cols-3 gap-y-2 justify-items-center">
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Client Name:</p>
-                                <p class="text-[#2A2A2A]">Catherine Paize</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Date:</p>
-                                <p class="text-[#2A2A2A]">20/04/2024</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Time:</p>
-                                <p class="text-[#2A2A2A]">13:30 pm</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Medium:</p>
-                                <p class="text-[#2A2A2A]">Discovery call</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Duration:</p>
-                                <p class="text-[#2A2A2A]">10m 39s</p>
-                            </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
-                                <p class="text-[#828282]">Status:</p>
-                                <p class="text-[#2A2A2A]">Upcoming</p>
-                            </div>
-
-
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-
-
+    <!-- For mobile screen -->
+    <div class="md:hidden">
+        <div class="flex items-center justify-around font-sm sm:font-base font-medium">
+            <h2 id="myBooking" class="booking activebooking">My Booking</h2>
+            <h2 id="bookingHistory" class="booking">Booking History</h2>
         </div>
+
+        <div class='w-full mt-[1rem]'>
+            <!-- Upcoming Bookings -->
+            <div id="myBookingTable" class="flex flex-col gap-2">
+                @if($bookings && $bookings->count() > 0)
+                    @foreach($bookings as $booking)
+                        <div class="bg-[#FFFFFF] rounded-xl shadow-md p-4 sm:p-6 grid grid-cols-2 gap-y-2 justify-items-start">
+                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                                <p class="text-[#828282]">Client Name:</p>
+                                <p class="text-[#2A2A2A]">{{ $booking->client_name }}</p>
+                            </div>
+                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                                <p class="text-[#828282]">Date:</p>
+                                <p class="text-[#2A2A2A]">{{ $booking->date->format('d/m/Y') }}</p>
+                            </div>
+                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                                <p class="text-[#828282]">Time:</p>
+                                <p class="text-[#2A2A2A]">{{ $booking->time }}</p>
+                            </div>
+                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                                <p class="text-[#828282]">Medium:</p>
+                                <p class="text-[#2A2A2A]">{{ $booking->medium }}</p>
+                            </div>
+                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                                <p class="text-[#828282]">Status:</p>
+                                <p class="text-[#2A2A2A]">{{ $booking->status }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="bg-[#FFFFFF] rounded-xl shadow-md p-4 sm:p-6 text-center">
+                        <div class="flex flex-col items-center justify-center">
+                            <!-- SVG Illustration -->
+                            <svg class="w-24 h-24 mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M15 12H9" />
+                                <path d="M12 9v6" />
+                            </svg>
+                            <!-- Message -->
+                            <p class="text-[#2A2A2A] text-base font-semibold">No data to display</p>
+                        </div>
+                    </div>
+                @endif
+            </div>
+
+            <!-- Booking History Section (if applicable) -->
+            <div id="bookingHistoryTable" class="hidden flex flex-col gap-2">
+                <!-- Add similar code for booking history if you have it available -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
         @include('advisor.components.footer')
 

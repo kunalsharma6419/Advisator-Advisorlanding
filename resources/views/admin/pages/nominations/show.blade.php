@@ -50,7 +50,8 @@
                                                         class="btn btn-warning ml-2">Re-evaluate</a>
                                                     {{-- <p>Overall Score: {{ $overallScore }}</p> --}}
                                                     <button type="button"
-                                                        class="btn btn-primary btn-rounded btn-fw">Overall Score : {{ $overallScore }}</button>
+                                                        class="btn btn-primary btn-rounded btn-fw">Overall Score :
+                                                        {{ $overallScore }}</button>
                                                 @elseif ($nomination->nomination_status === 'rejected')
                                                     {{-- Show overall score --}}
                                                     @php
@@ -64,7 +65,8 @@
                                                     <a href="{{ route('advisatoradmin.nominations.evaluate', $nomination->id) }}"
                                                         class="btn btn-warning ml-2">Re-evaluate</a>
                                                     <button type="button"
-                                                        class="btn btn-primary btn-rounded btn-fw">Overall Score : {{ $overallScore }}</button>
+                                                        class="btn btn-primary btn-rounded btn-fw">Overall Score :
+                                                        {{ $overallScore }}</button>
                                                 @endif
                                             </div>
                                         </div>
@@ -255,6 +257,26 @@
                                                         </div>
                                                     </div>
 
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Attached Documents</th>
+                                                <td>
+                                                    <div class="container mx-auto mt-10">
+                                                        <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                                                            <div class="p-6 border-b border-gray-200">
+                                                                <h2 class="text-3xl font-semibold text-gray-800">Document
+                                                                    Viewer</h2>
+                                                            </div>
+                                                            <div class="p-6">
+                                                                <iframe src="{{ $nomination->document_path }}"
+                                                                    class="w-full h-[75vh] border-0"></iframe>
+                                                                <br>
+                                                                <a href="{{ $nomination->document_path }}"
+                                                                    target="_blank">View Full Screen</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>

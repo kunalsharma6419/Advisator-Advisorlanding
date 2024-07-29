@@ -60,7 +60,8 @@
                 </p>
             </div>
 
-            <form id="nominationForm" method="POST" class="flex flex-col mt-[35px] gap-[28px] px-30">
+            <form id="nominationForm" method="POST" class="flex flex-col mt-[35px] gap-[28px] px-30"
+                enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="user_id" value="{{ $user->unique_id }}">
                 <div>
@@ -150,19 +151,21 @@
                             </svg>
                             <span
                                 class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-50 bg-[#6AA300] text-white text-center rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                To select multiple Industry verticals, use Ctrl + Click
+                                To select multiple Industry verticals, use Ctrl + Click
                                 <span
                                     class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-5 border-solid border-transparent border-t-gray-700"></span>
                             </span>
                         </div>
-                        <p class="mt-[18px] " style="color: #db5001">Each nomination form allows an advisor to select at
-                            the most 3 Industry verticals.</p>
+                        <p class="mt-[18px]" style="color: #db5001">Each nomination form allows an advisor to select at
+                            the most 3 Industry verticals.</p>
                         <select id="industry" name="industry[]" class="w-full p-2 rounded-[12px] mt-[18px]" multiple>
-                            {{-- <option selected>Select Industry Verticals</option> --}}
                             @foreach ($industries as $industry)
                                 <option value="{{ $industry->id }}">{{ $industry->name }}</option>
                             @endforeach
                         </select>
+                        <input type="text" id="other-industry" name="other_industry"
+                            class="w-full p-2 rounded-[12px] mt-[18px] hidden"
+                            placeholder="Please mention other industry">
                     </div>
                     <div class="border border-1 my-30 border-[#AFAFAF]"></div>
 
@@ -297,6 +300,17 @@
 
 
                 {{-- <div class="border w-full border-1 mt-[18px] border-[#AFAFAF]"></div> --}}
+                <div class="p-[18px] mt-[18px] w-full justify-between flex gap-[12px] rounded-[12px] bg-white">
+                    <p class="text-[18px] font-[500]">Attach Documents (optional)</p>
+                    <i class="fa-solid fa-paperclip" style="color: #3a3a3a"></i>
+                </div>
+                <input type="file" name="document_path" accept=".pdf,.doc,.docx" id="documentPathInput"
+                    onchange="previewDocument(event)">
+                @error('document_path')
+                    <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
+                @enderror
+
+                <div id="documentPreview" class="mt-4"></div>
 
                 <div class="flex flex-col gap-[12px]">
                     <div class="flex justify-between">
@@ -404,10 +418,22 @@
 
                 </div>
 
-                <div class="p-[18px] mt-[18px] w-full justify-between flex gap-[12px] rounded-[12px] bg-white">
+                {{-- <div class="p-[18px] mt-[18px] w-full justify-between flex gap-[12px] rounded-[12px] bg-white">
+                    <p class="text-[18px] font-[500]">Attach Documents (optional)</p>
+                    <i class="fa-solid fa-paperclip" style="color: #3a3a3a"></i>
+                </div> --}}
+                {{-- <div class="p-[18px] mt-[18px] w-full justify-between flex gap-[12px] rounded-[12px] bg-white">
                     <p class="text-[18px] font-[500]">Attach Documents (optional)</p>
                     <i class="fa-solid fa-paperclip" style="color: #3a3a3a"></i>
                 </div>
+                <input type="file" name="document_path" accept=".pdf,.doc,.docx" id="documentPathInput"
+                    onchange="previewDocument(event)">
+                @error('document_path')
+                    <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
+                @enderror
+
+                <div id="documentPreview" class="mt-4"></div> --}}
+
 
                 <button type="submit"
                     class="mt-[40px] text-[#2A2A2A] rounded-[18px] font-[600] text-center w-full py-[10px] bg-gradient-to-r from-[#EDF6DB] via-[#dce8c4] to-[#C5D5A7]">
@@ -581,7 +607,44 @@
         });
     });
 </script>
+<script>
+    function previewDocument(event) {
+        const file = event.target.files[0];
+        const previewContainer = document.getElementById('documentPreview');
+        previewContainer.innerHTML = '';
 
+        if (file) {
+            const fileName = document.createElement('p');
+            fileName.textContent = `Selected File: ${file.name}`;
+            previewContainer.appendChild(fileName);
+
+            if (file.type === 'application/pdf') {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const embed = document.createElement('embed');
+                    embed.src = e.target.result;
+                    embed.type = 'application/pdf';
+                    embed.width = '100%';
+                    embed.height = '500px';
+                    previewContainer.appendChild(embed);
+                };
+                reader.readAsDataURL(file);
+            } else if (file.type === 'application/msword' || file.type ===
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+                const fileLink = document.createElement('a');
+                fileLink.href = URL.createObjectURL(file);
+                fileLink.target = '_blank';
+                fileLink.textContent = 'Preview Document';
+                fileLink.classList.add('text-blue-500', 'underline');
+                previewContainer.appendChild(fileLink);
+            } else {
+                const notSupported = document.createElement('p');
+                notSupported.textContent = 'File preview not available for this file type.';
+                previewContainer.appendChild(notSupported);
+            }
+        }
+    }
+</script>
 <script>
     document.getElementById('business_function_category_id').addEventListener('change', function() {
         let categoryId = this.value;
@@ -603,7 +666,7 @@
             });
     });
 </script>
-<script>
+{{-- <script>
     document.addEventListener('DOMContentLoaded', function() {
         function limitSelection(selectElement) {
             selectElement.addEventListener('change', function() {
@@ -623,33 +686,43 @@
         limitSelection(document.getElementById('industry'));
         limitSelection(document.getElementById('geography'));
     });
-</script>
-{{-- <script>
-    function openContent(cityName, evt) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("city");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
+</script> --}}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function handleOtherIndustryField() {
+        const selectElement = document.getElementById('industry');
+        const selectedOptions = Array.from(selectElement.selectedOptions);
+        const otherIndustryInput = document.getElementById('other-industry');
+
+        if (selectedOptions.some(option => option.text.toLowerCase() === 'other - mention')) {
+            otherIndustryInput.classList.remove('hidden');
+        } else {
+            otherIndustryInput.classList.add('hidden');
         }
-        tablinks = document.getElementsByClassName("tabButton");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" bg-red-500 text-white", " bg-white text-black");
-        }
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " bg-red-500 text-white";
     }
 
-    document.getElementById('myBtn').onclick = function() {
-        document.getElementById('myModal').classList.remove('hidden');
-    };
+    function limitSelection(selectElement) {
+        selectElement.addEventListener('change', function() {
+            const selectedOptions = Array.from(selectElement.selectedOptions);
+            if (selectedOptions.length > 3) {
+                selectedOptions.slice(3).forEach(option => option.selected = false);
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Selection Limit',
+                    text: 'You can only select up to 3 options.',
+                    confirmButtonText: 'OK'
+                });
+            }
+            handleOtherIndustryField();
+        });
+    }
 
-    document.getElementsByClassName('close')[0].onclick = function() {
-        document.getElementById('myModal').classList.add('hidden');
-    };
+    const industrySelect = document.getElementById('industry');
+    limitSelection(industrySelect);
 
-    document.getElementById('closeBtn').onclick = function() {
-        document.getElementById('myModal').classList.add('hidden');
-    };
-</script> --}}
+    // Initialize visibility on page load
+    handleOtherIndustryField();
+});
+</script>
 
 </html>

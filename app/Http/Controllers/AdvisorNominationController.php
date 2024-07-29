@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\AdvisorNominationMail;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\AdminNominationNotification;
 
 class AdvisorNominationController extends Controller
 {
@@ -53,11 +54,21 @@ class AdvisorNominationController extends Controller
             'conference_call_price_per_hour' => 'nullable|numeric|min:0',
             'chat_price_per_minute' => 'nullable|numeric|min:0',
             'chat_price_per_hour' => 'nullable|numeric|min:0',
+            'document_path' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'other_industry' => 'nullable|string|max:255',
             'nomination_reason' => 'nullable|string',
             'nomination_status' => 'nullable|in:inprogress,selected,rejected',
         ]);
 
+
         $user = User::where('unique_id', $request->user_id)->firstOrFail();
+        // Handle new industry
+        $industry = $request->industry;
+        if ($request->filled('other_industry')) {
+            $newIndustry = IndustryVertical::create(['name' => $request->other_industry]);
+            $industry[] = $newIndustry->id;
+        }
+        // $documentPath = $request->input('document', null);
 
         $advisor = AdvisorNomination::create([
             'nominee_id' => Str::random(12),
@@ -70,7 +81,7 @@ class AdvisorNominationController extends Controller
             'business_function_category_id' => $request->business_function_category_id,
             'sub_function_category_id_1' => $request->sub_function_category_id_1,
             'sub_function_category_id_2' => $request->sub_function_category_id_2,
-            'industry_ids' => $request->industry,
+            'industry_ids' => $industry,
             'geography_ids' => $request->geography,
             'nominee_qualification' => $request->nominee_qualification,
             'nominee_experience' => $request->nominee_experience,
@@ -83,6 +94,14 @@ class AdvisorNominationController extends Controller
             'nomination_reason' => $request->nomination_reason,
             'nomination_status' => 'inprogress',
         ]);
+
+        // Handle document upload
+        if ($request->hasFile('document_path')) {
+            $documentPath = $request->file('document_path')->store('documents', 'public');
+            $advisor->update(['document_path' => $documentPath]);
+        }
+
+        // dd($request->all());
 
         $availabilityData = json_decode($request->availability, true);
         foreach ($availabilityData as $day => $timeSlots) {
@@ -98,6 +117,10 @@ class AdvisorNominationController extends Controller
 
         // Send email to advisor
         Mail::to($advisor->email)->send(new AdvisorNominationMail($advisor));
+
+        // Send email to admin
+        $admin = User::where('usertype', 1)->first();
+        Mail::to($admin->email)->send(new AdminNominationNotification($advisor));
 
         // return redirect()->back()->with('success', 'Nomination created successfully.');
         return response()->json(['success' => true,'msg'=> 'Nomination created successfully.', 'redirect' => route('home')]);

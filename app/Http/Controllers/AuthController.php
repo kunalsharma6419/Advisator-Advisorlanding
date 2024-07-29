@@ -114,7 +114,7 @@ class AuthController extends Controller
                     if ($user && !$user->is_verified) {
                         throw new \Exception('exists:' . $user->id); // Throw exception with existing unverified user ID
                     } elseif ($user) {
-                        $fail('The email has already been taken.');
+                        $fail('The email has already been taken. Proceed with Login');
                     }
                 }
             ],
@@ -273,7 +273,6 @@ class AuthController extends Controller
             return response()->json(['success' => false,'msg'=> 'You entered wrong OTP']);
         }
         else{
-
             $currentTime = time();
             $time = $otpData->created_at;
 

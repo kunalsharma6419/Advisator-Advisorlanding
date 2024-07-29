@@ -9,6 +9,7 @@ use App\Models\AdvisorEvaluation;
 use App\Models\AdvisorProfiles;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AdvisorSelected;
+use App\Mail\AdvisorRejected;
 
 class NominationsController extends Controller
 {
@@ -309,6 +310,8 @@ class NominationsController extends Controller
 
         } else {
             $nomination->nomination_status = 'rejected';
+            // Send the email for rejection
+            Mail::to($nomination->email)->send(new AdvisorRejected($nomination));
         }
         $nomination->save();
 

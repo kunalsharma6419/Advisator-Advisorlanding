@@ -14,24 +14,38 @@
                 <div class="border border-[#DBDFFF] lg:h-[280px] p-4 w-full rounded-xl bg-[#FFFFFF] shadow-md">
                     <div class="flex gap-2 items-start justify-start my-2">
                         <img class="w-6 h-6 mt-2" src="../src/assets/icons/fa6-solid_ranking-star.png" alt="" />
-                        <p class="text-sm sm:text-base md:text-xl text-[#2A2A2A]">
-                            Rank up your profile by completing your profile
+                        <p class="text-sm sm:text-base md:text-xl text-[#2A2A2A]" style="font-weight: bold;">
+                            Profile Completion Status
                         </p>
                     </div>
-                    <div class="my-[2rem] flex w-full h-4 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
-                        role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                    {{-- <div class="my-[2rem] flex w-full h-4 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
+                        role="progressbar" aria-valuenow="{{ $completionPercentage }}" aria-valuemin="0"
+                        aria-valuemax="100">
                         <div class="flex flex-col justify-center rounded-full overflow-hidden bg-[#7482FF] text-xs text-white text-center whitespace-nowrap dark:bg-[#7482FF] transition duration-500"
-                            style="width: 80%">
-                            80%
+                            style="width: {{ $completionPercentage }}%">
+                            {{ $completionPercentage }}%
+                        </div>
+                    </div> --}}
+                    <div class="my-[2rem] flex w-full h-8 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
+                        role="progressbar" aria-valuenow="{{ $completionPercentage }}" aria-valuemin="0"
+                        aria-valuemax="100">
+                        <div class="flex items-center justify-center rounded-full overflow-hidden text-xs text-black text-center whitespace-nowrap transition duration-500"
+                            style="
+             width: {{ $completionPercentage }}%;
+             background-color: {{ $completionPercentage <= 50 ? '#FF4D4F' : ($completionPercentage <= 80 ? '#FFD700' : '#28A745') }};
+             height: 100%;
+         ">
+                            {{ $completionPercentage }}%
                         </div>
                     </div>
+
                     <ul class="list-disc px-4">
                         <li class="text-[#3A3A3A] text-sm md:text-base">
                             Upload informative videos to assist and engage with users
                         </li>
                     </ul>
                 </div>
-                <div
+                {{-- <div
                     class="border border-[#F3EA9A] h-[280px] p-4 w-full flex justify-center flex-col rounded-xl bg-[#FFFFFF] shadow-md">
                     <div class="flex gap-2 items-start my-1">
                         <img class="w-6 h-6 mt-2" src="../src/assets/icons/star.png" alt="" />
@@ -40,41 +54,82 @@
                         </p>
                     </div>
                     <div id="chartdiv" class="w-full h-full"></div>
+                </div> --}}
+                <div
+                    class="border border-[#F3EA9A] h-[280px] p-4 w-full flex justify-center flex-col rounded-xl bg-[#FFFFFF] shadow-md">
+                    @if ($feedbackData && $feedbackData->count() > 0)
+                        <div class="flex gap-2 items-start my-1">
+                            <img class="w-6 h-6 mt-2" src="../src/assets/icons/star.png" alt="Star Icon" />
+                            <p class="text-sm sm:text-base md:text-xl text-[#2A2A2A]">
+                                Feedback Received
+                            </p>
+                        </div>
+                        <div id="chartdiv" class="w-full h-full"></div>
+                        {{-- Include the script to render your chart here --}}
+                    @else
+                        <div class="flex flex-col justify-center items-center w-full h-full text-center">
+                            <div class="flex gap-2 items-start my-1">
+                                <img class="w-6 h-6 mt-2" src="../src/assets/icons/star.png" alt="Star Icon" />
+                                <p class="text-sm sm:text-base md:text-xl text-[#2A2A2A]">
+                                    Feedback Received
+                                </p>
+                            </div>
+                            <svg class="w-20 h-20 mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M2 12c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10H7l-5 5V12z" stroke="#FF6F61"
+                                    fill="#FF6F61" />
+                                <path d="M6 12h12m-6-6v12" stroke="#FFFFFF" />
+                            </svg>
+                            <p class="text-sm sm:text-base md:text-lg text-[#2A2A2A]">
+                                No data to display
+                            </p>
+                        </div>
+                    @endif
                 </div>
+
                 <div class="border border-[#B6F39A] lg:h-[280px] p-4 w-full rounded-xl bg-[#FFFFFF] shadow-md">
-                    <div class="flex gap-2 items-start my-2">
-                        <img class="w-6 h-6 mt-2" src="../src/assets/icons/teenyicons_appointments-solid.png"
-                            alt="" />
-                        <p class="text-sm sm:text-base md:text-xl text-[#2A2A2A]">
-                            Upcoming bookings
-                        </p>
-                    </div>
-                    <ul class="list-disc pl-2 xl:px-4 flex flex-col gap-4 mt-[1.5rem]">
-                        <li class="text-sm md:text-base text-[#2A2A2A]">
-                            <div class="flex items-center justify-between">
-                                <p class="font-medium">Joe Dawson</p>
-                                <p class="font-normal">Apr 18, 2024 - 13:30 pm</p>
+                    @if ($upcomingBookings !== null && $upcomingBookings->isNotEmpty())
+                        <div class="flex gap-2 items-start my-2">
+                            <img class="w-6 h-6 mt-2" src="../src/assets/icons/teenyicons_appointments-solid.png"
+                                alt="Appointments Icon" />
+                            <p class="text-sm sm:text-base md:text-xl text-[#2A2A2A]">
+                                Upcoming bookings
+                            </p>
+                        </div>
+                        <ul class="list-disc pl-2 xl:px-4 flex flex-col gap-4 mt-[1.5rem]">
+                            @foreach ($upcomingBookings as $booking)
+                                <li class="text-sm md:text-base text-[#2A2A2A]">
+                                    <div class="flex items-center justify-between">
+                                        <p class="font-medium">{{ $booking->client_name }}</p>
+                                        <p class="font-normal">{{ $booking->date->format('M d, Y - h:i A') }}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <div class="flex flex-col justify-center items-center w-full h-full text-center">
+                            <div class="flex gap-2 items-start my-2">
+                                <img class="w-6 h-6 mt-2" src="../src/assets/icons/teenyicons_appointments-solid.png"
+                                    alt="Appointments Icon" />
+                                <p class="text-sm sm:text-base md:text-xl text-[#2A2A2A]">
+                                    No Upcoming bookings
+                                </p>
                             </div>
-                        </li>
-                        <li class="text-sm md:text-base text-[#2A2A2A]">
-                            <div class="flex items-center justify-between">
-                                <p class="font-medium">Rachel Wayne</p>
-                                <p class="font-normal">Apr 18, 2024 - 13:30 pm</p>
-                            </div>
-                        </li>
-                        <li class="text-sm md:text-base text-[#2A2A2A]">
-                            <div class="flex items-center justify-between">
-                                <p class="font-medium">Joe Dawson</p>
-                                <p class="font-normal">Apr 18, 2024 - 13:30 pm</p>
-                            </div>
-                        </li>
-                        <li class="text-sm md:text-base text-[#2A2A2A]">
-                            <div class="flex items-center justify-between">
-                                <p class="font-medium">Rachel Wayne</p>
-                                <p class="font-normal">Apr 18, 2024 - 13:30 pm</p>
-                            </div>
-                        </li>
-                    </ul>
+                            <svg class="w-20 h-20 mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12 6v6h6" stroke="#FF6F61" fill="none" />
+                                <circle cx="12" cy="12" r="10" stroke="#FF6F61" stroke-width="2"
+                                    fill="none" />
+                                <path d="M12 18h-6m12 0h-6" stroke="#FF6F61" fill="none" />
+                            </svg>
+
+                            <p class="text-sm sm:text-base md:text-lg text-[#2A2A2A]">
+                                There are no upcoming bookings at the moment.
+                            </p>
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -84,47 +139,44 @@
                         Total Earnings
                     </h3>
                     <div class="bg-[#FFFFFF] rounded-lg p-2 flex gap-2 items-center">
-                        <div>
-                            <button
-                                class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">
-                                Daily
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">
-                                Weekly
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">
-                                Monthly
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                class="text-xs sm:text-sm md:text-base text-[#FFFFFF] font-bold rounded-xl bg-[#FF3131] py-1 px-2 md:p-2 md:px-3">
-                                Yearly
-                            </button>
-                        </div>
+                        <button
+                            class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">Daily</button>
+                        <button
+                            class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">Weekly</button>
+                        <button
+                            class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">Monthly</button>
+                        <button
+                            class="text-xs sm:text-sm md:text-base text-[#FFFFFF] font-bold rounded-xl bg-[#FF3131] py-1 px-2 md:p-2 md:px-3">Yearly</button>
                     </div>
                 </div>
+                @if ($earningsData !== null && $earningsData->count() > 0)
+                    <ul
+                        class="list-disc flex flex-col md:flex-row items-start md:items-center justify-between px-[2rem] gap-2">
+                        <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">Average Monthly Earnings:
+                            <span class="font-bold">₹ 2,083</span>
+                        </li>
+                        <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">Most Advisory hours Month:
+                            <span class="font-bold"> Oct 2023 (295h)</span>
+                        </li>
+                        <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">Least Advisory hours Month:
+                            <span class="font-bold"> Jan 2023 (80h)</span>
+                        </li>
+                    </ul>
+                    <div id="earningChartdiv" class="w-full h-full"></div>
+                @else
+                    <div class="flex flex-col justify-center items-center w-full h-full text-center">
+                        <svg class="w-20 h-20 mb-4 text-[#FF6F61]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M12 2v4m0 0v4m0-4h4m-4 0H8m4 0v10m0-10h4m-4 0H8m4 0v4m-4 4h4m-4-4h-4" />
+                            <circle cx="12" cy="12" r="10" stroke="#FF6F61" stroke-width="2"
+                                fill="none" />
+                        </svg>
 
-                <ul class="list-disc flex flex-col md:flex-row items-start md:items-center justify-between px-[2rem] gap-2">
-                    <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">
-                        Average Monthly Earnings: <span class="font-bold">₹ 2,083</span>
-                    </li>
-                    <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">
-                        Most Advisory hours Month:
-                        <span class="font-bold"> Oct 2023 (295h)</span>
-                    </li>
-                    <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">
-                        Least Advisory hours Month:
-                        <span class="font-bold"> Jan 2023 (80h)</span>
-                    </li>
-                </ul>
-                <div id="earningChartdiv" class="w-full h-full"></div>
+                        <h2 class="text-lg sm:text-xl md:text-2xl font-semibold text-[#2A2A2A] mb-2">No Earnings Data</h2>
+                        <p class="text-sm sm:text-base md:text-lg text-[#2A2A2A]">There is no earnings data available.</p>
+                    </div>
+                @endif
             </div>
 
             <div class="flex flex-col w-full h-[575px] my-[2rem] shadow-md bg-[#F4FAFF] rounded-xl">
@@ -133,49 +185,45 @@
                         Total Advisory Hours
                     </h3>
                     <div class="bg-[#FFFFFF] rounded-lg p-2 flex gap-2 items-center">
-                        <div>
-                            <button
-                                class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">
-                                Daily
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">
-                                Weekly
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">
-                                Monthly
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                class="text-xs sm:text-sm md:text-base text-[#FFFFFF] font-bold rounded-xl bg-[#2159E8] py-1 px-2 md:p-2 md:px-3">
-                                Yearly
-                            </button>
-                        </div>
+                        <button
+                            class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">Daily</button>
+                        <button
+                            class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">Weekly</button>
+                        <button
+                            class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">Monthly</button>
+                        <button
+                            class="text-xs sm:text-sm md:text-base text-[#FFFFFF] font-bold rounded-xl bg-[#2159E8] py-1 px-2 md:p-2 md:px-3">Yearly</button>
                     </div>
                 </div>
+                @if ($advisoryHoursData !== null && $advisoryHoursData->count() > 0)
+                    <ul
+                        class="list-disc flex flex-col md:flex-row items-start md:items-center justify-between px-[2rem] gap-2">
+                        <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">Average Monthly Advisory
+                            hours: <span class="font-bold">230 hrs</span></li>
+                        <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">Most Advisory hours Month:
+                            <span class="font-bold"> Oct 2023 (295h)</span>
+                        </li>
+                        <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">Least Advisory hours Month:
+                            <span class="font-bold"> Jan 2023 (80h)</span>
+                        </li>
+                    </ul>
+                    <div id="advisoryHoursChartdiv" class="w-full h-full"></div>
+                @else
+                    <div class="flex flex-col justify-center items-center w-full h-full text-center">
+                        <svg class="w-20 h-20 mb-4 text-[#2159E8]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" stroke="#2159E8" stroke-width="2"
+                                fill="none" />
+                            <path d="M12 6v6h6" />
+                        </svg>
 
-                <ul class="list-disc flex flex-col md:flex-row items-start md:items-center justify-between px-[2rem] gap-2">
-                    <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">
-                        Average Monthly Advisory hours:
-                        <span class="font-bold">230 hrs</span>
-                    </li>
-                    <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">
-                        Most Advisory hours Month:
-                        <span class="font-bold"> Oct 2023 (295h)</span>
-                    </li>
-                    <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">
-                        Least Advisory hours Month:
-                        <span class="font-bold"> Jan 2023 (80h)</span>
-                    </li>
-                </ul>
-                <div id="advisoryHoursChartdiv" class="w-full h-full"></div>
-                <!-- <div id="newChart" class="w-full h-full"></div> -->
+                        <h2 class="text-lg sm:text-xl md:text-2xl font-semibold text-[#2A2A2A] mb-2">No Advisory Hours Data
+                        </h2>
+                        <p class="text-sm sm:text-base md:text-lg text-[#2A2A2A]">There is no advisory hours data
+                            available.</p>
+                    </div>
+                @endif
             </div>
 
             <div class="flex flex-col w-full h-[575px] my-[2rem] shadow-md bg-[#FFFBF1] rounded-xl mt-[3rem] md:mt-0">
@@ -184,48 +232,46 @@
                         Total Clients
                     </h3>
                     <div class="bg-[#FFFFFF] rounded-lg p-2 flex gap-2 items-center">
-                        <div>
-                            <button
-                                class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">
-                                Daily
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">
-                                Weekly
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">
-                                Monthly
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                class="text-xs sm:text-sm md:text-base text-[#FFFFFF] font-bold rounded-xl bg-[#FF3131] py-1 px-2 md:p-2 md:px-3">
-                                Yearly
-                            </button>
-                        </div>
+                        <button
+                            class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">Daily</button>
+                        <button
+                            class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">Weekly</button>
+                        <button
+                            class="text-xs sm:text-sm md:text-base text-[#2A2A2A] font-bold rounded-xl bg-transparent py-1 px-2 md:p-2 md:px-3">Monthly</button>
+                        <button
+                            class="text-xs sm:text-sm md:text-base text-[#FFFFFF] font-bold rounded-xl bg-[#FF3131] py-1 px-2 md:p-2 md:px-3">Yearly</button>
                     </div>
                 </div>
+                @if ($clientsData !== null && $clientsData->count() > 0)
+                    <ul
+                        class="list-disc flex flex-col md:flex-row items-start md:items-center justify-between px-[2rem] gap-2">
+                        <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">Average Monthly Clients:
+                            <span class="font-bold">16</span>
+                        </li>
+                        <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">Top Month for new Clients:
+                            <span class="font-bold"> Oct 2023 (28)</span>
+                        </li>
+                        <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">Lowest Month for New
+                            Clients: <span class="font-bold"> Jan 2023 (7)</span></li>
+                    </ul>
+                    <div id="totalClientChartdiv" class="w-full h-full"></div>
+                @else
+                    <div class="flex flex-col justify-center items-center w-full h-full text-center">
+                        <svg class="w-20 h-20 mb-4 text-[#FF3131]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <circle cx="12" cy="7" r="4" stroke="#FF3131" stroke-width="2"
+                                fill="none" />
+                            <path d="M5 20c0-4 3-7 7-7s7 3 7 7" stroke="#FF3131" stroke-width="2" fill="none" />
+                            <path d="M16 20c0-4-3-7-7-7s-7 3-7 7" stroke="#FF3131" stroke-width="2" fill="none" />
+                        </svg>
 
-                <ul class="list-disc flex flex-col md:flex-row items-start md:items-center justify-between px-[2rem] gap-2">
-                    <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">
-                        Average Monthly Clients: <span class="font-bold">16</span>
-                    </li>
-                    <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">
-                        Top Month for new Clients:
-                        <span class="font-bold"> Oct 2023 (28)</span>
-                    </li>
-                    <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">
-                        Lowest Month for New Clients:
-                        <span class="font-bold"> Jan 2023 (7)</span>
-                    </li>
-                </ul>
-                <div id="totalClientChartdiv" class="w-full h-full"></div>
+                        <h2 class="text-lg sm:text-xl md:text-2xl font-semibold text-[#2A2A2A] mb-2">No Clients Data</h2>
+                        <p class="text-sm sm:text-base md:text-lg text-[#2A2A2A]">There are no client data available.</p>
+                    </div>
+                @endif
             </div>
+
 
             <!-- bottom menu bar -->
             @include('advisor.components.bottommenu')

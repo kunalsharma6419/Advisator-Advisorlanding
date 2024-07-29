@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\NominationsController;
 use App\Http\Controllers\Admin\AdvisorsController;
 use App\Http\Controllers\Advisor\ProfileController;
+use App\Http\Controllers\Advisor\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,9 +72,11 @@ Route::post('verify-login-otp', [AuthController::class, 'verifiedLoginOtp'])->na
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
     Route::get('/redirect', [HomeController::class, 'redirect'])->name('redirect');
+
     //Admin Dashboard
     Route::prefix('advisatoradmin')->group(function () {
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('advisatoradmin.dashboard');
+        Route::get('contact-queries', [AdminController::class, 'contactqueries'])->name('advisatoradmin.contactqueries');
 
         //Nominations Menu
         Route::get('/nominations', [NominationsController::class, 'index'])->name('advisatoradmin.nominations.list');
@@ -104,7 +107,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 
     //Advisor Dashboard
     Route::prefix('advisor')->group(function () {
-        Route::get('dashboard', [AdvisorController::class, 'dashboard'])->name('advisor.dashboard');
+        Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('advisor.dashboard');
         //profile
         Route::get('myprofileinfo', [ProfileController::class, 'myprofile'])->name('advisor.myprofile');
         Route::put('profile', [ProfileController::class, 'profileupdate'])->name('advisor.myprofile.update');
@@ -115,8 +118,9 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
         Route::post('/advisor/update-prices', [ProfileController::class, 'updatePrices'])->name('advisor.updatePrices');
         Route::post('/advisor/bank-details', [ProfileController::class, 'bankstore'])->name('advisor.bankDetails.store');
         Route::post('/tickets/store', [ProfileController::class, 'ticketstore'])->name('advisor.tickets.store');
-        Route::get('reviews-summary', [AdvisorController::class, 'reviewssummary'])->name('advisor.reviewssummary');
-        Route::get('my-bookings', [AdvisorController::class, 'mybookings'])->name('advisor.mybookings');
-        Route::get('my-earnings', [AdvisorController::class, 'myearnings'])->name('advisor.myearnings');
+        Route::get('reviews-summary', [DashboardController::class, 'reviewssummary'])->name('advisor.reviewssummary');
+        Route::get('my-bookings', [DashboardController::class, 'mybookings'])->name('advisor.mybookings');
+        Route::get('my-earnings', [DashboardController::class, 'myearnings'])->name('advisor.myearnings');
     });
+
 });

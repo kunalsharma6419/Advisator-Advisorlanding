@@ -6,20 +6,20 @@ use Illuminate\Http\Request;
 
 class AdvisorController extends Controller
 {
-    public function dashboard()
-    {
-        return view('advisor.pages.dashboard');
-    }
+    // public function dashboard()
+    // {
+    //     return view('advisor.pages.dashboard');
+    // }
 
     // public function myprofile()
     // {
     //     return view('advisor.pages.myprofile');
     // }
 
-    public function reviewssummary()
-    {
-        return view('advisor.pages.reviewssummary');
-    }
+    // public function reviewssummary()
+    // {
+    //     return view('advisor.pages.reviewssummary');
+    // }
 
     public function mybookings()
     {

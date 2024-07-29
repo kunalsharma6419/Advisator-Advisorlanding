@@ -52,6 +52,12 @@
                 <span class="menu-title">Advisor Accounts</span>
             </a>
         </li>
+        <li class="nav-item {{ request()->routeIs('advisatoradmin.contactqueries') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('advisatoradmin.contactqueries') }}">
+                <i class="fa fa-phone menu-icon"></i>
+                <span class="menu-title">Contact Queries</span>
+            </a>
+        </li>
         {{-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
                 aria-controls="ui-basic">
@@ -144,12 +150,12 @@
                 </ul>
             </div>
         </li> --}}
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" href="docs/documentation.html">
                 <i class="mdi mdi-file-document-box menu-icon"></i>
                 <span class="menu-title">Documentation</span>
             </a>
-        </li>
+        </li> --}}
         <li class="nav-item sidebar-actions">
             <div class="nav-link">
                 <div class="mt-4">

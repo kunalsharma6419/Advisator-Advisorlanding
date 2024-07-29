@@ -23,7 +23,7 @@ class AdvisorNomination extends Model
         'sub_function_category_id_2', 'industry_ids', 'geography_ids', 'nominee_qualification',
         'nominee_experience', 'nominee_skills', 'discovery_call_price_per_minute',
         'discovery_call_price_per_hour', 'conference_call_price_per_minute',
-        'conference_call_price_per_hour', 'chat_price_per_minute', 'chat_price_per_hour',
+        'conference_call_price_per_hour', 'chat_price_per_minute', 'chat_price_per_hour','document_path',
         'nomination_reason', 'nomination_status'
     ];
     public function businessFunctionCategory()

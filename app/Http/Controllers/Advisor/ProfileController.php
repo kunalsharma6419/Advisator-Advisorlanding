@@ -75,26 +75,39 @@ class ProfileController extends Controller
             'highlighted_images.*' => 'nullable|image|max:2048', // Validate highlighted images
             'is_available' => 'nullable|boolean',
             'language_known' => 'nullable|string|in:English,Hindi',
-            'services.*' => 'nullable|string',
-            'awards_recognition.*' => 'nullable|string',
+            'services' => 'nullable|string',
+            'awards_recognition' => 'nullable|string',
             // 'video_upload.*' => 'nullable|file|mimes:mp4,mov,avi|max:20480', // Validate video uploads
             'about' => 'nullable|string',
             'is_founder' => 'nullable|boolean',
+            'linkedin_profile' => 'nullable|string',
             'company_name' => 'nullable|string|max:255',
             'company_website' => 'nullable|string|max:255|url',
         ]);
 
+        // // Handle photo upload
+        // if ($request->hasFile('photo')) {
+        //     // Delete previous photo if exists
+        //     if ($user->profile_photo_path) {
+        //         Storage::delete($user->profile_photo_path);
+        //     }
+
+        //     // Store new photo
+        //     $photoPath = $request->file('photo')->store('profile-photos', 'public');
+        //     $user->profile_photo_path = $photoPath;
+        // }
         // Handle photo upload
         if ($request->hasFile('photo')) {
-            // Delete previous photo if exists
-            if ($user->profile_photo_path) {
-                Storage::delete($user->profile_photo_path);
+            if ($advisor->profile_photo_path) {
+                Storage::delete($advisor->profile_photo_path);
             }
-
-            // Store new photo
             $photoPath = $request->file('photo')->store('profile-photos', 'public');
+            $advisor->profile_photo_path = $photoPath;
+            $advisor->save();
             $user->profile_photo_path = $photoPath;
+            $user->save();
         }
+
 
         // Handle multiple photo uploads (highlighted_images)
         if ($request->hasFile('highlighted_images')) {

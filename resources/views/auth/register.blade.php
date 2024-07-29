@@ -465,6 +465,23 @@ document.addEventListener('DOMContentLoaded', function() {
                         window.location.href = result.verification_url;
                     });
                 } else if (result.status === 'exists' || result.status === 'warning') {
+                    // if (response.redirect) {
+                    //     Swal.fire({
+                    //         icon: 'info',
+                    //         title: 'Account Status',
+                    //         text: result.message
+                    //     }).then(function() {
+                    //         window.location.href = response.redirect;
+                    //     });
+                    // }else {
+                    //     Swal.fire({
+                    //         icon: 'warning',
+                    //         title: 'Account Exists',
+                    //         text: result.message
+                    //     }).then(function() {
+                    //         window.location.href = result.verification_url;
+                    //     });
+                    // }
                     Swal.fire({
                         icon: result.status === 'exists' ? 'warning' : 'info',
                         title: 'Account Status',
@@ -478,9 +495,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 } else {
                     Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
+                        icon: 'warning',
+                        title: 'Account Already Exists',
                         text: result.message
+                    }).then(function() {
+                        window.location.href = '{{ route('login') }}';
                     });
                 }
             } catch (error) {

@@ -6,7 +6,7 @@
                 © 2024 Advisator. All rights reserved.
             </h3>
             <h3 class="text-[#3A3A3A] font-normal text-base text-start">
-                info@advisator.in
+                advisory@shift180.in
             </h3>
         </div>
     </div>

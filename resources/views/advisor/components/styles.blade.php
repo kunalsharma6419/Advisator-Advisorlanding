@@ -11,6 +11,12 @@
     <script src="//cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/d3-shape@3"></script>
+    <!-- Include stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
+    <!-- Include the Quill library -->
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+
+
 
     <style>
         .tools {
