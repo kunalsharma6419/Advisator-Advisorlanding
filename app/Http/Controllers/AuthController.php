@@ -190,7 +190,7 @@ class AuthController extends Controller
                     if (!$nomination) {
                         return response()->json([
                             'status' => 'warning',
-                            'message' => 'Kindly fill the nomination form to apply for the role of advisor',
+                            'message' => 'Fill out the nomination form to apply for the role of Advisor.',
                             'redirect' => route('advisor-nominations.create', ['userId' => $user->unique_id])
                         ]);
                     } elseif ($nomination->nomination_status == 'inprogress') {
@@ -372,13 +372,13 @@ class AuthController extends Controller
                 if($user->usertype == 0 || $user->usertype == 1)
                 {
                     Auth::login($user);
-                    return response()->json(['success' => true, 'msg' => 'Login Success, Mail has been verified', 'usertype' => $user->usertype]);
+                    return response()->json(['success' => true, 'msg' => 'Email address has been verified', 'usertype' => $user->usertype]);
                 } elseif ($user->usertype == 2) {
                     $nomination = AdvisorNomination::where('user_id', $user->unique_id)->first();
                     if (!$nomination) {
                         return response()->json([
                             'success' => true,
-                            'msg' => 'Kindly fill the nomination form to apply for the role of advisor',
+                            'msg' => 'Fill out the nomination form to apply for the role of Advisor.',
                             'redirect' => route('advisor-nominations.create', ['userId' => $user->unique_id])
                         ]);
                     } elseif ($nomination->nomination_status == 'inprogress') {
@@ -395,7 +395,7 @@ class AuthController extends Controller
                         ]);
                     } else {
                         Auth::login($user);
-                        return response()->json(['success' => true, 'msg' => 'Login Success, Mail has been verified']);
+                        return response()->json(['success' => true, 'msg' => 'Email address has been verified']);
                     }
                 } else {
                     return response()->json(['success' => false, 'msg' => 'Something went wrong']);

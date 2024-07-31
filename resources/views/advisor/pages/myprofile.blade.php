@@ -40,7 +40,7 @@
                                 <h5>Profile Information</h5>
                                 <span class="text-lg lg:text-xl cursor-pointer">></span>
                             </div>
-                            <p class="text-[#828282]">Update your profile's information and email address</p>
+                            <p class="text-[#828282]">Update your business profile information</p>
                         </div>
                     </div>
                     <div class="grow border shadow-sm p-4 rounded-xl flex gap-6">
@@ -49,101 +49,45 @@
                             @csrf
                             @method('PUT')
 
-                            {{-- <div>
-                                <label for="photo" class="block text-sm font-medium text-gray-700">Photo</label>
-                                <div class="mt-1 flex items-center">
-                                    @if (Auth::user()->profile_photo_path)
-                                        <img id="profilePhoto"
-                                            src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}"
-                                            alt="Profile Photo" width="100"
-                                            class="shrink-0 w-[70px] h-[70px] lg:w-[80px] lg:h-[80px] shadow-md rounded-full">
-                                    @else
-                                        <?php
-                                        $fullName = Auth::user()->full_name;
-                                        $initial = strtoupper(substr($fullName, 0, 1));
-                                        ?>
-                                        <img id="profilePhoto"
-                                            src="https://via.placeholder.com/150/000000/FFFFFF/?text={{ $initial }}"
-                                            alt="Profile Photo" width="100"
-                                            class="shrink-0 w-[70px] h-[70px] lg:w-[80px] lg:h-[80px] shadow-md rounded-full">
-                                    @endif
-                                    <input type="file" name="photo" id="photo" class="hidden"
-                                        onchange="previewPhoto()">
-                                </div>
-                                @error('photo')
-                                    <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
-                                @enderror
-                                <div class="mt-2 flex space-x-3">
-                                    <button type="button" onclick="document.getElementById('photo').click()"
-                                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg shadow-md">Select
-                                        a New Photo</button>
-                                    <button type="button" onclick="removePhoto()"
-                                        class="bg-red-200 hover:bg-red-300 text-red-700 font-semibold py-2 px-4 rounded-lg shadow-md">Remove
-                                        Photo</button>
-                                </div>
-                            </div> --}}
-                            {{-- <div>
-                                <label for="photo" class="block text-sm font-medium text-gray-700">Photo</label>
-                                <div class="mt-1 flex items-center">
-                                    @if (Auth::user()->profile_photo_path)
-                                        <img id="profilePhoto"
-                                            src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}"
-                                            alt="Profile Photo" width="100"
-                                            class="shrink-0 w-[70px] h-[70px] lg:w-[80px] lg:h-[80px] shadow-md rounded-full">
-                                    @else
-                                        <?php
-                                        $fullName = Auth::user()->full_name;
-                                        $initial = strtoupper(substr($fullName, 0, 1));
-                                        ?>
-                                        <img id="profilePhoto"
-                                            src="https://via.placeholder.com/150/000000/FFFFFF/?text={{ $initial }}"
-                                            alt="Profile Photo" width="100"
-                                            class="shrink-0 w-[70px] h-[70px] lg:w-[80px] lg:h-[80px] shadow-md rounded-full">
-                                    @endif
-                                    <input type="file" name="photo" id="photo" class="hidden"
-                                        onchange="previewPhoto()">
-                                </div>
-                                @error('photo')
-                                    <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
-                                @enderror
-                                <div class="mt-2 flex space-x-3">
-                                    <button type="button" onclick="document.getElementById('photo').click()"
-                                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg shadow-md">Select
-                                        a New Photo</button>
-                                    <button type="button" onclick="removePhoto()"
-                                        class="bg-red-200 hover:bg-red-300 text-red-700 font-semibold py-2 px-4 rounded-lg shadow-md">Remove
-                                        Photo</button>
-                                </div>
-                            </div> --}}
+                            <!-- Desktop Version -->
+                            <div class="hidden lg:block text-center">
+                                <h3 class="text-2xl font-bold">Business Profile</h3>
+                                <hr class="mt-2 border-gray-300">
+                            </div>
+
                             <div>
                                 <label for="photo" class="block text-sm font-medium text-gray-700">Photo</label>
                                 <div class="mt-1 flex items-center">
                                     @if ($advisor->profile_photo_path)
-                                        <img id="profilePhoto" src="{{ asset('storage/' . $advisor->profile_photo_path) }}"
-                                            alt="Profile Photo" width="100"
+                                        <img id="profilePhotoDesktop"
+                                            src="{{ asset('storage/' . $advisor->profile_photo_path) }}" alt="Profile Photo"
+                                            width="100"
                                             class="shrink-0 w-[70px] h-[70px] lg:w-[80px] lg:h-[80px] shadow-md rounded-full">
                                     @else
                                         <?php $initial = strtoupper(substr($advisor->full_name, 0, 1)); ?>
-                                        <img id="profilePhoto"
+                                        <img id="profilePhotoDesktop"
                                             src="https://via.placeholder.com/150/000000/FFFFFF/?text={{ $initial }}"
                                             alt="Profile Photo" width="100"
                                             class="shrink-0 w-[70px] h-[70px] lg:w-[80px] lg:h-[80px] shadow-md rounded-full">
                                     @endif
-                                    <input type="file" name="photo" id="photo" class="hidden"
-                                        onchange="previewPhoto()">
+                                    <input type="file" name="photo" id="photoDesktop" class="hidden"
+                                        onchange="previewPhoto('Desktop')">
                                 </div>
                                 @error('photo')
                                     <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
                                 @enderror
                                 <div class="mt-2 flex space-x-3">
-                                    <button type="button" onclick="document.getElementById('photo').click()"
+                                    <button type="button" onclick="document.getElementById('photoDesktop').click()"
                                         class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg shadow-md">Select
                                         a New Photo</button>
-                                    <button type="button" onclick="removePhoto()"
+                                    <button type="button" onclick="removePhoto('Desktop')"
                                         class="bg-red-200 hover:bg-red-300 text-red-700 font-semibold py-2 px-4 rounded-lg shadow-md">Remove
                                         Photo</button>
+                                    <button type="submit"
+                                        class="bg-indigo-700 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">Save</button>
                                 </div>
                             </div>
+
 
 
                             <div class="grow mt-6">
@@ -188,9 +132,20 @@
                                     @enderror
                                 </div>
 
+                                <div class="w-full mb-6 mt-6">
+                                    <label class="text-[#828282] font-normal text-base" for="linkedin_profile">Linkedin
+                                        Profile</label>
+                                    <input type="linkedin_profile" name="linkedin_profile" id="linkedin_profile"
+                                        value="{{ old('linkedin_profile', $advisor->linkedin_profile) }}"
+                                        class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
+                                    @error('linkedin_profile')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
                                 <div class="w-full mb-6">
                                     <label class="text-[#828282] font-normal text-base"
-                                        for="business_function_category_id">Business functions</label>
+                                        for="business_function_category_id">Business function</label>
                                     <div id="business_function"
                                         class="flex gap-2 items-center font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
                                         <select id="business_function_category_id" name="business_function_category_id"
@@ -250,7 +205,7 @@
                                     <div id="industry"
                                         class="flex gap-2 items-center font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
                                         <select id="industry_select" class="outline-none w-full">
-                                            <option value="">Select Industry</option>
+                                            <option value="" style="text-color: #FF3131;">Select Industry</option>
                                             @foreach ($industries as $industry)
                                                 <option value="{{ $industry->id }}">{{ $industry->name }}</option>
                                             @endforeach
@@ -303,9 +258,107 @@
                                         value="{{ json_encode($advisor->geography_ids) }}">
                                 </div>
 
+                                <div class="hidden lg:block text-center" style="margin-top: 50px;">
+                                    <h3 class="text-2xl font-bold">Additional Information</h3>
+                                    <hr class="mt-2 border-gray-300">
+                                </div>
+
+                                <div class="w-full">
+                                    <label for="is_founder" class="text-[#828282] font-normal text-base">Is
+                                        Founder</label>
+                                    <div
+                                        class="flex items-center justify-between text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%]  p-2 ">
+                                        <p>Are you a business owner?</p>
+                                        <input type="checkbox" name="is_founder" id="is_founder" value="1"
+                                            {{ old('is_founder', $advisor->is_founder ? 'checked' : '') }}
+                                            class="w-4 h-4 text-blue-600 outline-none bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                        @error('is_founder')
+                                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="w-full mb-6 mt-6">
+                                    <label class="text-[#828282] font-normal text-base" for="company_name">Company
+                                        Name</label>
+                                    <input type="company_name" name="company_name" id="company_name"
+                                        value="{{ old('company_name', $advisor->company_name) }}"
+                                        placeholder="Mention your company name"
+                                        class="text-[#3A3A3A] placeholder:text-[#B0B0B0] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
+                                    @error('company_name')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="w-full mb-6 mt-6">
+                                    <label class="text-[#828282] font-normal text-base" for="company_website">Company
+                                        Website</label>
+                                    <div class="relative inline-block border-b border-dotted border-black group">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="h-6 w-6 text-blue-500 cursor-pointer" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M13 16h-1v-4h-1m0-4h.01M12 17h0a1 1 0 010 2h0a1 1 0 010-2zm0-10h0a1 1 0 010 2h0a1 1 0 010-2z" />
+                                        </svg>
+                                        <span
+                                            class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-50 bg-[#6AA300] text-white text-center rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            Enter Company Website like that https://xyz.com
+                                            <span
+                                                class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-5 border-solid border-transparent border-t-gray-700"></span>
+                                        </span>
+                                    </div>
+                                    <input type="text" name="company_website" id="company_website"
+                                        value="{{ old('company_website', $advisor->company_website) }}"
+                                        placeholder="example - https//xyz.com"
+                                        class="text-[#3A3A3A] placeholder:text-[#B0B0B0] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
+                                    @error('company_website')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="w-full mb-6 mt-8">
+                                    <label class="text-[#828282] font-normal text-base" for="about">Mention details
+                                        about yourself e.g. experience, expertise</label>
+                                    <br>
+                                    <textarea id="about" name="about" rows="6"
+                                        class="text-base font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%]  p-2">{{ old('about', $advisor->about) }}</textarea>
+                                    @error('about')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <!-- Awards and Recognition -->
+                                <div class="mt-4">
+                                    <label for="awards_recognition" class="text-[#828282] font-normal text-base">Mention
+                                        accomplishments in your professional career</label>
+                                    <div id="awards-recognition-editor"
+                                        class="text-base font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
+                                    </div>
+                                    <input type="hidden" id="awards_recognition" name="awards_recognition"
+                                        value="{{ old('awards_recognition', $advisor->awards_recognition) }}">
+                                    <!-- Error Handling (if applicable) -->
+                                    @error('awards_recognition')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <!-- Services -->
+                                <div class="mt-4">
+                                    <label for="services" class="text-[#828282] font-normal text-base">Mention about
+                                        Services and products you or your company offers</label>
+                                    <div id="services-editor"
+                                        class="text-base font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[80%] lg:w-[90%] p-2">
+                                    </div>
+                                    <input type="hidden" id="services" name="services"
+                                        value="{{ old('services', $advisor->services) }}">
+                                    <!-- Error Handling (if applicable) -->
+                                    @error('services')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
                                 <div class="w-full mb-6">
-                                    <label for="highlighted_images"
-                                        class="text-[#828282] font-normal text-base">Highlighted Images</label>
+                                    <label for="highlighted_images" class="text-[#828282] font-normal text-base">Select
+                                        multiple images that highlight your services or products.</label>
                                     <input type="file" name="highlighted_images[]" id="highlighted_images"
                                         accept="image/*" multiple
                                         class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
@@ -339,112 +392,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Services -->
-                                <div class="mt-4">
-                                    <label for="services" class="text-[#828282] font-normal text-base">Services</label>
-                                    <div id="services-editor"
-                                        class="text-base font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[80%] lg:w-[90%] p-2">
-                                    </div>
-                                    <input type="hidden" id="services" name="services"
-                                        value="{{ old('services', $advisor->services) }}">
-                                    <!-- Error Handling (if applicable) -->
-                                    @error('services')
-                                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-
-                                <!-- Awards and Recognition -->
-                                <div class="mt-4">
-                                    <label for="awards_recognition" class="text-[#828282] font-normal text-base">Awards
-                                        & Recognition</label>
-                                    <div id="awards-recognition-editor"
-                                        class="text-base font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
-                                    </div>
-                                    <input type="hidden" id="awards_recognition" name="awards_recognition"
-                                        value="{{ old('awards_recognition', $advisor->awards_recognition) }}">
-                                    <!-- Error Handling (if applicable) -->
-                                    @error('awards_recognition')
-                                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-
-                                <div class="w-full mb-6 mt-8">
-                                    <label class="text-[#828282] font-normal text-base" for="about">About
-                                        you</label>
-                                    <br>
-                                    <textarea id="about" name="about" rows="6"
-                                        class="text-base font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%]  p-2">{{ old('about', $advisor->about) }}</textarea>
-                                    @error('about')
-                                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="w-full">
-                                    <label for="is_founder" class="text-[#828282] font-normal text-base">Is
-                                        Founder</label>
-                                    <div
-                                        class="flex items-center justify-between text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%]  p-2 ">
-                                        <p>Are you a business owner?</p>
-                                        <input type="checkbox" name="is_founder" id="is_founder" value="1"
-                                            {{ old('is_founder', $advisor->is_founder ? 'checked' : '') }}
-                                            class="w-4 h-4 text-blue-600 outline-none bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                                        @error('is_founder')
-                                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="w-full mb-6 mt-6">
-                                    <label class="text-[#828282] font-normal text-base" for="linkedin_profile">Linkedin
-                                        Profile</label>
-                                    <input type="linkedin_profile" name="linkedin_profile" id="linkedin_profile"
-                                        value="{{ old('linkedin_profile', $advisor->linkedin_profile) }}"
-                                        class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
-                                    @error('linkedin_profile')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="w-full mb-6 mt-6">
-                                    <label class="text-[#828282] font-normal text-base" for="company_name">Company
-                                        Name</label>
-                                    <input type="company_name" name="company_name" id="company_name"
-                                        value="{{ old('company_name', $advisor->company_name) }}"
-                                        placeholder="Enter Company Legal Name"
-                                        class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
-                                    @error('company_name')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="w-full mb-6 mt-6">
-                                    <label class="text-[#828282] font-normal text-base" for="company_website">Company
-                                        Website</label>
-                                    <div class="relative inline-block border-b border-dotted border-black group">
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="h-6 w-6 text-blue-500 cursor-pointer" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M13 16h-1v-4h-1m0-4h.01M12 17h0a1 1 0 010 2h0a1 1 0 010-2zm0-10h0a1 1 0 010 2h0a1 1 0 010-2z" />
-                                        </svg>
-                                        <span
-                                            class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-50 bg-[#6AA300] text-white text-center rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                            Enter Company Website like that https://xyz.com
-                                            <span
-                                                class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-5 border-solid border-transparent border-t-gray-700"></span>
-                                        </span>
-                                    </div>
-                                    <input type="text" name="company_website" id="company_website"
-                                        value="{{ old('company_website', $advisor->company_website) }}"
-                                        placeholder="Enter Company Website like that https://xyz.com"
-                                        class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
-                                    @error('company_website')
-                                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-
 
                                 <div class="w-full mt-6 flex justify-end space-x-3">
                                     <button type="submit"
@@ -468,10 +415,10 @@
                         <div
                             class="flex flex-col gap-3 text-[#2A2A2A] font-medium text-base lg:text-lg w-full border shadow-sm p-4 bg-[#F5F5F5] rounded-xl">
                             <div class="flex items-center justify-between">
-                                <h5>Availability</h5>
+                                <h5>Choose your availability effortlessly. </h5>
                                 <span class="text-lg lg:text-xl cursor-pointer" onclick="openAvailabilityModal()">></span>
                             </div>
-                            <p class="text-[#828282]">Choose your availability effortlessly.</p>
+                            <p class="text-[#828282]">Select available timeslots for client discussions.</p>
                         </div>
                     </div>
                     <div class="grow border shadow-sm p-5 rounded-xl">
@@ -494,7 +441,8 @@
                     <span class="close absolute top-2 right-2 text-gray-600 cursor-pointer"
                         onclick="closeAvailabilityModal()">&times;</span>
                     <div class="bg-white p-4 md:p-8">
-                        <h2 class="text-[16px] md:text-[20px] font-[500] text-[#526E1C]">Choose your Availability</h2>
+                        <h2 class="text-[16px] md:text-[20px] font-[500] text-[#526E1C]">Choose your availability
+                            effortlessly. </h2>
                         <div class="overflow-x-auto">
                             <table class="w-full mt-[20px] md:mt-[30px]">
                                 <tbody>
@@ -566,7 +514,8 @@
                                 <h5>Advisory Price</h5>
                                 <span class="text-lg lg:text-xl cursor-pointer">></span>
                             </div>
-                            <p class="text-[#828282]">Choose your availability effortlessly.</p>
+                            <p class="text-[#828282]">State your advisory fee for clients. For discovery calls, the
+                                suggested price is INR 0 to 500.</p>
                         </div>
                     </div>
                     <div class="grow border shadow-sm p-5 rounded-xl">
@@ -647,16 +596,15 @@
                                 <h5>Upload a Video</h5>
                                 <span class="text-lg lg:text-xl cursor-pointer">></span>
                             </div>
-                            <p class="text-[#828282]">Share your expertise visually by uploading informative videos to
-                                assist users</p>
+                            <p class="text-[#828282]">Showcase your expertise by uploading videos for users. </p>
                         </div>
                     </div>
                     <form action="{{ route('advisor.updateVideos') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="grow border flex flex-col justify-around shadow-sm p-5 rounded-xl">
-                            <p class="text-[#828282] text-base font-medium">Upload your video content here. Accepted file
-                                formats include MP4, MOV, AVI, and more.</p>
+                            <p class="text-[#828282] text-base font-medium"> Accepted file
+                                formats include MP4, MOV, AVI, and more. </p>
                             <div class="w-full mb-6 mt-8">
                                 <label for="video_upload" class="text-[#828282] font-normal text-base">Video Upload (Max
                                     2)</label>
@@ -710,8 +658,7 @@
                                 <h5>Payment Information</h5>
                                 <span class="text-lg lg:text-xl cursor-pointer">></span>
                             </div>
-                            <p class="text-[#828282]">Safely store your preferred payment method for seamless transactions
-                                on your profile.</p>
+                            <p class="text-[#828282]">Specify the account information for receiving advisory payments.</p>
                         </div>
                     </div>
                     <div class="grow border flex flex-col justify-around shadow-sm p-5 rounded-xl">
@@ -897,15 +844,15 @@
                                             <div class="flex flex-col justify-between">
                                                 <p class="text-base text-[#2A2A2A] font-semibold">
                                                     {{ Auth::user()->full_name }}</p>
-                                                <p class="text-sm text-[#828282] font-medium">{{ Auth::user()->email }}
+                                                <p class="text-sm text-[#828282] font-medium">Business Profile Information
                                                 </p>
                                             </div>
                                             <!-- <div class="flex flex-col items-start">
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                <p class="text-sm sm:text-base text-[#2A2A2A] font-semibold">Availability</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                <p class="text-xs sm:text-sm text-[#828282] font-medium">Choose your availability effortlessly.</p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <p class="text-sm sm:text-base text-[#2A2A2A] font-semibold">Availability</p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <p class="text-xs sm:text-sm text-[#828282] font-medium">Choose your availability effortlessly.</p>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                            </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div> -->
                                         </div>
                                         <svg id="arrow1" xmlns="http://www.w3.org/2000/svg" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor"
@@ -915,7 +862,7 @@
                                         </svg>
                                     </button>
                                     <div id="answer1" style="display:none">
-                                        <div class="w-full mx-auto h-[3rem] flex justify-between items-center">
+                                        {{-- <div class="w-full mx-auto h-[3rem] flex justify-between items-center">
                                             <div class="flex gap-2 items-center justify-start">
 
                                                 <h5 class="ftext-[#3A3A3A] font-medium  text-sm sm:text-base">Personal
@@ -927,104 +874,132 @@
                                                 <h6 class="text-[#3A3A3A] font-medium text-xs sm:text-sm">Edit</h6>
                                             </div>
 
+                                        </div> --}}
+                                        <div class="block lg:hidden text-center">
+                                            <h3 class="text-xl font-bold">Business Profile</h3>
+                                            <hr class="mt-2 border-gray-300">
                                         </div>
+
 
 
                                         <div class="w-[90%] md:w-[90%] lg:w-[85%] mx-auto mt-[1rem] mb-[3rem]">
 
                                             <div class="bg-[#FAFAFA]  shadow-md p-4 rounded-xl flex gap-6">
+                                                <!-- Mobile Version -->
                                                 <div>
-                                                    @if (Auth::user()->profile_photo_path)
-                                                        <img class="shrink-0 w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] shadow-md rounded-[2rem]"
-                                                            src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}"
-                                                            alt="">
-                                                    @else
-                                                        <?php
-                                                        $fullName = Auth::user()->full_name;
-                                                        $initial = strtoupper(substr($fullName, 0, 1));
-                                                        ?>
-                                                        <img id="profilePhoto"
-                                                            src="https://via.placeholder.com/150/000000/FFFFFF/?text={{ $initial }}"
-                                                            alt="Profile Photo" width="100"
-                                                            class="shrink-0 w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] shadow-md rounded-[2rem]">
-                                                    @endif
-                                                    <input type="file" name="photo" id="photo" class="hidden"
-                                                        onchange="previewPhoto()">
+                                                    <label for="photoMobile"
+                                                        class="block text-sm font-medium text-gray-700">Photo</label>
+                                                    <div class="mt-1 flex items-center">
+                                                        @if (Auth::user()->profile_photo_path)
+                                                            <img id="profilePhotoMobile"
+                                                                src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}"
+                                                                alt="Profile Photo" width="100"
+                                                                class="shrink-0 w-[70px] h-[70px] lg:w-[80px] lg:h-[80px] shadow-md rounded-full">
+                                                        @else
+                                                            <?php
+                                                            $fullName = Auth::user()->full_name;
+                                                            $initial = strtoupper(substr($fullName, 0, 1));
+                                                            ?>
+                                                            <img id="profilePhotoMobile"
+                                                                src="https://via.placeholder.com/150/000000/FFFFFF/?text={{ $initial }}"
+                                                                alt="Profile Photo" width="100"
+                                                                class="shrink-0 w-[70px] h-[70px] lg:w-[80px] lg:h-[80px] shadow-md rounded-full">
+                                                        @endif
+                                                        <input type="file" name="photo" id="photoMobile"
+                                                            class="hidden" onchange="previewPhoto('Mobile')">
+                                                    </div>
                                                     @error('photo')
                                                         <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
                                                     @enderror
-                                                    <div
-                                                        class="mt-2 flex flex-col md:flex-row md:items-center md:space-x-3">
+                                                    <div class="mt-2 flex space-x-3">
                                                         <button type="button"
-                                                            onclick="document.getElementById('photo').click()"
-                                                            class="w-full md:w-auto bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-3 md:px-4 rounded-lg shadow-md mb-2 md:mb-0">Select
-                                                            a New Photo</button>
-                                                        <button type="button" onclick="removePhoto()"
-                                                            class="w-full md:w-auto bg-red-200 hover:bg-red-300 text-red-700 font-semibold py-2 px-3 md:px-4 rounded-lg shadow-md">Remove
-                                                            Photo</button>
+                                                            onclick="document.getElementById('photoMobile').click()"
+                                                            class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg shadow-md">
+                                                            Select a New Photo
+                                                        </button>
+                                                        <button type="button" onclick="removePhoto('Mobile')"
+                                                            class="bg-red-200 hover:bg-red-300 text-red-700 font-semibold py-2 px-4 rounded-lg shadow-md">
+                                                            Remove Photo
+                                                        </button>
+                                                        <button type="submit"
+                                                            class="bg-indigo-700 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">Save</button>
                                                     </div>
-
                                                 </div>
-                                                <div class="grow">
-                                                    <div>
-                                                        <div class="w-full mb-2">
-                                                            <h5 class="text-[#828282] font-normal text-xs sm:text-sm">Full
-                                                                Name
-                                                            </h5>
 
-                                                            <input type="text" id="full_name" name="full_name"
-                                                                value="{{ old('full_name', $advisor->full_name) }}"
-                                                                class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
-                                                            @error('full_name')
-                                                                <div class="text-danger">{{ $message }}</div>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="w-full mb-2">
-                                                            <h5 class="text-[#828282] font-normal text-xs sm:text-sm">
-                                                                Mobile Number
-                                                            </h5>
-                                                            <div
-                                                                class="flex gap-2 items-center font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
-                                                                <input type="text" id="mobile_number"
-                                                                    name="mobile_number"
-                                                                    value="{{ old('mobile_number', $advisor->mobile_number) }}"
-                                                                    class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base outline-none w-full">
-                                                                @error('mobile_number')
-                                                                    <div class="text-danger">{{ $message }}</div>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        <div class="w-full mb-2">
-                                                            <h5 class="text-[#828282] font-normal text-xs sm:text-sm">
-                                                                Location
-                                                            </h5>
-                                                            <input type="text" id="location" name="location"
-                                                                value="{{ old('location', $advisor->location) }}"
-                                                                class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
-                                                            @error('location')
+
+
+                                            </div>
+                                            <div class="grow">
+                                                <div>
+                                                    <div class="w-full mb-2">
+                                                        <h5 class="text-[#828282] font-normal text-xs sm:text-sm">Full
+                                                            Name
+                                                        </h5>
+
+                                                        <input type="text" id="full_name" name="full_name"
+                                                            value="{{ old('full_name', $advisor->full_name) }}"
+                                                            class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
+                                                        @error('full_name')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="w-full mb-2">
+                                                    <h5 class="text-[#828282] font-normal text-xs sm:text-sm">Email
+                                                    </h5>
+                                                    <input type="email" name="email" id="email"
+                                                        value="{{ old('email', $advisor->email) }}"
+                                                        class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[100%] p-2">
+                                                    @error('email')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                    <div class="w-full mb-2">
+                                                        <h5 class="text-[#828282] font-normal text-xs sm:text-sm">
+                                                            Mobile Number
+                                                        </h5>
+                                                        <div
+                                                            class="flex gap-2 items-center font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
+                                                            <input type="text" id="mobile_number" name="mobile_number"
+                                                                value="{{ old('mobile_number', $advisor->mobile_number) }}"
+                                                                class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base outline-none w-full">
+                                                            @error('mobile_number')
                                                                 <div class="text-danger">{{ $message }}</div>
                                                             @enderror
                                                         </div>
                                                     </div>
                                                     <div class="w-full mb-2">
-                                                        <h5 class="text-[#828282] font-normal text-xs sm:text-sm">Email
+                                                        <h5 class="text-[#828282] font-normal text-xs sm:text-sm">
+                                                            Location
                                                         </h5>
-                                                        <input type="email" name="email" id="email"
-                                                            value="{{ old('email', $advisor->email) }}"
-                                                            class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[100%] p-2">
-                                                        @error('email')
+                                                        <input type="text" id="location" name="location"
+                                                            value="{{ old('location', $advisor->location) }}"
+                                                            class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
+                                                        @error('location')
                                                             <div class="text-danger">{{ $message }}</div>
                                                         @enderror
                                                     </div>
-
-
                                                 </div>
-                                            </div>
 
+
+
+                                            </div>
                                             <div
                                                 class="bg-[#FAFAFA] my-[1rem]  shadow-md p-4 rounded-xl flex flex-col gap-2">
                                                 <label class="text-[#828282] font-normal text-xs sm:text-sm"
-                                                    for="businessFunction">Business functions</label>
+                                                    for="company_name">Linkedin
+                                                    Profile</label>
+                                                <input type="linkedin_profile" name="linkedin_profile"
+                                                    id="linkedin_profile"
+                                                    value="{{ old('linkedin_profile', $advisor->linkedin_profile) }}"
+                                                    class="text-[#2A2A2A] placeholder:text-[#2A2A2A] font-medium text-sm sm:text-base outline-none bg-transparent">
+                                                @error('linkedin_profile')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div
+                                                class="bg-[#FAFAFA] my-[1rem]  shadow-md p-4 rounded-xl flex flex-col gap-2">
+                                                <label class="text-[#828282] font-normal text-xs sm:text-sm"
+                                                    for="businessFunction">Business function</label>
                                                 <div id="businessFunction">
                                                     <select id="business_function_category_id"
                                                         name="business_function_category_id" class="outline-none w-full">
@@ -1108,6 +1083,7 @@
                                                 <input type="hidden" name="industries" id="industries_mobile"
                                                     value="{{ json_encode($advisor->industry_ids) }}">
                                             </div>
+
                                             <div
                                                 class="bg-[#FAFAFA] my-[1rem]  shadow-md p-4 rounded-xl flex flex-col gap-2">
                                                 <label class="text-[#828282] font-normal text-xs sm:text-sm"
@@ -1139,10 +1115,90 @@
                                                 <input type="hidden" name="geographies" id="geographies_mobile"
                                                     value="{{ json_encode($advisor->industry_ids) }}">
                                             </div>
+                                            <div class="block lg:hidden text-center">
+                                            <h3 class="text-xl font-bold">Additional Information</h3>
+                                            <hr class="mt-2 border-gray-300">
+                                        </div>
+                                        <div
+                                                class="bg-[#FAFAFA] my-[1rem]  shadow-md p-4 rounded-xl flex justify-between items-center  gap-2">
+                                                <p>Are you a business Owner?</p>
+                                                <input type="checkbox" name="is_founder" id="is_founder" value="1"
+                                                    {{ old('is_founder', $advisor->is_founder ? 'checked' : '') }}
+                                                    class="w-4 h-4 text-blue-600 outline-none bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                                @error('is_founder')
+                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                                @enderror
+
+                                            </div>
                                             <div
                                                 class="bg-[#FAFAFA] my-[1rem]  shadow-md p-4 rounded-xl flex flex-col gap-2">
                                                 <label class="text-[#828282] font-normal text-xs sm:text-sm"
-                                                    for="highlighted_images">Highlighted Images</label>
+                                                    for="profileLink">Company Name</label>
+                                                <input type="company_name" name="company_name" id="company_name"
+                                                    value="{{ old('company_name', $advisor->company_name) }}"
+                                                    placeholder="Mention your company name"
+                                                    class="text-[#2A2A2A] placeholder:text-[#B0B0B0] font-medium text-sm sm:text-base outline-none bg-transparent">
+                                                @error('company_name')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+
+                                            </div>
+                                            <div
+                                                class="bg-[#FAFAFA] my-[1rem]  shadow-md p-4 rounded-xl flex flex-col gap-2">
+                                                <label class="text-[#828282] font-normal text-xs sm:text-sm"
+                                                    for="profileLink">Company Website</label>
+                                                <input type="text" name="company_website" id="company_website"
+                                                    value="{{ old('company_website', $advisor->company_website) }}"
+                                                    placeholder="example - https//xyz.com"
+                                                    class="text-[#2A2A2A] placeholder:text-[#B0B0B0] font-medium text-sm sm:text-base outline-none bg-transparent">
+                                                @error('company_website')
+                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                                @enderror
+
+                                            </div>
+                                            <div
+                                                class="bg-[#FAFAFA] my-[1rem]  shadow-md p-4 rounded-xl flex flex-col gap-2">
+                                                <label class="text-[#828282] font-normal text-xs sm:text-sm"
+                                                    for="Description">Mention details about yourself e.g. experience, expertise</label>
+                                                <textarea id="about" name="about" rows="6"
+                                                    class="text-[#2A2A2A] placeholder:text-[#2A2A2A] font-medium text-sm sm:text-base outline-none bg-transparent">{{ old('about', $advisor->about) }}</textarea>
+                                                @error('about')
+                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                                @enderror
+
+                                            </div>
+                                            <!-- Awards and Recognition -->
+                                            <div class="mt-4">
+                                                <label for="awards_recognition"
+                                                    class="text-[#828282] font-normal text-base">Mention accomplishments in your professional career</label>
+                                                <div id="awards-recognition-editor-mobile"
+                                                    class="text-[#2A2A2A] placeholder:text-[#2A2A2A] font-medium text-sm sm:text-base outline-none bg-transparent">
+                                                </div>
+                                                <input type="hidden" id="awards_recognition-mobile"
+                                                    name="awards_recognition"
+                                                    value="{{ old('awards_recognition', $advisor->awards_recognition) }}">
+                                                <!-- Error Handling (if applicable) -->
+                                                @error('awards_recognition')
+                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="mt-4">
+                                                <label for="services"
+                                                    class="text-[#828282] font-normal text-xs sm:text-sm">Mention about Services and products you or your company offers</label>
+                                                <div id="services-editor-mobile"
+                                                    class="text-[#2A2A2A] placeholder:text-[#2A2A2A] font-medium text-sm sm:text-base outline-none bg-transparent">
+                                                </div>
+                                                <input type="hidden" id="services-mobile" name="services"
+                                                    value="{{ old('services', $advisor->services) }}">
+                                                <!-- Error Handling (if applicable) -->
+                                                @error('services')
+                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div
+                                                class="bg-[#FAFAFA] my-[1rem]  shadow-md p-4 rounded-xl flex flex-col gap-2">
+                                                <label class="text-[#828282] font-normal text-xs sm:text-sm"
+                                                    for="highlighted_images">Select multiple images that highlight your services or products.</label>
                                                 <input type="file" name="highlighted_images[]"
                                                     id="highlighted_images_mobile" accept="image/*" multiple
                                                     class="text-[#2A2A2A] placeholder:text-[#2A2A2A] font-medium text-sm sm:text-base outline-none bg-transparent">
@@ -1188,48 +1244,8 @@
 
                                             </div> --}}
                                             <!-- Services -->
-                                            <div class="mt-4">
-                                                <label for="services"
-                                                    class="text-[#828282] font-normal text-xs sm:text-sm">Services</label>
-                                                <div id="services-editor-mobile"
-                                                    class="text-[#2A2A2A] placeholder:text-[#2A2A2A] font-medium text-sm sm:text-base outline-none bg-transparent">
-                                                </div>
-                                                <input type="hidden" id="services-mobile" name="services"
-                                                    value="{{ old('services', $advisor->services) }}">
-                                                <!-- Error Handling (if applicable) -->
-                                                @error('services')
-                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                                @enderror
-                                            </div>
 
 
-                                            <!-- Awards and Recognition -->
-                                            <div class="mt-4">
-                                                <label for="awards_recognition"
-                                                    class="text-[#828282] font-normal text-base">Awards
-                                                    & Recognition</label>
-                                                <div id="awards-recognition-editor-mobile"
-                                                    class="text-[#2A2A2A] placeholder:text-[#2A2A2A] font-medium text-sm sm:text-base outline-none bg-transparent">
-                                                </div>
-                                                <input type="hidden" id="awards_recognition-mobile"
-                                                    name="awards_recognition"
-                                                    value="{{ old('awards_recognition', $advisor->awards_recognition) }}">
-                                                <!-- Error Handling (if applicable) -->
-                                                @error('awards_recognition')
-                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                            <div
-                                                class="bg-[#FAFAFA] my-[1rem]  shadow-md p-4 rounded-xl flex flex-col gap-2">
-                                                <label class="text-[#828282] font-normal text-xs sm:text-sm"
-                                                    for="Description">About you</label>
-                                                <textarea id="about" name="about" rows="6"
-                                                    class="text-[#2A2A2A] placeholder:text-[#2A2A2A] font-medium text-sm sm:text-base outline-none bg-transparent">{{ old('about', $advisor->about) }}</textarea>
-                                                @error('about')
-                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                                @enderror
-
-                                            </div>
                                             {{-- <div
                                                 class="bg-[#FAFAFA] my-[1rem]  shadow-md p-4 rounded-xl flex flex-col gap-2">
                                                 <label class="text-[#828282] font-normal text-xs sm:text-sm"
@@ -1238,54 +1254,7 @@
                                                     placeholder="Enter LinkedIn profile link"
                                                     class="text-[#2A2A2A] placeholder:text-[#2A2A2A] font-medium text-sm sm:text-base outline-none bg-transparent">
                                             </div> --}}
-                                            <div
-                                                class="bg-[#FAFAFA] my-[1rem]  shadow-md p-4 rounded-xl flex justify-between items-center  gap-2">
-                                                <p>Are you a business Owner?</p>
-                                                <input type="checkbox" name="is_founder" id="is_founder" value="1"
-                                                    {{ old('is_founder', $advisor->is_founder ? 'checked' : '') }}
-                                                    class="w-4 h-4 text-blue-600 outline-none bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                                                @error('is_founder')
-                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                                @enderror
 
-                                            </div>
-                                            <div
-                                                class="bg-[#FAFAFA] my-[1rem]  shadow-md p-4 rounded-xl flex flex-col gap-2">
-                                                <label class="text-[#828282] font-normal text-xs sm:text-sm"
-                                                    for="company_name">Linkedin
-                                                    Profile</label>
-                                                <input type="linkedin_profile" name="linkedin_profile"
-                                                    id="linkedin_profile"
-                                                    value="{{ old('linkedin_profile', $advisor->linkedin_profile) }}"
-                                                    class="text-[#2A2A2A] placeholder:text-[#2A2A2A] font-medium text-sm sm:text-base outline-none bg-transparent">
-                                                @error('linkedin_profile')
-                                                    <div class="text-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                            <div
-                                                class="bg-[#FAFAFA] my-[1rem]  shadow-md p-4 rounded-xl flex flex-col gap-2">
-                                                <label class="text-[#828282] font-normal text-xs sm:text-sm"
-                                                    for="profileLink">Company Name</label>
-                                                <input type="company_name" name="company_name" id="company_name"
-                                                    value="{{ old('company_name', $advisor->company_name) }}"
-                                                    class="text-[#2A2A2A] placeholder:text-[#2A2A2A] font-medium text-sm sm:text-base outline-none bg-transparent">
-                                                @error('company_name')
-                                                    <div class="text-danger">{{ $message }}</div>
-                                                @enderror
-
-                                            </div>
-                                            <div
-                                                class="bg-[#FAFAFA] my-[1rem]  shadow-md p-4 rounded-xl flex flex-col gap-2">
-                                                <label class="text-[#828282] font-normal text-xs sm:text-sm"
-                                                    for="profileLink">Company Website</label>
-                                                <input type="text" name="company_website" id="company_website"
-                                                    value="{{ old('company_website', $advisor->company_website) }}"
-                                                    class="text-[#2A2A2A] placeholder:text-[#2A2A2A] font-medium text-sm sm:text-base outline-none bg-transparent">
-                                                @error('company_website')
-                                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                                @enderror
-
-                                            </div>
                                             <div class="w-full mt-6 flex justify-end space-x-3 mb-5">
                                                 <button type="submit"
                                                     class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg shadow-md">Save</button>
@@ -1305,8 +1274,7 @@
                                     class="flex items-center justify-between w-full px-2 lg:px-4 py-3 sm:p-3">
                                     <div class="flex flex-col items-start">
                                         <p class="text-sm sm:text-base text-[#2A2A2A] font-semibold">Availability</p>
-                                        <p class="text-xs sm:text-sm text-[#828282] font-medium">Choose your availability
-                                            effortlessly.</p>
+                                        <p class="text-xs sm:text-sm text-[#828282] font-medium">Select available timeslots for client discussions.</p>
 
                                     </div>
                                     <svg id="arrow2" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -1339,8 +1307,7 @@
                                     class="flex items-center justify-between w-full px-2 lg:px-4 py-3 sm:p-3">
                                     <div class="flex flex-col items-start">
                                         <p class="text-sm sm:text-base text-[#2A2A2A] font-semibold">Advisory Price</p>
-                                        <p class="text-xs sm:text-sm text-[#828282] font-medium">Recharge and check your
-                                            wallet balance.</p>
+                                        <p class="text-xs sm:text-sm text-[#828282] font-medium">State your advisory fee for clients. For discovery calls, the suggested price is INR 0 to 500.</p>
                                     </div>
 
                                     <svg id="arrow3" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -1457,8 +1424,7 @@
                                     <div class="flex flex-col items-start">
                                         <p class="text-sm sm:text-base text-[#2A2A2A] font-semibold">Payment Information
                                         </p>
-                                        <p class="text-xs sm:text-sm text-[#828282] font-medium text-start">Safely store
-                                            your preferred payment method for seamless transactions on your profile.</p>
+                                        <p class="text-xs sm:text-sm text-[#828282] font-medium text-start">Specify the account information for receiving advisory payments.</p>
                                     </div>
 
                                     <svg id="arrow4" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -1581,8 +1547,7 @@
                                     class="flex items-center justify-between w-full px-2 lg:px-4 py-3 sm:p-3">
                                     <div class="flex flex-col items-start">
                                         <p class="text-sm sm:text-base text-[#2A2A2A] font-semibold">Upload a video</p>
-                                        <p class="text-xs sm:text-sm text-[#828282] font-medium text-start">Share your
-                                            expertise visually by uploading informative videos to assist users</p>
+                                        <p class="text-xs sm:text-sm text-[#828282] font-medium text-start">Showcase your expertise by uploading videos for users.</p>
                                     </div>
 
                                     <svg id="arrow5" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -1674,7 +1639,8 @@
                                     </svg>
                                 </button>
                                 <div id="answer6" style="display:none">
-                                    <div class="grow border flex flex-col justify-around gap-3  shadow-sm p-5 rounded-xl ">
+                                    <div
+                                        class="grow border flex flex-col justify-around gap-3  shadow-sm p-5 rounded-xl ">
                                         <p class="text-[#828282] text-sm sm:text-base font-medium">Raise a ticket and tell
                                             us your queries, our support team will get back to you within 24 hours. </p>
                                         <button id="raiseTicketBtnmobile"
@@ -1931,30 +1897,35 @@
             });
         });
     </script>
-    <script>
-        function previewPhoto() {
-            const photoInput = document.getElementById('photo');
-            const profilePhoto = document.getElementById('profilePhoto');
 
-            const file = photoInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    profilePhoto.src = e.target.result;
+    <script>
+        function previewPhoto(type) {
+            const photoInput = document.getElementById(`photo${type}`);
+            const profilePhoto = document.getElementById(`profilePhoto${type}`);
+
+            if (photoInput && profilePhoto) {
+                const file = photoInput.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        profilePhoto.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
                 }
-                reader.readAsDataURL(file);
             }
         }
 
-        function removePhoto() {
-            const profilePhoto = document.getElementById('profilePhoto');
-            const photoInput = document.getElementById('photo');
+        function removePhoto(type) {
+            const profilePhoto = document.getElementById(`profilePhoto${type}`);
+            const photoInput = document.getElementById(`photo${type}`);
 
-            const fullName = "{{ Auth::user()->full_name }}";
-            const initial = fullName.trim().charAt(0).toUpperCase();
+            if (profilePhoto && photoInput) {
+                const fullName = "{{ Auth::user()->full_name }}";
+                const initial = fullName.trim().charAt(0).toUpperCase();
 
-            profilePhoto.src = `https://via.placeholder.com/150/000000/FFFFFF/?text=${initial}`;
-            photoInput.value = '';
+                profilePhoto.src = `https://via.placeholder.com/150/000000/FFFFFF/?text=${initial}`;
+                photoInput.value = '';
+            }
         }
     </script>
 
@@ -2027,145 +1998,6 @@
             }
         });
     </script>
-
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const addIndustryButton = document.getElementById('add_industry');
-            const addGeographyButton = document.getElementById('add_geography');
-            const industrySelect = document.getElementById('industry_select');
-            const geographySelect = document.getElementById('geography_select');
-            const selectedIndustriesContainer = document.getElementById('selected_industries');
-            const selectedGeographiesContainer = document.getElementById('selected_geographies');
-            const industriesInput = document.getElementById('industries');
-            const geographiesInput = document.getElementById('geographies');
-
-            // Function to add selected industry
-            addIndustryButton.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent form submission
-
-                const industryId = industrySelect.value;
-                const industryName = industrySelect.options[industrySelect.selectedIndex].text;
-
-                if (industryId && !isIndustrySelected(industryId)) {
-                    if (selectedIndustriesContainer.children.length < 3) {
-                        appendIndustryTag(industryId, industryName);
-                        updateIndustriesInput();
-                    } else {
-                        // SweetAlert notification
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Limit Reached',
-                            text: 'You can select only up to 3 industries.'
-                        });
-                    }
-                }
-            });
-
-            // Function to add selected geography
-            addGeographyButton.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent form submission
-
-                const geographyId = geographySelect.value;
-                const geographyName = geographySelect.options[geographySelect.selectedIndex].text;
-
-                if (geographyId && !isGeographySelected(geographyId)) {
-                    if (selectedGeographiesContainer.children.length < 3) {
-                        appendGeographyTag(geographyId, geographyName);
-                        updateGeographiesInput();
-                    } else {
-                        // SweetAlert notification
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Limit Reached',
-                            text: 'You can select only up to 3 geographies.'
-                        });
-                    }
-                }
-            });
-
-            // Function to check if industry is already selected
-            function isIndustrySelected(id) {
-                return document.getElementById(`industry_${id}`) !== null;
-            }
-
-            // Function to check if geography is already selected
-            function isGeographySelected(id) {
-                return document.getElementById(`geography_${id}`) !== null;
-            }
-
-            // Function to append industry tag
-            function appendIndustryTag(id, name) {
-                const tag = document.createElement('div');
-                tag.id = `industry_${id}`;
-                tag.className = 'bg-blue-200 text-blue-800 px-2 py-1 rounded flex items-center';
-                tag.innerHTML = `
-            <span>${name}</span>
-            <button type="button" class="ml-2 text-red-600 hover:text-red-800 focus:outline-none" onclick="removeIndustry(${id})">x</button>
-        `;
-                selectedIndustriesContainer.appendChild(tag);
-            }
-
-            // Function to append geography tag
-            function appendGeographyTag(id, name) {
-                const tag = document.createElement('div');
-                tag.id = `geography_${id}`;
-                tag.className = 'bg-green-200 text-green-800 px-2 py-1 rounded flex items-center';
-                tag.innerHTML = `
-            <span>${name}</span>
-            <button type="button" class="ml-2 text-red-600 hover:text-red-800 focus:outline-none" onclick="removeGeography(${id})">x</button>
-        `;
-                selectedGeographiesContainer.appendChild(tag);
-            }
-
-            // Function to remove selected industry
-            window.removeIndustry = function(id) {
-                const tag = document.getElementById(`industry_${id}`);
-                if (tag) {
-                    tag.remove();
-                    updateIndustriesInput();
-                }
-            };
-
-            // Function to remove selected geography
-            window.removeGeography = function(id) {
-                const tag = document.getElementById(`geography_${id}`);
-                if (tag) {
-                    tag.remove();
-                    updateGeographiesInput();
-                }
-            };
-
-            // Update hidden input for industries
-            function updateIndustriesInput() {
-                const selectedIds = Array.from(selectedIndustriesContainer.children).map(tag => tag.id.replace(
-                    'industry_', ''));
-                industriesInput.value = JSON.stringify(selectedIds);
-            }
-
-            // Update hidden input for geographies
-            function updateGeographiesInput() {
-                const selectedIds = Array.from(selectedGeographiesContainer.children).map(tag => tag.id.replace(
-                    'geography_', ''));
-                geographiesInput.value = JSON.stringify(selectedIds);
-            }
-
-            // Pre-select industries if available
-            @if ($advisor->industries)
-                @foreach ($advisor->industries as $industry)
-                    appendIndustryTag({{ $industry->id }}, '{{ $industry->name }}');
-                @endforeach
-                updateIndustriesInput();
-            @endif
-
-            // Pre-select geographies if available
-            @if ($advisor->geographies)
-                @foreach ($advisor->geographies as $geography)
-                    appendGeographyTag({{ $geography->id }}, '{{ $geography->name }}');
-                @endforeach
-                updateGeographiesInput();
-            @endif
-        });
-    </script> --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const addIndustryButton = document.getElementById('add_industry');
@@ -2903,15 +2735,15 @@
                     <tbody>
                         ${slots.length > 0 ?
                             slots.map(slot => `
-                                                                                                                                                                                                                                                        <tr align="center">
-                                                                                                                                                                                                                                                            <td class="py-2 px-4 border-b border-gray-300">
-                                                                                                                                                                                                                                                                <span class="text-green-600 font-bold">${formatTime(slot.time_slot.split('-')[0].trim())}</span>
-                                                                                                                                                                                                                                                            </td>
-                                                                                                                                                                                                                                                            <td class="py-2 px-4 border-b border-l border-gray-300">
-                                                                                                                                                                                                                                                                <span class="text-red-600 font-bold">${formatTime(slot.time_slot.split('-')[1].trim())}</span>
-                                                                                                                                                                                                                                                            </td>
-                                                                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                                                                    `).join('') :
+                                                                                                                                                                                                                                                                                                                    <tr align="center">
+                                                                                                                                                                                                                                                                                                                        <td class="py-2 px-4 border-b border-gray-300">
+                                                                                                                                                                                                                                                                                                                            <span class="text-green-600 font-bold">${formatTime(slot.time_slot.split('-')[0].trim())}</span>
+                                                                                                                                                                                                                                                                                                                        </td>
+                                                                                                                                                                                                                                                                                                                        <td class="py-2 px-4 border-b border-l border-gray-300">
+                                                                                                                                                                                                                                                                                                                            <span class="text-red-600 font-bold">${formatTime(slot.time_slot.split('-')[1].trim())}</span>
+                                                                                                                                                                                                                                                                                                                        </td>
+                                                                                                                                                                                                                                                                                                                    </tr>
+                                                                                                                                                                                                                                                                                                                `).join('') :
                             `<tr><td colspan="2" class="py-2 px-4 text-center">No slots available</td></tr>`
                         }
                     </tbody>

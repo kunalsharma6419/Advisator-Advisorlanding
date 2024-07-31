@@ -7,7 +7,7 @@
             </a>
         </div>
         <div class="hidden md:flex xl:w-[75%] xl:justify-between gap-8d md:gap-x-10 xl:gap-[60px]">
-            <ul
+            {{-- <ul
                 class="font-Roboto font-normal text-[#3A3A3A] grow xl:justify-center gap-4 text-sm lg:text-lg xl:gap-5 flex items-center">
                 <li class="font-bold text-[#2A2A2A] cursor-pointer"><a href="{{ route('home') }}">Home</a></li>
                 <li class="cursor-pointer">
@@ -16,7 +16,24 @@
                 <li class="cursor-pointer">About us</li>
                 <li class="cursor-pointer">Blog</li>
                 <li class="cursor-pointer">Contact us</li>
+            </ul> --}}
+            <ul
+                class="font-sans font-normal text-[#3A3A3A] grow xl:justify-center gap-4 text-sm lg:text-lg xl:gap-5 flex items-center">
+                <li class="cursor-pointer"><a href="{{ route('home') }}">Home</a></li>
+                <li class="cursor-pointer">
+                    <a href="{{ route('home') }}#about">About us</a>
+                </li>
+                <li class="cursor-pointer">
+                    <a href="{{ route('home') }}#steps">Onboarding Steps</a>
+                </li>
+                <li class="cursor-pointer">
+                    <a href="{{ route('home') }}#Feature">Features</a>
+                </li>
+                <li class="cursor-pointer">
+                    <a href="{{ route('home') }}#Contact">Contact us</a>
+                </li>
             </ul>
+
 
             <div class="ml-3 relative" id="dropdown-container">
                 <div class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition cursor-pointer"
@@ -70,13 +87,13 @@
 
         <div class="md:hidden w-[40%] gap-2 flex items-center justify-between">
             <div class="border border-[#DB9206] bg-[#FFF3DB] rounded sm:rounded-lg px-2 py-1 sm:py-2 sm:px-4">
-                <a class="cursor-pointer flex items-center gap-2" href="../src/Advisor pages/wallet.html">
-                    <img class="h-5 w-5" src="../src/assets/img/iconWallet.png" alt="" />
-                    <div class="text-[#D6D6D6]">|</div>
+                <a class="cursor-pointer flex items-center gap-2" href="{{ route('advisor.dashboard') }}">
+                    {{-- <img class="h-5 w-5" src="../src/assets/img/iconWallet.png" alt="" /> --}}
+                    {{-- <div class="text-[#D6D6D6]">|</div> --}}
 
                     <div class="flex items-center font-Roboto text-sm sm:text-base text-[#DB9206] font-semibold">
-                        &#8377;
-                        <p>1,229</p>
+
+                        <p>Dashboard</p>
                     </div>
                 </a>
             </div>

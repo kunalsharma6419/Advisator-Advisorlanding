@@ -16,6 +16,8 @@ use App\Models\AdvisorNomination;
 use Illuminate\Support\Facades\DB;
 use App\Models\BankDetails;
 use App\Models\CustomerSupportTicket;
+use App\Mail\TicketSubmitted;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -352,6 +354,11 @@ class ProfileController extends Controller
 
         // Create the ticket
         CustomerSupportTicket::create($ticketData);
+        // Send email notification to admin
+        $admin = User::where('usertype', 1)->first();
+        if ($admin) {
+            Mail::to($admin->email)->send(new TicketSubmitted($ticketData));
+        }
 
         return redirect()->back()->with('success', 'Ticket submitted successfully!');
     }

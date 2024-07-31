@@ -21,8 +21,29 @@
                 <a href="#" class="block w-full mb-4">
                     <div class="flex items-center gap-4 bg-[#FFF4ED] px-6 py-3 rounded-[30px] shadow-md">
                         <div class="relative">
-                            <img class="w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] rounded-full"
-                                src="../src/assets/defaultuser.png" alt="Profile Image" />
+                            @auth
+                                {{-- <img class="w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] rounded-full"
+                                    src="..{{ Auth::user()->profile_photo_path ?? '../src/assets/defaultuser.png' }}"
+                                    alt="Profile Image" /> --}}
+                                @if (Auth::user()->profile_photo_path)
+                                    <img class="w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] rounded-full"
+                                        src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}" alt="">
+                                @else
+                                    <?php
+                                    $fullName = Auth::user()->full_name;
+                                    $initial = strtoupper(substr($fullName, 0, 1));
+                                    ?>
+                                    <img id="profilePhoto"
+                                        src="https://via.placeholder.com/150/000000/FFFFFF/?text={{ $initial }}"
+                                        alt="Profile Photo" width="100"
+                                        class="w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] rounded-full">
+                                @endif
+                            @endauth
+
+                            @guest
+                                <img class="w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] rounded-full"
+                                    src="../src/assets/defaultuser.png" alt="Profile Image" />
+                            @endguest
                             <!-- SVG icon for verified badge -->
                             <svg class="absolute bottom-0 right-0 w-6 h-6 text-green-500 bg-white rounded-full p-1"
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -118,6 +139,20 @@
                         </h2>
                     </div>
                 </a>
+                @auth
+                    <a href="">
+                        <div class="flex items-center gap-4">
+                            <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/sidebar/Logout.png"
+                                alt="" />
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                                    {{ __('Log Out') }}
+                                </button>
+                            </form>
+                        </div>
+                    </a>
+                @endauth
             </div>
         </div>
 

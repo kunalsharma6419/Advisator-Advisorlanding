@@ -120,23 +120,23 @@
                         if (response.redirect) {
                             Swal.fire({
                                 icon: 'info',
-                                title: 'Evaluation Pending',
+                                title: 'Nomination Pending',
                                 text: response.msg
                             }).then(function() {
                                 window.location.href = response.redirect;
                             });
                         } else {
                             Swal.fire({
-                                icon: response.msg.includes('Evaluation') ? 'info' :
+                                icon: response.msg.includes('Nomination') ? 'info' :
                                     'success',
-                                title: response.msg.includes('Evaluation') ?
-                                    'Evaluation Stage' : 'Success',
+                                title: response.msg.includes('Nomination') ?
+                                    'Nomination Stage' : 'Success',
                                 text: response.msg
                             }).then(function() {
-                                if (!response.msg.includes('Evaluation')) {
+                                if (!response.msg.includes('Nomination')) {
                                     // window.location.href = response.redirect; // Redirect to dashboard or desired page
                                     if (response.msg.includes(
-                                            'Login Success, Mail has been verified'
+                                            'Email address has been verified'
                                             )) {
                                         let dashboardRoute =
                                         '{{ route('home') }}'; // Default fallback route

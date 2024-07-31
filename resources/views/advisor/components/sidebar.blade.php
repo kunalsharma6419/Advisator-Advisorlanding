@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            <a href="../auth/client.html">
+            {{-- <a href="../auth/client.html">
                 <div class="mt-[2rem] border-t border-b border-[#E5E5E5] py-2 my-2">
                     <a href="">
                         <div class="ml-[2rem] flex items-center gap-4">
@@ -47,10 +47,10 @@
                         </div>
                     </a>
                 </div>
-            </a>
+            </a> --}}
 
             <div class="px-[2rem] py-2 flex flex-col gap-6">
-                <a href="../Advisor pages/advisorbooking.html">
+                <a href="{{ route('advisor.mybookings') }}">
                     <div class="flex items-center gap-4">
                         <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
                             src="../src/assets/sidebar/MyBookings.png" alt="" />
@@ -59,7 +59,7 @@
                         </h2>
                     </div>
                 </a>
-                <a href="../Advisor pages/advisorMyearning.html">
+                <a href="{{ route('advisor.myearnings') }}">
                     <div class="flex items-center gap-4">
                         <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/sidebar/money.png"
                             alt="" />
@@ -68,34 +68,34 @@
                         </h2>
                     </div>
                 </a>
-                <a href="../Advisor pages/advisortransactionhistory.html">
+                <a href="{{ route('terms-of-service') }}">
                     <div class="flex items-center gap-4">
                         <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
-                            src="../src/assets/sidebar/tabler_transaction-rupee.png" alt="" />
+                            src="../src/assets/Landing_page/Terms.png" alt="" />
                         <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
-                            My Transactions
+                             Terms of Services
                         </h2>
                     </div>
                 </a>
-                <a href="../Advisor pages/blog.html">
+                <a href="{{ route('privacy-policy') }}">
                     <div class="flex items-center gap-4">
-                        <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/sidebar/Blogs.png"
+                        <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/Landing_page/Privacy.png"
                             alt="" />
                         <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
-                            Blogs
+                            Privacy Policy
                         </h2>
                     </div>
                 </a>
-                <a href="../Advisor pages/aboutus.html">
+                <a href="{{ route('onboarding-policy') }}">
                     <div class="flex items-center gap-4">
-                        <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/sidebar/Aboutus.png"
+                        <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/Landing_page/Onboard.png"
                             alt="" />
                         <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
-                            About us
+                            Onboarding Policy
                         </h2>
                     </div>
                 </a>
-                <a href="">
+                {{-- <a href="">
                     <div class="flex items-center gap-4">
                         <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
                             src="../src/assets/sidebar/Customersupport.png" alt="" />
@@ -103,7 +103,7 @@
                             Customer support
                         </h2>
                     </div>
-                </a>
+                </a> --}}
                 <a href="">
                     <div class="flex items-center gap-4">
                         <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/sidebar/Logout.png"
@@ -125,10 +125,14 @@
                 Find us on:
             </h3>
             <div class="flex gap-5">
-                <img class="w-[30px] h-[30px]" src="../src/assets/sidebar/instagram.png" alt="" />
-                <img class="w-[30px] h-[30px]" src="../src/assets/sidebar/facebook.png" alt="" />
-                <img class="w-[30px] h-[30px]" src="../src/assets/sidebar/linkedin.png" alt="" />
-                <img class="w-[30px] h-[30px]" src="../src/assets/sidebar/youtube.png" alt="" />
+                <a href="https://www.instagram.com/shift180world" target="_blank" rel="noopener"><img
+                        class="w-[30px] h-[30px]" src="../src/assets/sidebar/instagram.png" alt="" /></a>
+                <a href="https://www.facebook.com/Shift180.world/" target="_blank" rel="noopener"><img
+                        class="w-[30px] h-[30px]" src="../src/assets/sidebar/facebook.png" alt="" /></a>
+                <a href="https://www.linkedin.com/company/shift180/" target="_blank" rel="noopener"><img
+                        class="w-[30px] h-[30px]" src="../src/assets/sidebar/linkedin.png" alt="" /></a>
+                <a href="http://www.youtube.com/@Shift180AdvisoryServices" target="_blank" rel="noopener"><img
+                        class="w-[30px] h-[30px]" src="../src/assets/sidebar/youtube.png" alt="" /></a>
             </div>
         </div>
     </div>

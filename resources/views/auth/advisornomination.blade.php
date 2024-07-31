@@ -300,17 +300,18 @@
 
 
                 {{-- <div class="border w-full border-1 mt-[18px] border-[#AFAFAF]"></div> --}}
-                <div class="p-[18px] mt-[18px] w-full justify-between flex gap-[12px] rounded-[12px] bg-white">
+                {{-- <div class="p-[18px] mt-[18px] w-full justify-between flex gap-[12px] rounded-[12px] bg-white">
                     <p class="text-[18px] font-[500]">Attach Documents (optional)</p>
                     <i class="fa-solid fa-paperclip" style="color: #3a3a3a"></i>
                 </div>
-                <input type="file" name="document_path" accept=".pdf,.doc,.docx" id="documentPathInput"
+                <a href="https://forms.gle/JGCLAJ7RZXwtXGat6" target="_blank"></a> --}}
+                {{-- <input type="file" name="document_path" accept=".pdf,.doc,.docx" id="documentPathInput"
                     onchange="previewDocument(event)">
                 @error('document_path')
                     <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
                 @enderror
 
-                <div id="documentPreview" class="mt-4"></div>
+                <div id="documentPreview" class="mt-4"></div> --}}
 
                 <div class="flex flex-col gap-[12px]">
                     <div class="flex justify-between">
@@ -433,6 +434,10 @@
                 @enderror
 
                 <div id="documentPreview" class="mt-4"></div> --}}
+                <div class="p-[18px] mt-[18px] w-full justify-between flex gap-[12px] rounded-[12px] bg-white">
+                    <p class="text-[18px] font-[500]">Attach Documents (optional)</p>
+                    <a href="https://forms.gle/JGCLAJ7RZXwtXGat6" target="_blank"><i class="fa-solid fa-paperclip" style="color: #3a3a3a"></i></a>
+                </div>
 
 
                 <button type="submit"
@@ -688,41 +693,41 @@
     });
 </script> --}}
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    function handleOtherIndustryField() {
-        const selectElement = document.getElementById('industry');
-        const selectedOptions = Array.from(selectElement.selectedOptions);
-        const otherIndustryInput = document.getElementById('other-industry');
-
-        if (selectedOptions.some(option => option.text.toLowerCase() === 'other - mention')) {
-            otherIndustryInput.classList.remove('hidden');
-        } else {
-            otherIndustryInput.classList.add('hidden');
-        }
-    }
-
-    function limitSelection(selectElement) {
-        selectElement.addEventListener('change', function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        function handleOtherIndustryField() {
+            const selectElement = document.getElementById('industry');
             const selectedOptions = Array.from(selectElement.selectedOptions);
-            if (selectedOptions.length > 3) {
-                selectedOptions.slice(3).forEach(option => option.selected = false);
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Selection Limit',
-                    text: 'You can only select up to 3 options.',
-                    confirmButtonText: 'OK'
-                });
+            const otherIndustryInput = document.getElementById('other-industry');
+
+            if (selectedOptions.some(option => option.text.toLowerCase() === 'other - mention')) {
+                otherIndustryInput.classList.remove('hidden');
+            } else {
+                otherIndustryInput.classList.add('hidden');
             }
-            handleOtherIndustryField();
-        });
-    }
+        }
 
-    const industrySelect = document.getElementById('industry');
-    limitSelection(industrySelect);
+        function limitSelection(selectElement) {
+            selectElement.addEventListener('change', function() {
+                const selectedOptions = Array.from(selectElement.selectedOptions);
+                if (selectedOptions.length > 3) {
+                    selectedOptions.slice(3).forEach(option => option.selected = false);
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Selection Limit',
+                        text: 'You can only select up to 3 options.',
+                        confirmButtonText: 'OK'
+                    });
+                }
+                handleOtherIndustryField();
+            });
+        }
 
-    // Initialize visibility on page load
-    handleOtherIndustryField();
-});
+        const industrySelect = document.getElementById('industry');
+        limitSelection(industrySelect);
+
+        // Initialize visibility on page load
+        handleOtherIndustryField();
+    });
 </script>
 
 </html>

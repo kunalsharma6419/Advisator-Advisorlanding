@@ -284,7 +284,7 @@
         @include('advisor.components.sidebar')
     </div>
 
-    <script>
+    {{-- <script>
         // Create chart instance
         var chart = am4core.create("chartdiv", am4charts.PieChart);
 
@@ -486,6 +486,24 @@
         });
         showSideMenu.addEventListener("click", () => {
             sidebar.classList.remove("left-full");
+        });
+    </script> --}}
+    <script>
+        // JavaScript to toggle sidebar
+        // const toggleBtn = document.querySelector('.toggleBtn');
+        const hideSideMenu = document.getElementById('hideSideMenu')
+        const showSideMenu = document.getElementById('showSideMenu')
+
+
+        // console.log(toggleBtn)
+        console.log(hideSideMenu, showSideMenu)
+        const sidebar = document.querySelector('.sidebar');
+
+        hideSideMenu.addEventListener('click', () => {
+            sidebar.classList.add('left-full');
+        })
+        showSideMenu.addEventListener('click', () => {
+            sidebar.classList.remove('left-full');
         });
     </script>
     <script>
