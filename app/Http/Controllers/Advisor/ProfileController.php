@@ -18,6 +18,7 @@ use App\Models\BankDetails;
 use App\Models\CustomerSupportTicket;
 use App\Mail\TicketSubmitted;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 
 class ProfileController extends Controller
 {

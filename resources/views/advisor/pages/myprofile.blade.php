@@ -1184,7 +1184,7 @@
                                             </div>
                                             <div class="mt-4">
                                                 <label for="services"
-                                                    class="text-[#828282] font-normal text-xs sm:text-sm">Mention about Services and products you or your company offers</label>
+                                                    class="text-[#828282] font-normal text-base">Mention about services and products you or your company offers</label>
                                                 <div id="services-editor-mobile"
                                                     class="text-[#2A2A2A] placeholder:text-[#2A2A2A] font-medium text-sm sm:text-base outline-none bg-transparent">
                                                 </div>
@@ -1307,7 +1307,7 @@
                                     class="flex items-center justify-between w-full px-2 lg:px-4 py-3 sm:p-3">
                                     <div class="flex flex-col items-start">
                                         <p class="text-sm sm:text-base text-[#2A2A2A] font-semibold">Advisory Price</p>
-                                        <p class="text-xs sm:text-sm text-[#828282] font-medium">State your advisory fee for clients. For discovery calls, the suggested price is INR 0 to 500.</p>
+                                        <p class="text-xs sm:text-sm text-[#828282] font-medium text-start">State your advisory fee for clients. For discovery calls, the suggested price is INR 0 to 500.</p>
                                     </div>
 
                                     <svg id="arrow3" xmlns="http://www.w3.org/2000/svg" fill="none"

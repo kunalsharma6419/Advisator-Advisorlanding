@@ -35,19 +35,19 @@
                 </div>
             </div>
 
-            {{-- <a href="../auth/client.html">
+            <a href="">
                 <div class="mt-[2rem] border-t border-b border-[#E5E5E5] py-2 my-2">
-                    <a href="">
+                    <a href="{{ route('advisor.myprofile') }}">
                         <div class="ml-[2rem] flex items-center gap-4">
                             <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
                                 src="../src/assets/sidebar/userImg.png" alt="" />
                             <h2 class="font-medium text-sm sm:text-base text-[#BE7D00]">
-                                Switch to Client
+                                My Profile
                             </h2>
                         </div>
                     </a>
                 </div>
-            </a> --}}
+            </a>
 
             <div class="px-[2rem] py-2 flex flex-col gap-6">
                 <a href="{{ route('advisor.mybookings') }}">

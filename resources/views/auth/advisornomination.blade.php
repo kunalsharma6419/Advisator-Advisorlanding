@@ -434,9 +434,15 @@
                 @enderror
 
                 <div id="documentPreview" class="mt-4"></div> --}}
-                <div class="p-[18px] mt-[18px] w-full justify-between flex gap-[12px] rounded-[12px] bg-white">
-                    <p class="text-[18px] font-[500]">Attach Documents (optional)</p>
-                    <a href="https://forms.gle/JGCLAJ7RZXwtXGat6" target="_blank"><i class="fa-solid fa-paperclip" style="color: #3a3a3a"></i></a>
+                <div class="p-4 mt-4 w-full flex flex-col gap-4 rounded-lg bg-white shadow-md">
+                    <div class="flex justify-between items-center">
+                        <p class="text-base text-gray-600">Attach the document, then return to this form and submit</p>
+                        <a href="https://form.jotform.com/242140789991467" target="_blank"
+                            class="text-gray-700 hover:text-gray-900">
+                            <i class="fa-solid fa-paperclip text-xl"></i>
+                        </a>
+                    </div>
+                    <p class="text-lg font-medium text-gray-800">Attach Documents (optional)</p>
                 </div>
 
 

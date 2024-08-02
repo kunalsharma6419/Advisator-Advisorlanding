@@ -68,7 +68,7 @@
         <!-- My Reviews -->
         <div class="flex flex-col items-center justify-center gap-1">
             <a href="{{ route('advisor.reviewssummary') }}">
-                <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="{{ Request::is('advisor/reviews-summary') ? asset('src/assets/bottomNavbar/activeTransactions.png') : asset('src/assets/bottomNavbar/transactions.png') }}" alt="My Reviews" />
+                <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="{{ Request::is('advisor/reviews-summary') ? asset('src/assets/bottomNavbar/activereview.png') : asset('src/assets/bottomNavbar/review.png') }}" alt="My Reviews" />
             </a>
             <p class="font-semibold text-xs sm:text-sm text-[#C95555] {{ Request::is('advisor/reviews-summary') ? '' : 'hidden' }}">
                 My Reviews
