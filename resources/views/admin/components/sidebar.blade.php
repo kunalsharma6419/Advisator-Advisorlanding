@@ -58,6 +58,12 @@
                 <span class="menu-title">Contact Queries</span>
             </a>
         </li>
+        <li class="nav-item {{ request()->routeIs('advisatoradmin.importform') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('advisatoradmin.importform') }}">
+                <i class="fa fa-cloud-upload menu-icon"></i>
+                <span class="menu-title">Nomination Import</span>
+            </a>
+        </li>
         {{-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
                 aria-controls="ui-basic">

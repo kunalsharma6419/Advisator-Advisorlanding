@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\NominationsController;
 use App\Http\Controllers\Admin\AdvisorsController;
+use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Advisor\ProfileController;
 use App\Http\Controllers\Advisor\DashboardController;
 
@@ -77,6 +78,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::prefix('advisatoradmin')->group(function () {
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('advisatoradmin.dashboard');
         Route::get('contact-queries', [AdminController::class, 'contactqueries'])->name('advisatoradmin.contactqueries');
+        Route::get('import-form', [ImportController::class, 'importform'])->name('advisatoradmin.importform');
+        Route::post('import-data', [ImportController::class, 'importData'])->name('advisatoradmin.importdata');
 
         //Nominations Menu
         Route::get('/nominations', [NominationsController::class, 'index'])->name('advisatoradmin.nominations.list');
