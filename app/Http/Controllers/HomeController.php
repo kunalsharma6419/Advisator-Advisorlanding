@@ -87,4 +87,14 @@ class HomeController extends Controller
     {
         return view('landing.pages.onboardpolicy');
     }
+
+    public function shippingdeliverypolicy()
+    {
+        return view('landing.pages.shippingdeliverypolicy');
+    }
+
+    public function cancellationrefundpolicy()
+    {
+        return view('landing.pages.cancellationrefundpolicy');
+    }
 }

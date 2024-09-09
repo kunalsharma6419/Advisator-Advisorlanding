@@ -48,6 +48,8 @@ Route::post('/send-contact', [HomeController::class, 'contactstore'])->name('sen
 Route::get('/terms-of-service', [HomeController::class, 'terms'])->name('terms-of-service');
 Route::get('/privacy-policy', [HomeController::class, 'privacy'])->name('privacy-policy');
 Route::get('/onboarding-policy', [HomeController::class, 'onboardpolicy'])->name('onboarding-policy');
+Route::get('/shipping-and-delivery-policy', [HomeController::class, 'shippingdeliverypolicy'])->name('shipping-delivery-policy');
+Route::get('/cancellation-and-refund-policy', [HomeController::class, 'cancellationrefundpolicy'])->name('cancellation-refund-policy');
 
 //Register
 Route::get('register', [AuthController::class, 'loadRegister'])->name('register');

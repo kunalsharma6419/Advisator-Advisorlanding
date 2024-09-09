@@ -139,6 +139,30 @@
                         </h2>
                     </div>
                 </a>
+                <a href="{{ route('shipping-delivery-policy') }}">
+                    <div class="flex items-center gap-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                            fill="#6aa300" viewBox="0 0 24 24">
+                            <path
+                                d="M19 8h-1V3a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v15a1 1 0 0 0 1 1h1a3 3 0 0 0 6 0h2a3 3 0 0 0 6 0h1a1 1 0 0 0 1-1v-4a1 1 0 0 0-.276-.688l-4-4A1 1 0 0 0 19 8zM6 18a1 1 0 1 1 1-1 1 1 0 0 1-1 1zm9-1H9a3 3 0 0 0-6 0H4V4h12v4h-4a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h5zm1-4h1.586L20 14.414V16h-2zM18 18a1 1 0 1 1 1-1 1 1 0 0 1-1 1z" />
+                        </svg>
+                        <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                            Shipping & Delivery Policy
+                        </h2>
+                    </div>
+                </a>
+                <a href="{{ route('cancellation-refund-policy') }}">
+                    <div class="flex items-center gap-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                            fill="#6aa300" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10c5.514 0 10-4.486 10-10S17.514 2 12 2zm5 13a1 1 0 0 1-1.707.707L12 13.414l-3.293 3.293A1 1 0 1 1 7.293 15.293L10.586 12l-3.293-3.293A1 1 0 1 1 8.707 7.293L12 10.586l3.293-3.293A1 1 0 1 1 16.707 8.707L13.414 12l3.293 3.293A1 1 0 0 1 17 15z" />
+                        </svg>
+                        <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                            Cancellation & Refund Policy
+                        </h2>
+                    </div>
+                </a>
                 @auth
                     <a href="">
                         <div class="flex items-center gap-4">
