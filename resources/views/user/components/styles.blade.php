@@ -12,7 +12,7 @@
 <script src="//cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/d3-shape@3"></script>
-
+<script type="text/javascript" src="https://unpkg.com/@cometchat/chat-sdk-javascript/CometChat.js"></script>
 <style>
     .tools {
         text-align: center;

@@ -47,8 +47,129 @@
                 </ul>
                 <div id="earningChartdiv" class="w-full h-full"></div>
             </div> --}}
+            <div class="flex gap-[46px] mt-[50px]">
+                <div class="lg:flex  hidden flex-col w-[342px] h-[122px] bg-[#F5F5F5] rounded-[12px] gap-[14px] p-[24px]">
+                    <div class="flex justify-between">
+                        <h3 class="font-[500] text-[16px]">Wallet Earnings</h3>
+                        <img class="w-[24px] h-[24px]" src="../src/assets/right arrow.png" alt="" />
+                    </div>
+                    <p class="text-[#828282] font-[400] text-[16px]">
+                        Check your wallet earnings
+                    </p>
+                </div>
+                <!-- card  -->
+                <div
+                    class="bg-[#FDFADF] w-full text-[#2A2A2A] rounded-[18px] hover:bg-[#FFF2AB] flex flex-col gap-[15px] hover:border-[2px] hover:border-[#6A9023] p-[24px] border border-[#F4C2A4]">
+                    <div class="flex flex-row justify-between lg:flex-col">
+                        <div class="flex gap-[12px]">
+                            <img class="w-[30px] h-[30px]" src="../src/assets/wallet.png" alt="" />
+                            <h3 class="text-[14px] lg:text-[18px] font-[700] hover:text-[#6a9023]">
+                                Wallet Earnings:
+                            </h3>
+                        </div>
+
+                        <h4 class="text-[20px] mt-[5px] lg:text-[32px] font-[500]">
+                            ₹ {{ number_format(Auth::user()->advisor_wallet_balance, 2) }}
+                        </h4>
+                    </div>
+
+                    @if (Auth::user()->advisor_wallet_balance < 100)
+                        <p class="text-[#FF3131] font-[400] text-right lg:text-left text-[14px] mt-[30px] lg:text-[16px]">
+                            Low balance! Withdrawal is allowed for more than INR 100/-
+                        </p>
+                    @endif
+                    @if (Auth::user()->advisor_wallet_balance >= 100)
+                        <!-- Withdrawal Form -->
+                        <form action="{{ route('advisor.myearnings.withdraw') }}" method="POST">
+                            @csrf
+                            <div class="mt-4">
+                                <label for="withdraw_amount" class="block text-sm font-medium text-gray-700">Withdraw
+                                    Amount</label>
+                                <input type="number" name="withdraw_amount" class="mt-1 block w-full" min="100"
+                                    max="{{ Auth::user()->advisor_wallet_balance }}" required>
+
+                                <label for="bank_account_number" class="block text-sm font-medium text-gray-700">Bank
+                                    Account Number</label>
+                                <input type="text" name="bank_account_number" class="mt-1 block w-full"
+                                    value="{{ optional($advisor->bankDetails)->account_number ?? 'N/A' }}" required>
+
+                                <label for="bank_ifsc" class="block text-sm font-medium text-gray-700">Bank IFSC</label>
+                                <input type="text" name="bank_ifsc" class="mt-1 block w-full"
+                                    value="{{ optional($advisor->bankDetails)->bank_ifsc ?? 'N/A' }}" required>
+
+                                <button type="submit" class="mt-4 bg-green-500 text-white py-2 px-4 rounded">
+                                    Request Withdrawal
+                                </button>
+                            </div>
+                        </form>
+                    @endif
+                </div>
+            </div>
+            <div class="flex gap-[46px] mt-[50px]">
+                <div class="lg:flex  hidden flex-col w-[342px] h-[122px] bg-[#F5F5F5] rounded-[12px] gap-[14px] p-[24px]">
+                    <div class="flex justify-between">
+                        <h3 class="font-[500] text-[16px]">Wallet Withdrawals</h3>
+                        <img class="w-[24px] h-[24px]" src="../src/assets/right arrow.png" alt="" />
+                    </div>
+                    <p class="text-[#828282] font-[400] text-[16px]">
+                        Check your wallet withdrawals
+                    </p>
+                </div>
+                <!-- card  -->
+                <div
+                    class="bg-[#FDFADF] w-full text-[#2A2A2A] rounded-[18px] hover:bg-[#FFF2AB] flex flex-col gap-[15px] hover:border-[2px] hover:border-[#6A9023] p-[24px] border border-[#F4C2A4]">
+                    @if ($withdrawalRequests->isNotEmpty())
+                        <div class="mt-8">
+                            <div class="flex gap-[12px]">
+                                <img class="w-[30px] h-[30px]" src="../src/assets/wallet.png" alt="" />
+                                <h3 class="text-[14px] lg:text-[18px] font-[700] hover:text-[#6a9023]">
+                                    Wallet Withdraw Requests:
+                                </h3>
+                            </div>
+                            <table
+                                class="min-w-full bg-white border border-gray-300 mt-4 rounded-lg shadow-md overflow-hidden">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th
+                                            class="py-3 px-6 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                                            Date</th>
+                                        <th
+                                            class="py-3 px-6 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                                            Amount</th>
+                                        <th
+                                            class="py-3 px-6 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                                            Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    @foreach ($withdrawalRequests as $request)
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-4 px-6 whitespace-nowrap text-sm text-gray-900">
+                                                {{ $request->created_at->format('d M Y') }}</td>
+                                            <td class="py-4 px-6 whitespace-nowrap text-sm text-bold text-red-900">₹
+                                                {{ number_format($request->withdraw_amount, 2) }}</td>
+                                            <td class="py-4 px-6 whitespace-nowrap text-sm font-medium">
+                                                <span
+                                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                        @if ($request->status == 'approved') bg-green-100 text-green-800
+                        @elseif ($request->status == 'pending')
+                            bg-yellow-100 text-yellow-800
+                        @else
+                            bg-red-100 text-red-800 @endif">
+                                                    {{ ucfirst($request->status) }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
+                </div>
+            </div>
             <div class="flex flex-col w-full h-[575px] my-[2rem] shadow-md bg-[#FFF6F6] rounded-xl">
                 <div class="flex items-center justify-between p-[1rem]">
+
                     <h3 class="text-sm sm:text-base md:text-lg text-[#2A2A2A] font-medium">Total Earnings</h3>
                     <div class="bg-[#FFFFFF] rounded-lg p-2 flex gap-2 items-center">
                         <div>
@@ -75,11 +196,14 @@
                     <ul
                         class="list-disc flex flex-col md:flex-row items-start md:items-center justify-between px-[2rem] gap-2">
                         <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">Average Monthly Earnings:
-                            <span class='font-bold'>₹ 2,083</span></li>
+                            <span class='font-bold'>₹ 2,083</span>
+                        </li>
                         <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">Most Advisory Hours Month:
-                            <span class='font-bold'>Oct 2023 (295h)</span></li>
+                            <span class='font-bold'>Oct 2023 (295h)</span>
+                        </li>
                         <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">Least Advisory Hours Month:
-                            <span class='font-bold'>Jan 2023 (80h)</span></li>
+                            <span class='font-bold'>Jan 2023 (80h)</span>
+                        </li>
                     </ul>
                     <div id="earningChartdiv" class="w-full h-full">
                         <!-- Placeholder for the chart or data visualization -->

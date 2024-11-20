@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Model\AdvisorNomination;
+use App\Models\AdvisorNomination;
 
 class AdvisorEvaluation extends Model
 {
@@ -40,4 +40,11 @@ class AdvisorEvaluation extends Model
         $evaluation->overall_score = $overall_score;
         $evaluation->save();
     }
+
+    public function advisorProfile()
+{
+    return $this->belongsTo(AdvisorProfiles::class, 'advisor_nomination_id', 'advisor_id');
+}
+
+
 }

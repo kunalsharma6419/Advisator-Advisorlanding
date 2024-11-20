@@ -15,6 +15,7 @@ class AdvisorNomination extends Model
     protected $casts = [
         'industry_ids' => 'array',
         'geography_ids' => 'array',
+        'is_terms_accept' => 'boolean',
     ];
 
     protected $fillable = [
@@ -24,7 +25,7 @@ class AdvisorNomination extends Model
         'nominee_experience', 'nominee_skills', 'discovery_call_price_per_minute',
         'discovery_call_price_per_hour', 'conference_call_price_per_minute',
         'conference_call_price_per_hour', 'chat_price_per_minute', 'chat_price_per_hour','document_path',
-        'nomination_reason', 'nomination_status'
+        'nomination_reason', 'nomination_status','is_terms_accept',
     ];
     public function businessFunctionCategory()
     {

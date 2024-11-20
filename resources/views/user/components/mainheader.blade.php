@@ -2,25 +2,47 @@
     <div class="h-full w-[90%] md:w-[95%] lg:w-[90%] mx-auto flex justify-between items-center">
         <!-- logo -->
         <div>
-            <a href="./Home.html">
+            <a href="{{ route('home') }}">
                 <img class="w-[130px]" src=" ../src/assets/img/advisatorLogo.png" alt="" />
             </a>
         </div>
         <div class="hidden md:flex xl:w-[75%] xl:justify-between gap-8d md:gap-x-10 xl:gap-[60px]">
             <ul
                 class="font-Roboto font-normal text-[#3A3A3A] grow xl:justify-center gap-4 text-sm lg:text-lg xl:gap-5 flex items-center">
-                <li class="cursor-pointer"><a href="../Home.html">Home</a></li>
-                <li class="font-bold text-[#2A2A2A] cursor-pointer">
-                    <a href="./consultadvisor.html"> Consult Advisor</a>
+                <li class="{{ Route::currentRouteName() == 'home' ? 'font-bold text-[#6A9023]' : '' }} cursor-pointer"><a
+                        href="{{ route('home') }}">Home</a></li>
+                <li
+                    class="{{ Route::currentRouteName() == 'consult-advisor' ? 'font-bold text-[#6A9023]' : '' }} cursor-pointer">
+                    <a href="{{ route('consult-advisor') }}">Consult Advisor</a>
                 </li>
-                <li class="cursor-pointer">
-                    <a href="./aboutus.html">About us</a>
+                <li
+                    class="{{ Route::currentRouteName() == 'about-us' ? 'font-bold text-[#6A9023]' : '' }} cursor-pointer">
+                    <a href="{{ route('about-us') }}">About us</a>
                 </li>
-                <li class="cursor-pointer"><a href="./blog.html">Blog</a></li>
-                <li class="cursor-pointer">
-                    <a href="./contactus.html">Contact us</a>
+                <li class="{{ Route::currentRouteName() == 'blog' ? 'font-bold text-[#6A9023]' : '' }} cursor-pointer">
+                    <a href="{{ route('blog') }}">Blog</a>
+                </li>
+                <li
+                    class="{{ Route::currentRouteName() == 'contact-us' ? 'font-bold text-[#6A9023]' : '' }} cursor-pointer">
+                    <a href="{{ route('contact-us') }}">Contact us</a>
                 </li>
             </ul>
+
+            <div class="ml-1 relative py-2 lg:px-4 flex items-center justify-center rounded-lg cursor-pointer">
+                <form action="{{ route('toggle.usertype') }}" method="POST">
+                    @csrf
+                    <div class="">
+                        <button type="submit"
+                            class="bg-red-200 hover:bg-red-300 text-red-700 font-semibold py-2 px-4 rounded-lg shadow-md">
+                            @if (Auth::user()->usertype == 0)
+                                Switch to Advisor
+                            @else
+                                Switch to Client
+                            @endif
+                        </button>
+                    </div>
+                </form>
+            </div>
 
             <div class="ml-3 relative" id="dropdown-container">
                 <div class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition cursor-pointer"
@@ -61,15 +83,17 @@
 
                     <div class="border-t border-gray-200"></div>
 
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form method="POST" action="{{ route('logout') }}" id="logout-form">
                         @csrf
                         <button type="submit"
-                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            onclick="event.preventDefault(); handleCometChatLogout();">
                             {{ __('Log Out') }}
                         </button>
                     </form>
                 </div>
             </div>
+
         </div>
 
         <div class="md:hidden w-[40%] gap-2 flex items-center justify-between">
@@ -77,8 +101,12 @@
                 <a class="cursor-pointer flex items-center gap-2" href="../src/Advisor pages/wallet.html">
                     <img class="h-5 w-5" src=" ../src/assets/img/iconWallet.png" alt="" />
                     <div class="flex items-center font-Roboto text-sm sm:text-base text-[#DB9206] font-semibold">
-                        &#8377;
-                        <p>1,229</p>
+                        @if (Auth::user()->usertype == 0)
+                            <p>₹ {{ number_format(Auth::user()->user_wallet_balance, 2) }}</p>
+                        @elseif (Auth::user()->usertype == 2)
+                            <p>₹ {{ number_format(Auth::user()->advisor_wallet_balance, 2) }}</p>
+                        @endif
+
                     </div>
                 </a>
             </div>

@@ -1,11 +1,11 @@
 <section id="about" class="pt-16 overflow-hidden lg:pt-28 ">
     <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-        <div class="flex flex-col md:flex-row items-start font-sans">
+        <div class="flex flex-col items-start font-sans md:flex-row">
             <div class="flex-1 md:pr-8">
                 <h1 class="text-[28px] lg:text-[38px] mb-[2rem] font-bold font-sans text-center md:text-left">
                     About <span class="text-[#FF3131]">U</span><span class="text-[#6A9023]">S</span> ?
                 </h1>
-                <p class="max-w-lg mt-3 text-xl leading-relaxed mx-auto md:mx-0 text-center md:text-left">
+                <p class="max-w-lg mx-auto mt-3 text-xl leading-relaxed text-center md:mx-0 md:text-left">
                     Advisator is a platform introduced by Shift180
                     (www.shift180.in) to help clients discover
                     <span class="font-bold">reliable</span> and
@@ -13,14 +13,14 @@
                     experts at different stages of their business.
                 </p>
 
-                <p class="max-w-lg mt-3 text-xl leading-relaxed mx-auto md:mx-0 text-center md:text-left">
+                <p class="max-w-lg mx-auto mt-3 text-xl leading-relaxed text-center md:mx-0 md:text-left">
                     Advisator has onboarded experts in different domains - AI &
                     Analytics, Business growth, Business legal, Fund Raise, IT &
                     Cloud, Market Research, Marketing, Business Strategy,
                     Financial Management.
                 </p>
 
-                <p class="max-w-lg mt-3 text-xl leading-relaxed mx-auto md:mx-0 text-center md:text-left">
+                <p class="max-w-lg mx-auto mt-3 text-xl leading-relaxed text-center md:mx-0 md:text-left">
                     Over 100+ advisors who are business leaders and founders have
                     onboarded ADVISATOR. Be one of them by filling the nomination
                     form!

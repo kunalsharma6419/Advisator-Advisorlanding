@@ -29,27 +29,26 @@
                                 <p class="font-normal">Time</p>
                             </div>
                         </div>
-                        <li class="text-sm md:text-base text-[#2A2A2A]">
-                            <div class="flex items-center justify-between">
-                                <p class="font-medium">Rachel Wayne</p>
-                                <p class="font-normal">18/04/2024</p>
-                                <p class="font-normal">13:30 pm</p>
-                            </div>
-                        </li>
-                        <li class="text-sm md:text-base text-[#2A2A2A]">
-                            <div class="flex items-center justify-between">
-                                <p class="font-medium">Catherine Paize</p>
-                                <p class="font-normal">18/04/2024</p>
-                                <p class="font-normal">13:30 pm</p>
-                            </div>
-                        </li>
-                        <li class="text-sm md:text-base text-[#2A2A2A]">
-                            <div class="flex items-center justify-between">
-                                <p class="font-medium">Sam Will</p>
-                                <p class="font-normal">18/04/2024</p>
-                                <p class="font-normal">13:30 pm</p>
-                            </div>
-                        </li>
+            
+                        @if ($upcomingBookings && $upcomingBookings->count())
+                            @foreach ($upcomingBookings as $booking)
+                                <li class="text-sm md:text-base text-[#2A2A2A]">
+                                    <div class="flex items-center justify-between">
+                                        <p class="font-medium">{{ $booking->advisorNomination->full_name ?? 'N/A' }}</p>
+                                        <p class="font-normal">{{ $booking->booking_date->format('d/m/Y') }}</p>
+                                        <p class="font-normal">{{  $booking->time_slot }}</p> <!-- Adjust this if your time field has a different name -->
+                                    </div>
+                                </li>
+                            @endforeach
+                        @else
+                            <li class="text-sm md:text-base text-[#2A2A2A]">
+                                <div class="flex items-center justify-between">
+                                    <p class="font-medium">No upcoming bookings available.</p>
+                                    <p class="font-normal"></p>
+                                    <p class="font-normal"></p>
+                                </div>
+                            </li>
+                        @endif
                     </ul>
                 </div>
                 <div class="border border-[#DBDFFF] lg:h-[280px] p-4 w-full rounded-xl bg-[#FFFFFF] shadow-md">
@@ -59,21 +58,38 @@
                             Completing your profile
                         </p>
                     </div>
-                    <div class="my-[2rem] flex w-full h-4 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
+                    {{-- <div class="my-[2rem] flex w-full h-4 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
                         role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                         <div class="flex flex-col justify-center rounded-full overflow-hidden bg-[#7482FF] text-xs text-white text-center whitespace-nowrap dark:bg-[#7482FF] transition duration-500"
                             style="width: 80%">
                             80%
                         </div>
+                    </div> --}}
+                    <div class="my-[2rem] flex w-full h-8 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
+                        role="progressbar" aria-valuenow="{{ $completionPercentage }}" aria-valuemin="0"
+                        aria-valuemax="100">
+                        <div class="flex items-center justify-center rounded-full overflow-hidden text-xs text-black text-center whitespace-nowrap transition duration-500"
+                            style="
+             width: {{ $completionPercentage }}%;
+             background-color: {{ $completionPercentage <= 50 ? '#FF4D4F' : ($completionPercentage <= 80 ? '#FFD700' : '#28A745') }};
+             height: 100%;
+         ">
+                            {{ $completionPercentage }}%
+                        </div>
                     </div>
-                    <ul class="list-disc px-4">
-                        <li class="text-[#3A3A3A] text-sm md:text-base">
-                            Add your profile image.
-                        </li>
-                        <li class="text-[#3A3A3A] text-sm md:text-base">
-                            Add your business description.
-                        </li>
-                    </ul>
+                    @if (count($missingFields) > 0)
+                        <ul class="list-disc px-4">
+                            @foreach ($missingFields as $field)
+                                <li class="text-[#3A3A3A] text-sm md:text-base">
+                                    Add your {{ $field }}.
+                                </li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <p class="text-[#28A745] text-sm md:text-base">
+                            Boost your profile by engaging with our features and updating regularly!
+                        </p>
+                    @endif
                 </div>
             </div>
             <div class="w-full flex flex-col md:flex-row gap-4 md:gap-3 lg:gap-6 mt-[3rem]">
@@ -86,6 +102,10 @@
                     <div id="advisorchartdiv" class="w-full h-[90%]"></div>
                 </div>
 
+
+                
+
+                
                 <div
                     class="border border-[#F3EA9A] h-[320px] p-4 w-full flex justify-center flex-col rounded-xl bg-[#FFFFFF] shadow-md">
                     <div class="flex gap-2 items-start my-1">
@@ -93,7 +113,26 @@
                             Wallet Insights
                         </p>
                     </div>
-                    <div id="chartdiv" class="w-full h-full"></div>
+                    @if ($hasWalletInsights)
+                        <div id="chartdiv" class="w-full h-full"></div>
+                    @else
+                        <!-- Show the fallback message and icon when no wallet insights are available -->
+                        <div class="flex flex-col items-center justify-center text-center gap-4">
+                            <!-- SVG Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-red-500" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m9-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <!-- Message -->
+                            <p class="text-lg font-semibold text-gray-600">
+                                No Wallet Insights Now
+                            </p>
+                            <p class="text-sm text-gray-500">
+                                Kindly recharge to view your wallet insights.
+                            </p>
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -129,24 +168,35 @@
                         </div>
                     </div>
                 </div>
-
-                <ul class="list-disc flex flex-col md:flex-row items-start md:items-center justify-between px-[2rem] gap-2">
-                    <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">
-                        Average Monthly Advisory hours:
-                        <span class="font-bold">230 hrs</span>
-                    </li>
-                    <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">
-                        Most Advisory hours Month:
-                        <span class="font-bold"> Oct 2023 (295h)</span>
-                    </li>
-                    <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">
-                        Least Advisory hours Month:
-                        <span class="font-bold"> Jan 2023 (80h)</span>
-                    </li>
-                </ul>
-                <div id="earningChartdiv" class="w-full h-full"></div>
+            
+                @if ($advisoryHoursData !== null && $advisoryHoursData->count() > 0)
+                    <ul class="list-disc flex flex-col md:flex-row items-start md:items-center justify-between px-[2rem] gap-2">
+                        <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">
+                            Average Monthly Advisory hours: <span class="font-bold">230 hrs</span>
+                        </li>
+                        <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">
+                            Most Advisory hours Month: <span class="font-bold"> Oct 2023 (295h)</span>
+                        </li>
+                        <li class="font-normal text-[#2A2A2A] text-xs md:text-sm lg:text-base">
+                            Least Advisory hours Month: <span class="font-bold"> Jan 2023 (80h)</span>
+                        </li>
+                    </ul>
+                    <div id="earningChartdiv" class="w-full h-full"></div>
+                @else
+                    <div class="flex flex-col justify-center items-center w-full h-full text-center">
+                        <svg class="w-20 h-20 mb-4 text-[#FF3131]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" stroke="#FF3131" stroke-width="2" fill="none" />
+                            <path d="M12 6v6h6" />
+                        </svg>
+            
+                        <h2 class="text-lg sm:text-xl md:text-2xl font-semibold text-[#2A2A2A] mb-2">No Advisory Hours Data
+                        </h2>
+                        <p class="text-sm sm:text-base md:text-lg text-[#2A2A2A]">There is no advisory hours data available.</p>
+                    </div>
+                @endif
             </div>
-        </div>
+            
 
 
 
@@ -165,38 +215,20 @@
         // Create chart instance
         var chart = am4core.create("chartdiv", am4charts.PieChart);
 
-        // Add data
-        chart.data = [{
-                country: "Lithuania",
-                value: 501.9,
-            },
-            {
-                country: "Czechia",
-                value: 301.9,
-            },
-            {
-                country: "Ireland",
-                value: 201.1,
-            },
-            {
-                country: "Germany",
-                value: 165.8,
-            },
-            {
-                country: "Australia",
-                value: 139.9,
-            },
-        ];
+        // Dynamic data from the server
+        var walletchartData = @json($walletchartData);
+
+        // Add data to chart
+        chart.data = walletchartData;
 
         // Add and configure Series
         var pieSeries = chart.series.push(new am4charts.PieSeries());
         pieSeries.dataFields.value = "value";
-        pieSeries.dataFields.category = "country";
+        pieSeries.dataFields.category = "plan";
         pieSeries.labels.template.disabled = true;
         pieSeries.ticks.template.disabled = true;
 
-        // pieSeries.dataFields.value.legend = 20;
-
+        // Customize the chart appearance
         chart.legend = new am4charts.Legend();
         chart.legend.position = "left";
 
@@ -205,7 +237,53 @@
         var label = pieSeries.createChild(am4core.Label);
         label.disabled = true;
 
-        chart.logo.disabled = true;
+        chart.logo.disabled = true; // Remove amChart's branding logo
+    </script>
+    <script>
+        // // Create chart instance
+        // var chart = am4core.create("chartdiv", am4charts.PieChart);
+
+        // // Add data
+        // chart.data = [{
+        //         country: "Lithuania",
+        //         value: 501.9,
+        //     },
+        //     {
+        //         country: "Czechia",
+        //         value: 301.9,
+        //     },
+        //     {
+        //         country: "Ireland",
+        //         value: 201.1,
+        //     },
+        //     {
+        //         country: "Germany",
+        //         value: 165.8,
+        //     },
+        //     {
+        //         country: "Australia",
+        //         value: 139.9,
+        //     },
+        // ];
+
+        // // Add and configure Series
+        // var pieSeries = chart.series.push(new am4charts.PieSeries());
+        // pieSeries.dataFields.value = "value";
+        // pieSeries.dataFields.category = "country";
+        // pieSeries.labels.template.disabled = true;
+        // pieSeries.ticks.template.disabled = true;
+
+        // // pieSeries.dataFields.value.legend = 20;
+
+        // chart.legend = new am4charts.Legend();
+        // chart.legend.position = "left";
+
+        // chart.innerRadius = am4core.percent(50);
+
+        // var label = pieSeries.createChild(am4core.Label);
+        // label.disabled = true;
+
+        // chart.logo.disabled = true;
 
         // label.text = "${values.value.sum}";
         // label.horizontalCenter = "middle";
@@ -432,6 +510,7 @@
             // https://www.amcharts.com/docs/v5/concepts/animations/
             series.appear();
             chart.appear(1000, 100);
+
         }); // end am5.ready()
 
         // earning chart graph

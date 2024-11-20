@@ -77,14 +77,16 @@
             <!-- serarch bar -->
             <div class="hidden md:flex justify-between items-center gap-2 mt-[2rem]">
                 <h2 class="text-base lg:text-lg text-[#2A2A2A] font-medium ">All Reviews</h2>
-                <div class="hidden md:block w-fit font-medium rounded-lg bg-[#FFE2E2] shadow-md p-2">
-                    <select id="underline_select" class="outline-none bg-transparent w-full lg:pr-[1rem] text-[#3A3A3A]">
-                        <option selected>All</option>
-                        <option value="+92">Before 1 month</option>
-                        <option value="+92">Before 6 month</option>
-                        <option value="+94">Before 1 year</option>
-                    </select>
-                </div>
+                <form method="GET" action="{{ route('advisor.reviewssummary') }}">
+                    <div class="hidden md:block w-fit font-medium rounded-lg bg-[#FFE2E2] shadow-md p-2">
+                        <select name="filter" id="underline_select" class="outline-none bg-transparent w-full lg:pr-[1rem] text-[#3A3A3A]" onchange="this.form.submit()">
+                            <option value="" {{ request('filter') == '' ? 'selected' : '' }}>All</option>
+                            <option value="1_month" {{ request('filter') == '1_month' ? 'selected' : '' }}>Before 1 month</option>
+                            <option value="6_months" {{ request('filter') == '6_months' ? 'selected' : '' }}>Before 6 months</option>
+                            <option value="1_year" {{ request('filter') == '1_year' ? 'selected' : '' }}>Before 1 year</option>
+                        </select>
+                    </div>
+                </form>
                 <img class="w-8 h-8 cursor-pointer md:hidden" src="../src/assets/icons/Book Appointment.png"
                     alt="book appointment">
             </div>
@@ -141,11 +143,14 @@
                     <p class="text-xs sm:text-sm font-medium text-[#2A2A2A]">No data to display</p>
                 </div>
             @endif
+          
         </div>
+      
+
 
         <!-- table -->
         <div class="w-[90%] mx-auto mt-[2rem] bg-[#FAFAFA] p-1 shadow-sm mb-[5rem] md:mb-[1rem]">
-            <table class="table-fixed w-full border-separate text-[Generate invoice] border-spacing-y-3">
+            {{-- <table class="table-fixed w-full border-separate text-[Generate invoice] border-spacing-y-3">
                 <thead class="text-[#2A2A2A] font-medium text-base lg:text-lg">
                     <tr>
                         <th class="hidden md:block text-left align-top">Date</th>
@@ -188,7 +193,121 @@
                         </tr>
                     @endif
                 </tbody>
+            </table> --}}
+
+            <table class="table-fixed w-full border-separate border-spacing-y-3 text-sm lg:text-base">
+                <thead class="text-[#2A2A2A] font-medium">
+                    <tr>
+                        <th class="text-left align-top">Date</th>
+                        <th class="text-left align-top">User ID</th>
+                        <th class="text-left align-top">Overall Experience</th>
+                        <th class="text-left align-top">Reliability</th>
+                        <th class="text-left align-top">Affordability</th>
+                        <th class="text-left align-top">Relevance to Problem</th>
+                        <th class="text-left align-top">Review</th>
+                    </tr>
+                </thead>
+                <tbody class="border-spacing-y-3">
+                    @if ($feedbackData !== null && $feedbackData->count() > 0)
+                        @foreach ($feedbackData as $feedback)
+                            <tr class="rounded-md p-4">
+                                <!-- Date Created -->
+                                <td class="hidden md:table-cell py-2 px-4">{{ \Carbon\Carbon::parse($feedback->created_at)->format('d M Y') }}</td>
+
+            
+                                <!-- User ID -->
+                                <td class="hidden md:table-cell py-2 px-4">{{ $feedback->user_id }}</td>
+            
+                                <!-- Overall Experience Rating with Stars and Rating -->
+                                <td class="py-2 px-4">
+                                    <div class="flex items-center gap-2">
+                                        
+                                        <div class="flex space-x-1">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="16" height="16"
+                                                     class="{{ $i <= $feedback->overall_experience ? 'text-yellow-500' : 'text-gray-400' }}">
+                                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                                </svg>
+                                            @endfor
+                                        </div>
+                                        <span>{{ $feedback->overall_experience }}</span>
+                                    </div>
+                                </td>
+            
+                                <!-- Reliability Rating with Stars and Rating -->
+                                <td class="py-2 px-4">
+                                    <div class="flex items-center gap-2">
+                                        
+                                        <div class="flex space-x-1">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="16" height="16"
+                                                     class="{{ $i <= $feedback->reliability ? 'text-yellow-500' : 'text-gray-400' }}">
+                                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                                </svg>
+                                            @endfor
+                                        </div>
+                                        <span>{{ $feedback->reliability }}</span>
+                                    </div>
+                                </td>
+            
+                                <!-- Affordability Rating with Stars and Rating -->
+                                <td class="py-2 px-4">
+                                    <div class="flex items-center gap-2">
+                                        
+                                        <div class="flex space-x-1">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="16" height="16"
+                                                     class="{{ $i <= $feedback->affordability ? 'text-yellow-500' : 'text-gray-400' }}">
+                                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                                </svg>
+                                            @endfor
+                                        </div>
+                                        <span>{{ $feedback->affordability }}</span>
+                                    </div>
+                                </td>
+            
+                                <!-- Relevance to Problem Rating with Stars and Rating -->
+                                <td class="py-2 px-4">
+                                    <div class="flex items-center gap-2">
+                                    
+                                        <div class="flex space-x-1">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="16" height="16"
+                                                     class="{{ $i <= $feedback->relevance_to_problem ? 'text-yellow-500' : 'text-gray-400' }}">
+                                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                                </svg>
+                                            @endfor
+                                        </div>
+                                        <span>{{ $feedback->relevance_to_problem }}</span>
+                                    </div>
+                                </td>
+            
+                                <!-- Review Text -->
+                                <td class="truncate max-w-xs py-2 px-4">
+                                    <div class="content-container">
+                                       
+                     
+                                        <p>{{ Str::limit($feedback->review, 20) }}</p>
+                                        @if (strlen($feedback->review) > 20)
+                                        <span class="text-blue-500 cursor-pointer" onclick="this.parentElement.querySelector('p').classList.toggle('line-clamp-3')">... Read more</span>
+                                    @endif
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="7" class="text-center py-4">No data to display</td>
+                        </tr>
+                    @endif
+                </tbody>
+                  <!-- Pagination Links -->
+        
             </table>
+            
+            <div class="mt-4">
+                {{ $feedbackData->links() }}
+            </div>
         </div>
 
 

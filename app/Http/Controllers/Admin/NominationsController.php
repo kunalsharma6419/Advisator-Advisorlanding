@@ -308,6 +308,10 @@ class NominationsController extends Controller
             // Send the email
             Mail::to($advisor->email)->send(new AdvisorSelected($advisor));
 
+        } elseif($overall_score > 4) {
+            // Assuming you have an advisor object that you want to update
+            $advisor->is_super_advisor = true;
+            $advisor->save(); // Save the changes to the database
         } else {
             $nomination->nomination_status = 'rejected';
             // Send the email for rejection

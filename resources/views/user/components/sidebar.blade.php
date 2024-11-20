@@ -3,16 +3,28 @@
     <div class="w-[70%] sm:w-[60%] bg-[#FFFFFF] h-full">
         <div class="w-[90%]s mx-auto flexs flex-col gap-4 py-[2rem]">
             <div class="flex justify-between items-center">
-                <a href="../Client pages/userProfile.html">
+                <a href="#">
                     <div class="flex items-center gap-1 bg-[#FFF4ED] px-6 py-3 rounded-r-[30px]">
-                        <img class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[3rem]"
-                            src="../src/assets/img/profileImage.png" alt="" />
+                        @if (Auth::user()->profile_photo_path)
+                            <img class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[3rem]"
+                                src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}" alt="">
+                        @else
+                            <?php
+                            $fullName = Auth::user()->full_name;
+                            $initial = strtoupper(substr($fullName, 0, 1));
+                            ?>
+                            <img id="profilePhoto"
+                                src="https://via.placeholder.com/150/000000/FFFFFF/?text={{ $initial }}"
+                                alt="Profile Photo" width="100"
+                                class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[3rem]">
+                        @endif
+
                         <div>
                             <h2 class="text-sm sm:text-base text-[#2A2A2A] font-medium">
-                                Radhika Sharma
+                                {{ Auth::user()->full_name }}
                             </h2>
                             <h3 class="text-xs sm:text-sm text-[#828282] font-medium">
-                                radhikasharma@abc.com
+                                {{ Auth::user()->email }}
                             </h3>
                         </div>
                     </div>
@@ -24,19 +36,46 @@
             </div>
 
             <div class="mt-[2rem] border-t border-b border-[#E5E5E5] py-2 my-2">
-                <a href="../auth/advisornominationform.html">
-                    <div class="ml-[2rem] flex items-center gap-4">
-                        <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/img/phone.png"
-                            alt="" />
-                        <h2 class="font-medium text-sm sm:text-base text-[#BE7D00]">
-                            Become an Advisor
-                        </h2>
-                    </div>
-                </a>
+
+                <form action="{{ route('toggle.usertype') }}" method="POST">
+                    @csrf
+                    <a href="">
+                        <button type="submit" class="ml-[2rem] flex items-center gap-4">
+                            <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/img/phone.png"
+                                alt="" />
+                            <h2 class="font-medium text-sm sm:text-base text-[#BE7D00]">
+                                @if (Auth::user()->usertype == 0)
+                                    Switch to Advisor
+                                @else
+                                    Switch to Client
+                                @endif
+                            </h2>
+                        </button>
+                    </a>
+                    {{-- <div class="">
+                        <button type="submit"
+                            class="bg-red-200 hover:bg-red-300 text-red-700 font-semibold py-2 px-4 rounded-lg shadow-md">
+                            @if (Auth::user()->usertype == 0)
+                                Switch to Advisor
+                            @else
+                                Switch to Client
+                            @endif
+                        </button>
+                    </div> --}}
+                </form>
             </div>
 
             <div class="px-[2rem] py-2 flex flex-col gap-6">
-                <a href="../Client pages/consultadvisor.html">
+                <a href="{{route('user.dashboard')}}">
+                    <div class="flex items-center gap-4">
+                        <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                            src="../src/assets/img/FeaturedAdvisor.png" alt="" />
+                        <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                            Dashboard
+                        </h2>
+                    </div>
+                </a>
+                <a href="{{route('consult-advisor')}}">
                     <div class="flex items-center gap-4">
                         <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
                             src="../src/assets/img/Consult Advisor.png" alt="" />
@@ -45,16 +84,8 @@
                         </h2>
                     </div>
                 </a>
-                <a href="../Client pages/featuredadvisor.html">
-                    <div class="flex items-center gap-4">
-                        <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
-                            src="../src/assets/img/FeaturedAdvisor.png" alt="" />
-                        <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
-                            Featured Advisor
-                        </h2>
-                    </div>
-                </a>
-                <a href="../Client pages/advisorbooking.html">
+
+                <a href="{{route('user.mybookings')}}">
                     <div class="flex items-center gap-4">
                         <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/img/MyBookings.png"
                             alt="" />
@@ -63,7 +94,7 @@
                         </h2>
                     </div>
                 </a>
-                <a href="../Client pages/mywallet.html">
+                <a href="{{route('user.mywallet')}}">
                     <div class="flex items-center gap-4">
                         <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/img/Wallet.png"
                             alt="" />
@@ -72,7 +103,16 @@
                         </h2>
                     </div>
                 </a>
-                <a href="../Client pages/blog.html">
+                <a href="{{route('user.transactionhistory')}}">
+                    <div class="flex items-center gap-4">
+                        <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/img/Wallet.png"
+                            alt="" />
+                        <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                            Transaction History
+                        </h2>
+                    </div>
+                </a>
+                <a href="{{route('blog')}}">
                     <div class="flex items-center gap-4">
                         <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/img/Blogs.png"
                             alt="" />
@@ -81,7 +121,7 @@
                         </h2>
                     </div>
                 </a>
-                <a href="../Client pages/aboutus.html">
+                <a href="{{route('about-us')}}">
                     <div class="flex items-center gap-4">
                         <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/img/Aboutus.png"
                             alt="" />
@@ -90,22 +130,53 @@
                         </h2>
                     </div>
                 </a>
-                <a href="">
+                <a href="{{ route('terms-of-service') }}">
                     <div class="flex items-center gap-4">
                         <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
-                            src="../src/assets/img/Customersupport.png" alt="" />
+                            src="../src/assets/Landing_page/Terms.png" alt="" />
+                        <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                            Terms of Services
+                        </h2>
+                    </div>
+                </a>
+                <a href="{{ route('privacy-policy') }}">
+                    <div class="flex items-center gap-4">
+                        <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                            src="../src/assets/Landing_page/Privacy.png" alt="" />
+                        <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                            Privacy Policy
+                        </h2>
+                    </div>
+                </a>
+                <a href="{{ route('onboarding-policy') }}">
+                    <div class="flex items-center gap-4">
+                        <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                            src="../src/assets/Landing_page/Onboard.png" alt="" />
+                        <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                            Onboarding Policy
+                        </h2>
+                    </div>
+                </a>
+                {{-- <a href="">
+                    <div class="flex items-center gap-4">
+                        <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                            src="../src/assets/sidebar/Customersupport.png" alt="" />
                         <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
                             Customer support
                         </h2>
                     </div>
-                </a>
+                </a> --}}
                 <a href="">
                     <div class="flex items-center gap-4">
-                        <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/img/Logout.png"
+                        <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/sidebar/Logout.png"
                             alt="" />
-                        <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
-                            Logout
-                        </h2>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="font-medium text-sm sm:text-base text-[#2A2A2A]">
+                                {{ __('Log Out') }}
+                            </button>
+
+                        </form>
                     </div>
                 </a>
             </div>
@@ -116,10 +187,14 @@
                 Find us on:
             </h3>
             <div class="flex gap-5">
-                <img class="w-[30px] h-[30px]" src="../src/assets/img/instagram.png" alt="" />
-                <img class="w-[30px] h-[30px]" src="../src/assets/img/facebook.png" alt="" />
-                <img class="w-[30px] h-[30px]" src="../src/assets/img/linkedin.png" alt="" />
-                <img class="w-[30px] h-[30px]" src="../src/assets/img/youtube.png" alt="" />
+                <a href="https://www.instagram.com/shift180world" target="_blank" rel="noopener"><img
+                        class="w-[30px] h-[30px]" src="../src/assets/sidebar/instagram.png" alt="" /></a>
+                <a href="https://www.facebook.com/Shift180.world/" target="_blank" rel="noopener"><img
+                        class="w-[30px] h-[30px]" src="../src/assets/sidebar/facebook.png" alt="" /></a>
+                <a href="https://www.linkedin.com/company/shift180/" target="_blank" rel="noopener"><img
+                        class="w-[30px] h-[30px]" src="../src/assets/sidebar/linkedin.png" alt="" /></a>
+                <a href="http://www.youtube.com/@Shift180AdvisoryServices" target="_blank" rel="noopener"><img
+                        class="w-[30px] h-[30px]" src="../src/assets/sidebar/youtube.png" alt="" /></a>
             </div>
         </div>
     </div>

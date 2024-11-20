@@ -21,6 +21,7 @@
         };
     </script>
     <script src="https://kit.fontawesome.com/5c118959dd.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 CDN -->
 </head>
 
 <body>
@@ -52,7 +53,7 @@
             </div>
             <!-- add the toogle here -->
             <div class="flex flex-col gap-5 w-[80%] md:w-[400px] mx-auto  py-3 items-center mt-[50px] justify-center">
-                {{-- <div class="flex gap-[8px] w-full items-center justify-center rounded-[8px]  bg-white py-1">
+                <div class="flex gap-[8px] w-full items-center justify-center rounded-[8px]  bg-white py-1">
                     <div id="btnUser"
                         class="tabButton bg-red-500 text-white px-4 justify-center py-2 w-full items-center text-[16px] rounded-[8px] flex gap-3 font-[500]"
                         onclick="openContent('User')">
@@ -75,6 +76,7 @@
                         <!-- input fields -->
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
+                            <input type="hidden" name="usertype" value="0"> <!-- User type for User -->
                             <input class="p-[12px] mt-[18px] w-full rounded-[12px]" id="email"
                                 placeholder="Email Address" type="email" name="email" :value="old('email')"
                                 required autofocus autocomplete="username" />
@@ -100,9 +102,9 @@
                             </div>
                         </form>
                     </div>
-                </div> --}}
+                </div>
                 <!-- Advisor content -->
-                <div id="Advisor" class="city w-full" style="display: block;">
+                <div id="Advisor" class="city w-full" style="display: none;">
                     <div class="w-full  mt-[44] rounded-t-lg lg:rounded-none bg-[#F6F8F1]">
                         <h2 class="text-[#3A3A3A] font-[500] text-[16px] lg:text-[20px] mt-[3px]">
                             Advisor Login
@@ -110,6 +112,7 @@
                         <!-- input fields -->
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
+                            <input type="hidden" name="usertype" value="2"> <!-- User type for Advisor -->
                             <input class="p-[12px] mt-[18px] w-full rounded-[12px]" id="email"
                                 placeholder="Email Address" type="email" name="email" :value="old('email')"
                                 required autofocus autocomplete="username" />
@@ -170,6 +173,17 @@
         activeButton.querySelector("i").style.color = "#FFFFFF";
     }
 </script>
+
+@if (session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: '{{ session("error") }}',
+        confirmButtonColor: '#dc3545'
+    });
+</script>
+@endif
 
 </html>
 

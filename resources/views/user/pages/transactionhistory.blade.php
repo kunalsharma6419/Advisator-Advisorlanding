@@ -7,190 +7,91 @@
 
 
         <div class="font-Roboto w-[90%] md:w-[90%] lg:w-[85%] mx-auto">
-
-
-            <!-- page name -->
             @include('user.components.dashmenu')
 
+            <!-- Search bar -->
+            <form action="{{ route('user.transactionhistory') }}" method="GET">
+                <div class="flex justify-between items-center gap-2 mt-[2rem]">
+                    <h2 class="text-base lg:text-lg text-[#2A2A2A] font-medium hidden md:block">All Transaction History</h2>
 
-            <!-- serarch bar -->
-            <div class="flex justify-between items-center gap-2 mt-[2rem]">
-                <h2 class= "text-base lg:text-lg text-[#2A2A2A] font-medium hidden md:block">All Transaction history</h2>
-
-
-
-                <div class="lg:w-[60%]">
-                    <div
-                        class="max-w-[40rem] mx-auto border border-[#DADADA] px-2 xl:px-4 py-2 rounded-[24px] shadow-md flex  justify-between items-center gap-x-2 font-Roboto font-normal text-sm lg:text-base text-[#2A2A2A]">
-
-                        <div>
+                    <div class="lg:w-[60%]">
+                        <div
+                            class="max-w-[40rem] mx-auto border border-[#DADADA] px-2 xl:px-4 py-2 rounded-[24px] shadow-md flex justify-between items-center gap-x-2 font-Roboto font-normal text-sm lg:text-base text-[#2A2A2A]">
                             <input
                                 class="font-medium text-sm w-full lg:text-base text-[#AFAFAF] placeholder:text-[#AFAFAF] outline-none bg-[#FFFFFF]"
-                                type="text" placeholder="Search Transaction">
-                        </div>
+                                type="text" name="search" value="{{ $searchTerm }}" placeholder="Search Transaction">
 
-                        <div
-                            class="px-[1rem] py-1 md:py-2 md:px-[2rem] flex items-center gap-x-2  rounded-[2rem] bg-[#EDF6DB] shadow-md">
-                            <svg class="w-5 h-5 text-[#000000]" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                            </svg>
-
-                            <button class="font-Roboto text-nowrap font-semibold text-sm lg:text-base text-[#2A2A2A]">Find
-                                Advisor</button>
+                            <div
+                                class="px-[1rem] py-1 md:py-2 md:px-[2rem] flex items-center gap-x-2 rounded-[2rem] bg-[#EDF6DB] shadow-md">
+                                <svg class="w-5 h-5 text-[#000000]" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round"
+                                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                </svg>
+                                <button
+                                    class="font-Roboto text-nowrap font-semibold text-sm lg:text-base text-[#2A2A2A]">Find
+                                    Advisor</button>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Date filter dropdown -->
+                    <div class="hidden md:block w-fit font-medium rounded-lg bg-[#FFE2E2] shadow-md p-2">
+                        <select id="underline_select" name="date_filter"
+                            class="outline-none bg-transparent w-full lg:pr-[1rem] text-[#3A3A3A]">
+                            <option value="all" {{ $dateFilter == 'all' ? 'selected' : '' }}>All</option>
+                            <option value="1" {{ $dateFilter == '1' ? 'selected' : '' }}>Before 1 month</option>
+                            <option value="6" {{ $dateFilter == '6' ? 'selected' : '' }}>Before 6 months</option>
+                            <option value="12" {{ $dateFilter == '12' ? 'selected' : '' }}>Before 1 year</option>
+                        </select>
+                    </div>
+
+                    <img class="w-8 h-8 cursor-pointer md:hidden" src="../src/assets/icons/Book Appointment.png"
+                        alt="book appointment">
                 </div>
+            </form>
 
+            <!-- Table -->
+            <div class="w-[98%] sm:w-[90%] mx-auto mt-[2rem] bg-[#FAFAFA] p-1 shadow-sm mb-[5rem] md:mb-[1rem]">
+                <table class="table-fixed w-full border-separate text-[Generate invoice] border-spacing-y-3">
+                    <thead class="text-[#2A2A2A] font-medium text-base lg:text-lg">
+                        <tr>
+                            <th class="hidden md:block text-left align-top">Sr. No.</th>
+                            <th class="text-left align-top">Date</th>
+                            <th class="hidden md:block text-left align-top">Time</th>
+                            <th class="text-left align-top">Status</th>
+                            <th class="text-left align-top">Method</th>
+                            <th class="text-left align-top">Amount</th>
+                            <th class="text-left align-top">Wallet Balance</th>
+                            <th class="text-left align-top">Invoice</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm lg:text-base border-spacing-y-10">
+                        @foreach ($transactions as $transaction)
+                            <tr>
+                                <td class="hidden md:block">{{ $loop->iteration }}</td>
+                                <td>{{ $transaction->created_at->format('d/m/Y') }}</td>
+                                <td class="hidden md:block">{{ $transaction->created_at->format('h:i A') }}</td>
+                                <td>{{ $transaction->status }}</td>
+                                <td>{{ $transaction->method }}</td>
+                                <td class="{{ $transaction->method == 'booking refund' ? 'text-green-500' : 'text-[#FF3131]' }}">
+                                    ₹{{ number_format($transaction->amount, 2) }}
+                                </td>
+                                <td>₹{{ number_format($transaction->total_wallet_balance, 2) }}</td>
+                                <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate Invoice</td>
+                                <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
 
-                <div class="hidden md:block w-fit font-medium rounded-lg bg-[#FFE2E2] shadow-md p-2">
-                    <select id="underline_select" class="outline-none bg-transparent w-full lg:pr-[1rem] text-[#3A3A3A]">
-                        <option selected>All</option>
-                        <option value="+92">Before 1 month</option>
-                        <option value="+92">Before 6 month</option>
-                        <option value="+94">Before 1 year</option>
-                    </select>
+                <!-- Pagination -->
+                <div class="mt-4">
+                    {{ $transactions->links() }} <!-- Laravel pagination links -->
                 </div>
-
-                <img class="w-8 h-8 cursor-pointer md:hidden" src="../src/assets/icons/Book Appointment.png"
-                    alt="book appointment">
-
             </div>
-
         </div>
 
-        <!-- table  -->
-        <div class="w-[98%] sm:w-[90%] mx-auto mt-[2rem] bg-[#FAFAFA] p-1 shadow-sm mb-[5rem] md:mb-[1rem]">
-            <table class="table-fixed w-full border-separate text-[Generate invoice] border-spacing-y-3">
-                <thead class="text-[#2A2A2A] font-medium text-base lg:text-lg ">
-                    <tr>
-                        <th class="hidden md:block text-left align-top">sr.no</th>
-                        <th class="text-left align-top">Date</th>
-                        <th class="hidden md:block text-left align-top">Time</th>
-                        <th class="text-left align-top">Status</th>
-                        <th class="text-left align-top">Method</th>
-                        <th class="text-left align-top">Amount</th>
-                        <th class="text-left align-top">Total Wallet Balance</th>
-                        <th class="text-left align-top">Invoice</th>
-                    </tr>
-                </thead>
-                <tbody class="text-sm lg:text-base border-spacing-y-10">
-                    <tr>
-                        <td class="hidden md:block">01</td>
-                        <td>15/04/2024</td>
-                        <td class="hidden md:block">10:48 am</td>
-                        <td>Withdraw</td>
-                        <td>Credit card</td>
-                        <td class="text-[#FF3131]">₹360</td>
-                        <td>₹1249</td>
-                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
-                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
-                    </tr>
-                    <tr>
-                        <td class="hidden md:block">01</td>
-                        <td>15/04/2024</td>
-                        <td class="hidden md:block">10:48 am</td>
-                        <td>Credited</td>
-                        <td>Credit card</td>
-                        <td class="text-[#6A9023]">₹199</td>
-                        <td>₹1449</td>
-                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
-                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
-                    </tr>
-                    <tr>
-                        <td class="hidden md:block">01</td>
-                        <td>15/04/2024</td>
-                        <td class="hidden md:block">10:48 am</td>
-                        <td>Withdraw</td>
-                        <td>Credit card</td>
-                        <td class="text-[#FF3131]">₹360</td>
-                        <td>₹1249</td>
-                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
-                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
-                    </tr>
-                    <tr>
-                        <td class="hidden md:block">01</td>
-                        <td>15/04/2024</td>
-                        <td class="hidden md:block">10:48 am</td>
-                        <td>Credited</td>
-                        <td>Credit card</td>
-                        <td class="text-[#6A9023]">₹199</td>
-                        <td>₹1449</td>
-                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
-                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
-                    </tr>
-                    <tr>
-                        <td class="hidden md:block">01</td>
-                        <td>15/04/2024</td>
-                        <td class="hidden md:block">10:48 am</td>
-                        <td>Withdraw</td>
-                        <td>Credit card</td>
-                        <td class="text-[#FF3131]">₹360</td>
-                        <td>₹1249</td>
-                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
-                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
-                    </tr>
-                    <tr>
-                        <td class="hidden md:block">01</td>
-                        <td>15/04/2024</td>
-                        <td class="hidden md:block">10:48 am</td>
-                        <td>Credited</td>
-                        <td>Credit card</td>
-                        <td class="text-[#6A9023]">₹199</td>
-                        <td>₹1449</td>
-                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
-                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
-                    </tr>
-                    <tr>
-                        <td class="hidden md:block">01</td>
-                        <td>15/04/2024</td>
-                        <td class="hidden md:block">10:48 am</td>
-                        <td>Withdraw</td>
-                        <td>Credit card</td>
-                        <td class="text-[#FF3131]">₹360</td>
-                        <td>₹1249</td>
-                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
-                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
-                    </tr>
-                    <tr>
-                        <td class="hidden md:block">01</td>
-                        <td>15/04/2024</td>
-                        <td class="hidden md:block">10:48 am</td>
-                        <td>Credited</td>
-                        <td>Credit card</td>
-                        <td class="text-[#6A9023]">₹199</td>
-                        <td>₹1449</td>
-                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
-                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
-                    </tr>
-                    <tr>
-                        <td class="hidden md:block">01</td>
-                        <td>15/04/2024</td>
-                        <td class="hidden md:block">10:48 am</td>
-                        <td>Withdraw</td>
-                        <td>Credit card</td>
-                        <td class="text-[#FF3131]">₹360</td>
-                        <td>₹1249</td>
-                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
-                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
-                    </tr>
-                    <tr>
-                        <td class="hidden md:block">01</td>
-                        <td>15/04/2024</td>
-                        <td class="hidden md:block">10:48 am</td>
-                        <td>Credited</td>
-                        <td>Credit card</td>
-                        <td class="text-[#6A9023]">₹199</td>
-                        <td>₹1449</td>
-                        <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate invoice</td>
-                        <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
-                    </tr>
-
-                </tbody>
-            </table>
-
-        </div>
         <footer class="hidden md:block bg-[#FFFFFF] shadow-2xl border border-transparent mt-[2rem]">
             <div class="border border-[#EAEAEA] mb-4 w-full"></div>
             <div class="md:w-[95%] lg:w-[90%] mx-auto my-[2rem]">
@@ -205,7 +106,7 @@
             </div>
         </footer>
 
-        <!-- side bar -->
+        {{-- <!-- side bar -->
         <div
             class="sidebar absolute md:hidden flex justify-end z-20 top-0 transition-all left-full w-full min-h-screen h-full bottom-0">
             <div class="w-[70%] sm:w-[60%] bg-[#FFFFFF] h-full">
@@ -331,10 +232,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
 
-        <!-- bottom menu bar -->
+        {{-- <!-- bottom menu bar -->
         <div class="bg-[#FFFFFF] left-0 z-20 shadow-2xl h-[80px] fixed md:hidden bottom-0 w-full">
             <div class="h-full w-[85%] mx-auto flex justify-between items-center">
                 <div class="flex flex-col items-center justify-center gap-1">
@@ -377,9 +278,10 @@
                 </a>
             </div>
 
-        </div>
+        </div> --}}
 
-
+        @include('user.components.sidebar')
+        @include('user.components.bottommenu')
     </div>
 
     <script>

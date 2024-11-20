@@ -11,6 +11,6 @@ class CustomerSupportTicket extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'advisor_profile_id', 'subject', 'description', 'attachment'
+        'user_id','advisor_profile_id', 'subject', 'description', 'attachment'
     ];
 }

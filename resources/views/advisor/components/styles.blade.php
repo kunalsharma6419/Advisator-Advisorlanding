@@ -15,6 +15,7 @@
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
     <!-- Include the Quill library -->
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@cometchat/chat-sdk-javascript/CometChat.js"></script>
 
 
 

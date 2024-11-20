@@ -116,8 +116,55 @@
                 type: "POST",
                 data: formData,
                 success: function(response) {
+                    // if (response.success) {
+                    //     if (response.redirect) {
+                    //         Swal.fire({
+                    //             icon: 'info',
+                    //             title: 'Nomination Pending',
+                    //             text: response.msg
+                    //         }).then(function() {
+                    //             window.location.href = response.redirect;
+                    //         });
+                    //     } else {
+                    //         Swal.fire({
+                    //             icon: response.msg.includes('Nomination') ? 'info' :
+                    //                 'success',
+                    //             title: response.msg.includes('Nomination') ?
+                    //                 'Nomination Stage' : 'Success',
+                    //             text: response.msg
+                    //         }).then(function() {
+                    //             if (!response.msg.includes('Nomination')) {
+                    //                 // window.location.href = response.redirect; // Redirect to dashboard or desired page
+                    //                 if (response.msg.includes(
+                    //                         'Email address has been verified'
+                    //                         )) {
+                    //                     let dashboardRoute =
+                    //                     '{{ route('home') }}'; // Default fallback route
+                    //                     if (response.usertype == 1) {
+                    //                         dashboardRoute =
+                    //                             '{{ route('advisatoradmin.dashboard') }}'; // Adjust the route as needed
+                    //                     } else if (response.usertype == 0) {
+                    //                         dashboardRoute =
+                    //                             '{{ route('user.dashboard') }}'; // Adjust the route as needed
+                    //                     } else if (response.usertype == 2) {
+                    //                         dashboardRoute =
+                    //                             '{{ route('advisor.dashboard') }}'; // Adjust the route as needed
+                    //                     }
+                    //                     window.location.href = dashboardRoute;
+                    //                 }
+                    //             }
+                    //         });
+                    //     }
+                    // } else {
+                    //     Swal.fire({
+                    //         icon: 'error',
+                    //         title: 'Error',
+                    //         text: response.msg
+                    //     });
+                    // }
                     if (response.success) {
-                        if (response.redirect) {
+                        if (response.redirect && response.msg.includes('Nomination')) {
+                            // For Nomination Pending case
                             Swal.fire({
                                 icon: 'info',
                                 title: 'Nomination Pending',
@@ -126,6 +173,7 @@
                                 window.location.href = response.redirect;
                             });
                         } else {
+                            // For other success cases
                             Swal.fire({
                                 icon: response.msg.includes('Nomination') ? 'info' :
                                     'success',
@@ -134,34 +182,37 @@
                                 text: response.msg
                             }).then(function() {
                                 if (!response.msg.includes('Nomination')) {
-                                    // window.location.href = response.redirect; // Redirect to dashboard or desired page
                                     if (response.msg.includes(
-                                            'Email address has been verified'
-                                            )) {
+                                            'Email address has been verified')) {
                                         let dashboardRoute =
                                         '{{ route('home') }}'; // Default fallback route
+
+                                        // Redirect based on usertype
                                         if (response.usertype == 1) {
                                             dashboardRoute =
-                                                '{{ route('advisatoradmin.dashboard') }}'; // Adjust the route as needed
+                                                '{{ route('advisatoradmin.dashboard') }}'; // Admin dashboard
                                         } else if (response.usertype == 0) {
                                             dashboardRoute =
-                                                '{{ route('user.dashboard') }}'; // Adjust the route as needed
+                                                '{{ route('user.myprofile') }}'; // User dashboard
                                         } else if (response.usertype == 2) {
                                             dashboardRoute =
-                                                '{{ route('advisor.dashboard') }}'; // Adjust the route as needed
+                                                '{{ route('advisor.dashboard') }}'; // Advisor dashboard
                                         }
+
                                         window.location.href = dashboardRoute;
                                     }
                                 }
                             });
                         }
                     } else {
+                        // For error case
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
                             text: response.msg
                         });
                     }
+
                 },
                 error: function(xhr) {
                     Swal.fire({

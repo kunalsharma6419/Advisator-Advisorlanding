@@ -67,42 +67,52 @@
                             <div class="card-body">
                                 <h4 class="card-title">Nominations</h4>
                                 <p class="card-description"> Advisor Nominations<code>.table-striped</code></p>
+                                
                                 <div class="row mb-4">
-                                    <div class="col-md-6 d-flex align-items-center">
-                                        <form action="{{ url()->current() }}" method="GET"
-                                            class="w-100 d-flex align-items-center">
-                                            <label for="entries" class="mr-2 mb-0">Show</label>
-                                            <select name="entries" id="entries" class="form-control mr-2 w-auto"
-                                                onchange="this.form.submit()">
-                                                <option value="10" {{ request('entries', 10) == 10 ? 'selected' : '' }}>
-                                                    10</option>
-                                                <option value="25" {{ request('entries') == 25 ? 'selected' : '' }}>25
-                                                </option>
-                                                <option value="50" {{ request('entries') == 50 ? 'selected' : '' }}>50
-                                                </option>
-                                                <option value="100" {{ request('entries') == 100 ? 'selected' : '' }}>
-                                                    100</option>
-                                            </select>
-                                            <span>entries</span>
-                                        </form>
-                                    </div>
-                                    <div class="col-md-6 text-right">
-                                        <form action="{{ url()->current() }}" method="GET"
-                                            class="w-100 d-flex justify-content-end align-items-center">
-                                            <input type="text" class="form-control mr-2" name="search"
-                                                placeholder="Search Nominations" value="{{ $search }}">
-                                            <select name="status" id="status" class="form-control mr-2 w-auto" onchange="this.form.submit()">
-                                                <option value="">All Statuses</option>
-                                                <option value="inprogress" {{ request('status') == 'inprogress' ? 'selected' : '' }}>In Progress</option>
-                                                <option value="selected" {{ request('status') == 'selected' ? 'selected' : '' }}>Selected</option>
-                                                <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>Rejected</option>
-                                            </select>
-                                            <input type="date" class="form-control mr-2" name="date_from" placeholder="From Date" value="{{ request('date_from') }}">
-                                            <input type="date" class="form-control mr-2" name="date_to" placeholder="To Date" value="{{ request('date_to') }}">
-                                            <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
-                                        </form>
+                                    <!-- Flex Row on Mobile, Columns on Desktop -->
+                                    <div class="col-12 d-flex flex-column flex-md-row align-items-center mb-3">
+                                        
+                                        <!-- "Show" dropdown with width adjustment for mobile -->
+                                        <div class="mb-2 mb-md-0 d-flex align-items-center w-100 w-md-auto">
+                                            <form action="{{ url()->current() }}" method="GET" class="d-flex align-items-center w-100">
+                                                <label for="entries" class="mr-2 mb-0">Show</label>
+                                                <select name="entries" id="entries" class="form-control w-auto" onchange="this.form.submit()">
+                                                    <option value="10" {{ request('entries', 10) == 10 ? 'selected' : '' }}>10</option>
+                                                    <option value="25" {{ request('entries') == 25 ? 'selected' : '' }}>25</option>
+                                                    <option value="50" {{ request('entries') == 50 ? 'selected' : '' }}>50</option>
+                                                    <option value="100" {{ request('entries') == 100 ? 'selected' : '' }}>100</option>
+                                                </select>
+                                                <span>entries</span>
+                                            </form>
+                                        </div>
+                                
+                                        <!-- Search input and other filters (flex row on mobile, columns on desktop) -->
+                                        <div class="d-flex flex-column flex-md-row align-items-center w-100 mt-3 mt-md-0" style="gap: 1rem;">
+                                            <div class="mb-2 mb-md-0 w-100 w-md-25">
+                                                <input type="text" class="form-control w-100" name="search" placeholder="Search Nominations" value="{{ $search }}">
+                                            </div>
+                                            <div class="mb-2 mb-md-0 w-100 w-md-20">
+                                                <select name="status" id="status" class="form-control w-100" onchange="this.form.submit()">
+                                                    <option value="">All Statuses</option>
+                                                    <option value="inprogress" {{ request('status') == 'inprogress' ? 'selected' : '' }}>In Progress</option>
+                                                    <option value="selected" {{ request('status') == 'selected' ? 'selected' : '' }}>Selected</option>
+                                                    <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>Rejected</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-2 mb-md-0 w-100 w-md-20">
+                                                <input type="date" class="form-control w-100" name="date_from" placeholder="From Date" value="{{ request('date_from') }}">
+                                            </div>
+                                            <div class="mb-2 mb-md-0 w-100 w-md-20">
+                                                <input type="date" class="form-control w-100" name="date_to" placeholder="To Date" value="{{ request('date_to') }}">
+                                            </div>
+                                            <div class="mb-2 mb-md-0 w-100 w-md-15">
+                                                <button class="btn btn-primary w-100" type="submit"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                
+                                
 
                                 <div class="table-responsive">
                                     <table class="table table-striped">

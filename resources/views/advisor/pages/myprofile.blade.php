@@ -784,28 +784,138 @@
                     </div>
                 </div>
             </div>
-            {{-- <div>
-                <div class="hidden md:flex mt-8">
-                    <div class="px-4 md:w-[12rem] shrink-0 lg:w-[20rem]  xl:w-[25rem]">
-                        <div
-                            class="flex flex-col  gap-3 text-[#2A2A2A] font-medium text-base lg:text-lg  w-full border shadow-sm p-4 bg-[#F5F5F5] rounded-xl">
-                            <div class="flex items-center justify-between">
-                                <h5 class="text-[#FF3131]">Delete account</h5>
-                                <span class="text-lg lg:text-xl cursor-pointer">></span>
-                            </div>
-                            <p class="text-[#828282]">Permanently delete your account.</p>
+           <!---Delete Account-->
+           <div>
+            <div class="hidden mt-8 md:flex">
+                <div class="px-4 md:w-[12rem] shrink-0 lg:w-[20rem] xl:w-[25rem]">
+                    <div
+                        class="flex flex-col gap-3 text-[#2A2A2A] font-medium text-base lg:text-lg w-full border shadow-sm p-4 bg-[#F5F5F5] rounded-xl">
+                        <div class="flex items-center justify-between">
+                            <h5 class="text-[#FF3131]">Delete account</h5>
+                            <span class="text-lg cursor-pointer lg:text-xl">></span>
                         </div>
-                    </div>
-                    <div class="grow border flex flex-col justify-around gap-3  shadow-sm p-5 rounded-xl ">
-                        <p class="text-[#828282] text-base font-medium">Once your account is deleted, all of its resources
-                            and data will be permanently deleted.</p>
-                        <button
-                            class="w-fit bg-[#FF3131] text-[#FFFFFF] shadow-md py-2 px-6 rounded-[2rem] text-base font-semibold">
-                            Delete Account
-                        </button>
+                        <p class="text-[#828282]">Permanently delete your account.</p>
                     </div>
                 </div>
-            </div> --}}
+                <div class="flex flex-col justify-around gap-3 p-5 border shadow-sm grow rounded-xl">
+                    <p class="text-[#828282] text-base font-medium">
+                        Once your account is deleted, all of its resources and data will
+                        be permanently deleted.
+                    </p>
+                    <button id="DeleteAccountbtn"
+                        class="w-fit bg-[#FF3131] text-[#FFFFFF] shadow-md py-2 px-6 rounded-[2rem] text-base font-semibold">
+                        Delete Account
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
+           <!---Delete Account Modal-->
+
+
+
+           <div id="DeleteVerifyModal" class="fixed inset-0 flex items-center justify-center hidden w-full h-full modal">
+            <div class="absolute inset-0 bg-black opacity-50 modal-overlay"></div>
+
+            <div
+                class="modal-content bg-white p-8 rounded-lg shadow-lg relative z-10 w-full max-w-lg mx-4 md:mx-auto md:w-[70%] lg:w-[50%]">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-[#526E1C] font-semibold text-lg lg:text-xl">Verify OTP</h2>
+                    <button id="closeBtn"
+                        class="w-6 h-6 text-2xl leading-none text-gray-500 hover:text-gray-700 focus:outline-none"
+                        aria-label="Close">&times;</button>
+                </div>
+
+                <p class="mb-6 text-sm font-medium text-center text-gray-700 lg:text-base">
+                    Please enter the One-Time Password sent to your email address
+                </p>
+
+                <form id="otp-form" method="post">
+                    @csrf
+                    <div class="flex items-center justify-center gap-1 md:gap-3 lg:gap-3">
+                        <input type="text"
+                            class="p-4 text-2xl font-extrabold text-center bg-white border rounded outline-none appearance-none w-14 h-14 text-slate-900 focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                            maxlength="1" name="otp[]" />
+                        <input type="text"
+                            class="p-4 text-2xl font-extrabold text-center bg-white border rounded outline-none appearance-none w-14 h-14 text-slate-900 focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                            maxlength="1" name="otp[]" />
+                        <input type="text"
+                            class="p-4 text-2xl font-extrabold text-center bg-white border rounded outline-none appearance-none w-14 h-14 text-slate-900 focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                            maxlength="1" name="otp[]" />
+                        <input type="text"
+                            class="p-4 text-2xl font-extrabold text-center bg-white border rounded outline-none appearance-none w-14 h-14 text-slate-900 focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                            maxlength="1" name="otp[]" />
+                        <input type="text"
+                            class="p-4 text-2xl font-extrabold text-center bg-white border rounded outline-none appearance-none transparent w-14 h-14 text-slate-900 focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                            maxlength="1" name="otp[]" />
+                        <input type="text"
+                            class="p-4 text-2xl font-extrabold text-center bg-white border rounded outline-none appearance-none transparent w-14 h-14 text-slate-900 focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                            maxlength="1" name="otp[]" />
+                    </div>
+                    <div class="max-w-[260px] mx-auto mt-4"></div>
+                    <!-- button -->
+                    <button type="submit"
+                        class="mt-[30px] text-[#2A2A2A] font-[600] text-center w-full py-[10px] bg-gradient-to-r from-[#EDF6DB] via-[#dce8c4] to-[#C5D5A7]">
+                        Verify
+                    </button>
+                </form>
+                <p class="time"></p>
+                <button id="resendOtpVerificationDesktop" disabled
+                class="mt-4 text-[#2A2A2A] font-[600] text-center w-full py-[10px] bg-gray-400 cursor-not-allowed"
+                style="opacity: 0.6;">
+                Resend Verification OTP
+            </button>
+            
+            </div>
+            </form>
+        </div>
+    </div>
+
+
+
+   <!-- Delete Verification Modal Mobile -->
+<div id="DeleteVerifyMobileModal" class="fixed inset-0 flex items-center justify-center hidden w-full h-full modal">
+<div class="absolute inset-0 bg-black opacity-50 modal-overlay"></div>
+
+<div class="modal-content bg-white p-4 sm:p-8 rounded-lg shadow-lg relative z-10 w-full max-w-lg mx-4 md:mx-auto md:w-[70%] lg:w-[50%]">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-[#526E1C] font-semibold text-lg lg:text-xl">Verify OTP</h2>
+        <button id="closemodalBtn" class="w-6 h-6 text-2xl leading-none text-gray-500 hover:text-gray-700 focus:outline-none" aria-label="Close">&times;</button>
+    </div>
+
+    <p class="mb-6 text-sm font-medium text-center text-gray-700 lg:text-base">
+        Please enter the One-Time Password sent to your email address
+    </p>
+
+    <form id="otp-form" method="post">
+        @csrf
+        <div class="flex items-center justify-center gap-1 md:gap-3 lg:gap-3">
+            <input type="text" class="p-4 text-2xl font-extrabold text-center bg-white border rounded outline-none appearance-none w-14 h-14 text-slate-900 focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" maxlength="1" name="otp[]" />
+            <input type="text" class="p-4 text-2xl font-extrabold text-center bg-white border rounded outline-none appearance-none w-14 h-14 text-slate-900 focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" maxlength="1" name="otp[]" />
+            <input type="text" class="p-4 text-2xl font-extrabold text-center bg-white border rounded outline-none appearance-none w-14 h-14 text-slate-900 focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" maxlength="1" name="otp[]" />
+            <input type="text" class="p-4 text-2xl font-extrabold text-center bg-white border rounded outline-none appearance-none w-14 h-14 text-slate-900 focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" maxlength="1" name="otp[]" />
+            <input type="text" class="p-4 text-2xl font-extrabold text-center bg-white border rounded outline-none appearance-none transparent w-14 h-14 text-slate-900 focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" maxlength="1" name="otp[]" />
+            <input type="text" class="p-4 text-2xl font-extrabold text-center bg-white border rounded outline-none appearance-none transparent w-14 h-14 text-slate-900 focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" maxlength="1" name="otp[]" />
+        </div>
+
+        <div class="max-w-[260px] mx-auto mt-4"></div>
+
+        <!-- Submit button -->
+        <button type="submit" class="mt-[30px] text-[#2A2A2A] font-[600] text-center w-full py-[10px] bg-gradient-to-r from-[#EDF6DB] via-[#dce8c4] to-[#C5D5A7]">
+            Verify
+        </button>
+    </form>
+
+    <p class="time"></p>
+
+    <!-- Resend OTP Button -->
+    <button id="resendOtpVerificationMobile" disabled class="mt-4 text-[#2A2A2A] font-[600] text-center w-full py-[10px] bg-gray-400 cursor-not-allowed" style="opacity: 0.6;">
+        Resend Verification OTP
+    </button>
+</div>
+</div>
 
 
             <!-- page for mobile view -->
@@ -1651,36 +1761,36 @@
                                 </div>
                             </div>
 
-                            <!-- Delete Account -->
-                            {{-- <div
-                                class="transition-all duration-200 bg-[#F5F5F5] rounded-lg  shadow-lg cursor-pointer hover:bg-gray-50">
-                                <button type="button" id="question7" data-state="closed"
-                                    class="flex items-center justify-between w-full px-2 lg:px-4 py-3 sm:p-3">
-                                    <div class="flex flex-col items-start">
-                                        <p class="text-sm sm:text-base text-[#FF3131] font-semibold">Delete Account</p>
-                                        <p class="text-xs sm:text-sm text-[#828282] font-medium text-start">Permanently
-                                            delete your account.</p>
-                                    </div>
+                              <!-- Delete Account -->
+                        <div
+                        class="transition-all duration-200 bg-[#F5F5F5] rounded-lg  shadow-lg cursor-pointer hover:bg-gray-50">
+                        <button type="button" id="question7" data-state="closed"
+                            class="flex items-center justify-between w-full px-2 py-3 lg:px-4 sm:p-3">
+                            <div class="flex flex-col items-start">
+                                <p class="text-sm sm:text-base text-[#FF3131] font-semibold">Delete Account</p>
+                                <p class="text-xs sm:text-sm text-[#828282] font-medium text-start">Permanently
+                                    delete your account.</p>
+                            </div>
 
-                                    <svg id="arrow7" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor"
-                                        class="h-4 w-4 md:w-6 md:h-6 text-[#3A3A3A] shrink-0">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7"></path>
-                                    </svg>
+                            <svg id="arrow7" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor"
+                                class="h-4 w-4 md:w-6 md:h-6 text-[#3A3A3A] shrink-0">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="answer7" style="display:none">
+                            <div class="flex flex-col justify-around gap-3 p-5 border shadow-sm grow rounded-xl ">
+                                <p class="text-[#828282] text-sm sm:text-base font-medium">Once your account is
+                                    deleted, all of its resources and data will be permanently deleted. </p>
+                                <button
+                                id="DeleteVerifyMobileModalbtn"
+                                    class="w-fit bg-[#FF3131] text-[#FFFFFF] py-2 px-6 rounded-[2rem] text-sm sm:text-base font-semibold">
+                                    Delete Account
                                 </button>
-                                <div id="answer7" style="display:none">
-                                    <div
-                                        class="grow border flex flex-col justify-around gap-3  shadow-sm p-5 rounded-xl ">
-                                        <p class="text-[#828282] text-sm sm:text-base font-medium">Once your account is
-                                            deleted, all of its resources and data will be permanently deleted. </p>
-                                        <button
-                                            class="w-fit bg-[#FF3131] text-[#FFFFFF] py-2 px-6 rounded-[2rem] text-sm sm:text-base font-semibold">
-                                            Delete Account
-                                        </button>
-                                    </div>
-                                </div>
-                            </div> --}}
+                            </div>
+                        </div>
+                    </div>
 
                         </div>
                     </div>
@@ -3049,5 +3159,328 @@
                 awardsContentMobile);
         });
     </script>
+
+    
+
+<script>
+    // Select relevant elements
+    const deleteAccountBtn = document.getElementById('DeleteAccountbtn');
+    const deleteVerifyModal = document.getElementById('DeleteVerifyModal');
+    const closeModalBtn = document.getElementById('closeBtn');
+    const modalOverlay = document.querySelector('.modal-overlay');
+
+    // Function to show the modal
+    function showModal() {
+        deleteVerifyModal.classList.remove('hidden'); // Show the modal
+        deleteVerifyModal.classList.add('flex'); // Set it to flex display
+        timer('resendOtpVerificationDesktop'); 
+    }
+
+    // Function to hide the modal
+    function hideModal() {
+        deleteVerifyModal.classList.add('hidden'); // Hide the modal
+        deleteVerifyModal.classList.remove('flex'); // Remove flex display
+    }
+
+    // Event listeners
+    if (deleteAccountBtn) {
+        deleteAccountBtn.addEventListener('click', showModal); // Show modal on button click
+    }
+
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', hideModal); // Hide modal on close button click
+    }
+
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', hideModal); // Hide modal when overlay is clicked
+    }
+
+    // Close modal with the ESC key
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            hideModal(); // Close modal if ESC key is pressed
+        }
+    });
+</script>
+
+  
+
+<script>
+    // Function to toggle the modal visibility
+    function toggleModal(modalId, action) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            if (action === 'show') {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex'); // Show modal
+            } else if (action === 'hide') {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex'); // Hide modal
+            }
+        } else {
+            console.error(`Modal element with ID "${modalId}" not found!`);
+        }
+    }
+
+    // Adding event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+        // Open modal when the button is clicked
+        const openModalButton = document.getElementById('DeleteVerifyMobileModalbtn');
+        if (openModalButton) {
+            openModalButton.addEventListener('click', function() {
+                toggleModal('DeleteVerifyMobileModal', 'show');
+                timer('resendOtpVerificationMobile'); 
+            });
+        } else {
+            console.error('Button with ID "DeleteVerifyMobileModalbtn" not found!');
+        }
+
+        // Close modal when the close button is clicked
+        const closeModalButton = document.getElementById('closemodalBtn');
+        if (closeModalButton) {
+            closeModalButton.addEventListener('click', function() {
+                toggleModal('DeleteVerifyMobileModal', 'hide');
+            });
+        } else {
+            console.error('Close button with ID "closeBtn" not found!');
+        }
+
+        // Close modal when overlay is clicked
+        const modalOverlay = document.querySelector('.modal-overlay');
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', function() {
+                toggleModal('DeleteVerifyMobileModal', 'hide');
+            });
+        } else {
+            console.error('Overlay with class "modal-overlay" not found!');
+        }
+
+        // Close modal with the Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                toggleModal('DeleteVerifyMobileModal', 'hide');
+            }
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const inputs = [...document.querySelectorAll("input[name='otp[]']")];
+        const submit = document.querySelector("button[type=submit]");
+
+        const handleKeyDown = (e) => {
+            if (!/^[0-9]{1}$/.test(e.key) && e.key !== "Backspace" && e.key !== "Delete" && e.key !==
+                "Tab" && !e.metaKey) {
+                e.preventDefault();
+            }
+
+            if (e.key === "Backspace" || e.key === "Delete") {
+                const index = inputs.indexOf(e.target);
+                if (index > 0 && !e.target.value) {
+                    inputs[index - 1].focus();
+                }
+            }
+        };
+
+        const handleInput = (e) => {
+            const target = e.target;
+            const index = inputs.indexOf(target);
+            if (target.value) {
+                if (index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                } else {
+                    submit.focus();
+                }
+            }
+        };
+
+        const handleFocus = (e) => {
+            e.target.select();
+        };
+
+        const handlePaste = (e) => {
+            e.preventDefault();
+            const text = e.clipboardData.getData("text");
+            if (!/^[0-9]{6}$/.test(text)) {
+                return;
+            }
+            const digits = text.split("");
+            inputs.forEach((input, index) => (input.value = digits[index]));
+            submit.focus();
+        };
+
+        inputs.forEach((input) => {
+            input.addEventListener("input", handleInput);
+            input.addEventListener("keydown", handleKeyDown);
+            input.addEventListener("focus", handleFocus);
+            input.addEventListener("paste", handlePaste);
+        });
+    });
+</script>
+<script>
+
+    function showModal(modalId, buttonId) {
+        console.log("showModal called with modalId:", modalId, "buttonId:", buttonId);
+        $(`#${modalId}`).removeClass('hidden').addClass('flex'); // Show modal
+        timer(buttonId); // Start the timer for the specified button in the modal
+    }
+    
+    document.getElementById('DeleteAccountbtn').addEventListener('click', () => {
+        $.ajax({
+            url: "{{ route('advisor.sendDeleteAccountOtp') }}",
+            type: "POST",
+            data: {_token: "{{ csrf_token() }}"},
+            success: function(res) {
+                if (res.success) {
+                    // Directly show the OTP modal if the request is successful
+                    console.log("OTP sent successfully");
+                    showModal('otpModalId', 'resendOtpVerificationDesktop');
+                }
+            }
+        });
+    });
+    
+    document.getElementById('DeleteVerifyMobileModalbtn').addEventListener('click', () => {
+        $.ajax({
+            url: "{{ route('advisor.sendDeleteAccountOtp') }}",
+            type: "POST",
+            data: {_token: "{{ csrf_token() }}"},
+            success: function(res) {
+                if (res.success) {
+                    // Directly show the OTP modal if the request is successful
+                    console.log("OTP sent successfully for mobile");
+                    showModal('otpModalId', 'resendOtpVerificationMobile'); 
+                }
+            }
+        });
+    });
+    
+    $('#otp-form').submit(function(e) {
+        e.preventDefault();
+        let otp = '';
+        $('input[name="otp[]"]').each(function() {
+            otp += $(this).val();
+        });
+    
+        $.ajax({
+            url: "{{ route('advisor.verifyDeleteAccountOtp') }}",
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                otp: otp
+            },
+            success: function(res) {
+                if (res.success) {
+                    Swal.fire('Success', res.msg, 'success').then(() => {
+                        window.location.href = '/'; // Redirect to home after deletion
+                    });
+                } else {
+                    Swal.fire('Error', res.msg, 'error');
+                }
+            },
+            error: function(xhr) {
+                Swal.fire('Error', 'An unexpected error occurred while verifying the OTP. Please try again.', 'error');
+            }
+        });
+    });
+    
+    let otpTimer;
+    function timer(buttonId) {
+    console.log("Timer function started for buttonId:", buttonId);
+    clearInterval(otpTimer); // Clear any existing timer
+    let seconds = 0;
+    let minutes = 2;
+
+    // Disable and style the specific Resend OTP button
+    const buttonDesktop = $('#resendOtpVerificationDesktop');
+    const buttonMobile = $('#resendOtpVerificationMobile');
+    
+    const currentButton = $(`#${buttonId}`);
+
+    currentButton.prop('disabled', true).css({
+        "opacity": "0.6",
+        "cursor": "not-allowed",
+        "background-color": "#d3d3d3"
+    });
+
+    otpTimer = setInterval(() => {
+        if (minutes < 0) {
+            console.log("Timer finished");
+            $('.time').text(''); // Clear the timer text display
+            clearInterval(otpTimer);
+
+            // Re-enable both Resend OTP buttons
+            setTimeout(() => {
+                buttonDesktop.prop('disabled', false).css({
+                    "opacity": "1",
+                    "cursor": "pointer",
+                    "background-color": "#EDF6DB"
+                });
+                
+                buttonMobile.prop('disabled', false).css({
+                    "opacity": "1",
+                    "cursor": "pointer",
+                    "background-color": "#EDF6DB"
+                });
+
+                // Force a reflow and redraw the buttons using requestAnimationFrame for mobile compatibility
+                requestAnimationFrame(() => {
+                    buttonDesktop[0].style.display = 'none'; // Temporarily hide it
+                    buttonDesktop[0].offsetHeight;          // Trigger reflow
+                    buttonDesktop[0].style.display = '';    // Re-show the button
+
+                    buttonMobile[0].style.display = 'none'; // Temporarily hide it
+                    buttonMobile[0].offsetHeight;           // Trigger reflow
+                    buttonMobile[0].style.display = '';     // Re-show the button
+                });
+            }, 10);  // Small delay
+        } else {
+            let tempMinutes = minutes.toString().padStart(2, '0');
+            let tempSeconds = seconds.toString().padStart(2, '0');
+            $('.time').text(`${tempMinutes}:${tempSeconds}`);
+        }
+
+        if (seconds <= 0) {
+            minutes--;
+            seconds = 59;
+        } else {
+            seconds--;
+        }
+    }, 1000);
+}
+
+
+
+    $(document).on('click', '#resendOtpVerificationDesktop, #resendOtpVerificationMobile', function () {
+        const buttonId = $(this).attr('id'); // Get the specific button ID (either desktop or mobile)
+        console.log("Button clicked: ", buttonId);
+    
+        // Send the request to the backend to resend the OTP
+        $.ajax({
+            url: "{{ route('advisor.resendDeleteAccountOtp') }}",
+            type: "POST",
+            data: { _token: "{{ csrf_token() }}" },
+            success: function (res) {
+                if (res.success) {
+                    Swal.fire('Success', res.msg, 'success');
+                    
+                    // Start the timer again for the specific button if OTP was resent successfully
+                    timer(buttonId);
+                } else {
+                    Swal.fire('Error', res.msg, 'error');
+                }
+            },
+            error: function () {
+                Swal.fire('Error', 'An unexpected error occurred while resending the OTP. Please try again.', 'error');
+            }
+        });
+    });
+    
+    // For debugging purposes, ensure the timer starts
+     // You can comment this line after testing
+    
+    </script>
+    
 
 @endsection

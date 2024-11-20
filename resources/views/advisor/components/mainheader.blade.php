@@ -36,6 +36,7 @@
 
 
             <div class="ml-3 relative" id="dropdown-container">
+
                 <div class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition cursor-pointer"
                     id="dropdown-trigger">
                     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -82,6 +83,21 @@
                         </button>
                     </form>
                 </div>
+            </div>
+            <div class="ml-1 relative py-2 lg:px-4 flex items-center justify-center rounded-lg cursor-pointer">
+                <form action="{{ route('toggle.usertype') }}" method="POST">
+                    @csrf
+                    <div
+                        class="">
+                        <button type="submit" class="bg-red-200 hover:bg-red-300 text-red-700 font-semibold py-2 px-4 rounded-lg shadow-md">
+                            @if (Auth::user()->usertype == 0)
+                                Switch to Advisor
+                            @else
+                                Switch to Client
+                            @endif
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
 

@@ -14,7 +14,7 @@
                     <img class="w-[400px]" src="../src/assets/logo/AdvisatorLogo.png" alt="" />
                 </a>
                 {{-- <h2 class="text-lg lg:text-xl text-[#3A3A3A] font-normal text-center">
-                    SHIFT180 BUSINESS ADVISORY AND SERVICES PRIVATE LIMITED
+                    Business & Digital Expert Advice
                 </h2> --}}
             </div>
 
@@ -23,15 +23,6 @@
                 <h4 class="font-bold text-base text-[#3A3A3A] text-start my-2 px-4">
                     Reach Out to Us
                 </h4>
-                <div
-                    class="h-fit max-w-[40rem] mx-auto border border-[#DADADA] px-2 xl:px-4 py-2 rounded-[24px] shadow-md flex justify-between items-center gap-x-2 font-Roboto font-normal text-sm lg:text-base text-[#2A2A2A] mt-[15px]">
-                    <div class="flex items-center gap-2">
-                        <img class="w-3 h-4" src="../src/assets/img/location.png" alt="" />
-                        <h2 class="text-sm text-[#3A3A3A] font-normal">Company: <a href="#"
-                                style="color: #6AA300">SHIFT180 BUSINESS ADVISORY AND <br> SERVICES PRIVATE LIMITED</a>
-                        </h2>
-                    </div>
-                </div>
                 <div
                     class="h-fit max-w-[40rem] mx-auto border border-[#DADADA] px-2 xl:px-4 py-2 rounded-[24px] shadow-md flex justify-between items-center gap-x-2 font-Roboto font-normal text-sm lg:text-base text-[#2A2A2A] mt-[15px]">
                     <div class="flex items-center gap-2">
@@ -53,8 +44,7 @@
                     <div class="flex items-center gap-2">
                         <img class="w-3 h-4" src="../src/assets/img/location.png" alt="" />
                         <h2 class="text-sm text-[#3A3A3A] font-normal">Location: <a
-                                href="https://maps.app.goo.gl/XULGmFcD3VZuNcEF6" style="color: #6AA300">Gera Adara,
-                                Pune, India</a>
+                                href="https://maps.app.goo.gl/wtgGR7j391WHecPL6" style="color: #6AA300">Pune, India</a>
                         </h2>
                     </div>
                 </div>

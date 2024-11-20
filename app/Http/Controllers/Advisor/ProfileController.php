@@ -341,7 +341,7 @@ class ProfileController extends Controller
 
         // Prepare ticket data
         $ticketData = [
-            'advisor_profile_id' => $advisor->advisor_id,
+            'user_id' => $user->unique_id,
             'subject' => $request->input('subject'),
             'description' => $request->input('description'),
         ];

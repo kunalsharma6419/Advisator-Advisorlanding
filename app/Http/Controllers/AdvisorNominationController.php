@@ -32,7 +32,6 @@ class AdvisorNominationController extends Controller
     {
         return response()->json(SubFunctionCategory::where('business_function_category_id', $id)->get());
     }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -58,18 +57,30 @@ class AdvisorNominationController extends Controller
             'other_industry' => 'nullable|string|max:255',
             'nomination_reason' => 'nullable|string',
             'nomination_status' => 'nullable|in:inprogress,selected,rejected',
+            'is_terms_accept' => 'required|boolean',  // Add this validation
         ]);
-
-
-        $user = User::where('unique_id', $request->user_id)->firstOrFail();
+    
+        // Check if the advisor has already submitted a nomination
+        $existingNomination = AdvisorNomination::where('user_id', $request->user_id)
+            ->where('nomination_status', 'inprogress')
+            ->first();
+    
+        if ($existingNomination) {
+            return response()->json([
+                'success' => false,
+                'msg' => 'You have already filled the nomination form. Kindly wait for the advisor team to review it.',
+                'redirect' => route('home'),
+            ]);
+        }
+    
         // Handle new industry
         $industry = $request->industry;
         if ($request->filled('other_industry')) {
             $newIndustry = IndustryVertical::create(['name' => $request->other_industry]);
             $industry[] = $newIndustry->id;
         }
-        // $documentPath = $request->input('document', null);
-
+    
+        // Store the advisor nomination
         $advisor = AdvisorNomination::create([
             'nominee_id' => Str::random(12),
             'user_id' => $request->user_id,
@@ -93,16 +104,16 @@ class AdvisorNominationController extends Controller
             'chat_price_per_hour' => $request->chat_price_per_hour,
             'nomination_reason' => $request->nomination_reason,
             'nomination_status' => 'inprogress',
+            'is_terms_accept' => $request->has('is_terms_accept'),  // Store the terms acceptance
         ]);
-
+    
         // Handle document upload
         if ($request->hasFile('document_path')) {
             $documentPath = $request->file('document_path')->store('documents', 'public');
             $advisor->update(['document_path' => $documentPath]);
         }
-
-        // dd($request->all());
-
+    
+        // Handle availability
         $availabilityData = json_decode($request->availability, true);
         foreach ($availabilityData as $day => $timeSlots) {
             foreach ($timeSlots as $timeSlot) {
@@ -114,16 +125,14 @@ class AdvisorNominationController extends Controller
                 ]);
             }
         }
-
-        // Send email to advisor
+    
+        // Send email to advisor and admin
         Mail::to($advisor->email)->send(new AdvisorNominationMail($advisor));
-
-        // Send email to admin
         $admin = User::where('usertype', 1)->first();
         Mail::to($admin->email)->send(new AdminNominationNotification($advisor));
-
-        // return redirect()->back()->with('success', 'Nomination created successfully.');
+    
         return response()->json(['success' => true,'msg'=> 'Nomination created successfully.', 'redirect' => route('home')]);
     }
+    
 
 }

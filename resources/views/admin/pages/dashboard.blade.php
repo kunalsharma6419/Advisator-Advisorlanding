@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+    @extends('admin.layouts.app')
 
 @section('admincontent')
     <div class="container-scroller">

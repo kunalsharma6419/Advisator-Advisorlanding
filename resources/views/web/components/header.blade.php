@@ -3,7 +3,7 @@
         <!-- logo -->
         <div>
             <a href="{{ route('home') }}">
-                <img class="w-[180px]" src="./src/assets/logo/AdvisatorLogo.png" alt="" />
+                <img class="w-[180px]" src="../src/assets/logo/AdvisatorLogo.png" alt="" />
             </a>
         </div>
         <div class="hidden md:flex xl:w-[75%] xl:justify-between gap-8d md:gap-x-10 xl:gap-[60px]">
@@ -33,11 +33,32 @@
                 <ul class="text-sm lg:text-lg font-sans flex items-center gap-2 lg:gap-6">
                     @auth
                         @php
-                            $dashboardRoute = 'user.dashboard';
-                            if (Auth::user()->usertype == 1) {
-                                $dashboardRoute = 'advisatoradmin.dashboard';
-                            } elseif (Auth::user()->usertype == 2) {
-                                $dashboardRoute = 'advisor.dashboard';
+                            $uniqueId = Auth::user()->unique_id;
+                            $userType = Auth::user()->usertype;
+
+                            // Fetch the corresponding UserProfile model using the unique_id
+                            $userProfile = \App\Models\UserProfiles::where('user_id', $uniqueId)->first();
+
+                            // Check if the profile completion percentage exists and is less than 100
+                            $profileCompletion = $userProfile ? $userProfile->profile_completion_percentage : 0;
+                            // Determine the dashboard route based on user type and profile completion status
+                            if ($profileCompletion < 100) {
+                                if (Auth::user()->usertype == 1) {
+                                    $dashboardRoute = 'advisatoradmin.dashboard';
+                                } elseif (Auth::user()->usertype == 2) {
+                                    $dashboardRoute = 'advisor.dashboard';
+                                } else {
+                                    $dashboardRoute = 'user.myprofile'; // Default for usertype 0
+                                }
+                            } else {
+                                // Set dashboard route based on user type
+                                if (Auth::user()->usertype == 1) {
+                                    $dashboardRoute = 'advisatoradmin.dashboard';
+                                } elseif (Auth::user()->usertype == 2) {
+                                    $dashboardRoute = 'advisor.dashboard';
+                                } else {
+                                    $dashboardRoute = 'user.dashboard'; // Default for usertype 0
+                                }
                             }
                         @endphp
                         <li class="cursor-pointer text-sm lg:text-base text-[#6A9023] font-bold">
@@ -46,7 +67,7 @@
                     @else
                         @if (Route::has('register'))
                             <li class="cursor-pointer text-sm lg:text-base text-[#FF3131] font-bold">
-                                <a class="underline-none" href="{{ route('register') }}">Become an Advisor</a>
+                                <a class="underline-none" href="{{ route('landing') }}">Become an Advisor</a>
                             </li>
                         @endif
                         <li class="cursor-pointer text-sm lg:text-base text-[#6A9023] font-bold">
@@ -60,6 +81,92 @@
 
         <div class="md:hidden w-[40%] gap-2 flex items-center justify-between">
             <div class="border border-[#DB9206] bg-[#FFF3DB] rounded sm:rounded-lg px-2 py-1 sm:py-2 sm:px-4">
+                @if (Route::has('login'))
+                    @auth
+                        @php
+                            $uniqueId = Auth::user()->unique_id;
+                            $userType = Auth::user()->usertype;
+
+                            // Fetch the corresponding UserProfile model using the unique_id
+                            $userProfile = \App\Models\UserProfiles::where('user_id', $uniqueId)->first();
+
+                            // Check if the profile completion percentage exists and is less than 100
+                            $profileCompletion = $userProfile ? $userProfile->profile_completion_percentage : 0;
+                            // Determine the dashboard route based on user type and profile completion status
+                            if ($profileCompletion < 100) {
+                                if (Auth::user()->usertype == 1) {
+                                    $dashboardRoute = 'advisatoradmin.dashboard';
+                                } elseif (Auth::user()->usertype == 2) {
+                                    $dashboardRoute = 'advisor.dashboard';
+                                } else {
+                                    $dashboardRoute = 'user.myprofile'; // Default for usertype 0
+                                }
+                            } else {
+                                // Set dashboard route based on user type
+                                if (Auth::user()->usertype == 1) {
+                                    $dashboardRoute = 'advisatoradmin.dashboard';
+                                } elseif (Auth::user()->usertype == 2) {
+                                    $dashboardRoute = 'advisor.dashboard';
+                                } else {
+                                    $dashboardRoute = 'user.dashboard'; // Default for usertype 0
+                                }
+                            }
+                        @endphp
+                        <a class="underline-none flex items-center gap-2" href="{{ route($dashboardRoute) }}">
+                            <!-- SVG Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#DB9206]" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9 8v-1c0-2.21 1.79-4 4-4h10c2.21 0 4 1.79 4 4v1H3zm18-11h-2v-2h-2v2h-2v2h2v2h2v-2h2z" />
+                            </svg>
+
+                            Dashboard
+                        </a>
+                    @else
+                        @if (Route::has('register'))
+                            <a class="underline-none flex items-center gap-2" href="{{ route('register') }}">
+                                <!-- SVG Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#DB9206]" viewBox="0 0 24 24"
+                                    fill="currentColor">
+                                    <path
+                                        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9 8v-1c0-2.21 1.79-4 4-4h10c2.21 0 4 1.79 4 4v1H3zm18-11h-2v-2h-2v2h-2v2h2v2h2v-2h2z" />
+                                </svg>
+
+                                Signup
+                            </a>
+                        @endif
+                        {{-- <a class="underline-none flex items-center gap-2" href="{{ route('login') }}">
+                            <!-- SVG Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#DB9206]" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9 8v-1c0-2.21 1.79-4 4-4h10c2.21 0 4 1.79 4 4v1H3zm18-11h-2v-2h-2v2h-2v2h2v2h2v-2h2z" />
+                            </svg>
+
+                            Login
+                        </a> --}}
+                    @endauth
+
+                @endif
+                <!-- <a
+                    class="cursor-pointer flex items-center gap-2"
+                    href="../Advisor pages/wallet.html"
+                  >
+                    <img
+                      class="h-5 w-5"
+                      src="./src/assets/img/iconWallet.png"
+                      alt=""
+                    />
+
+                    <div
+                      class="flex items-center font-sans text-sm sm:text-base text-[#DB9206] font-semibold"
+                    >
+                      &#8377;
+                      <p>1,229</p>
+                    </div>
+                  </a> -->
+            </div>
+            {{-- <div class="border border-[#DB9206] bg-[#FFF3DB] rounded sm:rounded-lg px-2 py-1 sm:py-2 sm:px-4">
                 <a class="cursor-pointer flex items-center gap-2" href="../Advisor pages/wallet.html">
                     <img class="h-5 w-5" src="./src/assets/img/iconWallet.png" alt="" />
                     <div class="flex items-center font-sans text-sm sm:text-base text-[#DB9206] font-semibold">
@@ -67,7 +174,7 @@
                         <p>1,229</p>
                     </div>
                 </a>
-            </div>
+            </div> --}}
             <div id="showSideMenu" class="w-[24px] h-[24px] sm:w-7 sm:h-7 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-7 h-7">

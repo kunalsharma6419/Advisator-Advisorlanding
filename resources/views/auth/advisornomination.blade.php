@@ -313,7 +313,7 @@
 
                 <div id="documentPreview" class="mt-4"></div> --}}
 
-                <div class="flex flex-col gap-[12px]">
+                {{-- <div class="flex flex-col gap-[12px]">
                     <div class="flex justify-between">
                         <h4 class="text-[16px] font-[400]">Set Your Advisory Price (per minute) ::</h4>
                         <div
@@ -335,7 +335,23 @@
                         <div class="flex flex-col md:flex-row items-start md:items-center w-full justify-between">
                             <!-- Discovery call section -->
                             <div class="flex flex-col gap-[12px] mb-4 md:mb-0 md:mr-4 w-full md:w-auto">
-                                <h2 class="text-[16px] font-[500]">Discovery call :</h2>
+                                <h2 class="text-[16px] font-[500]">Discovery call :
+                                    <div class="relative inline-block border-b border-dotted border-black group">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="h-6 w-6 text-blue-500 cursor-pointer" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M13 16h-1v-4h-1m0-4h.01M12 17h0a1 1 0 010 2h0a1 1 0 010-2zm0-10h0a1 1 0 010 2h0a1 1 0 010-2z" />
+                                        </svg>
+                                        <span
+                                            class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-50 bg-[#6AA300] text-white text-center rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            Fixed Discovery Call rate at INR ₹100 for 15 minutes
+                                            <span
+                                                class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-5 border-solid border-transparent border-t-gray-700"></span>
+                                        </span>
+                                    </div>
+                                </h2>
+
                                 <div class="flex justify-between">
                                     <p class="text-[16px] font-[400] text-[#828282]">Currency</p>
                                     <p class="text-[16px] font-[400] text-[#828282]">Price</p>
@@ -346,7 +362,8 @@
                                     <div class="h-[1px] w-[24px] border border-[#000000]"></div>
                                     <input
                                         class="text-[16px] w-[50px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]"
-                                        step="0.01" name="discovery_call_price_per_minute" value="20">
+                                        step="0.01" name="discovery_call_price_per_minute" value="100"
+                                        readonly>
                                 </div>
                             </div>
 
@@ -417,13 +434,98 @@
                         </div>
                     </div>
 
-                </div>
+                </div> --}}
+                <div class="flex flex-col gap-[12px]">
+                    <div class="flex justify-between">
+                        <h4 class="text-[16px] font-[400]">Set Your Advisory Price (per minute) ::</h4>
+                        <div
+                            class="flex justify-between border border-[#828282] gap-[8px] w-[220px] rounded-[8px] px-3 bg-white py-2">
+                            <button id="btnMinute"
+                                class="tabButton bg-red-500 text-white px-4 py-2 text-[16px] rounded-[8px] font-[500]"
+                                onclick="openContent('minute', event)">
+                                Minute
+                            </button>
+                            <button id="btnHour"
+                                class="tabButton bg-white text-black px-4 py-2 text-[16px] rounded-[8px] font-[500]"
+                                onclick="openContent('hour', event)">
+                                Hour
+                            </button>
+                        </div>
+                    </div>
 
-                {{-- <div class="p-[18px] mt-[18px] w-full justify-between flex gap-[12px] rounded-[12px] bg-white">
+                    <div id="minute" class="city w-full" style="display: block">
+                        <div class="flex flex-col md:flex-row items-start md:items-center w-full justify-between">
+                            <!-- Discovery call section -->
+                            <div class="flex flex-col gap-[12px] mb-4 md:mb-0 md:mr-4 w-full md:w-auto">
+                                <h2 class="text-[16px] font-[500]">Discovery call :</h2>
+                                <div class="flex justify-between">
+                                    <p class="text-[16px] font-[400] text-[#828282]">Currency</p>
+                                    <p class="text-[16px] font-[400] text-[#828282]">Price</p>
+                                </div>
+                                <div class="flex items-center gap-[12px] justify-between">
+                                    <h2 class="text-[16px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]">INR
+                                        (₹)</h2>
+                                    <div class="h-[1px] w-[24px] border border-[#000000]"></div>
+                                    <input
+                                        class="text-[16px] w-[50px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]"
+                                        step="0.01" name="discovery_call_price_per_minute" value="100"
+                                        readonly>
+                                </div>
+                            </div>
+
+                            <!-- Divider for larger screens -->
+                            <div
+                                class="h-[1px] w-full md:h-[188px] md:w-[1px] border border-[#000000] hidden md:block">
+                            </div>
+
+                            <!-- Consultation call section -->
+                            <div class="flex flex-col gap-[12px] mt-4 md:mt-0 w-full md:w-auto">
+                                <h2 class="text-[16px] font-[500]">Consultation call :</h2>
+                                <div class="flex justify-between">
+                                    <p class="text-[16px] font-[400] text-[#828282]">Currency</p>
+                                    <p class="text-[16px] font-[400] text-[#828282]">Price</p>
+                                </div>
+                                <div class="flex items-center gap-[12px] justify-between">
+                                    <h2 class="text-[16px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]">INR
+                                        (₹)</h2>
+                                    <div class="h-[1px] w-[24px] border border-[#000000]"></div>
+                                    <input id="minuteRate"
+                                        class="text-[16px] w-[45px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]"
+                                        step="0.01" name="conference_call_price_per_minute" value=""
+                                        onchange="calculateHourRate()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="hour" class="city w-full" style="display: none">
+                        <div class="flex flex-col md:flex-row items-start md:items-center w-full justify-between">
+
+                            <!-- Consultation call section -->
+                            <div class="flex flex-col gap-[12px] mt-4 md:mt-0 w-full md:w-auto">
+                                <h2 class="text-[16px] font-[500]">Consultation call :</h2>
+                                <div class="flex justify-between">
+                                    <p class="text-[16px] font-[400] text-[#828282]">Currency</p>
+                                    <p class="text-[16px] font-[400] text-[#828282]">Price</p>
+                                </div>
+                                <div class="flex items-center gap-[12px] justify-between">
+                                    <h2 class="text-[16px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]">INR
+                                        (₹)</h2>
+                                    <div class="h-[1px] w-[24px] border border-[#000000]"></div>
+                                    <input id="hourRate"
+                                        class="text-[16px] w-[55px] bg-white rounded-[8px] p-2 font-[400] text-[#3A3A3A]"
+                                        step="0.01" name="conference_call_price_per_hour" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{{-- 
+                <div class="p-[18px] mt-[18px] w-full justify-between flex gap-[12px] rounded-[12px] bg-white">
                     <p class="text-[18px] font-[500]">Attach Documents (optional)</p>
                     <i class="fa-solid fa-paperclip" style="color: #3a3a3a"></i>
                 </div> --}}
-                {{-- <div class="p-[18px] mt-[18px] w-full justify-between flex gap-[12px] rounded-[12px] bg-white">
+                <div class="p-[18px] mt-[18px] w-full justify-between flex gap-[12px] rounded-[12px] bg-white">
                     <p class="text-[18px] font-[500]">Attach Documents (optional)</p>
                     <i class="fa-solid fa-paperclip" style="color: #3a3a3a"></i>
                 </div>
@@ -433,8 +535,8 @@
                     <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
                 @enderror
 
-                <div id="documentPreview" class="mt-4"></div> --}}
-                <div class="p-4 mt-4 w-full flex flex-col gap-4 rounded-lg bg-white shadow-md">
+                <div id="documentPreview" class="mt-4"></div>
+                {{-- <div class="p-4 mt-4 w-full flex flex-col gap-4 rounded-lg bg-white shadow-md">
                     <div class="flex justify-between items-center">
                         <p class="text-base text-gray-600">Attach the document, then return to this form and submit</p>
                         <a href="https://form.jotform.com/242140789991467" target="_blank"
@@ -443,12 +545,27 @@
                         </a>
                     </div>
                     <p class="text-lg font-medium text-gray-800">Attach Documents (optional)</p>
+                </div> --}}
+
+
+
+                <div>
+                    <label for="is_terms_accept">
+                        <input type="checkbox" id="is_terms_accept" name="is_terms_accept" value="1"  required/>
+                        I accept the 
+                        <a href="/terms-of-service" style="color: #526E1C; text-decoration: underline;">Terms and Conditions</a>,
+                        <a href="/privacy-policy" style="color: #526E1C; text-decoration: underline;">Privacy Policy</a>,
+                        <a href="/shipping-and-delivery-policy" style="color: #526E1C; text-decoration: underline;">Shipping & Delivery Policy</a>,
+                        <a href="/onboarding-policy" style="color: #526E1C; text-decoration: underline;">Onboarding Policy</a> and 
+                        <a href="/cancellation-and-refund-policy" style="color: #526E1C; text-decoration: underline;">Cancellation and Refund Policy</a>
+                    </label>
                 </div>
+                
+                
 
-
-                <button type="submit"
+                <button type="submit" id="submitFormBtn"
                     class="mt-[40px] text-[#2A2A2A] rounded-[18px] font-[600] text-center w-full py-[10px] bg-gradient-to-r from-[#EDF6DB] via-[#dce8c4] to-[#C5D5A7]">
-                    Proceed
+                    Submit
                 </button>
             </form>
         </div>
@@ -479,7 +596,18 @@
 <!-- script for calls -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function calculateHourRate() {
+        // Get the minute rate from the input field
+        var minuteRate = document.getElementById("minuteRate").value;
 
+        // Calculate the hour rate by multiplying the minute rate by 60
+        var hourRate = minuteRate * 60;
+
+        // Set the calculated hour rate into the hour input field
+        document.getElementById("hourRate").value = hourRate.toFixed(2); // Fixed to 2 decimal places
+    }
+</script>
 <script>
     function openContent(cityName, event) {
         event.preventDefault(); // Prevent page reload
@@ -553,71 +681,193 @@
         document.getElementById('availabilityInput').value = JSON.stringify(availabilityData);
     }
 
-    $(document).ready(function() {
-        $('#nominationForm').submit(function(event) {
-            event.preventDefault();
-            let formData = $(this).serialize();
 
-            // Show loading indicator
-            Swal.fire({
-                title: 'Processing...',
-                text: 'Please wait a moment',
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
-            });
 
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('advisor-nominations.store') }}', // Replace with your actual URL
-                data: formData,
-                success: function(res) {
-                    Swal.close(); // Close the loading indicator
+    
+    document.getElementById('submitFormBtn').addEventListener('click', function () {
+    var locationInput = document.getElementById('location').value.trim(); // Get location input
+    var linkedinProfileInput = document.getElementById('linkedin_profile').value.trim();
+    var availabilityInput = document.getElementById('availabilityInput').value.trim();
+    var minuteRateInput = document.getElementById('minuteRate').value.trim();
+    var conferenceCallPricePerMinuteInput = document.querySelector('[name="conference_call_price_per_minute"]').value.trim();
+    var businessFunctionInput = document.getElementById('business_function_category_id').value.trim();
+    var subFunction1Input = document.getElementById('sub_function_category_id_1').value.trim();
+    var industryInput = document.getElementById('industry').selectedOptions;
+    var geographyInput = document.getElementById('geography').selectedOptions;
+    var linkedinRegex = /^(https?:\/\/)?(www\.)?linkedin\.com\/.+$/;
 
-                    if (res.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
-                            text: res.msg
-                        }).then(() => {
-                            if (res.redirect) {
-                                window.location.href = res.redirect;
-                            } else {
-                                window.open("/", "_self");
-                            }
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error!',
-                            text: 'An error occurred: ' + res.msg
-                        });
-                    }
-                },
-                error: function(xhr, status, error) {
-                    Swal.close(); // Close the loading indicator
+    // Validate location
+    if (!locationInput || locationInput.length === 0) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Location required',
+            text: 'Please enter your location before submitting the form.',
+        });
+        return; // Stop further execution
+    }
 
-                    let errorMessage = 'An error occurred while submitting the form.';
+    // Validate LinkedIn profile URL
+    if (!linkedinProfileInput || !linkedinRegex.test(linkedinProfileInput)) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid LinkedIn Profile',
+            text: 'Please enter a valid LinkedIn profile URL starting with "https://linkedin.com".',
+        });
+        return; // Stop further execution
+    }
 
-                    if (xhr.responseJSON && xhr.responseJSON.errors) {
-                        errorMessage = Object.values(xhr.responseJSON.errors).join(', ');
-                    } else if (xhr.responseJSON && xhr.responseJSON.message) {
-                        errorMessage = xhr.responseJSON.message;
-                    }
+    // Validate availability
+    if (!availabilityInput || availabilityInput.length === 0) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Availability required',
+            text: 'Please choose your availability before submitting the form.',
+        });
+        return; // Stop further execution
+    }
 
-                    console.log('Error details:', xhr.responseText);
+    // Validate minute rate
+    if (!minuteRateInput || minuteRateInput.length === 0) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Minute Rate required',
+            text: 'Please enter a valid minute rate before submitting the form.',
+        });
+        return; // Stop further execution
+    }
 
+    // Validate conference call price per minute
+    if (!conferenceCallPricePerMinuteInput || conferenceCallPricePerMinuteInput.length === 0) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Conference Call Price per Minute required',
+            text: 'Please enter a valid price for conference calls per minute before submitting the form.',
+        });
+        return; // Stop further execution
+    }
+
+    // Validate Business Function
+    if (!businessFunctionInput || businessFunctionInput === 'Choose Business Function') {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Business Function required',
+            text: 'Please select a business function before submitting the form.',
+        });
+        return; // Stop further execution
+    }
+
+    // Validate Sub Function 1 if it's visible
+    if (document.getElementById('sub_function_1').style.display !== 'none' && (!subFunction1Input || subFunction1Input === '')) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Sub Function required',
+            text: 'Please selectbefore submitting the form.',
+        });
+        return; // Stop further execution
+    }
+
+    // Validate Industry (at least one should be selected)
+    if (industryInput.length === 0) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Industry required',
+            text: 'Please select Industry Vertical before submitting the form.',
+        });
+        return; // Stop further execution
+    }
+
+    // Validate Geography (at least one should be selected)
+    if (geographyInput.length === 0) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Geography required',
+            text: 'Please select Geographical Location before submitting the form.',
+        });
+        return; // Stop further execution
+    }
+
+    // If all validations pass, trigger form submission via AJAX
+    // $('#nominationForm').trigger('submit'); // Manually trigger the form submit event
+});
+
+
+
+$(document).ready(function () {
+    $('#nominationForm').submit(function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Use FormData instead of serialize() to handle file inputs
+        let formData = new FormData(this);
+
+        // Show loading indicator
+        Swal.fire({
+            title: 'Processing...',
+            text: 'Please wait a moment',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        // AJAX form submission
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('advisor-nominations.store') }}', // Replace with your actual URL
+            data: formData,
+            processData: false, // Necessary for FormData
+            contentType: false, // Necessary for FormData
+            success: function (res) {
+                Swal.close(); // Close the loading indicator
+
+                if (res.success) {
+                    // Show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Form Submitted!',
+                        text: res.msg || 'Your form has been successfully submitted!',
+                    }).then(() => {
+                        // Optional redirect handling
+                        if (res.redirect) {
+                            window.location.href = res.redirect;
+                        } else {
+                            window.open("/", "_self");
+                        }
+                    });
+                } else {
+                    // Show error message if success is false
                     Swal.fire({
                         icon: 'error',
                         title: 'Error!',
-                        text: errorMessage
+                        text: 'An error occurred: ' + (res.msg || 'Unknown error'),
                     });
                 }
-            });
+            },
+            error: function (xhr, status, error) {
+                Swal.close(); // Close the loading indicator
+
+                let errorMessage = 'An error occurred while submitting the form.';
+
+                if (xhr.responseJSON && xhr.responseJSON.errors) {
+                    errorMessage = Object.values(xhr.responseJSON.errors).join(', ');
+                } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                    errorMessage = xhr.responseJSON.message;
+                }
+
+                console.log('Error details:', xhr.responseText);
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: errorMessage
+                });
+            }
         });
     });
+});
+
+
 </script>
+
 <script>
     function previewDocument(event) {
         const file = event.target.files[0];
@@ -730,6 +980,8 @@
 
         const industrySelect = document.getElementById('industry');
         limitSelection(industrySelect);
+        const geographySelect = document.getElementById('geography');
+        limitSelection(geographySelect);
 
         // Initialize visibility on page load
         handleOtherIndustryField();

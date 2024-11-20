@@ -49,7 +49,8 @@
                                         <div class="display-4 text-info d-flex align-self-start me-3">{{ $newprofiles }}
                                         </div>
                                         <div class="media-body">
-                                            <p class="card-text">These are the profiles that have been selected in last 7 days.
+                                            <p class="card-text">These are the profiles that have been selected in last 7
+                                                days.
                                             </p>
                                         </div>
                                     </div>
@@ -103,6 +104,7 @@
                                                 <th> Email </th>
                                                 <th> Phone Number </th>
                                                 <th> Location </th>
+                                                <th> Completion Status </th>
                                                 <th> Submission Date </th>
                                                 <th> Linkedin Profile </th>
                                                 <th> Action </th>
@@ -117,33 +119,60 @@
                                                     <td>{{ $advisor->email }}</td>
                                                     <td>{{ $advisor->mobile_number }}</td>
                                                     <td>{{ $advisor->location }}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($advisor->created_at)->isoFormat('Do MMMM YYYY') }}</td>
-                                                    <td><a href="{{ $advisor->linkedin_profile }}"
-                                                            target="_blank">{{ $advisor->linkedin_profile }}</a></td>
+                                                    <td
+                                                        style="color:
+    @if ($advisor->profile_completion_percentage < 40) red
+    @elseif($advisor->profile_completion_percentage < 90) orange
+    @elseif($advisor->profile_completion_percentage == 100) green
+    @else green @endif;">
+                                                        {{ $advisor->profile_completion_percentage }} %
+                                                    </td>
+                                                    <td>{{ \Carbon\Carbon::parse($advisor->created_at)->isoFormat('Do MMMM YYYY') }}
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ $advisor->linkedin_profile }}" target="_blank">
+                                                            {{ $advisor->linkedin_profile }}
+                                                        </a>
+                                                    </td>
+                                                 
                                                     <td>
                                                         <div class="dropdown">
-                                                            <button type="button"
-                                                                class="btn p-0 dropdown-toggle hide-arrow"
-                                                                data-bs-toggle="dropdown">
+                                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                                 <i class="fa fa-caret-square-o-down"></i>
                                                             </button>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('advisatoradmin.advisoraccounts.show', $advisor->id) }}">
-                                                                    <i class="fa fa-eye me-1"></i>Show Details
+                                                                <a class="dropdown-item" href="{{ route('advisatoradmin.advisoraccounts.show', $advisor->id) }}">
+                                                                    <i class="fa fa-eye me-1"></i> Show Details
                                                                 </a>
-                                                                 <a class="dropdown-item"
-                                                                    href="{{ route('advisatoradmin.advisoraccounts.edit', $advisor->id) }}">
+                                                                <a class="dropdown-item" href="{{ route('advisatoradmin.advisoraccounts.edit', $advisor->id) }}">
                                                                     <i class="fa fa-edit me-1"></i> Edit Details
                                                                 </a>
-                                                                {{--<a class="dropdown-item"
-                                                                    onclick="return confirm('Are you sure to delete this?')"
-                                                                    href="{{ route('superadmin.advisorNominations.destroy', $nomination->id) }}">
-                                                                    <i class="bx bx-trash me-1"></i> Delete
-                                                                </a> --}}
+                                                    
+                                                                @if ($advisor->trashed())
+                                                                    <!-- Restore Button (for trashed users) -->
+                                                                    <form id="restoreForm{{ $advisor->user_id }}" action="{{ route('advisorNominations.userrestore', $advisor->user_id) }}" method="POST" style="display: inline;">
+                                                                        @csrf
+                                                                        @method('PATCH')
+                                                                        <button type="button" onclick="confirmRestore('{{ $advisor->user_id }}')" class="dropdown-item">
+                                                                            <i class="fa fa-undo me-1"></i> Restore
+                                                                        </button>
+                                                                    </form>
+                                                                @else
+                                                                    <!-- Delete Button (for active users) -->
+                                                                    <form id="deleteForm{{ $advisor->user_id }}" action="{{ route('advisorNominations.userdestroy', $advisor->user_id) }}" method="POST" style="display: inline;">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="button" onclick="confirmDelete('{{ $advisor->user_id }}')" class="dropdown-item">
+                                                                            <i class="fa fa-trash me-1"></i> Delete
+                                                                        </button>
+                                                                    </form>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </td>
+                                                    
+                                                    
+                                                            
 
                                                 </tr>
                                             @endforeach
@@ -172,4 +201,69 @@
         </div>
         <!-- page-body-wrapper ends -->
     </div>
+
+    <!-- Include SweetAlert CSS and JS from CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script>
+    function confirmDelete(userId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This action cannot be undone!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteForm' + userId).submit();
+            }
+        });
+    }
+    
+    function confirmRestore(userId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You want to restore this user.',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, restore it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('restoreForm' + userId).submit();
+            }
+        });
+    }
+    </script>
+
+
+@if (session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '{{ session('success') }}',
+            timer: 3000,
+            showConfirmButton: false
+        });
+    </script>
+@endif
+
+@if (session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: '{{ session('error') }}',
+            timer: 3000,
+            showConfirmButton: false
+        });
+    </script>
+@endif
+
 @endsection

@@ -35,7 +35,36 @@
                 </div>
             </div>
 
+
             <a href="">
+                <div class="mt-[2rem] border-t border-b border-[#E5E5E5] py-2 my-2">
+                    <form action="{{ route('toggle.usertype') }}" method="POST">
+                        @csrf
+                        <a href="">
+                            <button type="submit" class="ml-[2rem] flex items-center gap-4">
+                                <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/img/phone.png"
+                                    alt="" />
+                                <h2 class="font-medium text-sm sm:text-base text-[#BE7D00]">
+                                    @if (Auth::user()->usertype == 0)
+                                        Switch to Advisor
+                                    @else
+                                        Switch to Client
+                                    @endif
+                                </h2>
+                            </button>
+                        </a>
+                        {{-- <div class="">
+                        <button type="submit"
+                            class="bg-red-200 hover:bg-red-300 text-red-700 font-semibold py-2 px-4 rounded-lg shadow-md">
+                            @if (Auth::user()->usertype == 0)
+                                Switch to Advisor
+                            @else
+                                Switch to Client
+                            @endif
+                        </button>
+                    </div> --}}
+                    </form>
+                </div>
                 <div class="mt-[2rem] border-t border-b border-[#E5E5E5] py-2 my-2">
                     <a href="{{ route('advisor.myprofile') }}">
                         <div class="ml-[2rem] flex items-center gap-4">
@@ -73,14 +102,14 @@
                         <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
                             src="../src/assets/Landing_page/Terms.png" alt="" />
                         <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
-                             Terms of Services
+                            Terms of Services
                         </h2>
                     </div>
                 </a>
                 <a href="{{ route('privacy-policy') }}">
                     <div class="flex items-center gap-4">
-                        <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/Landing_page/Privacy.png"
-                            alt="" />
+                        <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                            src="../src/assets/Landing_page/Privacy.png" alt="" />
                         <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
                             Privacy Policy
                         </h2>
@@ -88,8 +117,8 @@
                 </a>
                 <a href="{{ route('onboarding-policy') }}">
                     <div class="flex items-center gap-4">
-                        <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]" src="../src/assets/Landing_page/Onboard.png"
-                            alt="" />
+                        <img class="w-[24px] h-[24px] sm:w-[30px] sm:h-[30px]"
+                            src="../src/assets/Landing_page/Onboard.png" alt="" />
                         <h2 class="font-medium text-sm sm:text-base text-[#2A2A2A]">
                             Onboarding Policy
                         </h2>

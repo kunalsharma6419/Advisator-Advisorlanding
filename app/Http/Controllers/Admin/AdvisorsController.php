@@ -12,6 +12,7 @@ use App\Models\GeographyLocation;
 use App\Models\Availabilities;
 use App\Models\AdvisorNomination;
 use App\Models\BankDetails;
+use App\Models\user;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -26,8 +27,10 @@ class AdvisorsController extends Controller
     {
         $entriesPerPage = request('entries', 10);
         $search = request('search');
-        $advisors = AdvisorProfiles::query();
-
+        
+        // Make sure to include trashed advisors
+        $advisors = AdvisorProfiles::withTrashed(); // This ensures that trashed records are included in the results
+    
         if ($search) {
             $advisors->where(function ($query) use ($search) {
                 $query->where('nominee_id', 'LIKE', '%' . $search . '%')
@@ -38,18 +41,20 @@ class AdvisorsController extends Controller
                     ->orWhere('user_id', 'LIKE', '%' . $search . '%');
             });
         }
-
+    
+        // Filter by 'selected' status
         $advisors = $advisors->where('nomination_status', 'selected')->paginate($entriesPerPage);
+    
         $totaladvisors = AdvisorProfiles::where('nomination_status', 'selected')->count();
-
+    
         $recentlySelectedDate = Carbon::now()->subDays(7);
         $newprofiles = AdvisorProfiles::where('nomination_status', 'selected')
                                         ->where('updated_at', '>=', $recentlySelectedDate)
                                         ->count();
-
+    
         return view('admin.pages.advisoraccounts.index', compact('advisors', 'search', 'totaladvisors', 'newprofiles'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -386,4 +391,57 @@ class AdvisorsController extends Controller
     {
         //
     }
+
+
+    public function userDestroy($user_id)
+    {
+        // Find the user by unique_id (as foreign key reference)
+        $user = User::where('unique_id', $user_id)->first();
+    
+        if ($user) {
+            // Soft delete the associated AdvisorProfile
+            $advisorProfile = AdvisorProfiles::where('user_id', $user->unique_id)->first();
+    
+            if ($advisorProfile) {
+                $advisorProfile->delete(); // Soft delete the advisor profile
+            }
+    
+          
+    
+            return redirect()->route('advisatoradmin.advisoraccounts.list')
+                             ->with('success', 'User and advisor profile deleted successfully.');
+        } else {
+            return redirect()->route('advisatoradmin.advisoraccounts.list')
+                             ->with('error', 'User not found.');
+        }
+    }
+
+    
+    public function userRestore($user_id)
+    {
+        // Find the user by unique_id or user_id (if applicable)
+        $user = User::withTrashed()->where('unique_id', $user_id)->first();
+    
+        if ($user) {
+            // Restore the associated AdvisorProfile (searching by user_id)
+            $advisorProfile = AdvisorProfiles::withTrashed()->where('user_id', $user->unique_id)->first();
+    
+            if ($advisorProfile) {
+                $advisorProfile->restore(); // Restore the advisor profile
+            }
+    
+           
+    
+            return redirect()->route('advisatoradmin.advisoraccounts.list')
+                             ->with('success', 'User and advisor profile restored successfully.');
+        } else {
+            return redirect()->route('advisatoradmin.advisoraccounts.list')
+                             ->with('error', 'User not found.');
+        }
+    }
+    
+
+
+
+
 }

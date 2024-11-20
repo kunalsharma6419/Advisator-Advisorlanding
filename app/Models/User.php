@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -12,11 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens;
-    use HasFactory;
-    use HasProfilePhoto;
-    use Notifiable;
-    use TwoFactorAuthenticatable;
+    use HasApiTokens, HasFactory, HasProfilePhoto, Notifiable, TwoFactorAuthenticatable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -32,7 +29,7 @@ class User extends Authenticatable
         'is_verified',
         'email_verified_at',
         'password',
-        // 'password'
+        'device_token',
     ];
 
     /**
@@ -41,7 +38,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        // 'password',
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',

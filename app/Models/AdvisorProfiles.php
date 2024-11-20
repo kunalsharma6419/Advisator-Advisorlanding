@@ -20,7 +20,7 @@ class AdvisorProfiles extends Model
     ];
 
     protected $fillable = [
-        'advisor_id', 'user_id', 'full_name', 'email', 'mobile_number', 'location',
+        'advisor_id', 'user_id', 'full_name', 'email','profile_photo_path', 'mobile_number', 'location',
         'linkedin_profile', 'business_function_category_id', 'sub_function_category_id_1',
         'sub_function_category_id_2', 'industry_ids', 'geography_ids', 'advisor_qualification',
         'advisor_experience', 'advsior_skills', 'discovery_call_price_per_minute',
@@ -28,7 +28,7 @@ class AdvisorProfiles extends Model
         'conference_call_price_per_hour', 'chat_price_per_minute', 'chat_price_per_hour', 'document_path', 'nomination_status',
         'highlighted_images', 'is_available', 'language_known',
         'services', 'awards_recognition', 'video_upload', 'about', 'is_founder',
-        'company_name', 'company_website'
+        'company_name', 'company_website', 'profile_completion_percentage'
     ];
 
     public function businessFunctionCategory()
@@ -48,7 +48,7 @@ class AdvisorProfiles extends Model
 
     public function availabilities()
     {
-        return $this->hasMany(Availabilities::class);
+        return $this->hasMany(Availabilities::class, 'advisor_nomination_id');
     }
 
     public function getIndustries()
@@ -128,6 +128,11 @@ class AdvisorProfiles extends Model
     public function getDocumentUrlAttribute()
     {
         return $this->document_path ? \Storage::url($this->document_path) : null;
+    }
+
+    public function withdrawals()
+    {
+        return $this->hasMany(WalletWithdrawal::class, 'advisor_profile_id', 'advisor_id');
     }
 
 }

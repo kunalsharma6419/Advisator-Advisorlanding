@@ -29,4 +29,16 @@ class AdminController extends Controller
 
         return view('admin.pages.contactqueries', compact('contacts', 'search'));
     }
+
+    public function destroy($id)
+    {
+        // Find the contact query by id
+        $contact = Contact::findOrFail($id);
+
+        // Delete the contact query
+        $contact->delete();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Contact query deleted successfully.');
+    }
 }

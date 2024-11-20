@@ -37,12 +37,48 @@
          ">
                             {{ $completionPercentage }}%
                         </div>
+
+
                     </div>
 
                     <ul class="list-disc px-4">
                         <li class="text-[#3A3A3A] text-sm md:text-base">
                             Upload informative videos to assist and engage with users
                         </li>
+                        @php
+                            // Construct the advisor profile URL using the environment APP_URL
+                            $advisorProfileUrl = env('APP_URL') . '/advisors/' . $advisor->user_id;
+
+                            // Get industries as a comma-separated string
+                            $industryNames = implode(', ', $advisor->getIndustries()->pluck('name')->toArray());
+
+                            // Create a predefined message template for LinkedIn
+                            $shareMessage = "
+        🎉 Exciting News! I've officially joined Advisator as an advisor. 🎉
+
+        As an expert in {$advisor->businessFunctionCategory->name}, I'm excited to share my insights and help businesses/individuals achieve their goals through personalized consultations.
+
+        🌟 Check out my profile to learn more about my experience in {$industryNames}, and feel free to reach out for any advice or collaboration opportunities!
+
+        🔗 Visit my Advisator profile: {$advisorProfileUrl}
+
+        #Advisator #ExpertAdvice #{$industryNames} #Consulting #BusinessGrowth
+    ";
+
+                            // URL encode necessary parts
+                            $encodedMessage = urlencode($shareMessage);
+                            $linkedinShareUrl = "https://www.linkedin.com/sharing/share-offsite/?url={$advisorProfileUrl}&text={$encodedMessage}";
+                        @endphp
+
+                        <li class="text-[#3A3A3A] text-sm md:text-base">
+                            Share your profile:
+                            <a href="{{ $linkedinShareUrl }}"
+                                class="bg-red-200 hover:bg-red-300 text-red-700 font-semibold py-2 px-4 rounded-lg shadow-md"
+                                target="_blank">
+                                Share on LinkedIn
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
                 {{-- <div
@@ -73,17 +109,126 @@
                                 <p class="text-sm sm:text-base md:text-xl text-[#2A2A2A]">
                                     Feedback Received
                                 </p>
+                                
                             </div>
-                            <svg class="w-20 h-20 mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M2 12c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10H7l-5 5V12z" stroke="#FF6F61"
-                                    fill="#FF6F61" />
-                                <path d="M6 12h12m-6-6v12" stroke="#FFFFFF" />
-                            </svg>
-                            <p class="text-sm sm:text-base md:text-lg text-[#2A2A2A]">
-                                No data to display
-                            </p>
+                            <div class="flex justify-between items-center py-2">
+                                <p class="text-gray-600">Average Overall Experience:</p>
+                                <div class="flex text-yellow-500">
+                                    @php
+                                        $fullStars = floor($averageOverallExperience);
+                                        $halfStar = ($averageOverallExperience - $fullStars) >= 0.5 ? true : false;
+                                    @endphp
+                                    <!-- Full Stars -->
+                                    @for ($i = 0; $i < $fullStars; $i++)
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                        </svg>
+                                    @endfor
+                                    <!-- Half Star -->
+                                    @if ($halfStar)
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                            <path d="M12 15.4l-3.1 2.4 1.2-4.8-3.9-3.3h4.8l1.5-4.6 1.5 4.6h4.8l-3.9 3.3 1.2 4.8z"/>
+                                        </svg>
+                                    @endif
+                                    <!-- Empty Stars -->
+                                    @for ($i = $fullStars + ($halfStar ? 1 : 0); $i < 5; $i++)
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16" stroke-width="2">
+                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                        </svg>
+                                    @endfor
+                                </div>
+                            </div>
+                        
+                            <!-- Display Average Reliability with Stars -->
+                            <div class="flex justify-between items-center py-2">
+                                <p class="text-gray-600">Average Reliability:</p>
+                                <div class="flex text-yellow-500">
+                                    @php
+                                        $fullStars = floor($averageReliability);
+                                        $halfStar = ($averageReliability - $fullStars) >= 0.5 ? true : false;
+                                    @endphp
+                                    <!-- Full Stars -->
+                                    @for ($i = 0; $i < $fullStars; $i++)
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                        </svg>
+                                    @endfor
+                                    <!-- Half Star -->
+                                    @if ($halfStar)
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                            <path d="M12 15.4l-3.1 2.4 1.2-4.8-3.9-3.3h4.8l1.5-4.6 1.5 4.6h4.8l-3.9 3.3 1.2 4.8z"/>
+                                        </svg>
+                                    @endif
+                                    <!-- Empty Stars -->
+                                    @for ($i = $fullStars + ($halfStar ? 1 : 0); $i < 5; $i++)
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16" stroke-width="2">
+                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                        </svg>
+                                    @endfor
+                                </div>
+                            </div>
+                        
+                            <!-- Display Average Affordability with Stars -->
+                            <div class="flex justify-between items-center py-2">
+                                <p class="text-gray-600">Average Affordability:</p>
+                                <div class="flex text-yellow-500">
+                                    @php
+                                        $fullStars = floor($averageAffordability);
+                                        $halfStar = ($averageAffordability - $fullStars) >= 0.5 ? true : false;
+                                    @endphp
+                                    <!-- Full Stars -->
+                                    @for ($i = 0; $i < $fullStars; $i++)
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                        </svg>
+                                    @endfor
+                                    <!-- Half Star -->
+                                    @if ($halfStar)
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                            <path d="M12 15.4l-3.1 2.4 1.2-4.8-3.9-3.3h4.8l1.5-4.6 1.5 4.6h4.8l-3.9 3.3 1.2 4.8z"/>
+                                        </svg>
+                                    @endif
+                                    <!-- Empty Stars -->
+                                    @for ($i = $fullStars + ($halfStar ? 1 : 0); $i < 5; $i++)
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16" stroke-width="2">
+                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                        </svg>
+                                    @endfor
+                                </div>
+                            </div>
+                        
+                            <!-- Display Average Relevance to Problem with Stars -->
+                            <div class="flex justify-between items-center py-2">
+                                <p class="text-gray-600">Average Relevance to Problem:</p>
+                                <div class="flex text-yellow-500">
+                                    @php
+                                        $fullStars = floor($averageRelevanceToProblem);
+                                        $halfStar = ($averageRelevanceToProblem - $fullStars) >= 0.5 ? true : false;
+                                    @endphp
+                                    <!-- Full Stars -->
+                                    @for ($i = 0; $i < $fullStars; $i++)
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                        </svg>
+                                    @endfor
+                                    <!-- Half Star -->
+                                    @if ($halfStar)
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                            <path d="M12 15.4l-3.1 2.4 1.2-4.8-3.9-3.3h4.8l1.5-4.6 1.5 4.6h4.8l-3.9 3.3 1.2 4.8z"/>
+                                        </svg>
+                                    @endif
+                                    <!-- Empty Stars -->
+                                    @for ($i = $fullStars + ($halfStar ? 1 : 0); $i < 5; $i++)
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16" stroke-width="2">
+                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                        </svg>
+                                    @endfor
+                                </div>
+                            </div>
                         </div>
                     @endif
                 </div>

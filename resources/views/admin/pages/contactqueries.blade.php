@@ -60,9 +60,31 @@
                                                     <td>{{ $contact->name }}</td>
                                                     <td>{{ $contact->email }}</td>
                                                     <td>{{ $contact->message }}</td>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <button type="button"
+                                                                class="btn p-0 dropdown-toggle hide-arrow"
+                                                                data-bs-toggle="dropdown">
+                                                                <i class="fa fa-caret-square-o-down"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item" href="#"
+                                                                    onclick="confirmDeletion('{{ $contact->id }}'); return false;">
+                                                                    <i class="bx bx-trash me-1"></i> Delete
+                                                                </a>
+                                                                <form id="delete-form-{{ $contact->id }}"
+                                                                    action="{{ route('advisatoradmin.contactqueries.destroy', $contact->id) }}"
+                                                                    method="POST" style="display: none;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
+
                                     </table>
                                 </div>
 
@@ -83,4 +105,39 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmDeletion(contactId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, keep it',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Show success message after deletion
+                    Swal.fire({
+                        title: 'Deleted!',
+                        text: 'Contact query deleted successfully.',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        // Submit the form to delete the contact after confirming
+                        document.getElementById('delete-form-' + contactId).submit();
+                    });
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    // Show message if the user cancels the deletion
+                    Swal.fire(
+                        'Cancelled',
+                        'Contact query is safe.',
+                        'error'
+                    );
+                }
+            });
+        }
+    </script>
 @endsection

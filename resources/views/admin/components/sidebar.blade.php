@@ -52,6 +52,12 @@
                 <span class="menu-title">Advisor Accounts</span>
             </a>
         </li>
+        <li class="nav-item {{ request()->routeIs('advisatoradmin.useraccounts.list') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('advisatoradmin.useraccounts.list') }}">
+                <i class="fa fa-users  menu-icon"></i>
+                <span class="menu-title">User Accounts</span>
+            </a>
+        </li>
         <li class="nav-item {{ request()->routeIs('advisatoradmin.contactqueries') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('advisatoradmin.contactqueries') }}">
                 <i class="fa fa-phone menu-icon"></i>

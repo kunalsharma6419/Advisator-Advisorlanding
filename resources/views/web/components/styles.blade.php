@@ -7,10 +7,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <script src="https://cdn.tailwindcss.com"></script>
+<script type="text/javascript" src="https://unpkg.com/@cometchat/chat-sdk-javascript/CometChat.js"></script>
+<!-- CometChat UIKit CDN -->
+
 
 <style>
-    .content-change span::before {
+    /* .content-change span::before {
         content: "Grow your business";
         animation: animate infinite 20s;
     }
@@ -36,7 +40,32 @@
         80% {
             content: "Get career guidance";
         }
+    } */
+
+    .content-change {
+        position: relative;
+        display: inline-block;
     }
+
+    #typing::after {
+        content: "|";
+        font-weight: bold;
+        animation: blink 0.7s infinite;
+        margin-left: 2px;
+    }
+
+    @keyframes blink {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0;
+        }
+    }
+
 
 
 
@@ -66,6 +95,50 @@
     .selected-team {
         color: #3F5713;
         border-color: #6A9023;
+    }
+
+    #suggestions-dropdown {
+        border: 1px solid #eaeaea;
+        border-radius: 8px;
+        max-height: 150px;
+        /* Reduced height for better visibility */
+        overflow-y: auto;
+        z-index: 10;
+        width: calc(100% - 32px);
+        /* Make dropdown width slightly less than the search bar width */
+        background-color: white;
+        /* Ensure the dropdown background is white for better contrast */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Added shadow for better separation from the search bar */
+        position: absolute;
+        top: 100%;
+        /* Position the dropdown directly below the search bar */
+        left: 0;
+        right: 0;
+        margin-top: 4px;
+        /* Add some space between the search bar and dropdown */
+    }
+
+    #suggestions-dropdown-mobile {
+        border: 1px solid #eaeaea;
+        border-radius: 8px;
+        max-height: 150px;
+        /* Reduced height for better visibility */
+        overflow-y: auto;
+        z-index: 10;
+        width: calc(100% - 32px);
+        /* Make dropdown width slightly less than the search bar width */
+        background-color: white;
+        /* Ensure the dropdown background is white for better contrast */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Added shadow for better separation from the search bar */
+        position: absolute;
+        top: 100%;
+        /* Position the dropdown directly below the search bar */
+        left: 0;
+        right: 0;
+        margin-top: 4px;
+        /* Add some space between the search bar and dropdown */
     }
 </style>
 

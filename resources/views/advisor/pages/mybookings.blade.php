@@ -1,7 +1,7 @@
 @extends('advisor.layouts.app')
 
 @section('advisorcontent')
-    <div class="w-full min-h-screen h-full relative overflow-hidden">
+    <div class="relative w-full h-full min-h-screen overflow-hidden">
         <!-- header -->
         @include('advisor.components.mainheader')
 
@@ -69,35 +69,67 @@
         <table class="table-fixed w-full border-separate text-[#2A2A2A] border-spacing-y-3">
             <thead class="text-[#2A2A2A] font-medium text-base lg:text-lg">
                 <tr>
-                    <th class="hidden md:block text-left align-top">#</th>
+                    <th class="hidden text-left align-top md:block">Booking Id</th>
                     <th class="text-left align-top">Date</th>
                     <th class="text-left align-top">Client</th>
                     <th class="text-left align-top">Medium</th>
                     <th class="text-left align-top">Status</th>
+                    <th class="text-left align-top">Action</th>
                 </tr>
             </thead>
             <tbody class="text-sm lg:text-base border-spacing-y-10">
                 @if($bookings && $bookings->count() > 0)
                     @foreach($bookings as $index => $booking)
                         <tr>
-                            <td class="hidden md:block">{{ $index + 1 }}</td>
-                            <td>{{ $booking->date->format('d/m/Y') }}</td>
-                            <td>{{ $booking->client_name }}</td>
-                            <td>{{ $booking->medium }}</td>
-                            <td>{{ $booking->status }}</td>
+
+                            <td class="hidden md:block">{{ $booking->booking_id }}</td>
+                            <td>{{ \Carbon\Carbon::parse($booking->booking_date)->format('d/m/Y') }}</td>
+                            <td>{{ $booking->userProfile->full_name ?? 'N/A' }}</td>
+                            <td>{{ $booking->booking_medium }}</td>
+                            <td
+                            class="
+@if ($booking->booking_status == 'Upcoming')  text-blue-800
+@elseif($booking->booking_status == 'Completed')  text-green-800
+@elseif($booking->booking_status == 'Pending') text-yellow-800
+@elseif($booking->booking_status == 'Rejected') text-red-800 @endif
+">
+                            {{ $booking->booking_status }}
+                        </td>
+                        <td class="flex gap-2">
+                            @if ($booking->booking_status !== 'Rejected')
+                                <form action="{{ route('advisor.booking.updateStatus', $booking->booking_id) }}" method="POST" id="bookingForm-{{ $booking->booking_id }}">
+                                    @csrf
+                                    @method('PATCH')
+                        
+                                    <!-- If booking status is Pending, show Accept and Reject buttons -->
+                                    @if ($booking->booking_status === 'Pending')
+                                        <button type="button" class="px-2 py-1 text-white bg-green-500 rounded" onclick="confirmAction('Accept', '{{ $booking->booking_id }}')">Accept</button>
+                                        <button type="button" class="px-2 py-1 text-white bg-red-500 rounded" onclick="confirmAction('Reject', '{{ $booking->booking_id }}')">Reject</button>
+                                    @endif
+                        
+                                    <!-- If booking status is Upcoming, show Consult Call and Reject buttons -->
+                                    @if ($booking->booking_status === 'Upcoming')
+                                        <button type="button" class="px-2 py-1 text-white bg-blue-500 rounded">Consult Call</button>
+                                        <button type="button" class="px-2 py-1 text-white bg-red-500 rounded" onclick="confirmAction('Reject', '{{ $booking->booking_id }}')">Reject</button>
+                                    @endif
+                                </form>
+                            @endif
+                        </td>
+                        
+                        
+                        
+                        
                         </tr>
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="5" class="text-center py-4">
+                        <td colspan="5" class="py-4 text-center">
                             <div class="flex flex-col items-center justify-center">
-                                <!-- SVG Illustration -->
                                 <svg class="w-32 h-32 mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <circle cx="12" cy="12" r="10" />
                                     <path d="M15 12H9" />
                                     <path d="M12 9v6" />
                                 </svg>
-                                <!-- Message -->
                                 <p class="text-[#2A2A2A] text-lg font-semibold">No data to display</p>
                             </div>
                         </td>
@@ -105,11 +137,15 @@
                 @endif
             </tbody>
         </table>
+        
+      
+        
+        
     </div>
 
     <!-- For mobile screen -->
     <div class="md:hidden">
-        <div class="flex items-center justify-around font-sm sm:font-base font-medium">
+        <div class="flex items-center justify-around font-medium font-sm sm:font-base">
             <h2 id="myBooking" class="booking activebooking">My Booking</h2>
             <h2 id="bookingHistory" class="booking">Booking History</h2>
         </div>
@@ -120,25 +156,25 @@
                 @if($bookings && $bookings->count() > 0)
                     @foreach($bookings as $booking)
                         <div class="bg-[#FFFFFF] rounded-xl shadow-md p-4 sm:p-6 grid grid-cols-2 gap-y-2 justify-items-start">
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                            <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                                 <p class="text-[#828282]">Client Name:</p>
                                 <p class="text-[#2A2A2A]">{{ $booking->client_name }}</p>
                             </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                            <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                                 <p class="text-[#828282]">Date:</p>
-                                <p class="text-[#2A2A2A]">{{ $booking->date->format('d/m/Y') }}</p>
+                                {{-- <p class="text-[#2A2A2A]">{{ $booking->date->format('d/m/Y') }}</p> --}}
                             </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                            <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                                 <p class="text-[#828282]">Time:</p>
                                 <p class="text-[#2A2A2A]">{{ $booking->time }}</p>
                             </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                            <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                                 <p class="text-[#828282]">Medium:</p>
                                 <p class="text-[#2A2A2A]">{{ $booking->medium }}</p>
                             </div>
-                            <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                            <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                                 <p class="text-[#828282]">Status:</p>
-                                <p class="text-[#2A2A2A]">{{ $booking->status }}</p>
+                                <p>Status: {{ $booking->status_label }}</p>
                             </div>
                         </div>
                     @endforeach
@@ -159,7 +195,7 @@
             </div>
 
             <!-- Booking History Section (if applicable) -->
-            <div id="bookingHistoryTable" class="hidden flex flex-col gap-2">
+            <div id="bookingHistoryTable" class="flex flex-col hidden gap-2">
                 <!-- Add similar code for booking history if you have it available -->
             </div>
         </div>
@@ -223,4 +259,45 @@
             sidebar.classList.remove('left-full');
         });
     </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.0/dist/sweetalert2.min.js"></script>
+<script>
+    function confirmAction(action, bookingId) {
+        let actionText = action === 'Accept' ? 'Accept' : 'Reject';
+        let confirmButtonText = action === 'Accept' ? 'Yes, Accept it!' : 'Yes, Reject it!';
+
+        Swal.fire({
+            title: `Are you sure you want to ${actionText} this booking?`,
+            text: `This action cannot be undone.`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: confirmButtonText,
+            cancelButtonText: 'Cancel',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Find the form and submit it after confirmation
+                let bookingForm = document.getElementById(`bookingForm-${bookingId}`);
+                if (bookingForm) {
+                    // Add a hidden input to specify action ('accept' or 'reject')
+                    let actionInput = document.createElement('input');
+                    actionInput.type = 'hidden';
+                    actionInput.name = action.toLowerCase(); // 'accept' or 'reject'
+                    actionInput.value = true;
+                    bookingForm.appendChild(actionInput);
+                    bookingForm.submit();
+                } else {
+                    console.error(`Form with ID bookingForm-${bookingId} not found.`);
+                }
+            }
+        });
+    }
+</script>
+
+
+
 @endsection
