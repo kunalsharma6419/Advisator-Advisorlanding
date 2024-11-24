@@ -151,456 +151,486 @@
                                 </h1>
                             </div>
                         @else
-                        @foreach ($advisors->chunk(2) as $chunk)
-                        <div class="w-full flex flex-wrap lg:flex-nowrap gap-[35px]">
-                            <!-- 1st  -->
-                            @foreach ($chunk as $advisor)
-                                <div
-                                    class="flex w-full xl:w-[50%] justify-between border hover:border-red-500 shadow-xl rounded-[20px] shadow-[#00000026] flex-col">
-
-                                    <a href="{{ route('advisors.detail', ['advisor_id' => $advisor->user_id]) }}">
-
-
-
-                                        <div
-                                        class="bg-[#FFFACA] py-2 rounded-tl-[20px] rounded-tr-[20px] px-2 flex justify-between">
-                                        <p class="text-[12px] font-[500] text-[#B58300]">
-                                            {{ $advisor->is_super_advisor == 'true' ? 'Super Advisor' : 'Advisor' }}
-                                        </p>
-                                        <div class="flex items-center gap-1">
-                                            <i class="fa-solid fa-circle fa-sm"
-                                                style="color: {{ $advisor->isAvailableToday ? '#6a9023' : '#e3342f' }}"></i>
-                                            <p class="text-[12px] font-[600]"
-                                                style="color: {{ $advisor->isAvailableToday ? '#6a9023' : '#e3342f' }}">
-                                                {{ $advisor->isAvailableToday ? 'Available' : 'Not Available' }}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                        <div class="px-4 pb-3 mt-4 sm:mt-4">
-                                            <!-- Profile Info -->
-                                            <div
-                                                class="flex flex-col sm:flex-row items-center sm:items-start justify-center w-full gap-4 sm:gap-16 lg:gap-8">
-                                                <!-- Avatar -->
-                                                <div class="flex w-full justify-around flex-row  sm:flex-col items-center sm:items-start gap-4 sm:justify-normal sm:w-auto">
-
-                                                    <!-- Name (Visible at the top for desktop, inline for mobile) -->
-                                                    <h2 class="text-xl hidden sm:block font-semibold text-gray-800 mb-4">
-                                                        @if (Auth::check())
-                                                            {{ $advisor->full_name }}
-                                                        @else
-                                                            {{ $advisor->user_id }}
-                                                        @endif
-                                                    </h2>
-
-
-                                                    <!-- Image -->
-                                                    <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-2 border-gray-200"
+                            @foreach ($advisors->chunk(2) as $chunk)
+                                <div class="w-full flex flex-wrap lg:flex-nowrap gap-[35px]">
+                                    <!-- 1st  -->
+                                    @foreach ($chunk as $advisor)
+                                        {{-- <div
+                                            class="flex w-full lg:w-[50%] border hover:border-red-500 shadow-xl rounded-[24px] shadow-[#00000026]  flex-col">
+                                            <a href="{{ route('advisors.detail', ['advisor_id' => $advisor->user_id]) }}">
+                                                <div class="bg-[#FFFACA] py-2 rounded-[24px] px-2 flex justify-between">
+                                                    <p class="text-[12px] font-[500] text-[#B58300]">
+                                                        {{ $advisor->is_super_advisor == 'true' ? 'Super Advisor' : 'Advisor' }}
+                                                    </p>
+                                                    <div class="flex items-center gap-1">
+                                                        <i class="fa-solid fa-circle fa-xs" style="color: #6a9023"></i>
+                                                        <p class="text-[12px] font-[600] text-[#6a9023]">
+                                                            {{ $advisor->is_available ? 'Available' : 'Not Available' }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="flex w-full gap-[12px] mt-[20px]">
+                                                    <img class="w-[120px] h-[120px]"
                                                         src="{{ $advisor->profile_photo_path ? asset('storage/' . $advisor->profile_photo_path) : asset('../src/assets/advisorgeneral.webp') }}"
                                                         alt="{{ $advisor->full_name }}" />
-                                                
-                                                    <!-- Text Content -->
-                                                    <div class="flex flex-col items-center sm:items-start text-center sm:text-left">
-                                                        <!-- Name (Visible at the top for desktop, inline for mobile) -->
-                                                        <h2 class="text-xl sm:hidden font-semibold text-gray-800 mb-4">
-                                                            @if (Auth::check())
+                                                    <div class="flex flex-col gap-[12px]">
+                                                        <div class="flex items-center justify-between w-full">
+                                                            <p class="text-[16px] font-[600] text-[#2A2A2A]">
                                                                 {{ $advisor->full_name }}
-                                                            @else
-                                                                {{ $advisor->user_id }}
-                                                            @endif
-                                                        </h2>
-                                                
-                                                        {{-- <!-- Rating -->
-                                                        <div class="flex items-center mb-2">
-                                                            <span class="text-yellow-500 text-sm">★</span>
-                                                            <span class="ml-1 text-sm font-semibold text-gray-800">4.9</span>
-                                                        </div>
-                                                 --}}
-
-                                                 
-                                                 @if ($advisor->average_review_score !== null)
-                                                 <div class="flex items-start mb-2 w-full">
-                                                     <span class="text-yellow-500 text-sm">★</span>
-                                                     <span
-                                                         class="ml-1 text-sm font-semibold text-gray-800">{{ number_format($advisor->average_review_score, 1) }}</span>
-                                                 </div>
-                                             @endif
-                                                        <!-- Additional Info -->
-                                                        <div class="flex flex-col gap-2">
-                                                            <!-- Language -->
-                                                            <div class="flex items-center gap-1">
-                                                                <img class="w-5 h-5" src="../src/assets/icons/hindi.png" alt="Language Icon" />
-                                                                <p class="text-sm font-medium text-gray-700">
-                                                                    {{ $advisor->language_known ?? 'N/A' }}
-                                                                </p>
-                                                            </div>
-                                                            
-                                                            <!-- Price -->
-                                                            <div class="flex items-center gap-1">
-                                                                <img class="w-5 h-5" src="../src/assets/icons/33.png" alt="Price Icon" />
-                                                                <p class="text-sm font-medium text-gray-700">
-                                                                    {{ $advisor->conference_call_price_per_minute ?? 'N/A' }}/min
-                                                                </p>
-                                                            </div>
-                                                            
-                                                            <!-- Location -->
-                                                            <div class="flex items-center gap-1">
-                                                                <img class="w-5 h-5" src="../src/assets/icons/location.png" alt="Location Icon" />
-                                                                <p class="text-sm font-medium text-gray-700">
-                                                                    {{ $advisor->location }}
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <!-- Name and Details -->
-                                                <div
-                                                    class="w-full sm:w-auto flex flex-col items-center sm:items-start sm:justify-between">
-                                                    {{-- <h2
-                                                        class="text-xl font-semibold text-gray-800 sm:opacity-0 mb-4 sm:mb-0">
-                                                        {{ $advisor->full_name }}
-                                                    </h2> --}}
-                                                    
-                                                    <!-- Business Information -->
-                                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
-                                                        <!-- Business Function -->
-                                                        <div class="col-span-3">
-                                                            <p class="font-semibold text-gray-700">Business
-                                                                Function:</p>
-                                                            <p
-                                                                class="text-sm mt-1 flex gap-2 flex-wrap text-gray-600">
-                                                                @if ($advisor->businessFunctionCategory)
-                                                                    <span
-                                                                        class="bg-red-100 border border-red-300 rounded-md px-2 py-1">
-                                                                        {{ $advisor->businessFunctionCategory->name }}
-                                                                    </span>
-                                                                @endif
                                                             </p>
+                                                            <div class="flex items-center gap-1">
+                                                                <i class="fa-solid fa-star fa-xs"
+                                                                    style="color: #ffb800"></i>
+                                                                <p class="text-[12px] font-[500] text-[#3A3A3A]">4.9</p>
+                                                            </div>
                                                         </div>
-
-                                                        <!-- Sub Business Function -->
-                                                        <div class="col-span-3">
-                                                            <p class="font-semibold text-gray-700">Sub Business
-                                                                Function:</p>
-                                                            <p
-                                                                class="text-sm mt-1 flex gap-2 flex-wrap text-gray-600">
-                                                                @if ($advisor->subFunctionCategory1)
-                                                                    <span
-                                                                        class="bg-red-100 border border-red-300 rounded-md px-2 py-1">
-                                                                        {{ $advisor->subFunctionCategory1->name }}
-                                                                    </span>
-                                                                @endif
-                                                                @if ($advisor->subFunctionCategory2)
-                                                                    <span
-                                                                        class="bg-red-100 border border-red-300 rounded-md px-2 py-1">
-                                                                        {{ $advisor->subFunctionCategory2->name }}
-                                                                    </span>
-                                                                @endif
-                                                            </p>
-                                                        </div>
-
-                                                        <!-- Industry -->
-                                                        <div class="col-span-3">
-                                                            <p class="font-semibold text-gray-700">Industry:</p>
-                                                            <p
-                                                                class="text-sm mt-1 flex gap-2 flex-wrap text-gray-600">
+                                                        <div class="flex w-full justify-between gap-[4px] items-center">
+                                                            <div class="flex flex-col gap-[4px]">
+                                                                <p>Industry :-</p>
                                                                 @foreach ($advisor->getIndustries() as $industry)
-                                                                    <span
-                                                                        class="bg-red-100 border border-red-300 rounded-md px-2 py-1">
-                                                                        {{ $industry->name }}
-                                                                    </span>
-                                                                    @if (!$loop->last)
-                                                                        <span
-                                                                            class="hidden md:inline-block">&nbsp;•&nbsp;</span>
-                                                                    @endif
+                                                                    <div class="flex items-center gap-1">
+                                                                        <i class="fa-solid fa-circle-check fa-xs"
+                                                                            style="color: #b197fc"></i>
+                                                                        <p
+                                                                            class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                                            {{ $industry->name }}
+                                                                        </p>
+                                                                    </div>
                                                                 @endforeach
+                                                            </div>
+
+                                                            <div class="w-[1px] h-[70%] border border-[#E5E5E5]"></div>
+                                                            <div class="flex w-full justify-between gap-[4px] items-center">
+                                                                <div class="flex flex-col gap-[4px]">
+                                                                    <p>Business Function :- </p>
+                                                                    @if ($advisor->businessFunctionCategory)
+                                                                        <div class="flex items-center gap-1">
+                                                                            <i class="fa-solid fa-circle-check fa-xs"
+                                                                                style="color: #b197fc"></i>
+                                                                            <p
+                                                                                class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                                                {{ $advisor->businessFunctionCategory->name }}
+                                                                            </p>
+                                                                        </div>
+                                                                    @endif
+                                                                    <p class="text-bold">Sub-Functions :-</p>
+
+                                                                    @if ($advisor->subFunctionCategory1)
+                                                                        <div class="flex items-center gap-1">
+                                                                            <i class="fa-solid fa-circle-check fa-xs"
+                                                                                style="color: #b197fc"></i>
+                                                                            <p
+                                                                                class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                                                {{ $advisor->subFunctionCategory1->name }}
+                                                                            </p>
+                                                                        </div>
+                                                                    @endif
+
+                                                                    @if ($advisor->subFunctionCategory2)
+                                                                        <div class="flex items-center gap-1">
+                                                                            <i class="fa-solid fa-circle-check fa-xs"
+                                                                                style="color: #b197fc"></i>
+                                                                            <p
+                                                                                class="text-[10px] lg:text-[14px] font-[400] text-[#3A3A3A]">
+                                                                                {{ $advisor->subFunctionCategory2->name }}
+                                                                            </p>
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                                <!-- Other parts of the card go here -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="flex w-full relative justify-between  px-4 pb-4 gap-[4px]">
+
+                                                    <div class="flex flex-col gap-[4px]">
+                                                        <div class="flex items-center gap-1">
+                                                            <img class="w-[20px] h-[20px]"
+                                                                src="../src/assets/icons/Discovery call.png"
+                                                                alt="" />
+                                                            <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                                                Discovery call
                                                             </p>
                                                         </div>
-
-                                                        <!-- Geography -->
-                                                        <div class="col-span-3">
-                                                            <p class="font-semibold text-gray-700">Geography:</p>
-                                                            <p
-                                                                class="text-sm mt-1 flex gap-2 flex-wrap text-gray-600">
-                                                                @foreach ($advisor->getGeographies() as $geography)
-                                                                    <span
-                                                                        class="bg-red-100 border border-red-300 rounded-md px-2 py-1">
-                                                                        {{ $geography->name }}
-                                                                    </span>
-                                                                    @if (!$loop->last)
-                                                                        <span
-                                                                            class="hidden md:inline-block">&nbsp;•&nbsp;</span>
-                                                                    @endif
-                                                                @endforeach
+                                                        <div class="flex items-center gap-1">
+                                                            <img class="w-[20px] h-[20px]"
+                                                                src="../src/assets/icons/Consultation call.png"
+                                                                alt="" />
+                                                            <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                                                Consultation call
+                                                            </p>
+                                                        </div>
+                                                        <div class="flex items-center gap-1">
+                                                            <img class="w-[20px] h-[20px]"
+                                                                src="../src/assets/icons/Chat.png" alt="" />
+                                                            <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                                                Chat
+                                                            </p>
+                                                        </div>
+                                                        <div class="flex items-center gap-1">
+                                                            <img class="w-[20px] h-[20px]"
+                                                                src="../src/assets/icons/Book Appointment.png"
+                                                                alt="" />
+                                                            <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                                                Book Appointment
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex flex-col gap-[4px]">
+                                                        <div class="flex items-center gap-1">
+                                                            <img class="w-[20px] h-[20px]"
+                                                                src="../src/assets/icons/hindi.png" alt="" />
+                                                            <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                                                {{ $advisor->language_known ?? 'N/A' }}
+                                                            </p>
+                                                        </div>
+                                                        <div class="flex items-center">
+                                                            <img class="w-[20px] h-[20px]"
+                                                                src="../src/assets/icons/33.png" alt="" />
+                                                            <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                                                {{ $advisor->discovery_call_price_per_minute ?? 'N/A' }}/min
+                                                            </p>
+                                                        </div>
+                                                        <div class="flex items-center gap-1">
+                                                            <img class="w-[20px] h-[20px]"
+                                                                src="../src/assets/icons/location.png" alt="" />
+                                                            <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                                                {{ $advisor->location }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex flex-col gap-[4px]">
+                                                        <div class="flex items-center gap-1">
+                                                            <i class="fa-regular fa-bell fa-xs"
+                                                                style="color: #c95555"></i>
+                                                            <p class="text-[12px] font-[500] text-[#C95555]">
+                                                                Notify me
                                                             </p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </a>
+                                        </div> --}}
+                                        <div
+                                            class="flex w-full xl:w-[50%] border hover:border-red-500 shadow-xl rounded-[24px] shadow-[#00000026] flex-col">
+                                            <a href="{{ route('advisors.detail', ['advisor_id' => $advisor->user_id]) }}">
+                                                <div class="bg-[#FFFACA] py-2 rounded-tl-[20px] rounded-tr-[20px] px-2 flex justify-between">
+                                                    <p class="text-[12px] font-[500] text-[#B58300]">
+                                                        {{ $advisor->is_super_advisor == 'true' ? 'Super Advisor' : 'Advisor' }}
+                                                    </p>
+                                                    <div class="flex items-center gap-1">
+                                                        <i class="fa-solid fa-circle fa-xs" style="color: #6a9023"></i>
+                                                        <p class="text-[12px] font-[600] text-[#6a9023]">
+                                                            {{ $advisor->is_available ? 'Available' : 'Not Available' }}
+                                                        </p>
+                                                    </div>
+                                                </div>
 
+                                                <div class="px-4 pb-3">
+                                                    <!-- Profile Info -->
+                                                    <div
+                                                        class="flex items-start justify-center w-full gap-4 sm:items-center sm:gap-16 lg:gap-8">
+                                                        <!-- Avatar -->
+                                                        <div class="flex flex-col">
+                                                            <!-- Placeholder image for avatar -->
+                                                            <h2
+                                                                class="text-xl sm:block hidden mb-[20px] font-semibold text-gray-800">
+                                                                @if (Auth::check())
+                                                                    {{ $advisor->full_name }}
+                                                                @else
+                                                                    {{ $advisor->user_id }}
+                                                                @endif
+                                                            </h2>
+                                                            <img class="w-[180px] sm:w-[120px] h-[120px]"
+                                                                src="{{ $advisor->profile_photo_path ? asset('storage/' . $advisor->profile_photo_path) : asset('../src/assets/advisorgeneral.webp') }}"
+                                                                alt="{{ $advisor->full_name }}" />
+                                                            <div class="flex flex-col gap-[4px]">
+                                                                <div class="flex items-center gap-1">
+                                                                    <img class="w-[20px] h-[20px]"
+                                                                        src="../src/assets/icons/hindi.png"
+                                                                        alt="" />
+                                                                    <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                                                        {{ $advisor->language_known ?? 'N/A' }}
+                                                                    </p>
+                                                                </div>
+                                                                <div class="flex items-center">
+                                                                    <img class="w-[20px] h-[20px]"
+                                                                        src="../src/assets/icons/33.png" alt="" />
+                                                                    <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                                                        {{ $advisor->conference_call_price_per_minute ?? 'N/A' }}/min
+                                                                    </p>
+                                                                </div>
+                                                                <div class="flex items-center gap-1">
+                                                                    <img class="w-[20px] h-[20px]"
+                                                                        src="../src/assets/icons/location.png"
+                                                                        alt="" />
+                                                                    <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                                                        {{ $advisor->location }}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
+                                                        <!-- Name and Details -->
+                                                        <div class="">
+                                                            <div class="flex justify-between">
+                                                                <h2
+                                                                    class="text-xl font-semibold text-gray-800 opacity-100 sm:opacity-0">
+                                                                    {{ $advisor->full_name }}
+                                                                </h2>
+                                                                <!-- Top Section: Availability and Rating -->
+                                                                <div class="flex items-center justify-between">
+                                                                    <div class="flex items-center">
+                                                                        <span class="text-sm text-yellow-500">★</span>
+                                                                        <span
+                                                                            class="ml-1 text-sm font-semibold text-gray-800">4.9</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="">
+                                                                <div class="grid grid-cols-3 gap-2">
+                                                                    <!-- Business Function -->
+                                                                    <div class="col-span-3">
+                                                                        <p class="font-semibold text-gray-700">
+                                                                            Business Function :
+                                                                        </p>
+                                                                        <p
+                                                                            class="text-sm mt-1 flex gap-[5px] flex-wrap items-center  w-full text-gray-600">
+                                                                            @if ($advisor->businessFunctionCategory)
+                                                                                <span
+                                                                                    class="bg-[#F7EAEA] border border-[#FFD3D3] rounded-md p-1">
+                                                                                    {{ $advisor->businessFunctionCategory->name }}
+                                                                                </span>
+                                                                            @endif
+                                                                        </p>
+                                                                    </div>
 
-                                            <!-- Industry and Business Function -->
-
-                                            <!-- Action Buttons -->
-                                            {{-- <div
-                                                class="grid flex-col items-start grid-cols-2 gap-2 mt-6 sm:flex sm:flex-row md:items-center md:justify-center">
-                                                <button onclick="handleDiscoveryCall('{{ $advisor->user_id }}')"
-                                                    class="bg-[#6a9023] w-[155px] sm:w-auto text-white px-4 py-2 rounded-md hover:bg-green-600">
-                                                    Discovery call
-                                                </button>
-                                                <button
-                                                    onclick="handleConsultationCall('{{ $advisor->user_id }}')"
-                                                    class="bg-[#ff3131] w-[155px] sm:w-auto text-white px-4 py-2 rounded-md hover:bg-orange-600">
-                                                    Consultation call
-                                                </button>
-                                                {{-- <button onclick="openBookingModal(event, 'appointmentModal-{{ $advisor->user_id }}')"
-                                                    class="bg-red-500 w-[155px] sm:w-auto text-white px-4 py-2 rounded-md hover:bg-red-600">
-                                                    Book Appointment
-                                                </button> --}}
-                                            {{-- <button
-                                                    onclick="showBookingAlert(event, '{{ route('advisors.detail', ['advisor_id' => $advisor->user_id]) }}')"
-                                                    class="bg-[#C95555] w-[155px] sm:w-auto text-white px-4 py-2 rounded-md hover:bg-red-600">
-                                                    Book Appointment
-                                                </button> --}}
-
-
-                                            {{-- <div
-                                                class="flex flex-col items-start gap-2 mt-6 sm:flex-row md:items-center md:justify-center">
-
-                                                <button onclick="handleDiscoveryCall('{{ $advisor->user_id }}')"
-                                                    class="bg-[#6a9023] w-full sm:w-auto text-white px-4 py-2 rounded-md hover:bg-green-600">
-                                                    Discovery call
-                                                </button>
-
-                                                <button
-                                                    onclick="handleConsultationCall('{{ $advisor->user_id }}')"
-                                                    class="bg-[#ff3131] w-full sm:w-auto text-white px-4 py-2 rounded-md hover:bg-orange-600">
-                                                    Consultation call
-                                                </button>
-
-                                                <button
-                                                    onclick="showBookingAlert(event, '{{ route('advisors.detail', ['advisor_id' => $advisor->user_id]) }}')"
-                                                    class="bg-[#C95555] w-full sm:w-auto text-white px-4 py-2 rounded-md hover:bg-red-600">
-                                                    Book Appointment
-                                                </button> --}}
-
-
-
-
-                                            {{-- <div id="appointmentModal"
-                                                class="fixed inset-0 z-50 items-center justify-center hidden bg-gray-600 bg-opacity-50">
-                                                <div class="relative p-6 bg-white rounded-lg shadow-lg w-96">
-                                                    <h2 class="mb-4 text-lg font-bold">Book Appointment with
-                                                        {{ $advisor->user_id }}
-                                                    </h2>
-
-                                                    <!-- Tabs for each day with dates -->
-                                                    <div class="flex mb-4 space-x-2 overflow-x-auto tabs">
-                                                        @foreach ($upcomingDays as $day)
-                                                            <button id="day-{{ $loop->index }}"
-                                                                class="tab-button bg-{{ $loop->first ? 'green' : 'blue' }}-500 text-white px-4 py-2 rounded-lg"
-                                                                onclick="selectDay('{{ $loop->index }}', '{{ $day['day'] }}')">
-                                                                {{ $day['day'] }}<br>{{ $day['date'] }}
-                                                            </button>
-                                                        @endforeach
+                                                                    <!-- Sub Business Function -->
+                                                                    <div class="col-span-3">
+                                                                        <p class="font-semibold text-gray-700">
+                                                                            Sub Business Function :
+                                                                        </p>
+                                                                        <p
+                                                                            class="text-sm mt-1 flex gap-[5px] flex-wrap items-center  w-full text-gray-600">
+                                                                            @if ($advisor->subFunctionCategory1)
+                                                                                <span
+                                                                                    class="bg-[#F7EAEA]  border border-[#FFD3D3] rounded-md p-1">
+                                                                                    {{ $advisor->subFunctionCategory1->name }}
+                                                                                </span><span class="hidden md:block">
+                                                                                    &nbsp;•&nbsp;
+                                                                                </span>
+                                                                            @endif
+                                                                            @if ($advisor->subFunctionCategory2)
+                                                                                <span
+                                                                                    class="bg-[#F7EAEA] border  border-[#FFD3D3] rounded-md p-1">
+                                                                                    {{ $advisor->subFunctionCategory2->name }}</span>
+                                                                            @endif
+                                                                        </p>
+                                                                    </div>
+                                                                    <!-- Industry -->
+                                                                    <div class="col-span-3">
+                                                                        <p class="font-semibold text-gray-700">Industry :
+                                                                        </p>
+                                                                        <p
+                                                                            class="text-sm mt-1 flex gap-[5px] flex-wrap items-center  w-full text-gray-600">
+                                                                            @foreach ($advisor->getIndustries() as $industry)
+                                                                                <span
+                                                                                    class="bg-[#F7EAEA] border border-[#FFD3D3] rounded-md p-1">
+                                                                                    {{ $industry->name }}
+                                                                                </span>
+                                                                                @if (!$loop->last)
+                                                                                    <span
+                                                                                        class="hidden md:inline-block">&nbsp;•&nbsp;</span>
+                                                                                @endif
+                                                                            @endforeach
+                                                                        </p>
+                                                                    </div>
+                                                                    <!-- Geography -->
+                                                                    <div class="col-span-3">
+                                                                        <p class="font-semibold text-gray-700">Geography :
+                                                                        </p>
+                                                                        <p
+                                                                            class="text-sm mt-1 flex gap-[5px] flex-wrap items-center  w-full text-gray-600">
+                                                                            @foreach ($advisor->getGeographies() as $geography)
+                                                                                <span
+                                                                                    class="bg-[#F7EAEA]  border border-[#FFD3D3] rounded-md p-1">
+                                                                                    {{ $geography->name }}
+                                                                                </span>
+                                                                                @if (!$loop->last)
+                                                                                    <span
+                                                                                        class="hidden md:inline-block">&nbsp;•&nbsp;</span>
+                                                                                @endif
+                                                                            @endforeach
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
-                                                    <!-- Time Slots for Selected Day -->
-                                                    {{-- <div id="timeSlots" class="time-slots">
-                                                        @foreach ($advisorAvailabilities as $availability)
-                                                            <div data-day="{{ $availability->day }}"
-                                                                class="hidden slot">
-                                                                <button id="slot-{{ $availability->time_slot }}"
-                                                                    class="w-full px-4 py-2 mb-2 text-center text-gray-700 bg-gray-200 rounded-lg slot-button"
-                                                                    onclick="selectSlot('{{ $availability->advisor_nomination_id }}', '{{ $availability->day }}', '{{ $availability->time_slot }}')">
-                                                                    {{ $availability->time_slot }}
+                                                    <!-- Industry and Business Function -->
+
+                                                    <!-- Action Buttons -->
+                                                    <div
+                                                    class="flex flex-col items-start gap-2 mt-6 sm:flex-row md:items-center md:justify-center"
+                                                   >
+                                                        <button onclick="handleDiscoveryCall('{{ $advisor->user_id }}')"
+                                                            class="bg-[#6a9023] w-full sm:w-auto text-white px-4 py-2 rounded-md hover:bg-green-600">
+                                                            Discovery call
+                                                        </button>
+
+                                                        <button onclick="handleConsultationCall('{{ $advisor->user_id }}')"
+                                                            class="bg-[#ff3131] w-full sm:w-auto text-white px-4 py-2 rounded-md hover:bg-orange-600">
+                                                            Consultation call
+                                                        </button>
+
+
+                                                        {{-- <button onclick="openBookingModal(event, 'appointmentModal-{{ $advisor->user_id }}')"
+                                                            class="bg-red-500 w-[155px] sm:w-auto text-white px-4 py-2 rounded-md hover:bg-red-600">
+                                                            Book Appointment
+                                                        </button> --}}
+                                                        {{-- <button
+                                                            onclick="showBookingAlert(event, '{{ route('advisors.detail', ['advisor_id' => $advisor->user_id]) }}')"
+                                                            class="bg-[#C95555] w-[155px] sm:w-auto text-white px-4 py-2 rounded-md hover:bg-red-600">
+                                                            Book Appointment
+                                                        </button> --}}
+
+
+                                                        <button onclick="showBookingAlert(event, '{{ route('advisors.detail', ['advisor_id' => $advisor->user_id]) }}')"
+                                                            class="bg-[#C95555] w-full sm:w-auto text-white px-4 py-2 rounded-md hover:bg-red-600">
+                                                            Book Appointment
+                                                        </button>
+
+                                                        {{-- <div id="appointmentModal"
+                                                        class="fixed inset-0 z-50 items-center justify-center hidden bg-gray-600 bg-opacity-50">
+                                                        <div class="relative p-6 bg-white rounded-lg shadow-lg w-96">
+                                                            <h2 class="mb-4 text-lg font-bold">Book Appointment with
+                                                                {{ $advisor->user_id }}
+                                                            </h2>
+
+                                                            <!-- Tabs for each day with dates -->
+                                                            <div class="flex mb-4 space-x-2 overflow-x-auto tabs">
+                                                                @foreach ($upcomingDays as $day)
+                                                                    <button id="day-{{ $loop->index }}"
+                                                                        class="tab-button bg-{{ $loop->first ? 'green' : 'blue' }}-500 text-white px-4 py-2 rounded-lg"
+                                                                        onclick="selectDay('{{ $loop->index }}', '{{ $day['day'] }}')">
+                                                                        {{ $day['day'] }}<br>{{ $day['date'] }}
+                                                                    </button>
+                                                                @endforeach
+                                                            </div>
+
+                                                            <!-- Time Slots for Selected Day -->
+                                                            {{-- <div id="timeSlots" class="time-slots">
+                                                                @foreach ($advisorAvailabilities as $availability)
+                                                                    <div data-day="{{ $availability->day }}"
+                                                                        class="hidden slot">
+                                                                        <button id="slot-{{ $availability->time_slot }}"
+                                                                            class="w-full px-4 py-2 mb-2 text-center text-gray-700 bg-gray-200 rounded-lg slot-button"
+                                                                            onclick="selectSlot('{{ $availability->advisor_nomination_id }}', '{{ $availability->day }}', '{{ $availability->time_slot }}')">
+                                                                            {{ $availability->time_slot }}
+                                                                        </button>
+
+                                                                    </div>
+                                                                @endforeach
+                                                            </div>
+                                                            <!-- Time Slots for Selected Day -->
+                                                            <div id="timeSlots" class="time-slots">
+                                                                @foreach ($advisorAvailabilities as $availability)
+                                                                    @if (!empty($availability->day))
+                                                                        <!-- Check if day exists -->
+                                                                        <div data-day="{{ $availability->day }}"
+                                                                            class="hidden slot">
+                                                                            <button
+                                                                                id="slot-{{ $availability->time_slot }}"
+                                                                                class="w-full px-4 py-2 mb-2 text-center text-gray-700 bg-gray-200 rounded-lg slot-button"
+                                                                                onclick="selectSlot('{{ $availability->advisor_nomination_id }}', '{{ $availability->day }}', '{{ $availability->time_slot }}')">
+                                                                                {{ $availability->time_slot }}
+                                                                            </button>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </div>
+
+
+                                                            <!-- Confirm Appointment Button -->
+                                                            <button id="confirmAppointment"
+                                                                class="hidden w-full p-2 mt-4 text-white bg-green-500 rounded"
+                                                                onclick="confirmBooking()">Confirm Appointment</button>
+
+                                                            <!-- Close Button -->
+                                                            <button class="w-full p-2 mt-4 text-white bg-red-500 rounded"
+                                                                onclick="closeBookingModal()">Close</button>
+                                                        </div>
+                                                    </div> --}}
+                                                        {{-- <!-- Modal for this advisor -->
+                                                        <div id="appointmentModal-{{ $advisor->user_id }}"
+                                                            class="fixed inset-0 z-50 items-center justify-center hidden bg-gray-600 bg-opacity-50">
+                                                            <div class="relative p-6 bg-white rounded-lg shadow-lg w-96">
+                                                                <h2 class="mb-4 text-lg font-bold">Book Appointment with
+                                                                    {{ $advisor->user_id }}</h2>
+
+                                                                <!-- Tabs for each day with dates -->
+                                                                <div class="flex mb-4 space-x-2 overflow-x-auto tabs">
+                                                                    @foreach ($upcomingDays as $day)
+                                                                        <button
+                                                                            class="px-4 py-2 text-white bg-blue-500 rounded-lg tab-button"
+                                                                            data-day-index="{{ $loop->index }}"
+                                                                            data-day="{{ $day['day'] }}"
+                                                                            data-date="{{ $day['date'] }}"
+                                                                            onclick="selectDay(event, '{{ $advisor->user_id }}', '{{ $loop->index }}', '{{ $day['day'] }}', '{{ $day['date'] }}')">
+                                                                            {{ $day['day'] }}<br>{{ $day['date'] }}
+                                                                        </button>
+                                                                    @endforeach
+                                                                </div>
+
+                                                                <!-- Time Slots for Selected Day -->
+                                                                <div id="timeSlots" class="time-slots">
+                                                                    @foreach ($advisorAvailabilities as $availability)
+                                                                        <div data-day="{{ $availability->day }}"
+                                                                            class="hidden slot">
+                                                                            <button
+                                                                                id="slot-{{ $advisor->user_id }}-{{ $availability->time_slot }}"
+                                                                                class="w-full px-4 py-2 mb-2 text-center text-gray-700 bg-gray-200 rounded-lg slot-button"
+                                                                                onclick="selectSlot(event, '{{ $advisor->user_id }}','{{ $availability->advisor_nomination_id }}', '{{ $availability->day }}', '{{ $availability->time_slot }}')">
+                                                                                {{ $availability->time_slot }}
+                                                                            </button>
+                                                                        </div>
+                                                                    @endforeach
+                                                                </div>
+
+                                                                <!-- Confirm Appointment Button -->
+                                                                <button id="confirmAppointment"
+                                                                    class="hidden w-full p-2 mt-4 text-white bg-green-500 rounded"
+                                                                    onclick="confirmBooking('{{ $advisor->user_id }}')">
+                                                                    Confirm Appointment
                                                                 </button>
 
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                    <!-- Time Slots for Selected Day -->
-                                                    <div id="timeSlots" class="time-slots">
-                                                        @foreach ($advisorAvailabilities as $availability)
-                                                            @if (!empty($availability->day))
-                                                                <!-- Check if day exists -->
-                                                                <div data-day="{{ $availability->day }}"
-                                                                    class="hidden slot">
-                                                                    <button
-                                                                        id="slot-{{ $availability->time_slot }}"
-                                                                        class="w-full px-4 py-2 mb-2 text-center text-gray-700 bg-gray-200 rounded-lg slot-button"
-                                                                        onclick="selectSlot('{{ $availability->advisor_nomination_id }}', '{{ $availability->day }}', '{{ $availability->time_slot }}')">
-                                                                        {{ $availability->time_slot }}
-                                                                    </button>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                    </div>
-
-
-                                                    <!-- Confirm Appointment Button -->
-                                                    <button id="confirmAppointment"
-                                                        class="hidden w-full p-2 mt-4 text-white bg-green-500 rounded"
-                                                        onclick="confirmBooking()">Confirm Appointment</button>
-
-                                                    <!-- Close Button -->
-                                                    <button class="w-full p-2 mt-4 text-white bg-red-500 rounded"
-                                                        onclick="closeBookingModal()">Close</button>
-                                                </div>
-                                            </div> --}}
-                                            {{-- <!-- Modal for this advisor -->
-                                                <div id="appointmentModal-{{ $advisor->user_id }}"
-                                                    class="fixed inset-0 z-50 items-center justify-center hidden bg-gray-600 bg-opacity-50">
-                                                    <div class="relative p-6 bg-white rounded-lg shadow-lg w-96">
-                                                        <h2 class="mb-4 text-lg font-bold">Book Appointment with
-                                                            {{ $advisor->user_id }}</h2>
-
-                                                        <!-- Tabs for each day with dates -->
-                                                        <div class="flex mb-4 space-x-2 overflow-x-auto tabs">
-                                                            @foreach ($upcomingDays as $day)
+                                                                <!-- Close Button -->
                                                                 <button
-                                                                    class="px-4 py-2 text-white bg-blue-500 rounded-lg tab-button"
-                                                                    data-day-index="{{ $loop->index }}"
-                                                                    data-day="{{ $day['day'] }}"
-                                                                    data-date="{{ $day['date'] }}"
-                                                                    onclick="selectDay(event, '{{ $advisor->user_id }}', '{{ $loop->index }}', '{{ $day['day'] }}', '{{ $day['date'] }}')">
-                                                                    {{ $day['day'] }}<br>{{ $day['date'] }}
+                                                                    class="w-full p-2 mt-4 text-white bg-red-500 rounded"
+                                                                    onclick="closeBookingModal(event)">
+                                                                    Close
                                                                 </button>
-                                                            @endforeach
-                                                        </div>
-
-                                                        <!-- Time Slots for Selected Day -->
-                                                        <div id="timeSlots" class="time-slots">
-                                                            @foreach ($advisorAvailabilities as $availability)
-                                                                <div data-day="{{ $availability->day }}"
-                                                                    class="hidden slot">
-                                                                    <button
-                                                                        id="slot-{{ $advisor->user_id }}-{{ $availability->time_slot }}"
-                                                                        class="w-full px-4 py-2 mb-2 text-center text-gray-700 bg-gray-200 rounded-lg slot-button"
-                                                                        onclick="selectSlot(event, '{{ $advisor->user_id }}','{{ $availability->advisor_nomination_id }}', '{{ $availability->day }}', '{{ $availability->time_slot }}')">
-                                                                        {{ $availability->time_slot }}
-                                                                    </button>
-                                                                </div>
-                                                            @endforeach
-                                                        </div>
-
-                                                        <!-- Confirm Appointment Button -->
-                                                        <button id="confirmAppointment"
-                                                            class="hidden w-full p-2 mt-4 text-white bg-green-500 rounded"
-                                                            onclick="confirmBooking('{{ $advisor->user_id }}')">
-                                                            Confirm Appointment
-                                                        </button>
-
-                                                        <!-- Close Button -->
-                                                        <button
-                                                            class="w-full p-2 mt-4 text-white bg-red-500 rounded"
-                                                            onclick="closeBookingModal(event)">
-                                                            Close
-                                                        </button>
-                                                    </div>
-                                                </div> --}}
-
-{{-- 
-
-
-                                            <div id="appointmentModal"
-                                                class="fixed inset-0 z-50 items-center justify-center hidden bg-gray-600 bg-opacity-50">
-                                                <div class="relative p-6 bg-white rounded-lg shadow-lg w-96">
-                                                    <h2 class="mb-4 text-lg font-bold">Book Appointment with
-                                                        {{ $advisor->user_id }}
-                                                    </h2>
-
-                                                    <!-- Tabs for each day with dates -->
-                                                    <div class="flex mb-4 space-x-2 overflow-x-auto tabs">
-                                                        @foreach ($upcomingDays as $day)
-                                                            <button id="day-{{ $loop->index }}"
-                                                                class="tab-button bg-{{ $loop->first ? 'green' : 'blue' }}-500 text-white px-4 py-2 rounded-lg"
-                                                                onclick="selectDay('{{ $loop->index }}', '{{ $day['day'] }}', '{{ $day['date'] }}')">
-                                                                {{ $day['day'] }}<br>{{ $day['date'] }}
-                                                            </button>
-                                                        @endforeach
-                                                    </div>
-
-
-                                                    <!-- Time Slots for Selected Day -->
-                                                    <div id="timeSlots" class="time-slots">
-                                                        @foreach ($advisorAvailabilities as $availability)
-                                                            <div data-day="{{ $availability->day }}"
-                                                                class="hidden slot">
-                                                                <button id="slot-{{ $availability->time_slot }}"
-                                                                    class="w-full px-4 py-2 mb-2 text-center text-gray-700 bg-gray-200 rounded-lg slot-button"
-                                                                    onclick="selectSlot('{{ $availability->advisor_nomination_id }}', '{{ $availability->day }}', '{{ $availability->time_slot }}')">
-                                                                    {{ $availability->time_slot }}
-                                                                </button>
-
                                                             </div>
-                                                        @endforeach
+                                                        </div> --}}
+
+                                                        <!-- Notify Me -->
+                                                        <div
+                                                            class="flex items-center justify-center flex-col bg-transparent w-full border border-black sm:w-auto text-white px-4 py-[10px] rounded-md gap-[4px] hover:bg-red-600 hover:text-white">
+                                                            <div class="flex items-center gap-1">
+                                                                <i class="fa-regular fa-bell fa-xs"
+                                                                    style="color: #c95555"></i>
+                                                                <p class="text-[12px] font-[500] text-[#C95555]">
+                                                                    Notify me
+                                                                </p>
+                                                            </div>
+                                                        </div>
                                                     </div>
-
-                                                    <!-- Confirm Appointment Button -->
-                                                    <button id="confirmAppointment"
-                                                        class="hidden w-full p-2 mt-4 text-white bg-green-500 rounded"
-                                                        onclick="confirmBooking()">Confirm Appointment</button>
-
-                                                    <!-- Close Button -->
-                                                    <button class="w-full p-2 mt-4 text-white bg-red-500 rounded"
-                                                        onclick="closeBookingModal()">Close</button>
                                                 </div>
-                                            </div> --}}
+                                            </a>
                                         </div>
-                                
-                                </a>
-
-
-                                <div
-                                    class="flex flex-col items-start gap-2 mt-6 p-4 sm:flex-row md:items-center md:justify-center">
-
-                                    <button onclick="handleDiscoveryCall('{{ $advisor->user_id }}')"
-                                        class="bg-[#6a9023] w-full sm:w-auto text-white px-4 py-2 rounded-md hover:bg-green-600">
-                                        Discovery call
-                                    </button>
-
-                                    <button onclick="handleConsultationCall('{{ $advisor->user_id }}')"
-                                        class="bg-[#ff3131] w-full sm:w-auto text-white px-4 py-2 rounded-md hover:bg-orange-600">
-                                        Consultation call
-                                    </button>
-
-                                    <button
-                                        onclick="showBookingAlert(event, '{{ route('advisors.detail', ['advisor_id' => $advisor->user_id]) }}')"
-                                        class="bg-[#C95555] w-full sm:w-auto text-white px-4 py-2 rounded-md hover:bg-red-600">
-                                        Book Appointment
-                                    </button>
-
-                                    
-                                    <button id="notifyButton" type="button"
-                                    data-route="{{ route('notify.advisor', $advisor->user_id) }}"
-                                    data-advisor-id="{{ $advisor->user_id }}"
-                                    class="w-full sm:w-auto text-[#c95555] px-4 py-2 rounded-md border border-black hover:border-gray hover:bg-red-600 hover:text-white">
-                                    <i class="fa-regular fa-bell fa-xs"></i>
-                                    Notify me
-                                </button>
-
-
-
-
-                                    {{-- <!-- Notify Me -->
-                                    <div
-                                        class="flex items-center justify-center flex-col bg-transparent w-full border border-black sm:w-auto text-white px-4 py-[10px] rounded-md gap-[4px] hover:bg-red-600 hover:text-white">
-                                        <div class="flex items-center gap-1">
-                                            <i class="fa-regular fa-bell fa-xs" style="color: #c95555"></i>
-                                            <p class="text-[12px] font-[500] text-[#C95555]">
-                                                Notify me
-                                            </p>
-                                        </div>
-                                    </div> --}}
-                                </div>
-
-
-
-                        </div>
-                    @endforeach
+                                    @endforeach
                                 </div>
                             @endforeach
                         @endif
@@ -618,81 +648,6 @@
 
         @include('web.components.footer')
     </div>
-
-    
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-     // Select all the notify buttons
-     document.querySelectorAll('#notifyButton').forEach(button => {
-         button.addEventListener('click', async function (event) {
-             event.preventDefault(); // Prevent any default action
-             
-             const url = button.getAttribute('data-route');
-             const csrfToken = '{{ csrf_token() }}'; // Directly using csrf_token()
- 
-             // Debugging line for checking Advisor ID
-             const advisorId = button.getAttribute('data-advisor-id');
-             console.log("Advisor ID passed:", advisorId);
- 
-             try {
-                 // Show a loading SweetAlert while the request is being processed
-                 Swal.fire({
-                     title: 'Please wait...',
-                     text: 'Notifying the advisor...',
-                     icon: 'info',
-                     allowOutsideClick: false,
-                     showConfirmButton: false,
-                     didOpen: () => {
-                         Swal.showLoading();
-                     }
-                 });
- 
-                 // Making an AJAX POST request using fetch
-                 const response = await fetch(url, {
-                     method: 'POST',
-                     headers: {
-                         'X-CSRF-TOKEN': csrfToken,
-                         'Content-Type': 'application/json',
-                     },
-                     body: JSON.stringify({ advisorId: advisorId }) // Send the advisor ID
-                 });
- 
-                 const data = await response.json();
- 
-                 // Close the loading SweetAlert
-                 Swal.close();
- 
-                 // Show a success or error SweetAlert based on the response
-                 if (data.success) {
-                     Swal.fire({
-                         title: 'Success!',
-                         text: 'Advisor has been notified successfully.',
-                         icon: 'success',
-                     });
-                 } else {
-                     Swal.fire({
-                         title: 'Error!',
-                         text: data.message || 'An error occurred.',
-                         icon: 'error',
-                     });
-                 }
-             } catch (error) {
-                 // Close the loading SweetAlert in case of an error
-                 Swal.close();
- 
-                 console.error('Error:', error);
-                 Swal.fire({
-                     title: 'Error!',
-                     text: 'An unexpected error occurred. Please try again.',
-                     icon: 'error',
-                 });
-             }
-         });
-     });
- });
- 
-     </script>
     <script>
         // JavaScript to toggle sidebar
         // const toggleBtn = document.querySelector('.toggleBtn');

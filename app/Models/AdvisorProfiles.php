@@ -135,4 +135,6 @@ class AdvisorProfiles extends Model
         return $this->hasMany(WalletWithdrawal::class, 'advisor_profile_id', 'advisor_id');
     }
 
+    
+
 }

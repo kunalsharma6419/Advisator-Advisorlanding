@@ -565,10 +565,10 @@
                         strategizing and digitalizing of your business.
                     </p>
                     <!-- Swiper for Categories -->
-                    <div class="swiper mySwiper1 bg-[#F9FFEF] mb-5">
-                        <div class="swiper-wrapper font-medium text-[#828282] text-sm sm:text-base md:text-lg">
+                    <div class="swiper mySwiper1  mb-5">
+                        <div class="swiper-wrapper font-medium text-[#ffffff] text-sm sm:text-base md:text-lg">
                             @foreach ($categories as $category)
-                                <div class="swiper-slide">
+                                <div class="swiper-slide bg-[#6A9023] rounded-lg">
                                     <p onclick="filterByCategory('{{ $category->name }}')"
                                         class="tabButton font-bold p-2 rounded-lg cursor-pointer {{ request('category') == $category->name ? 'bg-[#FF3131] text-[#FFFFFF]' : '' }}">
                                         {{ $category->name }}
@@ -637,7 +637,7 @@
                                 </div>
                             @endforeach
                         </div>
-                        <div class="swiper-pagination"></div>
+                        {{-- <div class="swiper-pagination"></div> --}}
                     </div>
 
 

@@ -47,6 +47,7 @@ use App\Http\Controllers\CallReviewController;
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/landing', [HomeController::class, 'landing'])->name('landing');
 Route::get('/consult-advisor', [HomeController::class, 'consultadvisor'])->name('consult-advisor');
+Route::post('/notify-advisor/{userId}', [HomeController::class, 'notifyAdvisor'])->name('notify.advisor');
 Route::get('/advisors/{advisor_id}', [HomeController::class, 'advisorDetail'])->name('advisors.detail');
 Route::get('/about-us', [HomeController::class, 'aboutus'])->name('about-us');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');

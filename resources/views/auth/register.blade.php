@@ -251,6 +251,18 @@
 
             const form = e.target;
             const formData = new FormData(form);
+            const nameInput = form.querySelector('#full_name');
+            const namePattern = /^[a-zA-Z\s]{2,}$/; // Allows only alphabets and spaces, minimum of 2 characters
+
+
+            if (!namePattern.test(nameInput.value.trim())) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Invalid Name',
+            text: 'Please enter a valid name (at least 2 characters, only letters, spaces, dashes, or apostrophes).'
+        });
+        return; // Prevent form submission
+    }
 
             // Show loading indicator
             Swal.fire({
@@ -313,7 +325,7 @@
                 } else {
                     Swal.fire({
                         icon: 'warning',
-                        title: 'Account Already Exists',
+                        title: 'Validation Error',
                         text: result.message
                     }).then(function() {
                         window.location.href = '{{ route('login') }}';

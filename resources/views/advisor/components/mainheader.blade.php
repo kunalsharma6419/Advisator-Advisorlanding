@@ -5,6 +5,7 @@
             <a href="{{ route('home') }}">
                 <img class="w-[180px]" src="../src/assets/logo/AdvisatorLogo.png" alt="" />
             </a>
+            
         </div>
         <div class="hidden md:flex xl:w-[75%] xl:justify-between gap-8d md:gap-x-10 xl:gap-[60px]">
             {{-- <ul

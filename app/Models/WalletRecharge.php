@@ -28,4 +28,5 @@ class WalletRecharge extends Model
     {
         return $this->belongsTo(WalletPlans::class);
     }
+    
 }

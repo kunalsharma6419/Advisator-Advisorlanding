@@ -78,24 +78,28 @@
     });
 
     var swiper = new Swiper(".swiper-meet-team", {
-        slidesPerView: "auto",
-        spaceBetween: 10,
-        slidesPerView: 2,
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
+    slidesPerView: 2, 
+    spaceBetween: 10, 
+    autoplay: {
+        delay: 3000, // Delay in milliseconds (3 seconds)
+        disableOnInteraction: false, 
+    },
+    // pagination: {
+    //     el: ".swiper-pagination",
+    //     clickable: true,          
+    // },
+    breakpoints: {
+        640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
         },
-        breakpoints: {
-            640: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-            },
-            768: {
-                slidesPerView: 3,
-                spaceBetween: 30,
-            },
+        768: {
+            slidesPerView: 3,
+            spaceBetween: 30,
         },
-    });
+    },
+});
+
 
     // JavaScript to toggle the answers and rotate the arrows
     document

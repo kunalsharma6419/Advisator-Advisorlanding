@@ -19,6 +19,7 @@ use App\Models\UserProfiles;
 use App\Models\CallReview;
 use App\Models\CallLog;
 use App\Models\WalletTransaction;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -139,93 +140,227 @@ class HomeController extends Controller
     }
     
     
-
-    // Show single category details
     public function showCategoryDetail(Request $request, $categoryName)
     {
         $category = BusinessFunctionCategory::where('name', $categoryName)->firstOrFail();
-        // Start query with relationships
-        // Start query to fetch only advisors that are related to the specific category
+    
+        // Fetch only advisors related to the specific category
         $query = AdvisorProfiles::with(['businessFunctionCategory', 'subFunctionCategory1', 'subFunctionCategory2'])
-                    ->where('business_function_category_id', $category->id); // Filter by related category
-        // Fetch the results (without pagination)
+                    ->where('business_function_category_id', $category->id)
+                    ->where('profile_completion_percentage', '>=', 80); // Ensure profile completion is at least 80%
+    
         // Apply Search Filter
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($subQuery) use ($search) {
+            $query->where(function ($subQuery) use ($search) {
                 $subQuery->where('full_name', 'like', '%' . $search . '%')
-                        ->orWhere('advisor_id', 'like', '%' . $search . '%');
+                         ->orWhere('advisor_id', 'like', '%' . $search . '%');
             });
         }
-
+    
         $advisors = $query->get();
+    
+        // Add average review scores and availability status for each advisor
+        $currentDay = Carbon::now('Asia/Kolkata')->format('D'); // Current day (e.g., 'Sat')
+        $currentTime = Carbon::now('Asia/Kolkata'); // Current time in Indian timezone
+    
+        $advisors->map(function ($advisor) use ($currentDay, $currentTime) {
+            // Fetch reviews
+            $reviews = CallReview::where('advisor_id', $advisor->advisor_id)->get();
+            $advisor->average_review_score = $reviews->isNotEmpty() ? $reviews->avg('overall_experience') : null;
+    
+            // Fetch availabilities
+            $availabilities = Availabilities::where('advisor_nomination_id', $advisor->advisor_id)->get();
+    
+            // Check if available today
+            $todayAvailabilities = $availabilities->filter(function ($availability) use ($currentDay) {
+                return $availability->day === $currentDay; // Filter availabilities for the current day
+            });
+    
+            $advisor->isAvailableToday = false;
+            foreach ($todayAvailabilities as $availability) {
+                try {
+                    // Split the time slot into start and end times
+                    [$startTime, $endTime] = explode('-', $availability->time_slot);
+    
+                    // Parse start and end times as Carbon instances in Indian timezone
+                    $startTime = Carbon::createFromFormat('gA', trim($startTime), 'Asia/Kolkata');
+                    $endTime = Carbon::createFromFormat('gA', trim($endTime), 'Asia/Kolkata');
+    
+                    // Handle cross-midnight time slots
+                    if ($endTime->lt($startTime)) {
+                        $endTime->addDay();
+                    }
+    
+                    // Check if the current time falls within the time slot
+                    if ($currentTime->between($startTime, $endTime, true)) {
+                        $advisor->isAvailableToday = true;
+                        break; // No need to check further slots
+                    }
+                } catch (\Exception $e) {
+                    // Log any errors during time slot parsing
+                    \Log::error('Time slot parsing error', [
+                        'advisor_id' => $advisor->advisor_id,
+                        'time_slot' => $availability->time_slot,
+                        'error' => $e->getMessage(),
+                    ]);
+                }
+            }
+    
+            return $advisor;
+        });
+    
         // Get all other categories except the current one
         $otherCategories = BusinessFunctionCategory::where('id', '!=', $category->id)->get();
-    $otherCategories->prepend($category); 
-
-        return view('web.pages.category_detail', compact('advisors','category', 'otherCategories'));
+        $otherCategories->prepend($category);
+    
+        return view('web.pages.category_detail', compact('advisors', 'category', 'otherCategories'));
     }
 
     
+   public function showIndustryDetail(Request $request, $industryName)
+{
+    // Fetch the industry based on the name
+    $industry = IndustryVertical::where('name', $industryName)->firstOrFail();
 
-    // Show single industry details
-    public function showIndustryDetail(Request $request, $industryName)
-    {
-        // Fetch the industry based on the name
-        $industry = IndustryVertical::where('name', $industryName)->firstOrFail();
+    // Fetch all advisors first
+    $advisors = AdvisorProfiles::all();
 
-        // Fetch advisors that belong to the specified industry
-        $advisors = AdvisorProfiles::all()->filter(function($advisor) use ($industry) {
-            // Filter advisors based on the industries they belong to
-            return $advisor->getIndustries()->contains('id', $industry->id);
+    // Filter advisors that belong to the specified industry and have a profile completion of 80% or more
+    $advisors = $advisors->filter(function ($advisor) use ($industry) {
+        // Check if the advisor's industry_ids contains the industry ID and if profile is complete
+        return in_array($industry->id, $advisor->industry_ids) && $advisor->profile_completion_percentage >= 80;
+    });
+
+    // Apply search filter if applicable
+    if ($request->filled('search')) {
+        $search = $request->search;
+        $advisors = $advisors->filter(function ($advisor) use ($search) {
+            return stripos($advisor->full_name, $search) !== false || stripos($advisor->advisor_id, $search) !== false;
         });
-
-        // Apply search filter if applicable
-        if ($request->filled('search')) {
-            $search = $request->search;
-            $advisors = $advisors->filter(function($advisor) use ($search) {
-                return stripos($advisor->full_name, $search) !== false || stripos($advisor->advisor_id, $search) !== false;
-            });
-        }
-
-        // Fetch other industries except the current one
-        $otherIndustries = IndustryVertical::where('name', '!=', $industryName)->get();
-
-        $otherIndustries->prepend($industry);
-
-        // Return the view with the filtered advisors and industry
-        return view('web.pages.industry_detail', compact('advisors', 'industry', 'otherIndustries'));
     }
 
-    // Show single geography location details
-    public function showGeographyDetail(Request $request, $locationName)
-    {
-        // Fetch the geography location based on the name
-        $location = GeographyLocation::where('name', $locationName)->firstOrFail();
+    // Add availability status, review scores, and other data for each advisor
+    $currentDay = Carbon::now('Asia/Kolkata')->format('D');
+    $currentTime = Carbon::now('Asia/Kolkata');
 
-        // Fetch advisors that belong to the specified geography location
-        $advisors = AdvisorProfiles::all()->filter(function($advisor) use ($location) {
-            // Filter advisors based on the geography they belong to
-            return $advisor->getGeographies()->contains('id', $location->id);
+    $advisors->map(function ($advisor) use ($currentDay, $currentTime) {
+        // Check for availability
+        $availabilities = Availabilities::where('advisor_nomination_id', $advisor->advisor_id)->get();
+        $todayAvailabilities = $availabilities->filter(function ($availability) use ($currentDay) {
+            return $availability->day === $currentDay;
         });
 
-        // Apply search filter if applicable
-        if ($request->filled('search')) {
-            $search = $request->search;
-            $advisors = $advisors->filter(function($advisor) use ($search) {
-                return stripos($advisor->full_name, $search) !== false || stripos($advisor->advisor_id, $search) !== false;
-            });
+        $advisor->isAvailableToday = false;
+        foreach ($todayAvailabilities as $availability) {
+            try {
+                [$startTime, $endTime] = explode('-', $availability->time_slot);
+                $startTime = Carbon::createFromFormat('gA', trim($startTime), 'Asia/Kolkata');
+                $endTime = Carbon::createFromFormat('gA', trim($endTime), 'Asia/Kolkata');
+
+                if ($endTime->lt($startTime)) {
+                    $endTime->addDay();
+                }
+
+                if ($currentTime->between($startTime, $endTime, true)) {
+                    $advisor->isAvailableToday = true;
+                    break;
+                }
+            } catch (\Exception $e) {
+                \Log::error('Time slot parsing error', [
+                    'advisor_id' => $advisor->advisor_id,
+                    'time_slot' => $availability->time_slot,
+                    'error' => $e->getMessage(),
+                ]);
+            }
         }
 
-        // Fetch other locations except the current one
-        $otherLocations = GeographyLocation::where('name', '!=', $locationName)->get();
+        // Fetch reviews and calculate the average score
+        $reviews = CallReview::where('advisor_id', $advisor->advisor_id)->get();
+        $advisor->average_review_score = $reviews->isNotEmpty() ? $reviews->avg('overall_experience') : null;
 
-        $otherLocations->prepend($location);
+        return $advisor;
+    });
 
-        // Return the view with the filtered advisors and location
-        return view('web.pages.geography_detail', compact('advisors', 'location', 'otherLocations'));
+    // Fetch other industries except the current one
+    $otherIndustries = IndustryVertical::where('name', '!=', $industryName)->get();
+    $otherIndustries->prepend($industry);
+
+    return view('web.pages.industry_detail', compact('advisors', 'industry', 'otherIndustries'));
+}
+
+public function showGeographyDetail(Request $request, $locationName)
+{
+    // Fetch the geography location based on the name
+    $location = GeographyLocation::where('name', $locationName)->firstOrFail();
+
+    // Fetch all advisors first
+    $advisors = AdvisorProfiles::all();
+
+    // Filter advisors that belong to the specified geography location and have a profile completion of 80% or more
+    $advisors = $advisors->filter(function ($advisor) use ($location) {
+        // Check if the advisor's geography_ids contains the location ID and if profile is complete
+        return in_array($location->id, $advisor->geography_ids) && $advisor->profile_completion_percentage >= 80;
+    });
+
+    // Apply search filter if applicable
+    if ($request->filled('search')) {
+        $search = $request->search;
+        $advisors = $advisors->filter(function ($advisor) use ($search) {
+            return stripos($advisor->full_name, $search) !== false || stripos($advisor->advisor_id, $search) !== false;
+        });
     }
 
+    // Add availability status, review scores, and other data for each advisor
+    $currentDay = Carbon::now('Asia/Kolkata')->format('D');
+    $currentTime = Carbon::now('Asia/Kolkata');
+
+    $advisors->map(function ($advisor) use ($currentDay, $currentTime) {
+        // Check for availability
+        $availabilities = Availabilities::where('advisor_nomination_id', $advisor->advisor_id)->get();
+        $todayAvailabilities = $availabilities->filter(function ($availability) use ($currentDay) {
+            return $availability->day === $currentDay;
+        });
+
+        $advisor->isAvailableToday = false;
+        foreach ($todayAvailabilities as $availability) {
+            try {
+                [$startTime, $endTime] = explode('-', $availability->time_slot);
+                $startTime = Carbon::createFromFormat('gA', trim($startTime), 'Asia/Kolkata');
+                $endTime = Carbon::createFromFormat('gA', trim($endTime), 'Asia/Kolkata');
+
+                if ($endTime->lt($startTime)) {
+                    $endTime->addDay();
+                }
+
+                if ($currentTime->between($startTime, $endTime, true)) {
+                    $advisor->isAvailableToday = true;
+                    break;
+                }
+            } catch (\Exception $e) {
+                \Log::error('Time slot parsing error', [
+                    'advisor_id' => $advisor->advisor_id,
+                    'time_slot' => $availability->time_slot,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+        }
+
+        // Fetch reviews and calculate the average score
+        $reviews = CallReview::where('advisor_id', $advisor->advisor_id)->get();
+        $advisor->average_review_score = $reviews->isNotEmpty() ? $reviews->avg('overall_experience') : null;
+
+        return $advisor;
+    });
+
+    // Fetch other locations except the current one
+    $otherLocations = GeographyLocation::where('name', '!=', $locationName)->get();
+    $otherLocations->prepend($location);
+
+    return view('web.pages.geography_detail', compact('advisors', 'location', 'otherLocations'));
+}
+
+    
 
     public function landing()
     {
@@ -238,6 +373,8 @@ class HomeController extends Controller
         return response()->json($subFunctions);
     }
 
+
+
     public function consultadvisor(Request $request)
     {
         // Start query with relationships
@@ -245,41 +382,38 @@ class HomeController extends Controller
             ->join('advisor_evaluations', 'advisor_profiles.advisor_id', '=', 'advisor_evaluations.advisor_nomination_id')
             ->select('advisor_profiles.*', 'advisor_evaluations.overall_score')
             ->orderBy('advisor_evaluations.overall_score', 'desc'); // Order by overall_score in descending order
-
-        // Apply Business Function filter if set
+    
+        // Apply Profile completion filter
+        $query->where('profile_completion_percentage', '>=', 80);
+    
+        // Apply other filters (business_function, sub_function, industry, location, etc.)
         if ($request->filled('business_function')) {
             $query->where('business_function_category_id', $request->business_function);
         }
-
-        // Apply Sub-Function filter if set
+    
         if ($request->filled('sub_function')) {
             $query->where(function ($subQuery) use ($request) {
                 $subQuery->where('sub_function_category_id_1', $request->sub_function)
                         ->orWhere('sub_function_category_id_2', $request->sub_function);
             });
         }
-
-        // Apply Industry filter if set
+    
         if ($request->filled('industry')) {
             $query->whereJsonContains('industry_ids', $request->industry);
         }
-
-        // Apply Location filter if set
+    
         if ($request->filled('location')) {
             $query->where('location', 'like', '%' . $request->location . '%');
         }
-
-        // Apply Price filter if set
+    
         if ($request->filled('price')) {
             $query->where('discovery_call_price_per_minute', '<=', $request->price);
         }
-
-        // Apply Availability filter if set
+    
         if ($request->filled('available')) {
             $query->where('is_available', true);
         }
-
-        // Apply Search Filter
+    
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function($subQuery) use ($search) {
@@ -287,38 +421,167 @@ class HomeController extends Controller
                         ->orWhere('advisor_id', 'like', '%' . $search . '%');
             });
         }
-
-        // Fetch the results (without pagination)
+    
+        // Fetch the advisors
         $advisors = $query->get();
+    
+        // Calculate the average review score for each advisor
+        $advisors->map(function ($advisor) {
+            // Get the reviews for this advisor
+            $reviews = CallReview::where('advisor_id', $advisor->advisor_id)->get();
+    
+            // Calculate the average overall_experience score (out of 5)
+            if ($reviews->isNotEmpty()) {
+                $averageScore = $reviews->avg('overall_experience');
+            } else {
+                $averageScore = null; // No reviews, set to null or 0 if you prefer
+            }
+    
+            // Add the average score to the advisor object
+            $advisor->average_review_score = $averageScore;
+    
+            return $advisor;
+        });
+    
         // Fetch Availabilities for each advisor
         $advisorAvailabilities = [];
         foreach ($advisors as $advisor) {
             // Fetch availability for the advisor
             $advisorAvailabilities = Availabilities::where('advisor_nomination_id', $advisor->advisor_id)
-                                                ->orderBy('day')
-                                                ->get();
+                                                    ->orderBy('day')
+                                                    ->get();
         }
-
+    
         // Get upcoming days (next 7 days including today)
         $upcomingDays = [];
         for ($i = 0; $i < 7; $i++) {
             $date = Carbon::now()->addDays($i);
             $upcomingDays[] = [
-                'day' => $date->format('D'), // e.g., Mon, Tue, etc.
+                'day' => $date->format('D'),
                 'date' => $date->format('Y-m-d')
             ];
         }
-
+    
         // Pass filter data to view
         $businessFunctions = BusinessFunctionCategory::all();
         $industries = IndustryVertical::all();
         $locations = GeographyLocation::all();
 
-        // Return filtered advisors to the view
+     
+// Add average review scores and availability status for each advisor
+$currentDay = Carbon::now('Asia/Kolkata')->format('D'); // Current day (e.g., 'Sat')
+$currentTime = Carbon::now('Asia/Kolkata'); // Current time in Indian timezone
+
+$advisors->map(function ($advisor) use ($currentDay, $currentTime) {
+    // Fetch reviews
+    $reviews = CallReview::where('advisor_id', $advisor->advisor_id)->get();
+    $advisor->average_review_score = $reviews->isNotEmpty() ? $reviews->avg('overall_experience') : null;
+
+    // Fetch availabilities
+    $availabilities = Availabilities::where('advisor_nomination_id', $advisor->advisor_id)->get();
+
+    // Check if available today
+    $todayAvailabilities = $availabilities->filter(function ($availability) use ($currentDay) {
+        return $availability->day === $currentDay; // Filter availabilities for the current day
+    });
+
+    $advisor->isAvailableToday = false;
+    foreach ($todayAvailabilities as $availability) {
+        try {
+            // Split the time slot into start and end times
+            [$startTime, $endTime] = explode('-', $availability->time_slot);
+
+            // Parse start and end times as Carbon instances in Indian timezone
+            $startTime = Carbon::createFromFormat('gA', trim($startTime), 'Asia/Kolkata');
+            $endTime = Carbon::createFromFormat('gA', trim($endTime), 'Asia/Kolkata');
+
+            // Handle cross-midnight time slots
+            if ($endTime->lt($startTime)) {
+                $endTime->addDay();
+            }
+
+            // Check if the current time falls within the time slot
+            if ($currentTime->between($startTime, $endTime, true)) {
+                $advisor->isAvailableToday = true;
+                break; // No need to check further slots
+            }
+        } catch (\Exception $e) {
+            // Log any errors during time slot parsing
+            \Log::error('Time slot parsing error', [
+                'advisor_id' => $advisor->advisor_id,
+                'time_slot' => $availability->time_slot,
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    return $advisor;
+});
+
+        // Return filtered advisors to the view, including average review scores
         return view('web.pages.consultadvisor', compact('advisors', 'businessFunctions', 'industries', 'locations', 'advisorAvailabilities', 'upcomingDays'));
     }
 
-    public function advisorSuggestions(Request $request)
+    public function notifyAdvisor(Request $request, $userid)
+    {
+        $advisor = AdvisorProfiles::where('user_id', $userid)->first();
+        $authUser = auth()->user();
+    
+        if (!$advisor) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Advisor not found.',
+            ], 404);
+        }
+    
+        if (!$authUser || !$authUser->unique_id) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User is not authenticated or does not have a unique ID.',
+            ], 401);
+        }
+    
+        // Create a unique cache key using the user's and advisor's IDs
+        $cacheKey = 'notify_' . $authUser->unique_id . '_' . $advisor->user_id;
+        
+        // Check if a notification was already sent in the last 10 minutes
+        if (Cache::has($cacheKey)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'You have already notified this advisor. Please try again after 60 minutes.',
+            ], 429);
+        }
+    
+        try {
+            // Send the email notification
+            \Mail::to($advisor->email)->send(new \App\Mail\AdvisorNotification($advisor, $authUser));
+    
+            // Store a timestamp in the cache for 10 minutes
+            Cache::put($cacheKey, Carbon::now()->timestamp, 60 * 60);
+
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Advisor has been notified successfully.',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to notify the advisor. Please try again.',
+            ], 500);
+        }
+    }
+    
+    
+
+    
+    
+
+
+
+    
+    
+        public function advisorSuggestions(Request $request)
     {
         if ($request->filled('query')) {
             $search = $request->query('query');
@@ -377,9 +640,52 @@ class HomeController extends Controller
         ->with('userProfile') // Include the user profile relationship
         ->get(); // Fetch a single review
 
-        // Pass the advisor data to the view
-        return view('web.pages.advisordetail', compact('advisor','reviews', 'industries', 'geographies','availabilities', 'advisorAvailabilities', 'upcomingDays'));
+        $averageReviewScore = $reviews->isNotEmpty() ? $reviews->avg('overall_experience') : null;
+        $advisor->average_review_score = $averageReviewScore;
+
+
+// Determine availability for today
+$currentDay = Carbon::now('Asia/Kolkata')->format('D'); // Get current day in 'D' format, e.g., 'Sat'
+$currentTime = Carbon::now('Asia/Kolkata'); // Current time in Indian timezone
+$isAvailableToday = false;
+
+// Filter today's availability slots
+$todayAvailabilities = $availabilities->filter(function ($availability) use ($currentDay) {
+    return $availability->day === $currentDay; // Match the current day
+});
+
+foreach ($todayAvailabilities as $availability) {
+    try {
+        // Split the time slot into start and end times
+        [$startTime, $endTime] = explode('-', $availability->time_slot);
+
+        // Parse start and end times into Carbon instances using 12-hour format with meridian (AM/PM)
+        $startTime = Carbon::createFromFormat('gA', trim($startTime), 'Asia/Kolkata'); // '9AM' -> '09:00 AM'
+        $endTime = Carbon::createFromFormat('gA', trim($endTime), 'Asia/Kolkata'); // '10AM' -> '10:00 AM'
+
+        // Handle scenarios where the end time is past midnight (e.g., '9PM-1AM')
+        if ($endTime->lt($startTime)) {
+            $endTime->addDay(); // Add one day to the end time if it's earlier than the start time
+        }
+
+        // Check if the current time falls within this slot
+        if ($currentTime->between($startTime, $endTime, true)) {
+            $isAvailableToday = true;
+            break; // No need to check further slots
+        }
+    } catch (\Exception $e) {
+        // Log any errors that occur during time parsing
+        \Log::error('Time slot parsing error', [
+            'time_slot' => $availability->time_slot,
+            'error' => $e->getMessage(),
+        ]);
     }
+}
+        // Pass the advisor data to the view
+        return view('web.pages.advisordetail', compact('advisor','reviews','isAvailableToday', 'industries', 'geographies','availabilities', 'advisorAvailabilities', 'upcomingDays'));
+    }
+
+
 
 
     // Show advisor profile with availability data

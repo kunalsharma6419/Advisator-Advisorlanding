@@ -10,6 +10,9 @@ use App\Models\UserProfiles;
 use App\Models\WalletPlans;
 use App\Models\WalletRecharge;
 use Razorpay\Api\Api;
+use App\Mail\WalletRechargeInvoice;
+use Illuminate\Support\Facades\Mail;
+use PDF;
 
 class WalletController extends Controller
 {
@@ -24,6 +27,8 @@ class WalletController extends Controller
             'walletplans' => $walletplans,
         ]);
     }
+
+    
 
     public function store(Request $request)
     {
@@ -105,13 +110,54 @@ class WalletController extends Controller
             $user->user_wallet_balance = $totalRechargeAmount;
             $user->save();
 
+            //Mail Send To User
+
+             // Send the invoice mail
+    $this->sendInvoiceMail($walletRecharge);
+
             // Redirect to success page
             return redirect()->route('user.mywallet.recharge')->with('success', 'Wallet Recharge Successful');
+
+
         } else {
             // Payment failed, redirect to failure page
             return redirect()->route('wallet.recharge.failure');
         }
     }
+
+
+    protected function sendInvoiceMail($walletRecharge)
+{
+    // Fetch user details
+    $user = User::where('unique_id', $walletRecharge->user_id)->first();
+    if (!$user) {
+        throw new \Exception("User not found for wallet recharge ID: {$walletRecharge->id}");
+    }
+
+    // Fetch plan details
+    $plan = WalletPlans::find($walletRecharge->plan_id);
+    if (!$plan) {
+        throw new \Exception("Plan not found for plan ID: {$walletRecharge->plan_id}");
+    }
+
+    // Generate the PDF invoice with walletRecharge, user, and plan
+    $pdf = PDF::loadView('pdf.invoice', [
+        'walletRecharge' => $walletRecharge,
+        'user' => $user,
+        'plan' => $plan,
+    ]);
+
+    // Save the PDF to storage
+    $pdfPath = storage_path('app/public/invoice_' . $walletRecharge->id . '.pdf');
+    $pdf->save($pdfPath);
+
+    // Send the email with all details and the PDF attachment
+    Mail::to($user->email)->send(new WalletRechargeInvoice($walletRecharge, $user, $plan, $pdfPath));
+}
+
+    
+
+
 
     protected function verifySignature($request)
     {

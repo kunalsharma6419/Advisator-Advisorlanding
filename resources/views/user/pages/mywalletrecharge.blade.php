@@ -240,10 +240,11 @@
                                                 class="hidden">{{ $plan->plan_name }}
                                         </label>
                                         <!-- Button to open modal -->
-                                        <button onclick="openModal({{ $plan->id }})"
+                                        <button onclick="openModal(event, {{ $plan->id }})"
                                             class="mt-[15px] bg-[#6A9023] text-white px-[16px] py-[8px] rounded-[12px] hover:bg-[#548b18]">
-                                            View Details
-                                        </button>
+                                        View Details
+                                    </button>
+                                    
                                     </div>
 
                                     <!-- Modal (hidden by default) -->
@@ -258,7 +259,7 @@
                                             <div class="features-content mb-4" id="features-content-{{ $plan->id }}">
                                                 {!! $plan->plan_features !!}
                                             </div>
-                                            <button onclick="closeModal({{ $plan->id }})"
+                                            <button  onclick="closeModal(event, {{ $plan->id }})"
                                                 class="mt-4 bg-[#6A9023] text-white px-4 py-2 rounded-lg hover:bg-[#548b18]">
                                                 Close
                                             </button>
@@ -287,10 +288,10 @@
                                                 class="hidden">{{ $plan->plan_name }}
                                         </label>
                                         <!-- Button to open modal -->
-                                        <button onclick="openModal({{ $plan->id }})"
+                                        <button onclick="openModal(event, {{ $plan->id }})"
                                             class="mt-[15px] bg-[#6A9023] text-white px-[16px] py-[8px] rounded-[12px] hover:bg-[#548b18]">
-                                            View Details
-                                        </button>
+                                        View Details
+                                    </button>
                                     </div>
 
                                     <!-- Modal (hidden by default) -->
@@ -305,7 +306,7 @@
                                             <div class="features-content mb-4" id="features-content-{{ $plan->id }}">
                                                 {!! $plan->plan_features !!}
                                             </div>
-                                            <button onclick="closeModal({{ $plan->id }})"
+                                            <button  onclick="closeModal(event, {{ $plan->id }})"
                                                 class="mt-4 bg-[#6A9023] text-white px-4 py-2 rounded-lg hover:bg-[#548b18]">
                                                 Close
                                             </button>
@@ -673,59 +674,56 @@
             });
     </script>
     <script>
-        function openModal(planId) {
-            document.getElementById('modal-' + planId).style.display = 'flex';
-        }
+        function openModal(event, planId) {
+    event.preventDefault(); // Prevent default button click behavior
+    document.getElementById('modal-' + planId).style.display = 'flex';
+}
+function closeModal(event, planId) {
+    event.preventDefault(); // Prevent default behavior (e.g., form submission or link navigation)
+    document.getElementById('modal-' + planId).style.display = 'none';
+}
 
-        function closeModal(planId) {
-            document.getElementById('modal-' + planId).style.display = 'none';
-        }
+document.addEventListener('DOMContentLoaded', function() {
+    const firstPlanCard = document.querySelector('.plan-card'); // Assuming all plan cards have the class "plan-card"
+    if (firstPlanCard) {
+        const planId = firstPlanCard.getAttribute('data-plan-id');
+        const planName = firstPlanCard.getAttribute('data-plan-name');
+        const planPrice = firstPlanCard.getAttribute('data-plan-price');
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get the first plan's details (assuming you have an array of plans in JS or you can fetch them dynamically)
-            const firstPlanCard = document.querySelector(
-                '.plan-card'); // Assuming all plan cards have the class "plan-card"
+        // Trigger the plan update for the first plan
+        updatePlanDetails(planId, planName, planPrice);
+    }
+});
 
-            if (firstPlanCard) {
-                // Extract plan details from the first card
-                const planId = firstPlanCard.getAttribute('data-plan-id');
-                const planName = firstPlanCard.getAttribute('data-plan-name');
-                const planPrice = firstPlanCard.getAttribute('data-plan-price');
+function updatePlanDetails(planId, planName, planPrice) {
+    // Remove hover effect from previously selected card
+    const previouslySelectedCard = document.querySelector('.selected-plan');
+    if (previouslySelectedCard) {
+        previouslySelectedCard.classList.remove('bg-[#FFFFFF]', 'border-[#6A9023]', 'hover:text-[#6a9023]', 'selected-plan');
+        previouslySelectedCard.classList.add('bg-[#FFEDE2]', 'border-[#F4C2A4]');
+    }
 
-                // Trigger the plan update for the first plan
-                updatePlanDetails(planId, planName, planPrice);
-            }
-        });
+    // Add hover effect to the clicked card
+    const selectedCard = document.querySelector(`[data-plan-id='${planId}']`);
+    selectedCard.classList.remove('bg-[#FFEDE2]', 'border-[#F4C2A4]');
+    selectedCard.classList.add('bg-[#FFFFFF]', 'border-[#6A9023]', 'hover:text-[#6a9023]', 'selected-plan');
 
-        function updatePlanDetails(planId, planName, planPrice) {
-            // Remove hover effect from previously selected card
-            const previouslySelectedCard = document.querySelector('.selected-plan');
-            if (previouslySelectedCard) {
-                previouslySelectedCard.classList.remove('bg-[#FFFFFF]', 'border-[#6A9023]', 'hover:text-[#6a9023]',
-                    'selected-plan');
-                previouslySelectedCard.classList.add('bg-[#FFEDE2]', 'border-[#F4C2A4]');
-            }
+    // Calculate amounts
+    const planAmount = parseFloat(planPrice);
+    const tax = (planAmount * 0.18).toFixed(2); // 18% tax
+    const platformFee = (tax * 0.02).toFixed(2); // 2% platform fee on the tax
+    const totalAmount = (planAmount + parseFloat(tax) + parseFloat(platformFee)).toFixed(2);
 
-            // Add hover effect to the clicked card
-            const selectedCard = document.querySelector(`[data-plan-id='${planId}']`);
-            selectedCard.classList.remove('bg-[#FFEDE2]', 'border-[#F4C2A4]');
-            selectedCard.classList.add('bg-[#FFFFFF]', 'border-[#6A9023]', 'hover:text-[#6a9023]', 'selected-plan');
+    // Update the target div with the selected plan data
+    document.querySelector('.plan-name').textContent = planName;
+    document.querySelector('.plan-amount').textContent = `₹${planAmount.toFixed(2)}`;
+    document.querySelector('.plan-tax').textContent = `₹${tax}`;
+    document.querySelector('.plan-platform-fee').textContent = `₹${platformFee}`;
+    document.querySelector('.plan-total').textContent = `₹${totalAmount}`;
 
-            // Calculate amounts
-            const planAmount = parseFloat(planPrice);
-            const tax = (planAmount * 0.18).toFixed(2); // 18% tax
-            const platformFee = (tax * 0.02).toFixed(2); // 2% platform fee on the tax
-            const totalAmount = (planAmount + parseFloat(tax) + parseFloat(platformFee)).toFixed(2);
+    // Automatically select the radio button for the chosen plan
+    selectedCard.querySelector('input[type="radio"]').checked = true;
+}
 
-            // Update the target div with the selected plan data
-            document.querySelector('.plan-name').textContent = planName;
-            document.querySelector('.plan-amount').textContent = `₹${planAmount.toFixed(2)}`;
-            document.querySelector('.plan-tax').textContent = `₹${tax}`;
-            document.querySelector('.plan-platform-fee').textContent = `₹${platformFee}`;
-            document.querySelector('.plan-total').textContent = `₹${totalAmount}`;
-
-            // Automatically select the radio button for the chosen plan
-            selectedCard.querySelector('input[type="radio"]').checked = true;
-        }
     </script>
 @endsection

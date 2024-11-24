@@ -244,22 +244,22 @@
                             @endauth
                         @endif
                         <!-- <a
-                                                                                                                                                                                                                            class="flex items-center gap-2 cursor-pointer"
-                                                                                                                                                                                                                            href="../Advisor pages/wallet.html"
-                                                                                                                                                                                                                          >
-                                                                                                                                                                                                                            <img
-                                                                                                                                                                                                                              class="w-5 h-5"
-                                                                                                                                                                                                                              src="./src/assets/img/iconWallet.png"
-                                                                                                                                                                                                                              alt=""
-                                                                                                                                                                                                                            />
+                                                                                                                                                                                                    class="flex items-center gap-2 cursor-pointer"
+                                                                                                                                                                                                    href="../Advisor pages/wallet.html"
+                                                                                                                                                                                                  >
+                                                                                                                                                                                                    <img
+                                                                                                                                                                                                      class="w-5 h-5"
+                                                                                                                                                                                                      src="./src/assets/img/iconWallet.png"
+                                                                                                                                                                                                      alt=""
+                                                                                                                                                                                                    />
 
-                                                                                                                                                                                                                            <div
-                                                                                                                                                                                                                              class="flex items-center font-sans text-sm sm:text-base text-[#DB9206] font-semibold"
-                                                                                                                                                                                                                            >
-                                                                                                                                                                                                                              &#8377;
-                                                                                                                                                                                                                              <p>1,229</p>
-                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                          </a> -->
+                                                                                                                                                                                                    <div
+                                                                                                                                                                                                      class="flex items-center font-sans text-sm sm:text-base text-[#DB9206] font-semibold"
+                                                                                                                                                                                                    >
+                                                                                                                                                                                                      &#8377;
+                                                                                                                                                                                                      <p>1,229</p>
+                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                  </a> -->
                     </div>
                     {{-- <div class="border border-[#DB9206] bg-[#FFF3DB] rounded sm:rounded-lg px-2 py-1 sm:py-2 sm:px-4">
                 <a class="flex items-center gap-2 cursor-pointer" href="../Advisor pages/wallet.html">
@@ -281,65 +281,74 @@
             </div>
         </div>
 
-        <!-- Search box for both mobile and desktop -->
-        <form action="{{ route('consult-advisor') }}" method="GET">
-            <div
-                class="flex flex-row lg:flex-row p-3 mx-auto bg-white border border-[#EAEAEA] rounded-[50px] justify-between w-full max-w-[80%]">
-                <input id="search-bar" name="search" class="bg-white rounded-[50px] w-full px-4 py-2 mb-3 lg:mb-0"
-                    placeholder="Search Advisor" type="text" autocomplete="off" />
-                <button type="submit"
-                    class="flex items-center  lg:w-auto bg-[#EDF6DB] px-6 py-3 rounded-[40px] gap-4 justify-center text-center whitespace-nowrap">
-                    <!-- Icon always visible -->
-                    <svg class="w-5 h-5 text-[#000000]" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round"
-                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                    </svg>
-                    <!-- Text only visible on large screens and above -->
-                    <p class="text-black hidden lg:block">Find Advisor</p>
-                </button>
-            </div>
-        </form>
-
-
-
-
-
-
 
         <div class="hidden lg:flex flex-col w-[90%] md:w-[95%] lg:w-[90%] mx-auto mt-[24px]">
-
+            <!-- serach box  for lg screen-->
+            <div
+                class="lg:flex hidden p-3  mx-auto bg-white border border-[#EAEAEA] rounded-[50px] justify-between w-[80%]">
+                <input class="bg-white rounded-[50px] w-full px-4" placeholder="Search Advisor" type="text" />
+                <button class="flex items-center w-[300px] bg-[#EDF6DB] px-[32px] rounded-[40px] py-[8px] gap-5">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #000000"></i>
+                    <p>Find Advisor</p>
+                </button>
+            </div>
             <!-- image swipper -->
             <div class="w-full mt-[30px]">
                 <!-- Swiper -->
-                @if (!empty($advisor->highlighted_images) && count($advisor->highlighted_images) > 0)
-                    <div class="swiper mySwiper1">
-                        <div class="swiper-wrapper">
-                            @foreach ($advisor->highlighted_images as $image)
-                                <div class="swiper-slide">
-                                    <div>
-                                        <img class="w-[239px] h-[180px] shadow shadow-[#00000026] object-cover"
-                                            src="{{ Storage::url($image) }}" alt="Highlighted Image" />
-                                    </div>
-                                </div>
-                            @endforeach
+                <div class="swiper mySwiper1">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div>
+                                <img class="w-[239px] h-[180px] shadow shadow-[#00000026]"
+                                    src="../src/assets/Rectangle 66.png" alt="" />
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div>
+                                <img class="w-[239px] h-[180px] shadow shadow-[#00000026]"
+                                    src="../src/assets/Rectangle 67.png" alt="" />
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div>
+                                <img class="w-[239px] h-[180px] shadow shadow-[#00000026]"
+                                    src="../src/assets/Rectangle 68.png" alt="" />
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div>
+                                <img class="w-[239px] h-[180px] shadow shadow-[#00000026]"
+                                    src="../src/assets/Rectangle 69.png" alt="" />
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div>
+                                <img class="w-[239px] h-[180px] shadow shadow-[#00000026]"
+                                    src="../src/assets/Rectangle 70.png" alt="" />
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div>
+                                <img class="w-[239px] h-[180px] shadow shadow-[#00000026]"
+                                    src="../src/assets/Rectangle 66.png" alt="" />
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div>
+                                <img class="w-[239px] h-[180px] shadow shadow-[#00000026]"
+                                    src="../src/assets/Rectangle 67.png" alt="" />
+                            </div>
                         </div>
                     </div>
-                @endif
-
+                </div>
                 <!-- next buttons -->
                 <!-- <div class="swiper-button-prev"></div>
-                                                                                                                                                                                                                                    <div class="swiper-button-next"></div> -->
+                                                                                                                                                                                                            <div class="swiper-button-next"></div> -->
             </div>
             <!-- content section -->
             <div class="w-full flex gap-[20px]">
                 <!-- left -->
-                <div class="w-full sm:w-1/2 md:w-1/3 lg:w-[40%] xl:w-[32%] flex flex-col">
-
-                    <!-- Content here -->
-
-
-
+                <div class="w-[22%] flex flex-col">
                     <!-- profle -->
                     <div class="flex w-full shadow-xl rounded-[24px] shadow-[#00000026]  mt-[12px] flex-col">
                         <div class="bg-[#FFFACA] py-2 rounded-tl-[20px] rounded-tr-[20px] px-2 flex justify-between">
@@ -347,17 +356,14 @@
                                 {{ $advisor->is_super_advisor == 'true' ? 'Super Advisor' : 'Advisor' }}
                             </p>
                             <div class="flex items-center gap-1">
-                                <i class="fa-solid fa-circle fa-xs"
-                                    style="color: {{ $isAvailableToday ? '#6a9023' : '#e3342f' }}"></i>
-                                <p class="text-[12px] font-[600]"
-                                    style="color: {{ $isAvailableToday ? '#6a9023' : '#e3342f' }}">
-                                    {{ $isAvailableToday ? 'Available' : 'Not Available' }}
+                                <i class="fa-solid fa-circle fa-xs" style="color: #6a9023"></i>
+                                <p class="text-[12px] font-[600] text-[#6a9023]">
+                                    {{ $advisor->is_available ? 'Available' : 'Not Available' }}
                                 </p>
                             </div>
                         </div>
-
-                        <div class="flex flex-col px-4 pb-4 w-full gap-[12px] items-center mt-2">
-                            <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-2 border-gray-200"
+                        <div class="flex flex-col px-4 pb-4 w-full gap-[12px]">
+                            <img class="w-[360px] h-[230px]"
                                 src="{{ $advisor->profile_photo_path ? asset('storage/' . $advisor->profile_photo_path) : asset('../src/assets/advisorgeneral.webp') }}"
                                 alt="{{ $advisor->full_name }}" />
                             <div class="flex flex-col gap-[4px]">
@@ -372,7 +378,6 @@
                             </div>
                         </div>
                         <div class="flex w-full justify-between mt-[12px] px-4 pb-4 gap-[4px]">
-
                             <div class="flex flex-col gap-[4px]">
                                 <div class="flex items-center gap-1">
                                     <img class="w-[20px] h-[20px]" src="../src/assets/icons/Discovery call.png"
@@ -489,16 +494,19 @@
                     <div class="relative inline-block w-full text-left">
                         <div class="flex justify-between items-center rounded-[18px] my-[12px] bg-[#FFF6F6] w-full p-2">
                             <button id="dropdown-button" onclick="toggleDropdown()"
-                                class="dropbtn text-[#3A3A3A] px-4 py-2 rounded-md text-[16px] font-[500] focus:outline-none flex items-center w-full justify-between">
+                                class="dropbtn text-[#3A3A3A] px-4 py-2 rounded-md text-[16px] font-[500] focus:outline-none flex items-center">
                                 Availability
-                                <i id="dropdown-icon" class="fas fa-chevron-down transition-transform"></i>
                             </button>
+
+                            <i id="dropdown-icon" onclick="toggleDropdown()"
+                                class="cursor-pointer fas fa-chevron-down"></i>
                         </div>
 
                         <div id="dropdown-menu"
                             class="absolute z-10 hidden w-full bg-white rounded-md shadow-md dropdown-content">
                             @php
                                 $days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                                // Group availability data by day
                                 $availabilityData = $availabilities->groupBy('day');
                             @endphp
 
@@ -523,8 +531,9 @@
                                 @endif
                             @endforeach
                         </div>
-                    </div>
 
+
+                    </div>
                     <!-- testimonial slider -->
                     {{-- <p class="font-[400] text-[14px] lg:text-[18px] text-[#2A2A2A]">
                         Reviews:
@@ -601,46 +610,40 @@
                     </div> --}}
                 </div>
                 <!-- right -->
-
                 <div class="w-[78%] flex flex-col gap-2">
                     <!-- 1st row  -->
-                    <div class="flex flex-wrap mt-[30px] justify-between gap-4">
-                        <!-- Business Functions Section -->
-                        <div class="flex flex-col gap-2 w-full sm:w-1/2 lg:w-1/5">
-                            <h3 class="font-[500] text-[12px] lg:text-[16px]">Business Functions:</h3>
-                            <div class="flex flex-wrap gap-2">
+                    <div class="flex mt-[30px] justify-between gap-2">
+                        <div class="flex flex-col gap-1">
+                            <h3 class="font-[500] text-[12px] lg:text-[16px]">
+                                Business Functions:
+                            </h3>
+                            <div class="flex gap-1">
                                 <h4
                                     class="text-[10px] p-2 rounded-[40px] bg-[#F7EAEA] border border-[#FFD3D3] lg:text-[14px] font-[400]">
                                     {{ $advisor->businessFunctionCategory->name ?? 'N/A' }}
                                 </h4>
                             </div>
                         </div>
-
-                        <!-- Divider -->
-                        <div class="hidden lg:block border-[2px] border-[#E5E5E5] h-full"></div>
-
-                        <!-- Sub-Business Functions Section -->
-                        <div class="flex flex-col gap-2 w-full sm:w-1/2 lg:w-1/5">
-                            <h3 class="font-[500] text-[12px] lg:text-[16px]">Sub-Business Functions:</h3>
-                            <div class="flex flex-wrap gap-2">
+                        <div class="border-[2px] border-[#E5E5E5] w-[1px] h-full"></div>
+                        <div class="flex flex-col gap-1">
+                            <h3 class="font-[500] text-[12px] lg:text-[16px]">
+                                Sub-Business Functions:
+                            </h3>
+                            <div class="flex gap-1">
                                 <h4
                                     class="text-[10px] p-2 rounded-[40px] bg-[#F7EAEA] border border-[#FFD3D3] lg:text-[14px] font-[400]">
                                     {{ $advisor->subFunctionCategory1->name ?? '' }}
                                 </h4>
                                 <h4
                                     class="text-[10px] p-2 rounded-[40px] bg-[#F7EAEA] border border-[#FFD3D3] lg:text-[14px] font-[400]">
-                                    {{ $advisor->subFunctionCategory2->name ?? '' }}
+                                    {{ $advisor->subFunctionCategory2->name ? '' . $advisor->subFunctionCategory2->name : '' }}
                                 </h4>
                             </div>
                         </div>
-
-                        <!-- Divider -->
-                        <div class="hidden lg:block border-[2px] border-[#E5E5E5] h-full"></div>
-
-                        <!-- Industry Section -->
-                        <div class="flex flex-col gap-2 w-full sm:w-1/2 lg:w-1/5">
+                        <div class="border-[2px] border-[#E5E5E5] w-[1px] h-full"></div>
+                        <div class="flex flex-col gap-1">
                             <h3 class="font-[500] text-[12px] lg:text-[16px]">Industry:</h3>
-                            <div class="flex flex-wrap gap-2">
+                            <div class="flex gap-1">
                                 @forelse($industries as $industry)
                                     <h4
                                         class="text-[10px] p-2 rounded-[40px] bg-[#F7EAEA] border border-[#FFD3D3] lg:text-[14px] font-[400]">
@@ -651,29 +654,25 @@
                                 @endforelse
                             </div>
                         </div>
-
-                        <!-- Divider -->
-                        <div class="hidden lg:block border-[2px] border-[#E5E5E5] h-full"></div>
-
-                        <!-- Geography Section -->
-                        <div class="flex flex-col gap-2 w-full sm:w-1/2 lg:w-1/5">
-                            <h3 class="font-[500] text-[12px] lg:text-[16px]">Geography:</h3>
-                            <div class="flex flex-wrap gap-2">
+                        <div class="border-[2px] border-[#E5E5E5] w-[1px] h-full"></div>
+                        <div class="flex flex-col gap-1">
+                            <h3 class="font-[500] text-[12px] lg:text-[16px]">
+                                Geography:
+                            </h3>
+                            <div class="flex gap-1">
                                 @forelse($geographies as $geography)
                                     <h4
                                         class="text-[10px] p-2 rounded-[40px] bg-[#F7EAEA] border border-[#FFD3D3] lg:text-[14px] font-[400]">
-                                        {{ $geography->name }}
-                                    </h4>
+                                        {{ $geography->name }}</h4>
                                 @empty
                                     <h4
                                         class="text-[10px] p-2 rounded-[40px] bg-[#F7EAEA] border border-[#FFD3D3] lg:text-[14px] font-[400]">
-                                        No geographies available
-                                    </h4>
+                                        No geographies available</h4>
                                 @endforelse
                             </div>
                         </div>
+                        <div class="border-[2px] border-[#E5E5E5] w-[1px] h-full"></div>
                     </div>
-
                     <!-- 2nd row  -->
                     <div class="flex flex-col bg-[#F5F5F5] relative gap-3 p-3">
                         {{-- <img class="w-[100px] h-[100px] md:w-[120px] md:h-[120px] absolute top-[0px] right-[20px]"
@@ -692,7 +691,7 @@
                             <div class="flex items-center gap-1">
                                 <i class="fa-solid fa-star" style="color: #ffd43b"></i>
                                 <p class="lg:text-[16px] lg:font-[500] text-[10px] font-[700]">
-                                    {{ $advisor->average_review_score ? number_format($advisor->average_review_score, 1) : 'No reviews' }}
+                                    4.9
                                 </p>
                             </div>
                         </div>
@@ -706,7 +705,7 @@
                         @endif
 
                         <h4 class="text-[12px] lg:text-[16px] font-[400]">About</h4>
-                        <p class="text-[12px] lg:text-[16px] font-[400] break-words">
+                        <p class="text-[12px] lg:text-[16px] font-[400]">
                             {{ $advisor->about }}
                         </p>
                     </div>
@@ -716,7 +715,7 @@
                             Awards & Recognition
                         </h4>
 
-                        <div class=" break-words">
+                        <div>
                             {{-- <li class="lg:text-[16px] text-[12px] font-[400]">
                                 Industry Excellence Award-2021
                             </li>
@@ -737,7 +736,7 @@
                     <div class="flex flex-col bg-[#F5F5F5] gap-3 p-3">
                         <h4 class="text-[12px] lg:text-[16px] font-[400]">Services</h4>
 
-                        <div class=" break-words">
+                        <div>
                             {{-- <li class="lg:text-[16px] text-[12px] font-[400]">
                                 Industry Excellence Award-2021
                             </li>
@@ -775,9 +774,8 @@
                                 <div class="relative w-full max-w-xl mx-auto p-4">
                                     <div class="relative testimonial-bg">
                                         <!-- Check if there are reviews -->
-                                        @if ($reviews->isEmpty())
-                                            <p
-                                                class="text-center text-[16px] lg:text-[18px] font-[400] text-[#2A2A2A] py-6">
+                                        @if($reviews->isEmpty())
+                                            <p class="text-center text-[16px] lg:text-[18px] font-[400] text-[#2A2A2A] py-6">
                                                 No reviews available yet.
                                             </p>
                                         @else
@@ -786,27 +784,22 @@
                                                     <div class="testimonial">
                                                         <div class="flex flex-col w-full p-4 gap-4">
                                                             <div class="flex gap-4">
-                                                                <img class="rounded-full"
-                                                                    style="height: 60px; width: 60px"
+                                                                <img class="rounded-full" style="height: 60px; width: 60px"
                                                                     src="{{ $review->userProfile && $review->userProfile->profile_photo_path ? asset('storage/' . $review->userProfile->profile_photo_path) : asset('../src/assets/advisorgeneral.webp') }}"
                                                                     alt="Profile Image" />
                                                                 <div class="flex flex-col">
-                                                                    <h2
-                                                                        class="font-bold text-[16px] lg:text-[18px] text-[#2A2A2A]">
+                                                                    <h2 class="font-bold text-[16px] lg:text-[18px] text-[#2A2A2A]">
                                                                         {{ $review->userProfile->full_name ?? 'Anonymous' }}
                                                                     </h2>
                                                                     <div class="flex gap-1 items-center">
-                                                                        <i class="fa-solid fa-star"
-                                                                            style="color: #ffd43b"></i>
-                                                                        <h5
-                                                                            class="text-[14px] lg:text-[16px] text-[#2A2A2A]">
+                                                                        <i class="fa-solid fa-star" style="color: #ffd43b"></i>
+                                                                        <h5 class="text-[14px] lg:text-[16px] text-[#2A2A2A]">
                                                                             {{ $review->overall_experience ?? 'N/A' }}/5
                                                                         </h5>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <p
-                                                                class="text-[16px] lg:text-[18px] font-[400] text-[#2A2A2A]">
+                                                            <p class="text-[16px] lg:text-[18px] font-[400] text-[#2A2A2A]">
                                                                 "{{ $review->review ?? 'No review available.' }}"
                                                             </p>
                                                         </div>
@@ -815,9 +808,9 @@
                                             </div>
                                         @endif
                                     </div>
-
+                    
                                     <!-- Slider Controls: Will only be displayed if reviews exist -->
-                                    @if ($reviews->isNotEmpty())
+                                    @if($reviews->isNotEmpty())
                                         <div class="owl-controls">
                                             <div class="owl-nav flex justify-between items-center py-4">
                                                 <div class="owl-prev text-[#2A2A2A] cursor-pointer">
@@ -833,140 +826,114 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>                    
             </div>
         </div>
-        {{-- <hr class="mb-[100px]"> --}}
+        <hr class="mb-[100px]">
         </hr>
 
         <!-- small screen design -->
         <div class="flex lg:hidden flex-col p-[20px] mb-[5rem]">
             <!-- slider  -->
-            <div class="swiper mySwiper1 bg-[#F4F9EF] p-[18px] mb-4">
-                @if (!empty($advisor->highlighted_images) && count($advisor->highlighted_images) > 0)
-                    <div class="swiper-wrapper">
-                        @foreach ($advisor->highlighted_images as $image)
-                            <div class="swiper-slide">
-                                <div>
-                                    <img class="w-[100px] h-[80px] shadow shadow-[#00000026] object-cover"
-                                        src="{{ Storage::url($image) }}" alt="Highlighted Image" />
-                                </div>
-                            </div>
-                        @endforeach
+            <div class="swiper mySwiper1 bg-[#F4F9EF] p-[18px]">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div>
+                            <img class="w-[100px] h-[80px] shadow shadow-[#00000026]" src="../src/assets/Rectangle 66.png"
+                                alt="" />
+                        </div>
                     </div>
-                @endif
-
-
-            </div>
-            <div class="bg-[#FFFACA] py-2 rounded-tl-[20px] rounded-tr-[20px] px-2 flex justify-between">
-                <p class="text-[12px] font-[500] text-[#B58300]">
-                    {{ $advisor->is_super_advisor == 'true' ? 'Super Advisor' : 'Advisor' }}
-                </p>
-                <div class="flex items-center gap-1">
-                    <i class="fa-solid fa-circle fa-xs"
-                        style="color: {{ $isAvailableToday ? '#6a9023' : '#e3342f' }}"></i>
-                    <p class="text-[12px] font-[600]" style="color: {{ $isAvailableToday ? '#6a9023' : '#e3342f' }}">
-                        {{ $isAvailableToday ? 'Available' : 'Not Available' }}
-                    </p>
+                    <div class="swiper-slide">
+                        <div>
+                            <img class="w-[100px] h-[80px] shadow shadow-[#00000026]" src="../src/assets/Rectangle 67.png"
+                                alt="" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div>
+                            <img class="w-[100px] h-[80px] shadow shadow-[#00000026]" src="../src/assets/Rectangle 68.png"
+                                alt="" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div>
+                            <img class="w-[100px] h-[80px] shadow shadow-[#00000026]" src="../src/assets/Rectangle 69.png"
+                                alt="" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div>
+                            <img class="w-[100px] h-[80px] shadow shadow-[#00000026]" src="../src/assets/Rectangle 70.png"
+                                alt="" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div>
+                            <img class="w-[100px] h-[80px] shadow shadow-[#00000026]" src="../src/assets/Rectangle 66.png"
+                                alt="" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div>
+                            <img class="w-[100px] h-[80px] shadow shadow-[#00000026]" src="../src/assets/Rectangle 67.png"
+                                alt="" />
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
+
+
             <!-- proflie  -->
             <div class="flex w-full shadow-xl rounded-[24px] shadow-[#00000026] p-4 flex-col">
-
-
-
-                <div class="flex flex-col mt-[8px] gap-5 md:gap-4 w-full">
+                <div class="flex rounded-[24px] bg-white p-1 justify-between">
+                    <p class="text-[12px] font-[500] text-[#B58300]">
+                        {{ $advisor->is_super_advisor == 'true' ? 'Super Advisor' : 'Advisor' }}</p>
+                    <div class="flex items-center gap-1">
+                        <i class="fa-solid fa-circle fa-sm"
+                            style="color: {{ $advisor->is_available ? '#6a9023' : '#e3342f' }}"></i>
+                        <p class="text-[12px] font-[600]"
+                            style="color: {{ $advisor->is_available ? '#6a9023' : '#e3342f' }}">
+                            {{ $advisor->is_available ? 'Available' : 'Not Available' }}
+                        </p>
+                    </div>
+                </div>
+                <div class="flex mt-[8px] gap-1 md:gap-4 w-full">
                     <!-- 1st col  -->
-                    <div class="flex flex-col shrink-0 w-full gap-[12px]">
-                        <div class="flex flex-row justify-around gap-2">
-                            <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-2 border-gray-200"
-                                src="{{ $advisor->profile_photo_path ? asset('storage/' . $advisor->profile_photo_path) : asset('../src/assets/advisorgeneral.webp') }}"
-                                alt="{{ $advisor->full_name }}" />
-
-
-                            <div class="flex flex-col gap-[4px]">
-
-
-                                <div class="flex flex-col w-full gap-[4px] relative">
-                                    <div class="flex items-center justify-between">
-                                        <h2 class="tetx-[14px] lg:text-[18px] font-[600]">
-                                            @if (Auth::check())
-                                                {{ $advisor->full_name }}
-                                            @else
-                                                {{ $advisor->user_id }}
-                                            @endif
-                                        </h2>
-
-                                    </div>
-                                    @if ($advisor->is_founder)
-                                        <h3 class="lg;text-[16px] font-[400] text-[12px]">
-                                            Founder, <span
-                                                class="font-bold text-[#6A9023]">{{ $advisor->company_name }}</span>
-                                            <br>
-                                            Website : <a href="{{ $advisor->company_website }}"
-                                                class="font-bold text-[#6A9023]">{{ $advisor->company_website }}</a>
-                                        </h3>
-                                    @endif
-                                </div>
-                                <!-- rating -->
-                                <div class="flex items-center gap-1">
-                                    <i class="fa-solid fa-star" style="color: #ffd43b"></i>
-                                    <p class="lg:text-[16px] lg:font-[500] text-[10px] font-[700]">
-                                        {{ $advisor->average_review_score ? number_format($advisor->average_review_score, 1) : 'No reviews' }}
-                                    </p>
-                                </div>
-
-
-                                <div class="flex items-center gap-1">
-                                    <img class="sm:w-[20px] sm:h-[20px] w-[15px] h-[15px]"
-                                        src="../src/assets/icons/hindi.png" alt="" />
-
-                                    <p class="text-[12px] font-[500] text-[#3A3A3A]">
-                                        {{ $advisor->language_known ?? 'N/A' }}
-                                    </p>
-                                </div>
-                                <div class="flex items-center gap-1">
-                                    <img class="sm:w-[20px] sm:h-[20px] w-[15px] h-[15px]"
-                                        src="../src/assets/icons/33.png" alt="" />
-
-                                    <p class="text-[12px] font-[500] text-[#3A3A3A]">
-                                        {{ $advisor->discovery_call_price_per_minute ?? 'N/A' }}/min
-                                    </p>
-                                </div>
-                                <div class="flex items-center gap-1">
-                                    <img class="sm:w-[20px] sm:h-[20px] w-[15px] h-[15px]"
-                                        src="../src/assets/icons/location.png" alt="" />
-
-                                    <p class="text-[12px] font-[500] text-[#3A3A3A]">
-                                        {{ $advisor->location }}, India
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-
+                    <div class="flex flex-col shrink-0 w-fit gap-[12px]">
+                        <img class="w-[100px] h-[80px] sm:w-[160px] shrink-0 sm:h-[130px]"
+                            src="{{ $advisor->profile_photo_path ? asset('storage/' . $advisor->profile_photo_path) : asset('../src/assets/advisorgeneral.webp') }}"
+                            alt="{{ $advisor->full_name }}" />
                         <div class="flex flex-col gap-[4px]">
-                            <div class="flex items-center gap-1 w-ful">
+                            <div class="flex items-center gap-1">
                                 <img class="w-[20px] h-[20px]" src="../src/assets/icons/Notify me.png" alt="" />
 
                                 <p class="text-[12px] font-[500] text-[#C95555]">Notify me</p>
                             </div>
-                            <div class="flex flex-col gap-[4px] w-full justify-around sm:flex-row">
-                                <button onclick="handleDiscoveryCall('{{ $advisor->user_id }}')"
-                                    class="bg-[#6a9023] w-full sm:w-auto text-white px-4 py-2 rounded-md hover:bg-green-600">
-                                    Discovery call
-                                </button>
+                            <div class="flex flex-col gap-[4px]">
+                                <div class="flex items-center gap-1">
+                                    <img class="w-[20px] h-[20px]" src="../src/assets/icons/Discovery call.png"
+                                        alt="" />
 
-                                <button onclick="handleConsultationCall('{{ $advisor->user_id }}')"
-                                    class="bg-[#ff3131] w-full sm:w-auto text-white px-4 py-2 rounded-md hover:bg-orange-600">
-                                    Consultation call
-                                </button>
+                                    <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                        <button onclick="handleDiscoveryCall('{{ $advisor->user_id }}')"
+                                            class="bg-[#4CAF50] text-white p-2 rounded w-[85px]">
+                                            Discovery call
+                                        </button>
+                                    </p>
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <img class="w-[20px] h-[20px]" src="../src/assets/icons/Consultation call.png"
+                                        alt="" />
 
-                                <button onclick="openBookingModal()"
-                                    class="bg-[#C95555] w-full sm:w-auto text-white px-4 py-2 rounded-md hover:bg-red-600">Book
-                                    Appointment
-
-                                </button>
+                                    <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                        <button onclick="handleConsultationCall('{{ $advisor->user_id }}')"
+                                            class="bg-[#FF7513] text-white p-2 rounded w-[85px]">
+                                            Consultation call
+                                        </button>
+                                    </p>
+                                </div>
                                 {{-- <div class="flex items-center gap-1">
                                     <img class="w-[20px] h-[20px]" src="../src/assets/icons/Chat.png" alt="" />
 
@@ -975,14 +942,14 @@
                                     </p>
                                 </div> --}}
                                 <div class="flex items-center gap-1">
-                                    {{-- <img class="w-[20px] h-[20px]" src="../src/assets/icons/Book Appointment.png"
-                                        alt="" /> --}}
+                                    <img class="w-[20px] h-[20px]" src="../src/assets/icons/Book Appointment.png"
+                                        alt="" />
 
-                                    {{-- <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]"> --}}
-                                    {{-- Book Appointment --}}
-                                    {{-- <button class="bg-[#FF3131] text-white p-2 rounded w-[85px]"
+                                    <p class="text-[9px] lg:text-[12px] font-[500] text-[#3A3A3A]">
+                                        {{-- Book Appointment --}}
+                                        <button class="bg-[#FF3131] text-white p-2 rounded w-[85px]"
                                             onclick="openBookingModal()">Book Appointment</button>
-                                    </p> --}}
+                                    </p>
                                 </div>
                                 <div id="appointmentMobileModal"
                                     class="fixed inset-0 z-50 items-center justify-center hidden bg-gray-600 bg-opacity-50">
@@ -1035,10 +1002,35 @@
 
                         <div class="flex flex-col w-full gap-[12px]">
                             <!-- title name  -->
-
+                            <div class="flex flex-col w-full gap-[4px] relative">
+                                <div class="flex items-center justify-between">
+                                    <h2 class="tetx-[14px] lg:text-[18px] font-[600]">
+                                        @if (Auth::check())
+                                            {{ $advisor->full_name }}
+                                        @else
+                                            {{ $advisor->user_id }}
+                                        @endif
+                                    </h2>
+                                    <!-- rating -->
+                                    <div class="flex items-center gap-1">
+                                        <i class="fa-solid fa-star" style="color: #ffd43b"></i>
+                                        <p class="lg:text-[16px] lg:font-[500] text-[10px] font-[700]">
+                                            4.9
+                                        </p>
+                                    </div>
+                                </div>
+                                @if ($advisor->is_founder)
+                                    <h3 class="lg;text-[16px] font-[400] text-[12px]">
+                                        Founder, <span
+                                            class="font-bold text-[#6A9023]">{{ $advisor->company_name }}</span>
+                                        <br>
+                                        Website : <a href="{{ $advisor->company_website }}"
+                                            class="font-bold text-[#6A9023]">{{ $advisor->company_website }}</a>
+                                    </h3>
+                                @endif
+                            </div>
                             <!-- dropdown options selected  -->
                             <div class="flex flex-col justify-between">
-
                                 <div class="flex flex-col gap-1">
                                     <h3 class="font-[500] text-[12px] lg:text-[16px]">
                                         Business Functions:
@@ -1100,26 +1092,55 @@
                                         @endforelse
                                     </div>
                                 </div>
+                                <div class="flex flex-col gap-[4px]">
+                                    <div class="flex items-center gap-1">
+                                        <img class="sm:w-[20px] sm:h-[20px] w-[15px] h-[15px]"
+                                            src="../src/assets/icons/hindi.png" alt="" />
+
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                            {{ $advisor->language_known ?? 'N/A' }}
+                                        </p>
+                                    </div>
+                                    <div class="flex items-center gap-1">
+                                        <img class="sm:w-[20px] sm:h-[20px] w-[15px] h-[15px]"
+                                            src="../src/assets/icons/33.png" alt="" />
+
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                            {{ $advisor->discovery_call_price_per_minute ?? 'N/A' }}/min
+                                        </p>
+                                    </div>
+                                    <div class="flex items-center gap-1">
+                                        <img class="sm:w-[20px] sm:h-[20px] w-[15px] h-[15px]"
+                                            src="../src/assets/icons/location.png" alt="" />
+
+                                        <p class="text-[12px] font-[500] text-[#3A3A3A]">
+                                            {{ $advisor->location }}, India
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Dropdown -->
+            
+            <!-- dropdown -->
             <div class="relative inline-block w-full text-left">
                 <div class="flex items-center justify-between bg-[#FFF6F6] mt-[12px] rounded-[18px] w-full p-2">
                     <button id="new-dropdown-button" onclick="toggleNewDropdown()"
-                        class="new-dropbtn text-[#3A3A3A] px-4 py-2 rounded-md text-[16px] font-[500] focus:outline-none flex items-center w-full justify-between">
+                        class="new-dropbtn text-[#3A3A3A] px-4 py-2 rounded-md text-[16px] font-[500] focus:outline-none flex items-center">
                         Availability
-                        <i id="new-dropdown-icon" class="fas fa-chevron-down transition-transform"></i>
                     </button>
+                    <i id="new-dropdown-icon" onclick="toggleNewDropdown()"
+                        class="cursor-pointer fas fa-chevron-down"></i>
                 </div>
 
                 <div id="new-dropdown-menu"
                     class="absolute z-10 hidden w-full bg-white rounded-md shadow-md new-dropdown-content">
                     @php
                         $days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                        // Group availability data by day
                         $availabilityData = $availabilities->groupBy('day');
                     @endphp
 
@@ -1144,12 +1165,12 @@
                         @endif
                     @endforeach
                 </div>
-            </div>
 
+            </div>
             <!-- about  -->
             <div class="flex flex-col gap-[5px] bg-[#F5F5F5] p-3 mt-[12px] rounded-[12px]">
                 <h4 class="text-[12px] lg:text-[16px] font-[400]">About</h4>
-                <p class="text-[12px] lg:text-[16px] font-[400] break-words">
+                <p class="text-[12px] lg:text-[16px] font-[400]">
                     {{ $advisor->about }}
                 </p>
             </div>
@@ -1159,7 +1180,7 @@
                     Awards & Recognition
                 </h4>
 
-                <div class="break-words">
+                <div>
                     {{-- <li class="lg:text-[16px] text-[12px] font-[400]">
                         Industry Excellence Award-2021
                     </li>
@@ -1180,7 +1201,7 @@
             <div class="flex flex-col mt-[12px] rounded-[12px] bg-[#F5F5F5] gap-3 p-3">
                 <h4 class="text-[12px] lg:text-[16px] font-[400]">Services</h4>
 
-                <div class="break-words">
+                <div>
                     {{-- <li class="lg:text-[16px] text-[12px] font-[400]">
                         Industry Excellence Award-2021
                     </li>
@@ -1223,33 +1244,35 @@
                 <div class="swiper-wrapper">
 
                     @if ($reviews->isEmpty())
-                        <div class="swiper-slide">
-                            <p class="text-[16px] lg:text-[18px] font-[400] text-[#2A2A2A]">
-                                No reviews available.
-                            </p>
-                        </div>
-                    @else
-                        @foreach ($reviews as $review)
-                            <div class="swiper-slide">
-                                <div class="flex flex-col w-full p-2 gsp-2">
-                                    <div class="flex gap-3">
-                                        <img style="height: 60px; width: 60px"
-                                            src="{{ $review->userProfile && $review->userProfile->profile_photo_path ? asset('storage/' . $review->userProfile->profile_photo_path) : asset('../src/assets/advisorgeneral.webp') }}"
-                                            alt="" />
-                                        <div class="flex flex-col">
-                                            <h2> {{ $review->userProfile->full_name ?? 'Anonymous' }}</h2>
-                                            <div class="flex gap-1">
-                                                <i class="fa-solid fa-star" style="color: #ffd43b"></i>
-                                                <h5> {{ $review->overall_experience ?? 'N/A' }}/5</h5>
-                                            </div>
-                                        </div>
+                    <div class="swiper-slide">
+                        <p class="text-[16px] lg:text-[18px] font-[400] text-[#2A2A2A]">
+                            No reviews available.
+                        </p>
+                    </div>
+                @else
+
+                    @foreach ($reviews as $review)
+                    <div class="swiper-slide">
+                        <div class="flex flex-col w-full p-2 gsp-2">
+                            <div class="flex gap-3">
+                                <img style="height: 60px; width: 60px" 
+                                  src="{{ $review->userProfile && $review->userProfile->profile_photo_path ? asset('storage/' . $review->userProfile->profile_photo_path) : asset('../src/assets/advisorgeneral.webp') }}"
+                                    alt="" />
+                                <div class="flex flex-col">
+                                    <h2>  {{ $review->userProfile->full_name ?? 'Anonymous' }}</h2>
+                                    <div class="flex gap-1">
+                                        <i class="fa-solid fa-star" style="color: #ffd43b"></i>
+                                        <h5> {{ $review->overall_experience ?? 'N/A' }}/5</h5>
                                     </div>
-                                    <p class="text-[18px] font-[400]">
-                                        "{{ $review->review ?? 'No review available.' }}"
-                                    </p>
                                 </div>
                             </div>
-                        @endforeach
+                            <p class="text-[18px] font-[400]">
+                                "{{ $review->review ?? 'No review available.' }}"
+                            </p>
+                        </div>
+                    </div>
+                    @endforeach
+                
                     @endif
                 </div>
             </div>
@@ -1777,55 +1800,60 @@
             const dropdownIcon = document.getElementById("dropdown-icon");
 
             if (dropdownMenu.classList.contains("hidden")) {
-                // Show dropdown
                 dropdownMenu.classList.remove("hidden");
-                dropdownIcon.classList.add("rotate-180"); // Rotate the chevron
+                dropdownIcon.classList.remove("hidden");
             } else {
-                // Hide dropdown
                 dropdownMenu.classList.add("hidden");
-                dropdownIcon.classList.remove("rotate-180"); // Reset rotation
+                dropdownIcon.classList.add("hidden");
             }
         }
 
         window.onclick = function(event) {
-            const dropdownButton = document.getElementById("dropdown-button");
-            const dropdownMenu = document.getElementById("dropdown-menu");
-            const dropdownIcon = document.getElementById("dropdown-icon");
-
-            if (!dropdownButton.contains(event.target)) {
-                // Hide dropdown if clicked outside
-                dropdownMenu.classList.add("hidden");
-                dropdownIcon.classList.remove("rotate-180");
+            if (
+                !event.target.matches(".dropbtn") &&
+                !event.target.matches("#dropdown-icon")
+            ) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (!openDropdown.classList.contains("hidden")) {
+                        openDropdown.classList.add("hidden");
+                        const dropdownIcon = document.getElementById("dropdown-icon");
+                        dropdownIcon.classList.add("hidden");
+                    }
+                }
             }
         };
     </script>
-
-    <!-- Dropdown Script -->
+    <!-- dropdown for small screen -->
     <script>
         function toggleNewDropdown() {
             const dropdownMenu = document.getElementById("new-dropdown-menu");
             const dropdownIcon = document.getElementById("new-dropdown-icon");
 
             if (dropdownMenu.classList.contains("hidden")) {
-                // Show dropdown
                 dropdownMenu.classList.remove("hidden");
-                dropdownIcon.classList.add("rotate-180"); // Rotate the chevron
+                dropdownIcon.classList.remove("hidden");
             } else {
-                // Hide dropdown
                 dropdownMenu.classList.add("hidden");
-                dropdownIcon.classList.remove("rotate-180"); // Reset rotation
+                dropdownIcon.classList.add("hidden");
             }
         }
 
-        // Close dropdown when clicking outside
         window.onclick = function(event) {
-            const dropdownButton = document.getElementById("new-dropdown-button");
-            const dropdownMenu = document.getElementById("new-dropdown-menu");
-            const dropdownIcon = document.getElementById("new-dropdown-icon");
-
-            if (!dropdownButton.contains(event.target)) {
-                dropdownMenu.classList.add("hidden");
-                dropdownIcon.classList.remove("rotate-180");
+            if (
+                !event.target.matches(".new-dropbtn") &&
+                !event.target.matches("#new-dropdown-icon")
+            ) {
+                var dropdowns = document.getElementsByClassName("new-dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (!openDropdown.classList.contains("hidden")) {
+                        openDropdown.classList.add("hidden");
+                        const dropdownIcon = document.getElementById("new-dropdown-icon");
+                        dropdownIcon.classList.add("hidden");
+                    }
+                }
             }
         };
     </script>
@@ -1948,62 +1976,5 @@
             @endif
         }
     </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchBar = document.getElementById('search-bar');
-            const suggestionsDropdown = document.getElementById('suggestions-dropdown');
-
-            if (!searchBar || !suggestionsDropdown) {
-                console.error('Search bar or suggestions dropdown element not found.');
-                return;
-            }
-
-            searchBar.addEventListener('input', function() {
-                let searchQuery = this.value;
-
-                if (searchQuery.length > 2) {
-                    fetchSuggestions(searchQuery);
-                } else {
-                    suggestionsDropdown.classList.add('hidden');
-                }
-            });
-
-            function fetchSuggestions(query) {
-                // Send an AJAX request to the server
-                fetch(`/advisor-suggestions?query=${query}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (!Array.isArray(data)) {
-                            console.error('Unexpected data format:', data);
-                            return;
-                        }
-
-                        suggestionsDropdown.innerHTML = '';
-
-                        if (data.length > 0) {
-                            data.forEach(advisor => {
-                                let option = document.createElement('div');
-                                option.className = 'p-2 cursor-pointer hover:bg-gray-100';
-                                option.innerText = advisor.full_name;
-                                option.addEventListener('click', function() {
-                                    searchBar.value = advisor.full_name;
-                                    suggestionsDropdown.classList.add('hidden');
-                                });
-                                suggestionsDropdown.appendChild(option);
-                            });
-                            suggestionsDropdown.classList.remove('hidden');
-                        } else {
-                            suggestionsDropdown.classList.add('hidden');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching suggestions:', error);
-                    });
-            }
-        });
-    </script>
-
-
 
 @endsection
