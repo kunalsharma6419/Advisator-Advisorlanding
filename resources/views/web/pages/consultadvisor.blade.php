@@ -32,25 +32,24 @@
                         <span class="font-[500] hidden lg:flex text-[16px]">
                             Home /<span class="font-[600]"> Consult Advisor</span>
                         </span>
-
+                    
                         <!-- Mobile Filter Toggle Button -->
                         <h3 id="mobile-filter-toggle"
-                            class="font-[500] text-[16px] flex lg:hidden lg:mt-[5px] cursor-pointer items-center justify-between w-full bg-[#FFF6F6] drop-shadow-lg p-2 rounded-[12px] mb-3 ">
+                            class="font-[500] text-[16px] flex lg:hidden lg:mt-[5px] cursor-pointer items-center justify-between w-full bg-[#FFF6F6] drop-shadow-lg p-2 rounded-[12px] mb-3">
                             Filter
                             <!-- Collapse/Expand Icon -->
                             <span id="filter-icon" class="ml-2 text-lg font-bold">+</span>
                         </h3>
-
+                    
                         <!-- Filter Title (Desktop Only) -->
                         <h2 class="font-[500] text-[16px] hidden lg:flex lg:mt-[45px]">
                             Filter by:
                         </h2>
-
+                    
                         <!-- Filter Content -->
-                        <div id="filter-content" class="flex-col lg:flex mt-[4px] lg:mt-[0px] w-full hidden lg:flex">
-                            <div class="flex flex-row gap-[12px] lg:gap-0 lg:flex-col items-center w-full">
-                                <!-- Filter form -->
-                                <div class="w-full lg:mt-[12px] mx-auto">
+                        <div id="filter-content" class="flex-col lg:flex mt-[4px] lg:mt-[0px] w-full hidden">
+                            <form  method="GET" class="w-full lg:mt-[12px] mx-auto">
+                                <div class="flex flex-col gap-[12px] lg:gap-0 lg:flex-col items-center w-full">
                                     <!-- Business Functions Dropdown -->
                                     <select name="business_function"
                                         class="w-full bg-[#FFF6F6] drop-shadow-lg p-3 rounded-[12px]">
@@ -62,14 +61,13 @@
                                             </option>
                                         @endforeach
                                     </select>
-
+                    
                                     <!-- Sub-Functions Dropdown -->
                                     <select id="sub-function-dropdown" name="sub_function"
                                         class="w-full mt-[12px] bg-[#FFF6F6] drop-shadow-lg p-3 rounded-[12px]">
                                         <option value="">Select Sub-Function</option>
-                                        <!-- Sub-functions will be dynamically populated here -->
                                     </select>
-
+                    
                                     <!-- Industry Dropdown -->
                                     <select name="industry"
                                         class="w-full mt-[12px] bg-[#FFF6F6] drop-shadow-lg p-3 rounded-[12px]">
@@ -81,7 +79,7 @@
                                             </option>
                                         @endforeach
                                     </select>
-
+                    
                                     <!-- Location Dropdown -->
                                     <select name="location"
                                         class="w-full mt-[12px] bg-[#FFF6F6] drop-shadow-lg p-3 rounded-[12px]">
@@ -93,7 +91,7 @@
                                             </option>
                                         @endforeach
                                     </select>
-
+                    
                                     <!-- Price Range -->
                                     <div class="w-full mt-[12px] bg-[#FFF6F6] drop-shadow-lg p-3 rounded-[12px]">
                                         <label for="price-range" class="block text-gray-700">Price (per minute)</label>
@@ -103,7 +101,7 @@
                                             oninput="this.nextElementSibling.textContent = `₹${this.value}/min`">
                                         <span>₹{{ request('price', 100) }}/min</span>
                                     </div>
-
+                    
                                     <!-- Availability Checkbox -->
                                     <label
                                         class="w-full mt-[12px] bg-[#FFF6F6] drop-shadow-lg p-3 rounded-[12px] flex items-center">
@@ -111,12 +109,19 @@
                                             {{ request('available') ? 'checked' : '' }} />
                                         <span class="ml-2">Available</span>
                                     </label>
-
-                                    <!-- Submit Button -->
-                                    <button type="submit"
-                                        class="w-full bg-[#C95555] mt-[12px] text-white p-3 rounded-[12px]">Filter</button>
                                 </div>
-                            </div>
+                    
+                                <!-- Submit Button -->
+                                <div class="flex flex-col w-full justify-between items-center gap-4 mt-[12px]">
+                                    <button type="submit" class="bg-[#C95555] text-white p-3 rounded-[12px] w-full">Filter</button>
+                    
+                                    <!-- Clear Filter Button -->
+                                    @if(request()->except('page')) <!-- Check if filters are applied -->
+                                        <a href="/consult-advisor"
+                                            class="border-[#C95555] border text-center text-[#C95555] p-3 rounded-[12px] w-full">Clear Filter</a>
+                                    @endif
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -239,8 +244,11 @@
                                                                         <img class="w-5 h-5"
                                                                             src="../src/assets/icons/hindi.png"
                                                                             alt="Language Icon" />
-                                                                        <p class="text-sm font-medium text-gray-700">
+                                                                        {{-- <p class="text-sm font-medium text-gray-700">
                                                                             {{ $advisor->language_known ?? 'English,hindi' }}
+                                                                        </p> --}}
+                                                                        <p class="text-sm font-medium text-gray-700">
+                                                                            English,Hindi
                                                                         </p>
                                                                     </div>
 
@@ -250,7 +258,8 @@
                                                                             src="../src/assets/icons/33.png"
                                                                             alt="Price Icon" />
                                                                         <p class="text-sm font-medium text-gray-700">
-                                                                            {{ $advisor->conference_call_price_per_minute ?? 'N/A' }}/min
+                                                                            {{-- {{ $advisor->conference_call_price_per_minute ?? 'N/A' }}/min --}}
+                                                                            {{ $advisor->conference_call_price_per_minute ?? 'N/A' }}/min</p>
                                                                         </p>
                                                                     </div>
 
@@ -648,78 +657,99 @@
     n>
 
 <!-- JavaScript -->
+
 <script>
-   document.addEventListener('DOMContentLoaded', function () {
-    // Select all the notify buttons
-    document.querySelectorAll('#notifyButton').forEach(button => {
-        button.addEventListener('click', async function (event) {
-            event.preventDefault(); // Prevent any default action
-            
-            const url = button.getAttribute('data-route');
-            const csrfToken = '{{ csrf_token() }}'; // Directly using csrf_token()
+    document.addEventListener('DOMContentLoaded', function () {
+        // Select all the notify buttons
+        document.querySelectorAll('#notifyButton').forEach(button => {
+            button.addEventListener('click', async function (event) {
+                event.preventDefault(); // Prevent any default action
 
-            // Debugging line for checking Advisor ID
-            const advisorId = button.getAttribute('data-advisor-id');
-            console.log("Advisor ID passed:", advisorId);
+                // Check if the user is logged in
+                const isLoggedIn = {{ auth()->check() ? 'true' : 'false' }}; // Authentication check
 
-            try {
-                // Show a loading SweetAlert while the request is being processed
-                Swal.fire({
-                    title: 'Please wait...',
-                    text: 'Notifying the advisor...',
-                    icon: 'info',
-                    allowOutsideClick: false,
-                    showConfirmButton: false,
-                    didOpen: () => {
-                        Swal.showLoading();
-                    }
-                });
-
-                // Making an AJAX POST request using fetch
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ advisorId: advisorId }) // Send the advisor ID
-                });
-
-                const data = await response.json();
-
-                // Close the loading SweetAlert
-                Swal.close();
-
-                // Show a success or error SweetAlert based on the response
-                if (data.success) {
+                if (!isLoggedIn) {
                     Swal.fire({
-                        title: 'Success!',
-                        text: 'Advisor has been notified successfully.',
-                        icon: 'success',
+                        title: 'Login Required',
+                        text: 'You need to log in to notify the advisor. Please log in to continue.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Login',
+                        cancelButtonText: 'Cancel',
+                        confirmButtonColor: '#4CAF50',
+                        cancelButtonColor: '#f44336',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "{{ route('login') }}"; // Redirect to login
+                        }
                     });
-                } else {
+                    return; // Stop further execution if not logged in
+                }
+
+                const url = button.getAttribute('data-route');
+                const csrfToken = '{{ csrf_token() }}'; // Directly using csrf_token()
+
+                // Debugging line for checking Advisor ID
+                const advisorId = button.getAttribute('data-advisor-id');
+                console.log("Advisor ID passed:", advisorId);
+
+                try {
+                    // Show a loading SweetAlert while the request is being processed
+                    Swal.fire({
+                        title: 'Please wait...',
+                        text: 'Notifying the advisor...',
+                        icon: 'info',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                    // Making an AJAX POST request using fetch
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ advisorId: advisorId }) // Send the advisor ID
+                    });
+
+                    const data = await response.json();
+
+                    // Close the loading SweetAlert
+                    Swal.close();
+
+                    // Show a success or error SweetAlert based on the response
+                    if (data.success) {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Advisor has been notified successfully.',
+                            icon: 'success',
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: data.message || 'An error occurred.',
+                            icon: 'error',
+                        });
+                    }
+                } catch (error) {
+                    // Close the loading SweetAlert in case of an error
+                    Swal.close();
+
+                    console.error('Error:', error);
                     Swal.fire({
                         title: 'Error!',
-                        text: data.message || 'An error occurred.',
+                        text: 'An unexpected error occurred. Please try again.',
                         icon: 'error',
                     });
                 }
-            } catch (error) {
-                // Close the loading SweetAlert in case of an error
-                Swal.close();
-
-                console.error('Error:', error);
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'An unexpected error occurred. Please try again.',
-                    icon: 'error',
-                });
-            }
+            });
         });
     });
-});
-
-    </script>
+</script>
 
     <script>
         function updatePrice(value) {

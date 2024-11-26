@@ -201,8 +201,12 @@
                                                             <!-- Language -->
                                                             <div class="flex items-center gap-1">
                                                                 <img class="w-5 h-5" src="../src/assets/icons/hindi.png" alt="Language Icon" />
-                                                                <p class="text-sm font-medium text-gray-700">
+                                                                {{-- <p class="text-sm font-medium text-gray-700">
                                                                     {{ $advisor->language_known ?? 'N/A' }}
+                                                                </p> --}}
+
+                                                                <p class="text-sm font-medium text-gray-700">
+                                                                    English,hindi
                                                                 </p>
                                                             </div>
                                                             
@@ -590,78 +594,99 @@
 
     
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-     // Select all the notify buttons
-     document.querySelectorAll('#notifyButton').forEach(button => {
-         button.addEventListener('click', async function (event) {
-             event.preventDefault(); // Prevent any default action
-             
-             const url = button.getAttribute('data-route');
-             const csrfToken = '{{ csrf_token() }}'; // Directly using csrf_token()
- 
-             // Debugging line for checking Advisor ID
-             const advisorId = button.getAttribute('data-advisor-id');
-             console.log("Advisor ID passed:", advisorId);
- 
-             try {
-                 // Show a loading SweetAlert while the request is being processed
-                 Swal.fire({
-                     title: 'Please wait...',
-                     text: 'Notifying the advisor...',
-                     icon: 'info',
-                     allowOutsideClick: false,
-                     showConfirmButton: false,
-                     didOpen: () => {
-                         Swal.showLoading();
-                     }
-                 });
- 
-                 // Making an AJAX POST request using fetch
-                 const response = await fetch(url, {
-                     method: 'POST',
-                     headers: {
-                         'X-CSRF-TOKEN': csrfToken,
-                         'Content-Type': 'application/json',
-                     },
-                     body: JSON.stringify({ advisorId: advisorId }) // Send the advisor ID
-                 });
- 
-                 const data = await response.json();
- 
-                 // Close the loading SweetAlert
-                 Swal.close();
- 
-                 // Show a success or error SweetAlert based on the response
-                 if (data.success) {
-                     Swal.fire({
-                         title: 'Success!',
-                         text: 'Advisor has been notified successfully.',
-                         icon: 'success',
-                     });
-                 } else {
-                     Swal.fire({
-                         title: 'Error!',
-                         text: data.message || 'An error occurred.',
-                         icon: 'error',
-                     });
-                 }
-             } catch (error) {
-                 // Close the loading SweetAlert in case of an error
-                 Swal.close();
- 
-                 console.error('Error:', error);
-                 Swal.fire({
-                     title: 'Error!',
-                     text: 'An unexpected error occurred. Please try again.',
-                     icon: 'error',
-                 });
-             }
-         });
-     });
- });
- 
-     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Select all the notify buttons
+            document.querySelectorAll('#notifyButton').forEach(button => {
+                button.addEventListener('click', async function (event) {
+                    event.preventDefault(); // Prevent any default action
+    
+                    // Check if the user is logged in
+                    const isLoggedIn = {{ auth()->check() ? 'true' : 'false' }}; // Authentication check
+    
+                    if (!isLoggedIn) {
+                        Swal.fire({
+                            title: 'Login Required',
+                            text: 'You need to log in to notify the advisor. Please log in to continue.',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: 'Login',
+                            cancelButtonText: 'Cancel',
+                            confirmButtonColor: '#4CAF50',
+                            cancelButtonColor: '#f44336',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "{{ route('login') }}"; // Redirect to login
+                            }
+                        });
+                        return; // Stop further execution if not logged in
+                    }
+    
+                    const url = button.getAttribute('data-route');
+                    const csrfToken = '{{ csrf_token() }}'; // Directly using csrf_token()
+    
+                    // Debugging line for checking Advisor ID
+                    const advisorId = button.getAttribute('data-advisor-id');
+                    console.log("Advisor ID passed:", advisorId);
+    
+                    try {
+                        // Show a loading SweetAlert while the request is being processed
+                        Swal.fire({
+                            title: 'Please wait...',
+                            text: 'Notifying the advisor...',
+                            icon: 'info',
+                            allowOutsideClick: false,
+                            showConfirmButton: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+    
+                        // Making an AJAX POST request using fetch
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': csrfToken,
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ advisorId: advisorId }) // Send the advisor ID
+                        });
+    
+                        const data = await response.json();
+    
+                        // Close the loading SweetAlert
+                        Swal.close();
+    
+                        // Show a success or error SweetAlert based on the response
+                        if (data.success) {
+                            Swal.fire({
+                                title: 'Success!',
+                                text: 'Advisor has been notified successfully.',
+                                icon: 'success',
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: data.message || 'An error occurred.',
+                                icon: 'error',
+                            });
+                        }
+                    } catch (error) {
+                        // Close the loading SweetAlert in case of an error
+                        Swal.close();
+    
+                        console.error('Error:', error);
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'An unexpected error occurred. Please try again.',
+                            icon: 'error',
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    
     <script>
         // JavaScript to toggle sidebar
         // const toggleBtn = document.querySelector('.toggleBtn');

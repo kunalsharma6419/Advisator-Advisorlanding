@@ -545,11 +545,12 @@
                                             <p class="text-[#828282] font-normal">Price</p>
                                             <input type="number" name="discovery_call_price_per_minute"
                                                 value="{{ $advisor->discovery_call_price_per_minute }}"
+                                                onchange="calculateHourRate()"
                                                 id="discovery_call_price_per_minute"
                                                 class="text-base text-[#3A3A3A] font-semibold  py-1 lg:py-2 px-1 lg:px-3 bg-[#FFFFFF] border border-[#E1E9D3] rounded-lg shadow-md w-[90px]">
                                             <input type="number" name="discovery_call_price_per_hour"
                                                 value="{{ $advisor->discovery_call_price_per_hour }}"
-                                                id="discovery_call_price_per_hour"
+                                                id="discovery_call_price_per_hour" disabled
                                                 class="text-base text-[#3A3A3A] font-semibold py-1 lg:py-2 px-1 lg:px-3 bg-[#FFFFFF] border border-[#E1E9D3] rounded-lg shadow-md hidden w-[100px]">
                                         </div>
                                     </div>
@@ -570,6 +571,7 @@
                                             <input type="number" name="conference_call_price_per_minute"
                                                 value="{{ $advisor->conference_call_price_per_minute }}"
                                                 id="conference_call_price_per_minute"
+                                                onchange="calculateHourRate()"
                                                 class="text-base text-[#3A3A3A] font-semibold py-1 lg:py-2 px-1 lg:px-3 bg-[#FFFFFF] border border-[#E1E9D3] rounded-lg shadow-md w-[90px]">
                                             <input type="number" name="conference_call_price_per_hour"
                                                 value="{{ $advisor->conference_call_price_per_hour }}"
@@ -1916,6 +1918,22 @@
     <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
     <!-- SweetAlert JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        function calculateHourRate() {
+            // Get the minute rate from the input field
+            var minuteRate = document.getElementById("discovery_call_price_per_minute").value;
+            var conferenceminuteRate = document.getElementById("conference_call_price_per_minute").value;
+         
+            var conferencehourRate = conferenceminuteRate * 60; 
+            // Calculate the hour rate by multiplying the minute rate by 60
+            var hourRate = minuteRate * 60;
+    
+            // Set the calculated hour rate into the hour input field
+            // document.getElementById("discovery_call_price_per_hour").value = hourRate.toFixed(2); // Fixed to 2 decimal places
+            document.getElementById("conference_call_price_per_hour").value = conferencehourRate.toFixed(2); // Fixed to 2 decimal places
+        }
+    </script>
     <script>
         function openlargeCalender() {
             Swal.fire({

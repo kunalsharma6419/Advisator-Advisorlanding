@@ -74,55 +74,111 @@ class AdvisorProfiles extends Model
         return $this->hasOne(BankDetails::class, 'advisor_profile_id', 'advisor_id');
     }
 
+    // public function calculateCompletionPercentage()
+    // {
+    //     $fields = [
+    //         'full_name',
+    //         'email',
+    //         'mobile_number',
+    //         'location',
+    //         'linkedin_profile',
+    //         'business_function_category_id',
+    //         'sub_function_category_id_1',
+    //         'sub_function_category_id_2',
+    //         'industry_ids',
+    //         'geography_ids',
+    //         'discovery_call_price_per_minute',
+    //         'discovery_call_price_per_hour',
+    //         'conference_call_price_per_minute',
+    //         'conference_call_price_per_hour',
+    //         'chat_price_per_minute',
+    //         'chat_price_per_hour',
+    //         'highlighted_images',
+    //         'services',
+    //         'awards_recognition',
+    //         'video_upload',
+    //         'about',
+    //         'company_name',
+    //         'company_website',
+    //     ];
+
+    //     $filled = 0;
+
+    //     foreach ($fields as $field) {
+    //         if (!empty($this->{$field})) {
+    //             $filled++;
+    //         }
+    //     }
+
+    //     // Check bank details
+    //     if ($this->bankDetails()->exists()) {
+    //         $filled++;
+    //     }
+
+    //     // return ($filled / (count($fields) + 1)) * 100;
+    //     // Calculate percentage
+    //     $percentage = ($filled / (count($fields) + 1)) * 100;
+
+    //     // Format percentage to one decimal place
+    //     return number_format($percentage, 1);
+
+    // }
+
+
     public function calculateCompletionPercentage()
-    {
-        $fields = [
-            'full_name',
-            'email',
-            'mobile_number',
-            'location',
-            'linkedin_profile',
-            'business_function_category_id',
-            'sub_function_category_id_1',
-            'sub_function_category_id_2',
-            'industry_ids',
-            'geography_ids',
-            'discovery_call_price_per_minute',
-            'discovery_call_price_per_hour',
-            'conference_call_price_per_minute',
-            'conference_call_price_per_hour',
-            'chat_price_per_minute',
-            'chat_price_per_hour',
-            'highlighted_images',
-            'services',
-            'awards_recognition',
-            'video_upload',
-            'about',
-            'company_name',
-            'company_website',
-        ];
+{
+    $fields = [
+        'full_name',
+        'email',
+        'mobile_number',
+        'location',
+        'linkedin_profile',
+        'business_function_category_id',
+        'sub_function_category_id_1',
+        'sub_function_category_id_2',
+        'industry_ids',
+        'geography_ids',
+        'discovery_call_price_per_minute',
+        // 'discovery_call_price_per_hour',
+        'conference_call_price_per_minute',
+        'conference_call_price_per_hour',
+        'chat_price_per_minute',
+        'chat_price_per_hour',
+        'highlighted_images',
+        'services',
+        'awards_recognition',
+        'video_upload',
+        'about',
+        'company_name',
+        'company_website',
+    ];
 
-        $filled = 0;
+    $filled = 0;
 
-        foreach ($fields as $field) {
-            if (!empty($this->{$field})) {
+    foreach ($fields as $field) {
+        // Check arrays and specific fields with special conditions
+        
+        if (in_array($field, ['industry_ids', 'geography_ids', 'highlighted_images', 'video_upload'])) {
+            if (!empty($this->{$field}) && count($this->{$field}) > 0) {
                 $filled++;
             }
-        }
-
-        // Check bank details
-        if ($this->bankDetails()->exists()) {
+        } elseif (!empty($this->{$field})) {
             $filled++;
         }
-
-        // return ($filled / (count($fields) + 1)) * 100;
-        // Calculate percentage
-        $percentage = ($filled / (count($fields) + 1)) * 100;
-
-        // Format percentage to one decimal place
-        return number_format($percentage, 1);
-
     }
+
+    
+    if ($this->bankDetails()->exists()) {
+        $filled++;
+    }
+
+    
+    $percentage = ($filled / (count($fields) + 1)) * 100;
+
+   
+    return number_format($percentage, 1);
+}
+
 
     // Add a method to get the full URL to the document
     public function getDocumentUrlAttribute()

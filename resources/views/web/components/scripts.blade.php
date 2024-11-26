@@ -60,11 +60,15 @@
     var swiper = new Swiper(".swiper-verticals-geography", {
         slidesPerView: "auto",
         spaceBetween: 10,
+        autoplay: {
+        delay: 3000, // Delay in milliseconds (3 seconds)
+        disableOnInteraction: true, 
+    },
         slidesPerView: 3,
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
+        // pagination: {
+        //     el: ".swiper-pagination",
+        //     clickable: true,
+        // },
         breakpoints: {
             640: {
                 slidesPerView: 3,
@@ -76,6 +80,7 @@
             },
         },
     });
+    
 
     var swiper = new Swiper(".swiper-meet-team", {
     slidesPerView: 2, 

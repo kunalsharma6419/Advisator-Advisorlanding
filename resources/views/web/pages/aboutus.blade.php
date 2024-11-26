@@ -562,7 +562,7 @@
                         <!-- 3rd Card -->
                         <div class="flex items-center rounded-lg p-4 border bg-white shadow-md">
                             <img class="w-[70px] h-[70px] sm:w-[100px] sm:h-[100px] lg:w-[120px] lg:h-[120px] rounded-full border-2 border-gray-300"
-                                src="../src/assets/cto1.jpeg" alt="Kunal Vashisht" />
+                                src="../src/assets/cto4.png" alt="Kunal Vashisht" />
                             <div class="flex-1 ml-4">
                                 <h4 class="text-[14px] sm:text-[14px] lg:text-[18px] font-semibold">Kunal Vashisht</h4>
                                 <h6 class="text-[12px] sm:text-[12px] lg:text-[18px] font-bold text-gray-600">CTO</h6>
@@ -583,27 +583,28 @@
                                 </path>
                             </svg>
                         </a>
-                                <p class="text-[12px] sm:text-[12px] lg:text-[17px] font-normal text-gray-600">
-                                    As the CTO at Advisator, I lead the technology strategy and execution, playing a key
-                                    role in driving innovation
-                                    and delivering cutting-edge solutions in the B2C SaaS space.
-                                    <span id="extra-text-2"
-                                        class="hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                                        My responsibilities include:
-                                        <br>
-                                        1. Technology Vision: Developing and implementing a strategic technology roadmap
-                                        aligned with business objectives.
-                                        <br> 2. Product Development: Overseeing end-to-end product development lifecycle.
-                                        <br> 3. Team Leadership: Building and leading a high-performing tech team.
-                                        <br> 4. Tech Stack Management: Evaluating and selecting appropriate technologies.
-                                        <br> 5. Data Security and Compliance: Ensuring privacy, security, and regulatory
-                                        compliance.
-                                    </span>
-                                    <a href="javascript:void(0)" onclick="toggleText('extra-text-2', this)"
-                                        class="text-[#6A9023] hover:underline">
-                                        Read More
-                                    </a>
-                                </p>
+                        <p class="text-[12px] sm:text-[12px] lg:text-[17px] font-normal text-gray-600">
+                            As the CTO at Advisator, Kunal Vashisht leads the technology strategy and execution, playing a key 
+                            role in driving innovation 
+                            and delivering cutting-edge solutions in the B2C SaaS space. 
+                            <span id="extra-text-2" 
+                                class="hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out"> 
+                                His responsibilities include: 
+                                <br> 
+                                1. Technology Vision: Developing and implementing a strategic technology roadmap 
+                                aligned with business objectives. 
+                                <br> 2. Product Development: Overseeing end-to-end product development lifecycle. 
+                                <br> 3. Team Leadership: Building and leading a high-performing tech team. 
+                                <br> 4. Tech Stack Management: Evaluating and selecting appropriate technologies. 
+                                <br> 5. Data Security and Compliance: Ensuring privacy, security, and regulatory 
+                                compliance. 
+                            </span> 
+                            <a href="javascript:void(0)" onclick="toggleText('extra-text-2', this)" 
+                                class="text-[#6A9023] hover:underline"> 
+                                Read More 
+                            </a> 
+                        </p>
+                        
                             </div>
                         </div>
                     </div>

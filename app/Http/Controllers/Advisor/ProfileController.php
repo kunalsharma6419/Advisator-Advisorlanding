@@ -161,7 +161,10 @@ class ProfileController extends Controller
         // Sync awards and recognitions
         $advisor->awards_recognition = $request->input('awards_recognition', []);
 
-
+           // Calculate and update profile completion percentage
+    $profileCompletionPercentage = $advisor->calculateCompletionPercentage();
+    $advisor->profile_completion_percentage = $profileCompletionPercentage;
+    
         // Save advisor profile
         $advisor->save();
 
@@ -299,7 +302,7 @@ class ProfileController extends Controller
         $advisor = AdvisorProfiles::where('user_id', $user->unique_id)->firstOrFail();
 
         $advisor->discovery_call_price_per_minute = $request->input('discovery_call_price_per_minute');
-        $advisor->discovery_call_price_per_hour = $request->input('discovery_call_price_per_hour');
+        // $advisor->discovery_call_price_per_hour = $request->input('discovery_call_price_per_hour');
         $advisor->conference_call_price_per_minute = $request->input('conference_call_price_per_minute');
         $advisor->conference_call_price_per_hour = $request->input('conference_call_price_per_hour');
         $advisor->chat_price_per_minute = $request->input('chat_price_per_minute');

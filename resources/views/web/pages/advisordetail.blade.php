@@ -244,22 +244,22 @@
                             @endauth
                         @endif
                         <!-- <a
-                                                                                                                                                                                                                            class="flex items-center gap-2 cursor-pointer"
-                                                                                                                                                                                                                            href="../Advisor pages/wallet.html"
-                                                                                                                                                                                                                          >
-                                                                                                                                                                                                                            <img
-                                                                                                                                                                                                                              class="w-5 h-5"
-                                                                                                                                                                                                                              src="./src/assets/img/iconWallet.png"
-                                                                                                                                                                                                                              alt=""
-                                                                                                                                                                                                                            />
+                                                                                                                                                                                                                                class="flex items-center gap-2 cursor-pointer"
+                                                                                                                                                                                                                                href="../Advisor pages/wallet.html"
+                                                                                                                                                                                                                              >
+                                                                                                                                                                                                                                <img
+                                                                                                                                                                                                                                  class="w-5 h-5"
+                                                                                                                                                                                                                                  src="./src/assets/img/iconWallet.png"
+                                                                                                                                                                                                                                  alt=""
+                                                                                                                                                                                                                                />
 
-                                                                                                                                                                                                                            <div
-                                                                                                                                                                                                                              class="flex items-center font-sans text-sm sm:text-base text-[#DB9206] font-semibold"
-                                                                                                                                                                                                                            >
-                                                                                                                                                                                                                              &#8377;
-                                                                                                                                                                                                                              <p>1,229</p>
-                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                          </a> -->
+                                                                                                                                                                                                                                <div
+                                                                                                                                                                                                                                  class="flex items-center font-sans text-sm sm:text-base text-[#DB9206] font-semibold"
+                                                                                                                                                                                                                                >
+                                                                                                                                                                                                                                  &#8377;
+                                                                                                                                                                                                                                  <p>1,229</p>
+                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                              </a> -->
                     </div>
                     {{-- <div class="border border-[#DB9206] bg-[#FFF3DB] rounded sm:rounded-lg px-2 py-1 sm:py-2 sm:px-4">
                 <a class="flex items-center gap-2 cursor-pointer" href="../Advisor pages/wallet.html">
@@ -282,24 +282,20 @@
         </div>
 
         <!-- Search box for both mobile and desktop -->
-        <form action="{{ route('consult-advisor') }}" method="GET">
-            <div
-                class="flex flex-row lg:flex-row p-3 mx-auto bg-white border border-[#EAEAEA] rounded-[50px] justify-between w-full max-w-[80%]">
-                <input id="search-bar" name="search" class="bg-white rounded-[50px] w-full px-4 py-2 mb-3 lg:mb-0"
-                    placeholder="Search Advisor" type="text" autocomplete="off" />
-                <button type="submit"
-                    class="flex items-center  lg:w-auto bg-[#EDF6DB] px-6 py-3 rounded-[40px] gap-4 justify-center text-center whitespace-nowrap">
-                    <!-- Icon always visible -->
-                    <svg class="w-5 h-5 text-[#000000]" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round"
-                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                    </svg>
-                    <!-- Text only visible on large screens and above -->
-                    <p class="text-black hidden lg:block">Find Advisor</p>
-                </button>
-            </div>
-        </form>
+<form action="{{ route('consult-advisor') }}" method="GET">
+    <div class="flex flex-row lg:flex-row p-2 mt-4 mx-auto items-center bg-white border border-[#EAEAEA] rounded-[50px] justify-between w-full max-w-[80%]">
+        <input id="search-bar" name="search" class="bg-white rounded-[50px] w-full px-4 lg:py-3 lg:mb-0 text-sm lg:text-base" placeholder="Search Advisor" type="text" autocomplete="off" />
+        <button type="submit" class="flex items-center lg:w-auto bg-[#EDF6DB] p-2 lg:px-3  lg:py-3 rounded-full gap-4 justify-center text-center whitespace-nowrap">
+            <!-- Icon always visible -->
+            <svg class="w-5 h-5 text-[#000000]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+            <!-- Text only visible on large screens and above -->
+            <p class="text-black hidden lg:block">Find Advisor</p>
+        </button>
+    </div>
+</form>
+
 
 
 
@@ -329,7 +325,7 @@
 
                 <!-- next buttons -->
                 <!-- <div class="swiper-button-prev"></div>
-                                                                                                                                                                                                                                    <div class="swiper-button-next"></div> -->
+                                                                                                                                                                                                                                        <div class="swiper-button-next"></div> -->
             </div>
             <!-- content section -->
             <div class="w-full flex gap-[20px]">
@@ -362,12 +358,26 @@
                                 alt="{{ $advisor->full_name }}" />
                             <div class="flex flex-col gap-[4px]">
                                 <div class="flex items-center gap-1">
-                                    <img class="w-[20px] h-[20px]" src="../src/assets/icons/Notify me.png"
+
+
+                                    {{-- <img class="w-[20px] h-[20px]" src="../src/assets/icons/Notify me.png"
                                         alt="" />
 
                                     <p class="lg:text-[16px] text-[10px] font-[500] text-[#C95555]">
                                         Notify me
-                                    </p>
+                                    </p> --}}
+
+                                    <button id="notifyButton" type="button"
+                                        data-route="{{ route('notify.advisor', $advisor->user_id) }}"
+                                        data-advisor-id="{{ $advisor->user_id }}"
+                                        class="lg:text-[16px] text-[10px] font-[500] text-[#C95555] flex items-center gap-1">
+                                        <img class="w-[20px] h-[20px]" src="../src/assets/icons/Notify me.png"
+                                            alt="" />
+                                        Notify me
+                                    </button>
+
+
+
                                 </div>
                             </div>
                         </div>
@@ -465,14 +475,15 @@
                                     <img class="w-[20px] h-[20px]" src="../src/assets/icons/hindi.png" alt="" />
 
                                     <p class="text-[12px] font-[500] text-[#3A3A3A]">
-                                        {{ $advisor->language_known ?? 'N/A' }}
+                                        {{-- {{ $advisor->language_known ?? 'N/A' }} --}}
+                                        English,Hindi
                                     </p>
                                 </div>
                                 <div class="flex items-center gap-1">
                                     <img class="w-[20px] h-[20px]" src="../src/assets/icons/33.png" alt="" />
 
                                     <p class="text-[12px] font-[500] text-[#3A3A3A]">
-                                        {{ $advisor->discovery_call_price_per_minute ?? 'N/A' }}/min</p>
+                                        {{ $advisor->conference_call_price_per_minute ?? 'N/A' }}/min</p>
                                 </div>
                                 <div class="flex items-center gap-1">
                                     <img class="w-[20px] h-[20px]" src="../src/assets/icons/location.png"
@@ -697,22 +708,23 @@
                             </div>
                         </div>
                         @if ($advisor->is_founder)
-                            <h3 class="lg:text-[16px] font-[400] text-[12px]">
-                                Founder, <span class="font-bold text-[#6A9023]">{{ $advisor->company_name }}</span>
-                                <br>
-                                Website : <a href="{{ $advisor->company_website }}"
-                                    class="font-bold text-[#6A9023]">{{ $advisor->company_website }}</a>
-                            </h3>
+                        <h3 class="text-[12px] lg:text-[16px] font-[400]">
+                            Founder, <span class="font-bold text-[#6A9023]">{{ $advisor->company_name }}</span>
+                            <br class="lg:hidden">
+                            Website : 
+                            <a href="{{ $advisor->company_website }}" class="font-bold text-[#6A9023]">{{ $advisor->company_website }}</a>
+                        </h3>
+                        
                         @endif
 
-                        <h4 class="text-[12px] lg:text-[16px] font-[400]">About</h4>
+                        <h4 class="text-[12px] lg:text-[16px]  font-bold">About</h4>
                         <p class="text-[12px] lg:text-[16px] font-[400] break-words">
                             {{ $advisor->about }}
                         </p>
                     </div>
                     <!-- 3rd row  -->
                     <div class="flex flex-col bg-[#F5F5F5] gap-3 p-3">
-                        <h4 class="text-[12px] lg:text-[16px] font-[400]">
+                        <h4 class="text-[12px] font-bold lg:text-[16px]">
                             Awards & Recognition
                         </h4>
 
@@ -735,7 +747,7 @@
                     <!-- 4th row  -->
 
                     <div class="flex flex-col bg-[#F5F5F5] gap-3 p-3">
-                        <h4 class="text-[12px] lg:text-[16px] font-[400]">Services</h4>
+                        <h4 class="text-[12px] lg:text-[16px]  font-bold">Services</h4>
 
                         <div class=" break-words">
                             {{-- <li class="lg:text-[16px] text-[12px] font-[400]">
@@ -767,7 +779,7 @@
                         @endforeach
                     @endif
                     <div class="flex gap-5">
-                        <p class="font-[400] text-[14px] lg:text-[18px] text-[#2A2A2A]">
+                        <p class="font-bold text-[14px] lg:text-[18px] text-[#2A2A2A]">
                             Reviews:
                         </p>
                         <div class="bg-[#F6F8FD] rounded-[24px]">
@@ -820,15 +832,21 @@
                                     @if ($reviews->isNotEmpty())
                                         <div class="owl-controls">
                                             <div class="owl-nav flex justify-between items-center py-4">
-                                                <div class="owl-prev text-[#2A2A2A] cursor-pointer">
+                                                <!-- Previous Button -->
+                                                <div
+                                                    class="owl-prev text-[#2A2A2A] cursor-pointer p-2 hover:bg-gray-200 rounded-full transition">
                                                     <i class="fas fa-chevron-left"></i>
                                                 </div>
-                                                <div class="owl-next text-[#2A2A2A] cursor-pointer">
+
+                                                <!-- Next Button -->
+                                                <div
+                                                    class="owl-next text-[#2A2A2A] cursor-pointer p-2 hover:bg-gray-200 rounded-full transition">
                                                     <i class="fas fa-chevron-right"></i>
                                                 </div>
                                             </div>
                                         </div>
                                     @endif
+
                                 </div>
                             </div>
                         </div>
@@ -889,25 +907,28 @@
 
                                 <div class="flex flex-col w-full gap-[4px] relative">
                                     <div class="flex items-center justify-between">
-                                        <h2 class="tetx-[14px] lg:text-[18px] font-[600]">
+                                        <h2 class="text-[14px] lg:text-[18px] font-[600]">
                                             @if (Auth::check())
                                                 {{ $advisor->full_name }}
                                             @else
                                                 {{ $advisor->user_id }}
                                             @endif
                                         </h2>
-
                                     </div>
+                                
                                     @if ($advisor->is_founder)
-                                        <h3 class="lg;text-[16px] font-[400] text-[12px]">
-                                            Founder, <span
-                                                class="font-bold text-[#6A9023]">{{ $advisor->company_name }}</span>
+                                    <h3 class="text-[12px] lg:text-[16px] font-[400] break-words w-28 sm:w-48 md:">
+                                            Founder, 
+                                            <span class="font-bold text-[#6A9023]">{{ $advisor->company_name }}</span>
                                             <br>
-                                            Website : <a href="{{ $advisor->company_website }}"
-                                                class="font-bold text-[#6A9023]">{{ $advisor->company_website }}</a>
+                                            Website : 
+                                            <a href="{{ $advisor->company_website }}" class="font-bold text-[#6A9023] break-words w-full">
+                                                {{ $advisor->company_website }}
+                                            </a>
                                         </h3>
                                     @endif
                                 </div>
+                                
                                 <!-- rating -->
                                 <div class="flex items-center gap-1">
                                     <i class="fa-solid fa-star" style="color: #ffd43b"></i>
@@ -922,15 +943,17 @@
                                         src="../src/assets/icons/hindi.png" alt="" />
 
                                     <p class="text-[12px] font-[500] text-[#3A3A3A]">
-                                        {{ $advisor->language_known ?? 'N/A' }}
+                                        {{-- {{ $advisor->language_known ?? 'N/A' }} --}}
+                                        English,Hindi
                                     </p>
+                                    
                                 </div>
                                 <div class="flex items-center gap-1">
                                     <img class="sm:w-[20px] sm:h-[20px] w-[15px] h-[15px]"
                                         src="../src/assets/icons/33.png" alt="" />
 
                                     <p class="text-[12px] font-[500] text-[#3A3A3A]">
-                                        {{ $advisor->discovery_call_price_per_minute ?? 'N/A' }}/min
+                                        {{ $advisor->conference_call_price_per_minute ?? 'N/A' }}/min
                                     </p>
                                 </div>
                                 <div class="flex items-center gap-1">
@@ -942,15 +965,25 @@
                                     </p>
                                 </div>
                             </div>
+                            
 
+                        </div>
+                        <div class="flex items-center gap-1 w-ful">
+                            {{-- <img class="w-[20px] h-[20px]" src="../src/assets/icons/Notify me.png" alt="" />
+
+                            <p class="text-[12px] font-[500] text-[#C95555]">Notify me</p> --}}
+                            <button id="notifyButton" type="button"
+                                    data-route="{{ route('notify.advisor', $advisor->user_id) }}"
+                                    data-advisor-id="{{ $advisor->user_id }}"
+                                    class="lg:text-[16px] text-[12px] font-[500] text-[#C95555] flex items-center gap-1 p-3">
+                                    <img class="w-[20px] h-[20px]" src="../src/assets/icons/Notify me.png"
+                                        alt="" />
+                                    Notify me
+                                </button>
                         </div>
 
                         <div class="flex flex-col gap-[4px]">
-                            <div class="flex items-center gap-1 w-ful">
-                                <img class="w-[20px] h-[20px]" src="../src/assets/icons/Notify me.png" alt="" />
-
-                                <p class="text-[12px] font-[500] text-[#C95555]">Notify me</p>
-                            </div>
+                            
                             <div class="flex flex-col gap-[4px] w-full justify-around sm:flex-row">
                                 <button onclick="handleDiscoveryCall('{{ $advisor->user_id }}')"
                                     class="bg-[#6a9023] w-full sm:w-auto text-white px-4 py-2 rounded-md hover:bg-green-600">
@@ -1148,14 +1181,14 @@
 
             <!-- about  -->
             <div class="flex flex-col gap-[5px] bg-[#F5F5F5] p-3 mt-[12px] rounded-[12px]">
-                <h4 class="text-[12px] lg:text-[16px] font-[400]">About</h4>
+                <h4 class="text-[12px] lg:text-[16px] font-bold">About</h4>
                 <p class="text-[12px] lg:text-[16px] font-[400] break-words">
                     {{ $advisor->about }}
                 </p>
             </div>
             <!-- 3rd row  -->
             <div class="flex flex-col mt-[12px] rounded-[12px] bg-[#F5F5F5] gap-3 p-3">
-                <h4 class="text-[12px] lg:text-[16px] font-[400]">
+                <h4 class="text-[12px] lg:text-[16px] font-bold">
                     Awards & Recognition
                 </h4>
 
@@ -1178,7 +1211,7 @@
             <!-- 4th row  -->
 
             <div class="flex flex-col mt-[12px] rounded-[12px] bg-[#F5F5F5] gap-3 p-3">
-                <h4 class="text-[12px] lg:text-[16px] font-[400]">Services</h4>
+                <h4 class="text-[12px] lg:text-[16px]  font-bold">Services</h4>
 
                 <div class="break-words">
                     {{-- <li class="lg:text-[16px] text-[12px] font-[400]">
@@ -1214,7 +1247,7 @@
                     alt="" />
             </div> --}}
             <!-- testimonial slider -->
-            <p class="font-[400] mt-[12px] text-[14px] lg:text-[18px] text-[#2A2A2A]">
+            <p class="font-bold mt-[12px] text-[14px] lg:text-[18px] text-[#2A2A2A]">
                 Reviews:
             </p>
 
@@ -1510,6 +1543,104 @@
     <!-- Include SweetAlert2 and Tailwind Modal Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all the notify buttons
+            document.querySelectorAll('#notifyButton').forEach(button => {
+                button.addEventListener('click', async function(event) {
+                    event.preventDefault(); // Prevent any default action
+
+                    // Check if the user is logged in
+                    const isLoggedIn =
+                    {{ auth()->check() ? 'true' : 'false' }}; // Authentication check
+
+                    if (!isLoggedIn) {
+                        Swal.fire({
+                            title: 'Login Required',
+                            text: 'You need to log in to notify the advisor. Please log in to continue.',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: 'Login',
+                            cancelButtonText: 'Cancel',
+                            confirmButtonColor: '#4CAF50',
+                            cancelButtonColor: '#f44336',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href =
+                                "{{ route('login') }}"; // Redirect to login
+                            }
+                        });
+                        return; // Stop further execution if not logged in
+                    }
+
+                    const url = button.getAttribute('data-route');
+                    const csrfToken = '{{ csrf_token() }}'; // Directly using csrf_token()
+
+                    // Debugging line for checking Advisor ID
+                    const advisorId = button.getAttribute('data-advisor-id');
+                    console.log("Advisor ID passed:", advisorId);
+
+                    try {
+                        // Show a loading SweetAlert while the request is being processed
+                        Swal.fire({
+                            title: 'Please wait...',
+                            text: 'Notifying the advisor...',
+                            icon: 'info',
+                            allowOutsideClick: false,
+                            showConfirmButton: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+
+                        // Making an AJAX POST request using fetch
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': csrfToken,
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                advisorId: advisorId
+                            }) // Send the advisor ID
+                        });
+
+                        const data = await response.json();
+
+                        // Close the loading SweetAlert
+                        Swal.close();
+
+                        // Show a success or error SweetAlert based on the response
+                        if (data.success) {
+                            Swal.fire({
+                                title: 'Success!',
+                                text: 'Advisor has been notified successfully.',
+                                icon: 'success',
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: data.message || 'An error occurred.',
+                                icon: 'error',
+                            });
+                        }
+                    } catch (error) {
+                        // Close the loading SweetAlert in case of an error
+                        Swal.close();
+
+                        console.error('Error:', error);
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'An unexpected error occurred. Please try again.',
+                            icon: 'error',
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 
     <script>
         let selectedDayIndex = 0;

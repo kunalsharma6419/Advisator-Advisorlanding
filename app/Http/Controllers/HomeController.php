@@ -76,68 +76,74 @@ class HomeController extends Controller
     }
 
     public function home(Request $request)
-    {
-        $categories = BusinessFunctionCategory::all();
-        $industries = IndustryVertical::all();
-        $geographyLocations = GeographyLocation::all();
-        $businessFunctions = BusinessFunctionCategory::select('id', 'name')->get();
-    
-        // Fetch request inputs
-        $selectedCategory = $request->input('category');
-        $selectedBusinessFunction = $request->input('business_function');
-        $selectedSubFunction = $request->input('sub_function');
-        $selectedIndustry = $request->input('industry');
-        $selectedLocation = $request->input('location');
-    
-        // Prepare the advisor query
-        $advisors = AdvisorProfiles::query();
-    
-        // Apply category filter if selected
-        if ($selectedCategory) {
-            $advisors->whereHas('businessFunctionCategory', function($query) use ($selectedCategory) {
-                $query->where('name', $selectedCategory);
-            });
-        }
-    
-        // Apply business function filter if selected
-        if ($selectedBusinessFunction) {
-            $advisors->whereHas('businessFunctionCategory', function($query) use ($selectedBusinessFunction) {
-                $query->where('name', $selectedBusinessFunction);
-            });
-        }
-    
-        // Apply sub-function filter if selected
-        if ($selectedSubFunction) {
-            $advisors->whereHas('subFunction', function($query) use ($selectedSubFunction) {
-                $query->where('name', $selectedSubFunction);
-            });
-        }
-    
-        // Apply industry filter if selected
-        if ($selectedIndustry) {
-            $advisors->whereHas('industry', function($query) use ($selectedIndustry) {
-                $query->where('name', $selectedIndustry);
-            });
-        }
-    
-        // Apply location filter if selected
-        if ($selectedLocation) {
-            $advisors->whereHas('getGeographies', function($query) use ($selectedLocation) {
-                $query->where('name', $selectedLocation);
-            });
-        }
-    
-        // Fetch the filtered advisors
-        $advisors = $advisors->get();
-    
-        // Check if the request is AJAX (to return only the advisor list)
-        if ($request->ajax()) {
-            return view('web.pages.partials.advisor-list', compact('advisors'));
-        }
-    
-        // Return the full view if it's not an AJAX request
-        return view('web.pages.home', compact('categories', 'industries', 'geographyLocations', 'advisors', 'businessFunctions'));
+{
+    $categories = BusinessFunctionCategory::all();
+    $industries = IndustryVertical::all();
+    $geographyLocations = GeographyLocation::all();
+    $businessFunctions = BusinessFunctionCategory::select('id', 'name')->get();
+
+    // Fetch request inputs
+    $selectedCategory = $request->input('category');
+    $selectedBusinessFunction = $request->input('business_function');
+    $selectedSubFunction = $request->input('sub_function');
+    $selectedIndustry = $request->input('industry');
+    $selectedLocation = $request->input('location');
+
+    // Prepare the advisor query with a join to advisor_evaluations
+    $advisors = AdvisorProfiles::query()
+        ->join('advisor_evaluations', 'advisor_profiles.advisor_id', '=', 'advisor_evaluations.advisor_nomination_id')
+        ->select('advisor_profiles.*', 'advisor_evaluations.overall_score')
+        ->where('profile_completion_percentage', '>=', 80) // Profile completion filter
+        ->orderBy('advisor_evaluations.overall_score', 'desc'); // Order by overall score
+
+    // Apply category filter if selected
+    if ($selectedCategory) {
+        $advisors->whereHas('businessFunctionCategory', function($query) use ($selectedCategory) {
+            $query->where('name', $selectedCategory);
+        });
     }
+
+    // Apply business function filter if selected
+    if ($selectedBusinessFunction) {
+        $advisors->whereHas('businessFunctionCategory', function($query) use ($selectedBusinessFunction) {
+            $query->where('name', $selectedBusinessFunction);
+        });
+    }
+
+    // Apply sub-function filter if selected
+    if ($selectedSubFunction) {
+        $advisors->whereHas('subFunction', function($query) use ($selectedSubFunction) {
+            $query->where('name', $selectedSubFunction);
+        });
+    }
+
+    // Apply industry filter if selected
+    if ($selectedIndustry) {
+        $advisors->whereHas('industry', function($query) use ($selectedIndustry) {
+            $query->where('name', $selectedIndustry);
+        });
+    }
+
+    // Apply location filter if selected
+    if ($selectedLocation) {
+        $advisors->whereHas('getGeographies', function($query) use ($selectedLocation) {
+            $query->where('name', $selectedLocation);
+        });
+    }
+
+    // Fetch the filtered advisors
+    $advisors = $advisors->get();
+
+    // Check if the request is AJAX (to return only the advisor list)
+    if ($request->ajax()) {
+        return view('web.pages.partials.advisor-list', compact('advisors'));
+    }
+
+    // Return the full view if it's not an AJAX request
+    return view('web.pages.home', compact('categories', 'industries', 'geographyLocations', 'advisors', 'businessFunctions'));
+}
+
+    
     
     
     public function showCategoryDetail(Request $request, $categoryName)
