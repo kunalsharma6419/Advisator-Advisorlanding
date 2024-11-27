@@ -23,38 +23,59 @@ class AdvisorsController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $entriesPerPage = request('entries', 10);
-        $search = request('search');
-        
-        // Make sure to include trashed advisors
-        $advisors = AdvisorProfiles::withTrashed(); // This ensures that trashed records are included in the results
-    
-        if ($search) {
-            $advisors->where(function ($query) use ($search) {
-                $query->where('nominee_id', 'LIKE', '%' . $search . '%')
-                    ->orWhere('full_name', 'LIKE', '%' . $search . '%')
-                    ->orWhere('email', 'LIKE', '%' . $search . '%')
-                    ->orWhere('mobile_number', 'LIKE', '%' . $search . '%')
-                    ->orWhere('location', 'LIKE', '%' . $search . '%')
-                    ->orWhere('user_id', 'LIKE', '%' . $search . '%');
-            });
-        }
-    
-        // Filter by 'selected' status
-        $advisors = $advisors->where('nomination_status', 'selected')->paginate($entriesPerPage);
-    
-        $totaladvisors = AdvisorProfiles::where('nomination_status', 'selected')->count();
-    
-        $recentlySelectedDate = Carbon::now()->subDays(7);
-        $newprofiles = AdvisorProfiles::where('nomination_status', 'selected')
-                                        ->where('updated_at', '>=', $recentlySelectedDate)
-                                        ->count();
-    
-        return view('admin.pages.advisoraccounts.index', compact('advisors', 'search', 'totaladvisors', 'newprofiles'));
+     */public function index()
+{
+    $entriesPerPage = request('entries', 10);
+    $search = request('search');
+    $profilePercentage = request('profile_percentage');
+
+    $advisors = AdvisorProfiles::withTrashed(); // Include trashed records
+
+    // Search filter
+    if ($search) {
+        $advisors->where(function ($query) use ($search) {
+            $query->where('nominee_id', 'LIKE', '%' . $search . '%')
+                ->orWhere('full_name', 'LIKE', '%' . $search . '%')
+                ->orWhere('email', 'LIKE', '%' . $search . '%')
+                ->orWhere('mobile_number', 'LIKE', '%' . $search . '%')
+                ->orWhere('location', 'LIKE', '%' . $search . '%')
+                ->orWhere('user_id', 'LIKE', '%' . $search . '%');
+        });
     }
+
+    // Profile completion percentage filter
+    if ($profilePercentage) {
+        // Check if the value is a range (e.g., "0-100")
+        if (strpos($profilePercentage, '-') !== false) {
+            // It's a range, split it
+            $range = explode('-', $profilePercentage);
+            if (count($range) === 2) {
+                $min = (float) trim($range[0]);
+                $max = (float) trim($range[1]);
+                $advisors->whereBetween('profile_completion_percentage', [$min, $max]);
+            }
+        } else {
+            // It's a single value, filter by exact match
+            $percentage = (float) trim($profilePercentage);
+            $advisors->where('profile_completion_percentage', $percentage);
+        }
+    }
+
+    // Filter by 'selected' status
+    $advisors = $advisors->where('nomination_status', 'selected')->paginate($entriesPerPage);
+
+    $totaladvisors = AdvisorProfiles::where('nomination_status', 'selected')->count();
+
+    $recentlySelectedDate = Carbon::now()->subDays(7);
+    $newprofiles = AdvisorProfiles::where('nomination_status', 'selected')
+                                   ->where('updated_at', '>=', $recentlySelectedDate)
+                                   ->count();
+
+    return view('admin.pages.advisoraccounts.index', compact('advisors', 'search', 'totaladvisors', 'newprofiles', 'profilePercentage'));
+}
+
+
+
     
     /**
      * Show the form for creating a new resource.
@@ -133,105 +154,125 @@ class AdvisorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $advisor = AdvisorProfiles::findOrFail($id);
-
-        // Validate incoming request data
-        $request->validate([
-            'photo' => 'nullable|image|max:2048', // Adjust max file size as needed
-            'full_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'mobile_number' => 'required|string|max:20',
-            'location' => 'nullable|string|max:255',
-            'business_function_category_id' => 'required|exists:business_function_categories,id',
-            'sub_function_category_id_1' => 'nullable|exists:sub_function_categories,id',
-            'sub_function_category_id_2' => 'nullable|exists:sub_function_categories,id',
-            'industries.*' => 'nullable|exists:industry_verticals,id',
-            'geographies.*' => 'nullable|exists:geography_locations,id',
-            'highlighted_images.*' => 'nullable|image|max:2048', // Validate highlighted images
-            'is_available' => 'nullable|boolean',
-            'language_known' => 'nullable|string|in:English,Hindi',
-            'services.*' => 'nullable|string',
-            'awards_recognition.*' => 'nullable|string',
-            // 'video_upload.*' => 'nullable|file|mimes:mp4,mov,avi|max:20480', // Validate video uploads
-            'about' => 'nullable|string',
-            'is_founder' => 'nullable|boolean',
-            'company_name' => 'nullable|string|max:255',
-            'company_website' => 'nullable|string|max:255|url',
-            'awards_recognition' => 'nullable|string',
-            'services' => 'nullable|string',
-        ]);
-
-        // Handle photo upload
-        if ($request->hasFile('photo')) {
-            // Delete previous photo if exists
-            if ($user->profile_photo_path) {
-                Storage::delete($user->profile_photo_path);
-            }
-
-            // Store new photo
-            $photoPath = $request->file('photo')->store('profile-photos', 'public');
-            $user->profile_photo_path = $photoPath;
-        }
-
-        // Handle multiple photo uploads (highlighted_images)
-        if ($request->hasFile('highlighted_images')) {
-            $uploadedImages = [];
-            foreach ($request->file('highlighted_images') as $image) {
-                $path = $image->store('highlighted-images', 'public');
-                $uploadedImages[] = $path;
-            }
-            $advisor->highlighted_images = $uploadedImages;
-        }
-
-        // Remove deleted images from storage and database
-        if ($request->has('removed_images')) {
-            $removedImages = $request->input('removed_images', []);
-            foreach ($removedImages as $removedImage) {
-                // Delete from storage
-                Storage::disk('public')->delete($removedImage);
-                // Remove from database field
-                $advisor->highlighted_images = array_diff($advisor->highlighted_images ?? [], [$removedImage]);
-            }
-        }
-
-        // Update advisor profile fields
-        $advisor->fill($request->except(['photo', 'industries', 'geographies', 'highlighted_images', 'removed_images']));
-
-        // Sync industries
-        if ($request->has('industries')) {
-            $advisor->industry_ids = $request->input('industries');
-        } else {
-            $advisor->industry_ids = [];
-        }
-
-        // Sync geographies
-        if ($request->has('geographies')) {
-            $advisor->geography_ids = $request->input('geographies');
-        } else {
-            $advisor->geography_ids = [];
-        }
-
-        // Convert JSON strings to arrays
-        $advisor->industry_ids = json_decode($request->input('industries', '[]'));
-        $advisor->geography_ids = json_decode($request->input('geographies', '[]'));
 
 
-        // Sync services
-        $advisor->services = $request->input('services', []);
+     public function update(Request $request, $id)
+     {
+         $advisor = AdvisorProfiles::find($id);
+     
+         if (!$advisor) {
+             return redirect()->back()->withErrors(['error' => 'Advisor profile not found.']);
+         }
+     
+         // Step 2: Fetch the associated user using the advisor profile's user_id
+         $user = User::where('unique_id', $advisor->user_id)->first();
+     
+         if (!$user) {
+             return redirect()->back()->withErrors(['error' => 'Associated user not found.']);
+         }
+     
+         // Validate incoming request data
+         $request->validate([
+             'photo' => 'nullable|image|max:2048', // Adjust max file size as needed
+             'full_name' => 'required|string|max:255',
+             'email' => 'required|string|email|max:255',
+             'mobile_number' => 'required|string|max:20',
+             'location' => 'nullable|string|max:255',
+             'business_function_category_id' => 'required|exists:business_function_categories,id',
+             'sub_function_category_id_1' => 'nullable|exists:sub_function_categories,id',
+             'sub_function_category_id_2' => 'nullable|exists:sub_function_categories,id',
+             'industries.*' => 'nullable|exists:industry_verticals,id',
+             'geographies.*' => 'nullable|exists:geography_locations,id',
+             'highlighted_images.*' => 'nullable|image|max:2048', // Validate highlighted images
+             'is_available' => 'nullable|boolean',
+             'language_known' => 'nullable|string|in:English,Hindi',
+             'services.*' => 'nullable|string',
+             'awards_recognition.*' => 'nullable|string',
+             // 'video_upload.*' => 'nullable|file|mimes:mp4,mov,avi|max:20480', // Validate video uploads
+             'about' => 'nullable|string',
+             'is_founder' => 'nullable|boolean',
+             'company_name' => 'nullable|string|max:255',
+             'company_website' => 'nullable|string|max:255|url',
+             'awards_recognition' => 'nullable|string',
+             'services' => 'nullable|string',
+         ]);
+     
+         // Handle photo upload
+         if ($request->hasFile('photo')) {
+             // Delete previous photo if exists
+             if ($user->profile_photo_path) {
+                 Storage::delete($user->profile_photo_path);
+             }
+     
+             // Store new photo
+             $photoPath = $request->file('photo')->store('profile-photos', 'public');
+             $user->profile_photo_path = $photoPath;
+     
+             // Also update the advisor profile's photo path
+             $advisor->profile_photo_path = $photoPath;
+         }
+     
+         // Handle multiple photo uploads (highlighted_images)
+         if ($request->hasFile('highlighted_images')) {
+             $uploadedImages = [];
+             foreach ($request->file('highlighted_images') as $image) {
+                 $path = $image->store('highlighted-images', 'public');
+                 $uploadedImages[] = $path;
+             }
+             $advisor->highlighted_images = $uploadedImages;
+         }
+     
+         // Remove deleted images from storage and database
+         if ($request->has('removed_images')) {
+             $removedImages = $request->input('removed_images', []);
+             foreach ($removedImages as $removedImage) {
+                 // Delete from storage
+                 Storage::disk('public')->delete($removedImage);
+                 // Remove from database field
+                 $advisor->highlighted_images = array_diff($advisor->highlighted_images ?? [], [$removedImage]);
+             }
+         }
+     
+         // Update advisor profile fields
+         $advisor->fill($request->except(['photo', 'industries', 'geographies', 'highlighted_images', 'removed_images']));
+     
+         // Sync industries
+         if ($request->has('industries')) {
+             $advisor->industry_ids = $request->input('industries');
+         } else {
+             $advisor->industry_ids = [];
+         }
+     
+         // Sync geographies
+         if ($request->has('geographies')) {
+             $advisor->geography_ids = $request->input('geographies');
+         } else {
+             $advisor->geography_ids = [];
+         }
+     
+         // Convert JSON strings to arrays
+         $advisor->industry_ids = json_decode($request->input('industries', '[]'));
+         $advisor->geography_ids = json_decode($request->input('geographies', '[]'));
+     
+         // Sync services
+         $advisor->services = $request->input('services', []);
+     
+         // Sync awards and recognitions
+         $advisor->awards_recognition = $request->input('awards_recognition', []);
+     
+         // Calculate profile completion percentage
+         $completionPercentage = $advisor->calculateCompletionPercentage();
+         $advisor->profile_completion_percentage = $completionPercentage;
+     
+         // Save advisor profile
+         $advisor->save();
+     
+         // Redirect back with success message
+         return redirect()->back()->with('success', 'Profile updated successfully.');
+     }
+     
 
-        // Sync awards and recognitions
-        $advisor->awards_recognition = $request->input('awards_recognition', []);
-
-
-        // Save advisor profile
-        $advisor->save();
-
-        // Redirect back with success message
-        return redirect()->back()->with('success', 'Profile updated successfully.');
-    }
-
+    
     public function getAvailability($id)
     {
         $advisor = AdvisorProfiles::findOrFail($id);
@@ -409,17 +450,15 @@ class AdvisorsController extends Controller
                 $advisorProfile->delete(); // Soft delete the advisor profile
             }
     
-          
-    
             return redirect()->route('advisatoradmin.advisoraccounts.list')
-                             ->with('success', 'User and advisor profile deleted successfully.');
+                             ->with('success', 'Advisor profile deleted successfully.');
         } else {
             return redirect()->route('advisatoradmin.advisoraccounts.list')
                              ->with('error', 'User not found.');
         }
     }
-
     
+
     public function userRestore($user_id)
     {
         // Find the user by unique_id or user_id (if applicable)
@@ -433,15 +472,14 @@ class AdvisorsController extends Controller
                 $advisorProfile->restore(); // Restore the advisor profile
             }
     
-           
-    
             return redirect()->route('advisatoradmin.advisoraccounts.list')
-                             ->with('success', 'User and advisor profile restored successfully.');
+                             ->with('success', 'Advisor profile restored successfully.');
         } else {
             return redirect()->route('advisatoradmin.advisoraccounts.list')
                              ->with('error', 'User not found.');
         }
     }
+    
     
 
 

@@ -85,7 +85,15 @@
                                     </div>
                                     <div class="col-md-6 text-right">
                                         <form action="{{ url()->current() }}" method="GET"
+
                                             class="w-100 d-flex justify-content-end align-items-center">
+
+                                            <div class="d-flex justify-content-end  align-items-center">
+                                            <label for="profile_percentage" class="mr-4 mb-0">Profile%</label>
+                                            <input type="text" name="profile_percentage" id="profile_percentage"  class="form-control mr-2 w-auto" 
+                                                   placeholder="e.g., 0-100" value="{{ request('profile_percentage') }}" max="100" min="0">
+                                                </div>
+                                                   
                                             <input type="text" class="form-control mr-2" name="search"
                                                 placeholder="Search Nominations" value="{{ $search }}">
                                             <button class="btn btn-primary" type="submit"><i
