@@ -11,6 +11,7 @@ use App\Models\IndustryVertical;
 use App\Models\GeographyLocation;
 use App\Models\Availabilities;
 use App\Models\AdvisorNomination;
+use Illuminate\Support\Facades\Storage;
 use App\Models\BankDetails;
 use App\Models\user;
 use Illuminate\Support\Facades\DB;
@@ -140,7 +141,7 @@ class AdvisorsController extends Controller
         $request->validate([
             'photo' => 'nullable|image|max:2048', // Adjust max file size as needed
             'full_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $advisor->id,
+            'email' => 'required|string|email|max:255',
             'mobile_number' => 'required|string|max:20',
             'location' => 'nullable|string|max:255',
             'business_function_category_id' => 'required|exists:business_function_categories,id',
@@ -158,6 +159,8 @@ class AdvisorsController extends Controller
             'is_founder' => 'nullable|boolean',
             'company_name' => 'nullable|string|max:255',
             'company_website' => 'nullable|string|max:255|url',
+            'awards_recognition' => 'nullable|string',
+            'services' => 'nullable|string',
         ]);
 
         // Handle photo upload

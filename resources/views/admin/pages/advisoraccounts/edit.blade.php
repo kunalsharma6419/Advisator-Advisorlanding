@@ -288,6 +288,28 @@
                                     @enderror
                                 </div>
 
+                                <div class="w-100 mb-4 mt-4">
+                                    <label for="awards_recognition" class="form-label text-secondary">Awards Recognition</label>
+                                    <div id="awards-recognition-editor"
+                                        class="text-base font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
+                                    </div>
+                                    <textarea hidden id="awards_recognition" name="awards_recognition" rows="6" class="form-control">{{ old('awards_recognition', $advisor->awards_recognition) }}</textarea>
+                                    @error('awards_recognition')
+                                        <div class="text-danger small">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="w-100 mb-4 mt-4">
+                                    <label for="services" class="form-label text-secondary">Services</label>
+                                    <div id="services-editor"
+                                        class="text-base font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
+                                    </div>
+                                    <textarea hidden id="services" name="services" rows="6" class="form-control">{{ old('services', $advisor->services) }}</textarea>
+                                    @error('services')
+                                        <div class="text-danger small">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
 
                                 <button type="submit" class="btn btn-primary me-2">Submit</button>
                                 <button class="btn btn-light">Cancel</button>
@@ -667,6 +689,63 @@
         </div>
         <!-- page-body-wrapper ends -->
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to initialize Quill editor
+            function initializeQuillEditor(selector, hiddenInputId, initialContent) {
+                var quill = new Quill(selector, {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: [
+                            [{
+                                'header': '1'
+                            }, {
+                                'header': '2'
+                            }],
+                            ['bold', 'italic', 'underline'],
+                            [{
+                                'list': 'ordered'
+                            }, {
+                                'list': 'bullet'
+                            }],
+                            ['link', 'image'],
+                            ['clean']
+                        ]
+                    }
+                });
+
+                // Set the initial content of the Quill editor
+                quill.root.innerHTML = initialContent;
+
+                // Sync Quill content with hidden input field
+                quill.on('text-change', function() {
+                    var html = quill.root.innerHTML;
+                    document.getElementById(hiddenInputId).value = html;
+                });
+
+                return quill;
+            }
+
+            // Initialize Quill editors for both web and mobile views
+
+            // Awards and Recognition (Web)
+            var awardsContentWeb = document.getElementById('awards_recognition').value;
+            initializeQuillEditor('#awards-recognition-editor', 'awards_recognition', awardsContentWeb);
+
+              // Services (Web)
+              var servicesContentWeb = document.getElementById('services').value;
+            initializeQuillEditor('#services-editor', 'services', servicesContentWeb);
+
+        
+          
+        });
+    </script>
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
         function previewPhoto() {

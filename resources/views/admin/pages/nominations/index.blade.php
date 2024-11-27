@@ -83,7 +83,7 @@
                                                     <option value="100" {{ request('entries') == 100 ? 'selected' : '' }}>100</option>
                                                 </select>
                                                 <span>entries</span>
-                                            </form>
+                                            
                                         </div>
                                 
                                         <!-- Search input and other filters (flex row on mobile, columns on desktop) -->
@@ -108,6 +108,7 @@
                                             <div class="mb-2 mb-md-0 w-100 w-md-15">
                                                 <button class="btn btn-primary w-100" type="submit"><i class="fa fa-search"></i></button>
                                             </div>
+                                        </form>
                                         </div>
                                     </div>
                                 </div>

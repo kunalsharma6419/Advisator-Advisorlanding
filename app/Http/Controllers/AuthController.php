@@ -359,7 +359,7 @@ class AuthController extends Controller
     }
 
 
-    
+
 
     public function userLogin(Request $request)
     {
@@ -368,16 +368,16 @@ class AuthController extends Controller
             'email' => 'string|email|required|max:100',
             'usertype' => 'required|integer', // Ensure that usertype is provided
         ]);
-    
+
         // Fetch the user by email
         $user = User::where('email', $request->email)->first();
-    
+
         // Check if user exists
         if (!$user) {
             // If user not found, redirect back with an error
             return back()->with('error', 'This email address does not exist in our system. Please try signing up');
         }
-    
+
         /*
         // Match the usertype from the form with the user record
         if ($request->usertype == 0) {
@@ -397,19 +397,19 @@ class AuthController extends Controller
             return back()->with('error', 'Invalid user type. Please contact administration.');
         }
         */
-    
+
         // Proceed with the authentication flow if the profile is valid
         $this->authenticatecomet($user);
-    
+
         // Send OTP and redirect to verification page
         $this->sendOtp($user);
         return redirect("/verification-login/" . $user->id);
     }
-    
-        
-    
-    
-    
+
+
+
+
+
 
     public function authenticatecomet(User $user)
     {
@@ -551,12 +551,12 @@ class AuthController extends Controller
     public function toggleUsertype(Request $request)
     {
         $user = Auth::user();
-    
+
         // Check if the user is switching to advisor
         if ($user->usertype == 0) {
             // Check if the user has a nomination in the AdvisorNomination table
             $nomination = AdvisorNomination::where('user_id', $user->unique_id)->first();
-    
+
             if ($nomination) {
                 // If nomination exists, check its status
                 if ($nomination->nomination_status == 'selected') {
@@ -566,7 +566,7 @@ class AuthController extends Controller
                         // Switch usertype to advisor if profile is active
                         $user->usertype = 2;
                         $user->save();
-    
+
                         return redirect()->route('advisor.dashboard')->with('success', 'You are now switched to the Advisor dashboard.');
                     } else {
                         // Profile is inactive or missing
@@ -583,27 +583,27 @@ class AuthController extends Controller
                                  ->with('info', 'Fill out the nomination form to apply for the role of Advisor.');
             }
         }
-    
+
         // Check if the user is switching to client
         if ($user->usertype == 2) {
             // Check if the user profile is completed and active in the UserRegistration table
             $userProfile = UserProfiles::where('user_id', $user->unique_id)->first();
-    
+
             if ($userProfile && !$userProfile->is_deleted) {
                 // Switch usertype to client if profile is active
                 $user->usertype = 0;
                 $user->save();
-    
+
                 return redirect()->route('user.myprofile')->with('success', 'You are now switched to the Client dashboard.');
             } else {
                 // Profile is inactive or missing
                 return back()->with('error', 'Your client account is deactivated. Please contact administration.');
             }
         }
-    
+
         // If no valid switch, return an error message
         return back()->with('error', 'User type switch failed due to missing or inactive profile.');
     }
-    
+
 
 }
