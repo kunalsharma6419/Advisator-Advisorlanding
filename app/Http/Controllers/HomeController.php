@@ -93,7 +93,7 @@ class HomeController extends Controller
     $advisors = AdvisorProfiles::query()
         ->join('advisor_evaluations', 'advisor_profiles.advisor_id', '=', 'advisor_evaluations.advisor_nomination_id')
         ->select('advisor_profiles.*', 'advisor_evaluations.overall_score')
-        ->where('profile_completion_percentage', '>=', 80) // Profile completion filter
+        ->where('profile_completion_percentage', '>=', 65) // Profile completion filter
         ->orderBy('advisor_evaluations.overall_score', 'desc'); // Order by overall score
 
     // Apply category filter if selected
@@ -153,7 +153,7 @@ class HomeController extends Controller
         // Fetch only advisors related to the specific category
         $query = AdvisorProfiles::with(['businessFunctionCategory', 'subFunctionCategory1', 'subFunctionCategory2'])
                     ->where('business_function_category_id', $category->id)
-                    ->where('profile_completion_percentage', '>=', 80); // Ensure profile completion is at least 80%
+                    ->where('profile_completion_percentage', '>=', 65); // Ensure profile completion is at least 80%
     
         // Apply Search Filter
         if ($request->filled('search')) {
@@ -235,7 +235,7 @@ class HomeController extends Controller
     // Filter advisors that belong to the specified industry and have a profile completion of 80% or more
     $advisors = $advisors->filter(function ($advisor) use ($industry) {
         // Check if the advisor's industry_ids contains the industry ID and if profile is complete
-        return in_array($industry->id, $advisor->industry_ids) && $advisor->profile_completion_percentage >= 80;
+        return in_array($industry->id, $advisor->industry_ids) && $advisor->profile_completion_percentage >= 65;
     });
 
     // Apply search filter if applicable
@@ -306,7 +306,7 @@ public function showGeographyDetail(Request $request, $locationName)
     // Filter advisors that belong to the specified geography location and have a profile completion of 80% or more
     $advisors = $advisors->filter(function ($advisor) use ($location) {
         // Check if the advisor's geography_ids contains the location ID and if profile is complete
-        return in_array($location->id, $advisor->geography_ids) && $advisor->profile_completion_percentage >= 80;
+        return in_array($location->id, $advisor->geography_ids) && $advisor->profile_completion_percentage >= 65;
     });
 
     // Apply search filter if applicable
@@ -390,7 +390,7 @@ public function showGeographyDetail(Request $request, $locationName)
             ->orderBy('advisor_evaluations.overall_score', 'desc'); // Order by overall_score in descending order
     
         // Apply Profile completion filter
-        $query->where('profile_completion_percentage', '>=', 80);
+        $query->where('profile_completion_percentage', '>=', 65);
     
         // Apply other filters (business_function, sub_function, industry, location, etc.)
         if ($request->filled('business_function')) {

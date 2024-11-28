@@ -746,7 +746,7 @@
                                 </div>
                             </div> --}}
                                 <div class="swiper-wrapper">
-                                    @foreach ($industries as $industry)
+                                    @foreach ($industries->take(23) as $industry)
                                         <a href="{{ route('industry.detail', ['industryName' => $industry->name]) }}"
                                             class="swiper-slide">
                                             <div
