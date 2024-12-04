@@ -1,7 +1,7 @@
 @extends('user.layouts.app')
 
 @section('usercontent')
-    <div class="w-full min-h-screen h-full relative overflow-hidden">
+    <div class="relative w-full h-full min-h-screen overflow-hidden">
         <!-- header -->
         @include('user.components.mainheader')
 
@@ -52,66 +52,67 @@
             </form>
 
             <!-- Table -->
-            <div class="w-[98%] sm:w-[90%] mx-auto mt-[2rem] bg-[#FAFAFA] p-1 shadow-sm mb-[5rem] md:mb-[1rem]">
-                <table class="table-fixed w-full border-separate text-[Generate invoice] border-spacing-y-3">
-                    <thead class="text-[#2A2A2A] font-medium text-base lg:text-lg">
+            <div class="w-[98%] sm:w-[90%] mx-auto mt-8 bg-[#FAFAFA] p-4 shadow-sm mb-[5rem] md:mb-[1rem]">
+                <table class="w-full border-separate table-auto border-spacing-y-3">
+                    <thead class="text-sm font-medium text-gray-800 bg-gray-100 md:text-base">
                         <tr>
-                            <th class="hidden md:block text-left align-top">Sr. No.</th>
-                            <th class="text-left align-top">Date</th>
-                            <th class="hidden md:block text-left align-top">Time</th>
-                            <th class="text-left align-top">Status</th>
-                            <th class="text-left align-top">Method</th>
-                            <th class="text-left align-top">Amount</th>
-                            <th class="text-left align-top">Wallet Balance</th>
-                            <th class="text-left align-top">Invoice</th>
+                            <th class="hidden px-2 py-3 text-left md:block">Sr. No.</th>
+                            <th class="px-2 py-3 text-left">Date</th>
+                            <th class="hidden px-2 py-3 text-left md:block">Time</th>
+                            <th class="px-2 py-3 text-left">Status</th>
+                            <th class="px-2 py-3 text-left">Method</th>
+                            <th class="px-2 py-3 text-left">Amount</th>
+                            <th class="px-2 py-3 text-left">Wallet Balance</th>
+                            <th class="px-2 py-3 text-left">Invoice</th>
                         </tr>
                     </thead>
-                    <tbody class="text-sm lg:text-base border-spacing-y-10">
-                        @foreach ($transactions as $transaction)
+                    <tbody class="text-sm md:text-base">
+                        @if ($transactions->isEmpty())
                             <tr>
-                                <td class="hidden md:block">{{ $loop->iteration }}</td>
-                                <td>{{ $transaction->created_at->format('d/m/Y') }}</td>
-                                <td class="hidden md:block">{{ $transaction->created_at->format('h:i A') }}</td>
-                                <td>{{ $transaction->status }}</td>
-                                <td>{{ $transaction->method }}</td>
-                                <td class="{{ $transaction->method == 'booking refund' ? 'text-green-500' : 'text-[#FF3131]' }}">
-                                    ₹{{ number_format($transaction->amount, 2) }}
+                                <td colspan="8" class="py-4 text-center text-gray-500">
+                                    No transactions available.
                                 </td>
-                                <td>₹{{ number_format($transaction->total_wallet_balance, 2) }}</td>
-                                <td class="text-[#6A9023] underline hidden md:block cursor-pointer">Generate Invoice</td>
-                                <td class="text-[#6A9023] underline block md:hidden cursor-pointer">Download</td>
                             </tr>
-                        @endforeach
+                        @else
+                            @foreach ($transactions as $transaction)
+                                <tr class="bg-white hover:bg-gray-50">
+                                    <td class="hidden px-2 py-3 md:block">{{ $loop->iteration }}</td>
+                                    <td class="px-2 py-3">{{ $transaction->created_at->format('d/m/Y') }}</td>
+                                    <td class="hidden px-2 py-3 md:block">{{ $transaction->created_at->format('h:i A') }}</td>
+                                    <td class="px-2 py-3">{{ $transaction->status }}</td>
+                                    <td class="px-2 py-3">{{ $transaction->method }}</td>
+                                    <td class="px-2 py-3 {{ $transaction->method == 'booking refund' ? 'text-green-500' : 'text-red-500' }}">
+                                        ₹{{ number_format($transaction->amount, 2) }}
+                                    </td>
+                                    <td class="px-2 py-3">₹{{ number_format($transaction->total_wallet_balance, 2) }}</td>
+                                    <td class="hidden px-2 py-3 text-green-600 underline cursor-pointer md:block">
+                                        Generate Invoice
+                                    </td>
+                                    <td class="block px-2 py-3 text-green-600 underline cursor-pointer md:hidden">
+                                        Download
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
-
+            
                 <!-- Pagination -->
                 <div class="mt-4">
                     {{ $transactions->links() }} <!-- Laravel pagination links -->
                 </div>
             </div>
-        </div>
+        </div>            
+            
 
-        <footer class="hidden md:block bg-[#FFFFFF] shadow-2xl border border-transparent mt-[2rem]">
-            <div class="border border-[#EAEAEA] mb-4 w-full"></div>
-            <div class="md:w-[95%] lg:w-[90%] mx-auto my-[2rem]">
-                <div class="w-full flex items-center justify-between">
-                    <h3 class="text-[#3A3A3A] font-normal text-base text-start">
-                        © 2024 Advisator. All rights reserved.
-                    </h3>
-                    <h3 class="text-[#3A3A3A] font-normal text-base text-start">
-                        info@advisator.in
-                    </h3>
-                </div>
-            </div>
-        </footer>
+        
 
         {{-- <!-- side bar -->
         <div
-            class="sidebar absolute md:hidden flex justify-end z-20 top-0 transition-all left-full w-full min-h-screen h-full bottom-0">
+            class="absolute top-0 bottom-0 z-20 flex justify-end w-full h-full min-h-screen transition-all sidebar md:hidden left-full">
             <div class="w-[70%] sm:w-[60%] bg-[#FFFFFF] h-full">
                 <div class="w-[90%]s mx-auto flexs flex-col gap-4 py-[2rem]">
-                    <div class="flex justify-between items-center">
+                    <div class="flex items-center justify-between">
                         <a href="../Client pages/userProfile.html">
                             <div class="flex items-center gap-1 bg-[#FFF4ED] px-6 py-3 rounded-r-[30px]">
                                 <img class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[3rem]"
@@ -127,7 +128,7 @@
                             </div>
                         </a>
                         <div>
-                            <img id="hideSideMenu" class="w-7 sm:w-8 cursor-pointer" src="../src/assets/img/cross.png"
+                            <img id="hideSideMenu" class="cursor-pointer w-7 sm:w-8" src="../src/assets/img/cross.png"
                                 alt="" />
                         </div>
                     </div>
@@ -240,14 +241,14 @@
             <div class="h-full w-[85%] mx-auto flex justify-between items-center">
                 <div class="flex flex-col items-center justify-center gap-1">
                     <a href="../Home.html">
-                        <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="../src/assets/bottomNavbar/activeHome.png"
+                        <img class="cursor-pointer w-7 h-7 sm:h-8 sm:w-8" src="../src/assets/bottomNavbar/activeHome.png"
                             alt="">
                     </a>
                     <p class="font-semibold text-xs sm:text-sm text-[#C95555]">Home</p>
                 </div>
                 <div class="flex flex-col items-center justify-center gap-1">
                     <a href="./consultadvisor.html">
-                        <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer"
+                        <img class="cursor-pointer w-7 h-7 sm:h-8 sm:w-8"
                             src="../src/assets/bottomNavbar/constultadvisor.png" alt="">
                     </a>
                     <p class="font-semibold text-xs sm:text-sm text-[#C95555] hidden">Consult Advisor</p>
@@ -255,14 +256,14 @@
                 <div></div>
                 <div class="flex flex-col items-center justify-center gap-1">
                     <a href="./advisorbooking.html">
-                        <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="../src/assets/bottomNavbar/booking.png"
+                        <img class="cursor-pointer w-7 h-7 sm:h-8 sm:w-8" src="../src/assets/bottomNavbar/booking.png"
                             alt="">
                     </a>
                     <p class="font-semibold text-xs sm:text-sm text-[#C95555] hidden">Booking</p>
                 </div>
                 <div class="flex flex-col items-center justify-center gap-1">
                     <a href="./userProfile.html">
-                        <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="../src/assets/bottomNavbar/profile.png"
+                        <img class="cursor-pointer w-7 h-7 sm:h-8 sm:w-8" src="../src/assets/bottomNavbar/profile.png"
                             alt="">
                     </a>
                     <p class="font-semibold text-xs sm:text-sm text-[#C95555] hidden">My Profile</p>
@@ -272,7 +273,7 @@
             <div
                 class="absolute left-1/2 top-[-80%] translate-y-1/2 -translate-x-1/2 w-[80px] h-[80px] bg-[#FFFFFF] flex items-center justify-center rounded-[4rem]">
                 <a href="./featuredadvisor.html" class="flex flex-col items-center justify-center gap-1">
-                    <img class="w-7 h-7 sm:h-8 sm:w-8 cursor-pointer" src="../src/assets/bottomNavbar/advisor.png"
+                    <img class="cursor-pointer w-7 h-7 sm:h-8 sm:w-8" src="../src/assets/bottomNavbar/advisor.png"
                         alt="">
                     <p class="font-semibold text-xs sm:text-sm text-[#DA9000] hidden">Featured Advisor</p>
                 </a>
@@ -283,6 +284,39 @@
         @include('user.components.sidebar')
         @include('user.components.bottommenu')
     </div>
+
+    <footer class="hidden md:block bg-[#FFFFFF] shadow-2xl border border-transparent mt-[2rem]">
+        <div class="border border-[#EAEAEA] mb-4 w-full"></div>
+        <div class="md:w-[95%] lg:w-[90%] mx-auto my-[2rem]">
+            <div class="flex items-center justify-between w-full">
+                <h3 class="text-[#3A3A3A] font-normal text-base text-start">
+                    © 2024 Advisator. All rights reserved.
+                </h3>
+                <h3 class="text-[#3A3A3A] font-normal text-base text-start">
+                    info@advisator.in
+                </h3>
+            </div>
+        </div>
+    </footer>
+    
+    @if($transactions->isEmpty() && request('search'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            title: "No Transactions Found",
+            text: "No transactions match your search. Would you like to add funds to your wallet?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Add Funds",
+            cancelButtonText: "Cancel",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "{{ route('user.mywallet.recharge') }}";
+            }
+        });
+    </script>
+@endif
+
 
     <script>
         // JavaScript to toggle sidebar

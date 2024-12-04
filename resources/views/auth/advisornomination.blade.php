@@ -65,18 +65,18 @@
                 @csrf
                 <input type="hidden" name="user_id" value="{{ $user->unique_id }}">
                 <div>
-                    <label for="full_name">Full Name :</label>
+                    <label for="full_name">Full Name <span class="text-[#ff0909]">*</span> :</label>
                     <input class="w-full px-[18px] py-[14px] h-[60px] rounded-[8px] shadow-lg" type="text"
                         id="full_name" name="full_name" value="{{ $user->full_name }}" readonly />
                 </div>
                 <div>
-                    <label for="email">Email :</label>
+                    <label for="email">Email <span class="text-[#ff0909]">*</span> :</label>
                     <input class="w-full mt-[12px] h-[60px] px-[18px] py-[14px] rounded-[8px] shadow-lg" type="email"
                         id="email" name="email" value="{{ $user->email }}" readonly />
                 </div>
 
                 <div>
-                    <label for="mobile_number">Mobile Number :</label>
+                    <label for="mobile_number">Mobile Number <span class="text-[#ff0909]">*</span> :</label>
                     <div class="p-[18px] mt-[18px] w-full flex gap-[12px] rounded-[12px] bg-white">
 
                         <input type="text" class="w-full" id="mobile_number" name="mobile_number"
@@ -85,7 +85,7 @@
                 </div>
 
                 <div>
-                    <label for="location">Location :</label>
+                    <label for="location">Location <span class="text-[#ff0909]">*</span> :</label>
                     <input placeholder="Location" class="px-[18px] w-full h-[60px] rounded-[8px] shadow-lg"
                         type="text" id="location" name="location" required />
                 </div>
@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="border w-full border-1 mt-[18px] border-[#AFAFAF]"></div>
-                <h2 class="font-[500] text-[16px]">Select Business Function ::</h2>
+                <h2 class="font-[500] text-[16px]">Select Business Function <span class="text-[#ff0909]">*</span>  ::</h2>
                 <p class="font-[400] text-[16px]" style="color: #db5001">
                     Each nomination form allows an advisor to choose one primary business function and two
                     sub-functions. For instance, under business function, one could select "digital platforms," with
@@ -110,20 +110,20 @@
 
                 <div class="flex flex-col gap-[28px]">
                     <div class="w-full mx-auto">
-                        {{-- <label for="business_function_category_id">Select Business Function :</label> --}}
                         <select id="business_function_category_id" name="business_function_category_id"
                             class="w-full p-2 rounded-[12px]" required>
-                            <option selected>Choose Business Function</option>
+                            <option value="" disabled selected>Choose Business Function <span class="text-[#ff0909]">*</span></option>
                             @foreach ($businessFunctionCategories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>
+                    
 
                     {{-- <div class="border border-gray-400 border-1 my-30"></div> --}}
 
                     <div class="w-full mx-auto" id="sub_function_1" style="display:none;">
-                        <label for="sub_function_category_id_1">Select Sub Function 1 :</label>
+                        <label for="sub_function_category_id_1">Select Sub Function 1 <span class="text-[#ff0909]">*</span> :</label>
                         <select id="sub_function_category_id_1" name="sub_function_category_id_1"
                             class="w-full p-2 rounded-[12px]" required>
                             <option value="">Select one Option</option>
@@ -142,7 +142,7 @@
                     <div class="border border-gray-400 border-1 my-30"></div>
 
                     <div class="w-full mx-auto">
-                        <label for="industry">Select Industry Verticals:</label>
+                        <label for="industry">Select Industry Verticals <span class="text-[#ff0909]">*</span> :</label>
                         <div class="relative inline-block border-b border-dotted border-black group">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 cursor-pointer"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -170,7 +170,7 @@
                     <div class="border border-1 my-30 border-[#AFAFAF]"></div>
 
                     <div class="w-full mx-auto">
-                        <label for="geography">Select Geographical Locations:</label>
+                        <label for="geography">Select Geographical Locations<span class="text-[#ff0909]">*</span> :</label>
                         <div class="relative inline-block border-b border-dotted border-black group">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 cursor-pointer"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -214,7 +214,7 @@
 
                 <div class="border w-full border-1 mt-[18px] border-[#AFAFAF]"></div>
                 <div class="flex flex-col gap-[12px]">
-                    <h3 class="text-[18px] font-[500]">Availability</h3>
+                    <h3 class="text-[18px] font-[500]">Availability<span class="text-[#ff0909]">*</span> </h3>
                     <div class="flex items-center justify-between">
                         <p class="text-[16px] font-[500] text-[#828282]">
                             Please choose your availability
@@ -480,7 +480,7 @@
 
                             <!-- Consultation call section -->
                             <div class="flex flex-col gap-[12px] mt-4 md:mt-0 w-full md:w-auto">
-                                <h2 class="text-[16px] font-[500]">Consultation call :</h2>
+                                <h2 class="text-[16px] font-[500]">Consultation call<span class="text-[#ff0909]">*</span>  :</h2>
                                 <div class="flex justify-between">
                                     <p class="text-[16px] font-[400] text-[#828282]">Currency</p>
                                     <p class="text-[16px] font-[400] text-[#828282]">Price</p>
@@ -503,7 +503,7 @@
 
                             <!-- Consultation call section -->
                             <div class="flex flex-col gap-[12px] mt-4 md:mt-0 w-full md:w-auto">
-                                <h2 class="text-[16px] font-[500]">Consultation call :</h2>
+                                <h2 class="text-[16px] font-[500]">Consultation call<span class="text-[#ff0909]">*</span>  :</h2>
                                 <div class="flex justify-between">
                                     <p class="text-[16px] font-[400] text-[#828282]">Currency</p>
                                     <p class="text-[16px] font-[400] text-[#828282]">Price</p>
@@ -707,11 +707,21 @@
     }
 
     // Validate LinkedIn profile URL
-    if (!linkedinProfileInput || !linkedinRegex.test(linkedinProfileInput)) {
+    if (linkedinProfileInput && !linkedinRegex.test(linkedinProfileInput)) {
         Swal.fire({
             icon: 'error',
             title: 'Invalid LinkedIn Profile',
-            text: 'Please enter a valid LinkedIn profile URL starting with "https://linkedin.com".',
+            text: 'Please enter a valid LinkedIn profile URL starting with "https://linkedin.com"',
+        });
+        return; // Stop further execution
+    }
+
+     // Validate Business Function
+     if (!businessFunctionInput || businessFunctionInput === 'Choose Business Function') {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Business Function required',
+            text: 'Please select a business function before submitting the form.',
         });
         return; // Stop further execution
     }
@@ -746,15 +756,7 @@
         return; // Stop further execution
     }
 
-    // Validate Business Function
-    if (!businessFunctionInput || businessFunctionInput === 'Choose Business Function') {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Business Function required',
-            text: 'Please select a business function before submitting the form.',
-        });
-        return; // Stop further execution
-    }
+   
 
     // Validate Sub Function 1 if it's visible
     if (document.getElementById('sub_function_1').style.display !== 'none' && (!subFunction1Input || subFunction1Input === '')) {

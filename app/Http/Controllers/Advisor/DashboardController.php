@@ -136,21 +136,36 @@ class DashboardController extends Controller
         return view('advisor.pages.reviewssummary', compact('advisor', 'feedbackData'));
     }
 
-    public function mybookings()
+    public function mybookings(Request $request)
     {
         // Fetch the advisor nomination profile based on the authenticated user ID
         $advisor = AdvisorNomination::where('user_id', Auth::user()->unique_id)->firstOrFail();
-
-        // Fetch bookings linked to this advisor's nominee_id
-        // Use 'with' to eagerly load the related 'UserProfiles' for each booking
-        $bookings = AppointmentBooking::with('userProfile') // Assuming 'userProfile' is the relationship to the client
-            ->where('advisor_id', $advisor->nominee_id)
-            ->orderBy('booking_date', 'asc')
-            ->get();
-
+    
+        // Fetch the search term from the request
+        $searchTerm = $request->input('search', '');
+    
+        // Build the query for bookings linked to this advisor's nominee_id
+        $query = AppointmentBooking::with('userProfile') // Assuming 'userProfile' is the relationship to the client
+            ->where('advisor_id', $advisor->nominee_id);
+    
+        // Apply search filter
+        if ($searchTerm) {
+            $query->where(function ($query) use ($searchTerm) {
+                $query->where('booking_date', 'LIKE', '%' . $searchTerm . '%')
+                      ->orWhereHas('userProfile', function ($q) use ($searchTerm) {
+                          $q->where('full_name', 'LIKE', '%' . $searchTerm . '%') // Assuming 'name' is a column in the UserProfile model
+                            ->orWhere('email', 'LIKE', '%' . $searchTerm . '%'); // Adjust fields as necessary
+                      });
+            });
+        }
+    
+        // Get results
+        $bookings = $query->orderBy('booking_date', 'asc')->get();
+    
         // Return the view with the bookings and advisor profile
-        return view('advisor.pages.mybookings', compact('advisor', 'bookings'));
+        return view('advisor.pages.mybookings', compact('advisor', 'bookings', 'searchTerm'));
     }
+    
 
     public function updateBookingStatus(Request $request, $id)
     {

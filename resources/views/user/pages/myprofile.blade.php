@@ -1457,10 +1457,7 @@
     </script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
-<script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
     document.addEventListener('DOMContentLoaded', function() {
         const saveButton = document.getElementById('saveButton');
         const form = document.getElementById('profileForm');
@@ -1473,45 +1470,96 @@
             const fullName = document.getElementById('full_name').value.trim();
             const email = document.getElementById('email').value.trim();
             const mobileNumber = document.getElementById('mobile_number').value.trim();
-            const about = document.getElementById('about').value.trim();  // Added about field
-            
-            // List of validation errors
-            let errors = [];
+            const about = document.getElementById('about').value.trim();
+            const location = document.getElementById('location').value.trim(); // Added location field
 
-            // Validate Full Name
+            // Validate Full Name (required and no numbers)
             if (!fullName) {
-                errors.push('Full Name is required.');
-            }
-
-            // Validate Email
-            if (!email) {
-                errors.push('Email is required.');
-            } else if (!validateEmail(email)) {
-                errors.push('Please enter a valid email address.');
-            }
-
-            // Validate Mobile Number
-            if (!mobileNumber) {
-                errors.push('Mobile Number is required.');
-            }
-
-            // Validate About (new validation for the about field)
-            if (!about) {
-                errors.push('Please provide some details about yourself.');
-            }
-
-            // If there are errors, show SweetAlert and stop submission
-            if (errors.length > 0) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'User Validation Error',
-                    html: '<ul style="text-align: left;">' + errors.map(error => `<li>${error}</li>`).join('') + '</ul>'
+                    title: 'Validation Error',
+                    text: 'Full Name is required.'
                 });
-                return; // Stop further execution if there are validation errors
-            } 
+                return; // Stop further execution
+            } else if (/\d/.test(fullName)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Full Name should not contain numbers.'
+                });
+                return; // Stop further execution
+            }
+
+            // Validate Email (required and valid format)
+            if (!email) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Email is required.'
+                });
+                return; // Stop further execution
+            } else if (!validateEmail(email)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Please enter a valid email address.'
+                });
+                return; // Stop further execution
+            }
+
+            // Validate Mobile Number (must start with + and contain exactly 10 digits)
+            if (!mobileNumber) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Mobile Number is required.'
+                });
+                return; // Stop further execution
+            } else if (!validateMobileNumber(mobileNumber)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Mobile Number must start with a country code (e.g., +91) and contain exactly 10 digits.'
+                });
+                return; // Stop further execution
+            }
+
+            // Validate About (required and no special characters)
+            if (!about) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Please provide some details about yourself.'
+                });
+                return; // Stop further execution
+            } else if (/[^a-zA-Z0-9\s]/.test(about)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'About should not contain special characters.'
+                });
+                return; // Stop further execution
+            }
+
+            // Validate Location (required, no numbers, and no special characters)
+            if (!location) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Location is required.'
+                });
+                return; // Stop further execution
+            } else if (/[^a-zA-Z\s]/.test(location)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Location should not contain numbers or special characters.'
+                });
+                return; // Stop further execution
+            }
 
             // No errors, proceed with form submission
-            form.submit();  // Now this submits the form
+            form.submit(); // Now this submits the form
         });
 
         // Email validation function
@@ -1519,8 +1567,16 @@
             const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return re.test(email);
         }
+
+        // Mobile number validation function
+        function validateMobileNumber(mobileNumber) {
+            // Ensure number starts with a '+' followed by a country code and 10 digits
+            const re = /^\+[1-9]\d{1,3}[1-9]\d{9}$/;
+            return re.test(mobileNumber);
+        }
     });
 </script>
+
 
 
 

@@ -20,28 +20,32 @@
 
 
                 <div class="lg:w-[60%]">
-                    <div
-                        class="max-w-[40rem] mx-auto border border-[#DADADA] px-2 xl:px-4 py-2 rounded-[24px] shadow-md flex  justify-between items-center gap-x-2 font-Roboto font-normal text-sm lg:text-base text-[#2A2A2A]">
-
-                        <div>
-                            <input
-                                class="font-medium text-sm w-full lg:text-base text-[#AFAFAF] placeholder:text-[#AFAFAF] outline-none bg-[#FFFFFF]"
-                                type="text" placeholder="Search Bookings">
-                        </div>
-
+                    <form method="GET" action="{{ route('advisor.mybookings') }}">
                         <div
-                            class="px-[1rem] py-1 md:py-2 md:px-[2rem] flex items-center gap-x-2  rounded-[2rem] bg-[#EDF6DB] shadow-md">
-                            <svg class="w-5 h-5 text-[#000000]" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                            </svg>
-
-                            <button
-                                class="font-Roboto text-nowrap font-semibold text-sm lg:text-base text-[#2A2A2A]">Search</button>
+                            class="max-w-[40rem] mx-auto border border-[#DADADA] px-2 xl:px-4 py-2 rounded-[24px] shadow-md flex justify-between items-center gap-x-2 font-Roboto font-normal text-sm lg:text-base text-[#2A2A2A]">
+                            
+                            <!-- Search Input -->
+                            <div>
+                                <input
+                                    class="font-medium text-sm w-full lg:text-base text-[#AFAFAF] placeholder:text-[#AFAFAF] outline-none bg-[#FFFFFF]"
+                                    type="text" name="search" value="{{ request('search') }}" placeholder="Search Bookings">
+                            </div>
+                
+                            <!-- Search Button -->
+                            <div
+                                class="px-[1rem] py-1 md:py-2 md:px-[2rem] flex items-center gap-x-2 rounded-[2rem] bg-[#EDF6DB] shadow-md">
+                                <svg class="w-5 h-5 text-[#000000]" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round"
+                                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                </svg>
+                                <button type="submit"
+                                    class="font-Roboto text-nowrap font-semibold text-sm lg:text-base text-[#2A2A2A]">Search</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
+                
 
 
                 <div class="hidden md:block w-fit font-medium rounded-lg bg-[#FFE2E2] shadow-md p-2">
@@ -217,6 +221,20 @@
 
 
     </div>
+
+
+    
+    @if($bookings->isEmpty() && request('search'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            title: "No Bookings Found",
+            text: "You currently have no bookings assigned.",
+            icon: "info",
+            confirmButtonText: "Okay",
+        });
+    </script>
+@endif
 
     <script>
         const myBooking = document.getElementById('myBooking');

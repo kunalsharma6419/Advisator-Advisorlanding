@@ -75,16 +75,27 @@
                         <form method="POST" action="{{ route('register') }}" id="userregisterForm">
                             @csrf
                             <!-- input fields -->
+                            <!-- input fields -->
                             <input id="full_name" class="p-[18px] mt-[18px] w-full rounded-[12px]"
                                 placeholder="Full Name" type="text" name="full_name" :value="old('full_name')"
-                                required autofocus autocomplete="full_name" />
+                                required autofocus autocomplete="full_name" pattern="[A-Za-z\s]{4,}"
+                                title="Only letters and spaces are allowed, and at least 4 characters are required" />
+
+
                             <input id="email" class="p-[12px] mt-[18px] w-full rounded-[12px]"
                                 placeholder="Email Address" type="email" name="email" :value="old('email')"
-                                required autocomplete="username" />
+                                required autocomplete="username"
+                                pattern="^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                                title="Email must contain only letters, numbers, periods (.), and @ symbol" />
+
+
+                                
                             <!-- phone number input fields -->
                             <input id="phone_number" class="p-[12px] mt-[18px] w-full rounded-[12px]"
-                                placeholder="Moblie Number with Country Code" type="text" name="phone_number"
+                                placeholder="Moblie Number with Country Code" type="tel" name="phone_number"
                                 :value="old('phone_number')" required autocomplete="phone_number" />
+
+                                
                             <!-- hidden input for usertype -->
                             <input type="hidden" id="usertype" name="usertype" value="0">
                             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -137,10 +148,14 @@
                             <!-- input fields -->
                             <input id="full_name" class="p-[18px] mt-[18px] w-full rounded-[12px]"
                                 placeholder="Full Name" type="text" name="full_name" :value="old('full_name')"
-                                required autofocus autocomplete="full_name" />
+                                required autofocus autocomplete="full_name" pattern="[A-Za-z\s]{4,}"
+                                title="Only letters and spaces are allowed, and at least 4 characters are required" />
+                            <!-- input fields -->
                             <input id="email" class="p-[12px] mt-[18px] w-full rounded-[12px]"
                                 placeholder="Email Address" type="email" name="email" :value="old('email')"
-                                required autocomplete="username" />
+                                required autocomplete="username"
+                              />
+
                             <!-- phone number input fields -->
                             <input id="phone_number" class="p-[12px] mt-[18px] w-full rounded-[12px]"
                                 placeholder="Moblie Number with Country Code" type="text" name="phone_number"
@@ -252,17 +267,18 @@
             const form = e.target;
             const formData = new FormData(form);
             const nameInput = form.querySelector('#full_name');
-            const namePattern = /^[a-zA-Z\s]{2,}$/; // Allows only alphabets and spaces, minimum of 2 characters
+            const namePattern =
+                /^[a-zA-Z\s]{2,}$/; // Allows only alphabets and spaces, minimum of 2 characters
 
 
             if (!namePattern.test(nameInput.value.trim())) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Invalid Name',
-            text: 'Please enter a valid name (at least 2 characters, only letters, spaces, dashes, or apostrophes).'
-        });
-        return; // Prevent form submission
-    }
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Invalid Name',
+                    text: 'Please enter a valid name (at least 2 characters, only letters, spaces, dashes, or apostrophes).'
+                });
+                return; // Prevent form submission
+            }
 
             // Show loading indicator
             Swal.fire({
@@ -328,7 +344,7 @@
                         title: 'Validation Error',
                         text: result.message
                     }).then(function() {
-                        window.location.href = '{{ route('login') }}';
+
                     });
                 }
             } catch (error) {
@@ -340,89 +356,92 @@
             }
         });
 
-        document.getElementById('advisorregisterForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+        document.getElementById('advisorregisterForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
 
-            const form = e.target;
-            const formData = new FormData(form);
+    const form = e.target;
+    const formData = new FormData(form);
 
-            // Show loading indicator
+    // Show loading indicator
+    Swal.fire({
+        title: 'Processing...',
+        text: 'Please wait a moment',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    try {
+        const response = await fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        });
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
             Swal.fire({
-                title: 'Processing...',
-                text: 'Please wait a moment',
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
+                icon: 'success',
+                title: 'Success',
+                text: result.message
+            }).then(function () {
+                window.location.href = result.verification_url;
+            });
+        } else if (result.status === 'exists' || result.status === 'warning') {
+            // Handle account existence or warning scenarios
+            // if (response.redirect) {
+            //     Swal.fire({
+            //         icon: 'info',
+            //         title: 'Account Status',
+            //         text: result.message
+            //     }).then(function() {
+            //         window.location.href = response.redirect;
+            //     });
+            // } else {
+            //     Swal.fire({
+            //         icon: 'warning',
+            //         title: 'Account Exists',
+            //         text: result.message
+            //     }).then(function() {
+            //         window.location.href = result.verification_url;
+            //     });
+            // }
+            Swal.fire({
+                icon: result.status === 'exists' ? 'warning' : 'info',
+                title: 'Account Status',
+                text: result.message
+            }).then(function () {
+                if (result.redirect) {
+                    window.location.href = result.redirect;
+                } else if (result.verification_url) {
+                    window.location.href = result.verification_url;
                 }
             });
-
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: formData,
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                });
-
-                const result = await response.json();
-
-                if (result.status === 'success') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: result.message
-                    }).then(function() {
-                        window.location.href = result.verification_url;
-                    });
-                } else if (result.status === 'exists' || result.status === 'warning') {
-                    // if (response.redirect) {
-                    //     Swal.fire({
-                    //         icon: 'info',
-                    //         title: 'Account Status',
-                    //         text: result.message
-                    //     }).then(function() {
-                    //         window.location.href = response.redirect;
-                    //     });
-                    // }else {
-                    //     Swal.fire({
-                    //         icon: 'warning',
-                    //         title: 'Account Exists',
-                    //         text: result.message
-                    //     }).then(function() {
-                    //         window.location.href = result.verification_url;
-                    //     });
-                    // }
-                    Swal.fire({
-                        icon: result.status === 'exists' ? 'warning' : 'info',
-                        title: 'Account Status',
-                        text: result.message
-                    }).then(function() {
-                        if (result.redirect) {
-                            window.location.href = result.redirect;
-                        } else {
-                            window.location.href = result.verification_url;
-                        }
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Account Already Exists',
-                        text: result.message
-                    }).then(function() {
-                        window.location.href = '{{ route('login') }}';
-                    });
-                }
-            } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: error.message || 'An error occurred. Please try again.'
-                });
-            }
+        } else {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Account Already Exists',
+                text: result.message
+            }).then(function () {
+                window.location.href = '{{ route('login') }}'; // Replace with server-provided redirect if available
+            });
+        }
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error.message || 'An error occurred. Please try again.'
         });
+    }
+});
+
     });
 </script>
+
 </html>
 
 {{-- <x-guest-layout>

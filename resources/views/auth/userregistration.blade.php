@@ -64,7 +64,7 @@
                 </div>
 
                 <div>
-                    <label for="location">Location :</label>
+                    <label for="location">Location <span class="text-[#ff0909]">*</span>:</label>
                     <input placeholder="Location" class="px-[18px] w-full h-[60px] rounded-[8px] shadow-lg"
                         type="text" id="location" name="location" required />
                 </div>
@@ -166,14 +166,20 @@
                 </div>
 
                 <div class="flex items-center gap-2 mt-[20px]">
-                    <input type="checkbox" id="is_terms_accept" name="is_terms_accept" class="cursor-pointer" value="1" required>
+                    <input type="checkbox" id="is_terms_accept" name="is_terms_accept" class="cursor-pointer"
+                        value="1" required>
                     <label for="is_terms_accept" class="text-sm text-gray-700">
-                        I accept the 
-                        <a href="/terms-of-service" style="color: #526E1C; text-decoration: underline;">Terms and Conditions</a>,
-                        <a href="/privacy-policy" style="color: #526E1C; text-decoration: underline;">Privacy Policy</a>,
-                        <a href="/shipping-and-delivery-policy" style="color: #526E1C; text-decoration: underline;">Shipping & Delivery Policy</a>,
-                        <a href="/onboarding-policy" style="color: #526E1C; text-decoration: underline;">Onboarding Policy</a> and 
-                        <a href="/cancellation-and-refund-policy" style="color: #526E1C; text-decoration: underline;">Cancellation and Refund Policy</a>
+                        I accept the
+                        <a href="/terms-of-service" style="color: #526E1C; text-decoration: underline;">Terms and
+                            Conditions</a>,
+                        <a href="/privacy-policy" style="color: #526E1C; text-decoration: underline;">Privacy
+                            Policy</a>,
+                        <a href="/shipping-and-delivery-policy"
+                            style="color: #526E1C; text-decoration: underline;">Shipping & Delivery Policy</a>,
+                        <a href="/onboarding-policy" style="color: #526E1C; text-decoration: underline;">Onboarding
+                            Policy</a> and
+                        <a href="/cancellation-and-refund-policy"
+                            style="color: #526E1C; text-decoration: underline;">Cancellation and Refund Policy</a>
                     </label>
                 </div>
                 <button type="submit"
@@ -190,6 +196,20 @@
     $(document).ready(function() {
         $('#registrationForm').submit(function(event) {
             event.preventDefault();
+
+            let location = $('#location').val();
+
+            // Check if location contains only alphabets and no spaces
+            let locationRegex = /^[A-Za-z]+$/; // Regex to allow only alphabets, no spaces
+
+            if (!locationRegex.test(location)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Location',
+                    text: 'Location can only contain alphabets with no spaces or special characters.'
+                });
+                return false; // Prevent form submission
+            }
             let formData = $(this).serialize();
 
             // Show loading indicator

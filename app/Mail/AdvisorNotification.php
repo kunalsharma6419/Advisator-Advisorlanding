@@ -22,7 +22,7 @@ class AdvisorNotification extends Mailable
     public function build()
     {
         // Include the unique ID of the authenticated user in the subject
-        $subject = 'A User (ID: ' . $this->authUser->unique_id . ') is Interested in Consulting You';
+        $subject = 'User (ID: ' . $this->authUser->unique_id . ') is Interested';
 
         return $this->subject($subject)
                     ->view('emails.advisor_notification');

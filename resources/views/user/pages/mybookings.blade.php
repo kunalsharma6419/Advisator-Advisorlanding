@@ -1,7 +1,7 @@
 @extends('user.layouts.app')
 
 @section('usercontent')
-    <div class="w-full min-h-screen h-full relative overflow-hidden">
+    <div class="relative w-full h-full min-h-screen overflow-hidden">
         <!-- header -->
         @include('user.components.mainheader')
 
@@ -95,7 +95,7 @@
 
     <!-- Table for Tablet and Desktop Screens -->
     <div class="hidden md:block">
-        <table class="table-fixed w-full border-separate border-spacing-y-3">
+        <table class="w-full border-separate table-fixed border-spacing-y-3">
             <thead class="text-[#2A2A2A] font-medium text-base lg:text-lg">
                 <tr>
                     <th class="text-left align-top">Booking ID</th>
@@ -128,8 +128,8 @@
                         <td>
                             @if ($booking->booking_status !== 'Rejected')
                                 <button onclick="confirmCancel(this)" data-id="{{ $booking->booking_id }}"
-                                        class="bg-red-500 text-white rounded px-3 py-1">Cancel Appointment</button>
-                                <button class="bg-blue-500 text-white rounded px-3 py-1">Consultation Call</button>
+                                        class="px-3 py-1 text-white bg-red-500 rounded">Cancel Appointment</button>
+                                <button class="px-3 py-1 text-white bg-blue-500 rounded">Consultation Call</button>
                             @endif
                         </td>
                     </tr>
@@ -149,7 +149,7 @@
 
     <!-- For Mobile Screens -->
     <div class="md:hidden">
-        <div class="flex items-center justify-around font-sm sm:font-base font-medium">
+        <div class="flex items-center justify-around font-medium font-sm sm:font-base">
             <h2 id="myBooking" class="booking activebooking">My Booking</h2>
             <h2 id="bookingHistory" class="booking">Booking History</h2>
         </div>
@@ -159,27 +159,27 @@
             <div id="myBookingTable" class="flex flex-col gap-2">
                 @forelse($upcomingBookings as $booking)
                     <div class="bg-[#FFFFFF] rounded-xl shadow-md p-4 sm:p-6 grid grid-cols-3 gap-y-2 justify-items-center">
-                        <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                        <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                             <p class="text-[#828282]">Booking Id:</p>
                             <p class="text-[#2A2A2A]">{{ $booking->booking_id ?? 'N/A' }}</p>
                         </div>
-                        <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                        <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                             <p class="text-[#828282]">Advisor Name:</p>
                             <p class="text-[#2A2A2A]">{{ $booking->advisorNomination->full_name ?? 'N/A' }}</p>
                         </div>
-                        <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                        <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                             <p class="text-[#828282]">Date:</p>
                             <p class="text-[#2A2A2A]">{{ $booking->booking_date->format('d/m/Y') }}</p>
                         </div>
-                        <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                        <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                             <p class="text-[#828282]">Time:</p>
                             <p class="text-[#2A2A2A]">{{ $booking->time_slot }}</p>
                         </div>
-                        <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                        <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                             <p class="text-[#828282]">Medium:</p>
                             <p class="text-[#2A2A2A]">{{ $booking->booking_medium }}</p>
                         </div>
-                        <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                        <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                             <p class="text-[#828282]">Status:</p>
                             <p class="@if ($booking->booking_status == 'Upcoming') text-blue-800
                                 @elseif($booking->booking_status == 'Completed') text-green-800
@@ -190,12 +190,12 @@
                         </div>
 
                         @if ($booking->booking_status !== 'Rejected')
-                            <div class="flex flex-col space-x-2 font-medium text-xs sm:text-sm" style="align-items: center;">
-                                <button class="bg-blue-500 text-white rounded px-3 py-1">Consultation Call</button>
+                            <div class="flex flex-col space-x-2 text-xs font-medium sm:text-sm" style="align-items: center;">
+                                <button class="px-3 py-1 text-white bg-blue-500 rounded">Consultation Call</button>
                             </div>
-                            <div class="flex flex-col space-x-2 font-medium text-xs sm:text-sm" style="align-items: center;">
+                            <div class="flex flex-col space-x-2 text-xs font-medium sm:text-sm" style="align-items: center;">
                                 <button onclick="confirmCancel(this)" data-id="{{ $booking->booking_id }}"
-                                        class="bg-red-500 text-white rounded px-3 py-1">Cancel Appointment</button>
+                                        class="px-3 py-1 text-white bg-red-500 rounded">Cancel Appointment</button>
                             </div>
                         @endif
                     </div>
@@ -212,34 +212,34 @@
             </div>
 
             <!-- Booking History -->
-            <div id="bookingHistoryTable" class="hidden flex flex-col gap-2">
+            <div id="bookingHistoryTable" class="flex flex-col hidden gap-2">
                 @forelse($bookingHistory as $booking)
                     <div class="bg-[#FFFFFF] rounded-xl shadow-md p-4 sm:p-6 grid grid-cols-3 gap-y-2 justify-items-center">
-                        <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                        <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                             <p class="text-[#828282]">Booking Id:</p>
                             <p class="text-[#2A2A2A]">{{ $booking->booking_id ?? 'N/A' }}</p>
                         </div>
-                        <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                        <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                             <p class="text-[#828282]">Advisor Name:</p>
                             <p class="text-[#2A2A2A]">{{ $booking->advisorNomination->full_name ?? 'N/A' }}</p>
                         </div>
-                        <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                        <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                             <p class="text-[#828282]">Date:</p>
                             <p class="text-[#2A2A2A]">{{ $booking->booking_date->format('d/m/Y') }}</p>
                         </div>
-                        <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                        <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                             <p class="text-[#828282]">Time:</p>
                             <p class="text-[#2A2A2A]">{{ $booking->time_slot }}</p>
                         </div>
-                        <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                        <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                             <p class="text-[#828282]">Medium:</p>
                             <p class="text-[#2A2A2A]">{{ $booking->booking_medium }}</p>
                         </div>
-                        <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                        <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                             <p class="text-[#828282]">Duration:</p>
                             <p class="text-[#2A2A2A]">{{ $booking->duration ?? 'N/A' }}</p>
                         </div>
-                        <div class="flex flex-col w-fit font-medium text-xs sm:text-sm">
+                        <div class="flex flex-col text-xs font-medium w-fit sm:text-sm">
                             <p class="text-[#828282]">Status:</p>
                             <p class="@if ($booking->booking_status == 'Upcoming') text-blue-800
                                 @elseif($booking->booking_status == 'Completed') text-green-800
@@ -271,7 +271,7 @@
         <footer class="hidden md:block bg-[#FFFFFF] shadow-2xl border border-transparent mt-[2rem]">
             <div class="border border-[#EAEAEA] mb-4 w-full"></div>
             <div class="md:w-[95%] lg:w-[90%] mx-auto my-[2rem]">
-                <div class="w-full flex items-center justify-between">
+                <div class="flex items-center justify-between w-full">
                     <h3 class="text-[#3A3A3A] font-normal text-base text-start">
                         © 2024 Advisator. All rights reserved.
                     </h3>
@@ -294,6 +294,27 @@
     </div>
     <!-- SweetAlert Script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    @if($bookings->isEmpty() && request('search'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            title: "No Bookings Found",
+            text: "Would you like to book a appointment ?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Book Now",
+            cancelButtonText: "Cancel",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "{{ route('consult-advisor') }}";
+            }
+        });
+    </script>
+@endif
+
+
     <script>
         const myBooking = document.getElementById('myBooking');
         const bookingHistory = document.getElementById('bookingHistory');
@@ -336,12 +357,12 @@
         });
     </script>
     @if (session('success'))
-        <div class="bg-green-100 text-green-700 p-2 rounded mt-2">
+        <div class="p-2 mt-2 text-green-700 bg-green-100 rounded">
             {{ session('success') }}
         </div>
     @endif
     @if (session('error'))
-        <div class="bg-red-100 text-red-700 p-2 rounded mt-2">
+        <div class="p-2 mt-2 text-red-700 bg-red-100 rounded">
             {{ session('error') }}
         </div>
     @endif

@@ -124,16 +124,23 @@ class AuthController extends Controller
     public function studentRegister(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'full_name' => 'string|required|min:2',
+            'full_name' => 'string|required|min:4',
             'email' => [
                 'string',
                 'email',
                 'required',
                 'max:100',
                 function ($attribute, $value, $fail) {
+                    // Check if the email contains only allowed characters
+                    if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $value)) {
+                        $fail('The email contains invalid characters. Special characters are not allowed.');
+                        return;
+                    }
+            
+                    // Check for existing email
                     $user = User::where('email', $value)->first();
                     if ($user && !$user->is_verified) {
-                        throw new \Exception('exists:' . $user->id); // Throw exception with existing unverified user ID
+                        throw new \Exception('exists:' . $user->id); 
                     } elseif ($user) {
                         $fail('The email has already been taken. Proceed with Login');
                     }
