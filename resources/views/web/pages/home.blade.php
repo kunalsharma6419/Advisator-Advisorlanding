@@ -470,7 +470,7 @@
                     <a href="{{ route('consult-advisor') }}" class="flex justify-center">
                         <div
                             class="w-[10rem] sm:w-[15rem] md:w-auto py-3 px-4 md:px-10 md:py-5 flex items-center justify-center gap-1 md:gap-2 rounded-3xl bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] cursor-pointer">
-                            <img class="h-4 w-4 sm:w-6 sm:h-6 md:h-8 md:w-8 lg:w-10 lg:h-10"
+                            <img class="w-4 h-4 sm:w-6 sm:h-6 md:h-8 md:w-8 lg:w-10 lg:h-10"
                                 src="./src/assets/img/Discoverycall.png" alt="" />
                             <p class="text-[10px] sm:text-sm md:text-base text-[#000000]">
                                 Discovery call
@@ -482,7 +482,7 @@
                     <a href="{{ route('consult-advisor') }}" class="flex justify-center">
                         <div
                             class="w-[10rem] sm:w-[15rem] md:w-auto py-3 px-4 md:px-10 md:py-5 flex items-center justify-center gap-1 md:gap-2 rounded-3xl bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] cursor-pointer">
-                            <img class="h-4 w-4 sm:w-6 sm:h-6 md:h-8 md:w-8 lg:w-10 lg:h-10"
+                            <img class="w-4 h-4 sm:w-6 sm:h-6 md:h-8 md:w-8 lg:w-10 lg:h-10"
                                 src="./src/assets/img/Consultationcall.png" alt="" />
                             <p class="text-[10px] sm:text-sm md:text-base text-[#000000]">
                                 Consultation call
@@ -494,7 +494,7 @@
                     <a href="{{ route('consult-advisor') }}" class="flex justify-center col-span-2">
                         <div
                             class="w-[10rem] sm:w-[15rem] md:w-auto py-3 px-4 md:px-10 md:py-5 flex items-center justify-center gap-1 md:gap-2 rounded-3xl bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] cursor-pointer">
-                            <img class="h-4 w-4 sm:w-6 sm:h-6 md:h-8 md:w-8 lg:w-10 lg:h-10"
+                            <img class="w-4 h-4 sm:w-6 sm:h-6 md:h-8 md:w-8 lg:w-10 lg:h-10"
                                 src="./src/assets/img/BookAppointment.png" alt="" />
                             <p class="text-[10px] sm:text-sm md:text-base text-[#000000]">
                                 Book Appointment
@@ -509,7 +509,7 @@
                     <a href="{{ route('consult-advisor') }}" class="flex justify-center hidden md:flex">
                         <div
                             class="w-[10rem] sm:w-[15rem] md:w-auto py-3 px-4 md:px-10 md:py-5 flex items-center justify-center gap-1 md:gap-2 rounded-3xl bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] cursor-pointer">
-                            <img class="h-4 w-4 sm:w-6 sm:h-6 md:h-8 md:w-8 lg:w-10 lg:h-10"
+                            <img class="w-4 h-4 sm:w-6 sm:h-6 md:h-8 md:w-8 lg:w-10 lg:h-10"
                                 src="./src/assets/img/Discoverycall.png" alt="" />
                             <p class="text-[10px] sm:text-sm md:text-base text-[#000000]">
                                 Discovery call
@@ -521,7 +521,7 @@
                     <a href="{{ route('consult-advisor') }}" class="flex justify-center hidden md:flex">
                         <div
                             class="w-[10rem] sm:w-[15rem] md:w-auto py-3 px-4 md:px-10 md:py-5 flex items-center justify-center gap-1 md:gap-2 rounded-3xl bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] cursor-pointer">
-                            <img class="h-4 w-4 sm:w-6 sm:h-6 md:h-8 md:w-8 lg:w-10 lg:h-10"
+                            <img class="w-4 h-4 sm:w-6 sm:h-6 md:h-8 md:w-8 lg:w-10 lg:h-10"
                                 src="./src/assets/img/Consultationcall.png" alt="" />
                             <p class="text-[10px] sm:text-sm md:text-base text-[#000000]">
                                 Consultation call
@@ -533,7 +533,7 @@
                     <a href="{{ route('consult-advisor') }}" class="flex justify-center hidden md:flex">
                         <div
                             class="w-[10rem] sm:w-[15rem] md:w-auto py-3 px-4 md:px-10 md:py-5 flex items-center justify-center gap-1 md:gap-2 rounded-3xl bg-gradient-to-r from-[#F7FFE9] to-[#D5E4B8] cursor-pointer">
-                            <img class="h-4 w-4 sm:w-6 sm:h-6 md:h-8 md:w-8 lg:w-10 lg:h-10"
+                            <img class="w-4 h-4 sm:w-6 sm:h-6 md:h-8 md:w-8 lg:w-10 lg:h-10"
                                 src="./src/assets/img/BookAppointment.png" alt="" />
                             <p class="text-[10px] sm:text-sm md:text-base text-[#000000]">
                                 Book Appointment
@@ -565,7 +565,7 @@
                         strategizing and digitalizing of your business.
                     </p>
                     <!-- Swiper for Categories -->
-                    <div class="swiper mySwiper1  mb-5">
+                    <div class="mb-5 swiper mySwiper1">
                         <div class="swiper-wrapper font-medium text-[#ffffff] text-sm sm:text-base md:text-lg">
                             @foreach ($categories as $category)
                                 <div class="swiper-slide bg-[#6A9023] rounded-lg">
@@ -579,8 +579,9 @@
                     </div>
 
                     <!-- Swiper for Advisors -->
-                    <div class="swiper swiper-meet-team h-[17rem] sm:h-[22rem] lg:h-[35rem] mt-5" id="advisors-container">
-                        <div class="swiper-wrapper">
+                    <div id="advisors-container">
+                    <div class="swiper swiper-meet-team h-[17rem] sm:h-[22rem] lg:h-[35rem] mt-5" >
+                        <div class="swiper-wrapper ">
                             @foreach ($advisors as $advisor)
                                 <div class="swiper-slide">
                                     <a href="{{ route('advisors.detail', ['advisor_id' => $advisor->user_id]) }}">
@@ -639,6 +640,7 @@
                         </div>
                         {{-- <div class="swiper-pagination"></div> --}}
                     </div>
+                </div>
 
 
                 </div>
@@ -889,7 +891,7 @@
                                     <p class="text-center text-[18px] lg:text-2xl text-[#6A9023]">Are you a <span
                                             class="text-[#FF3131]">User</span><span class="text-[#6A9023]">?</span></p>
                                     <img src="{{ asset('src/assets/user.png') }}" alt="Advisor"
-                                        class="w-12 h-12 sm:w-16 sm:h-16 object-contain">
+                                        class="object-contain w-12 h-12 sm:w-16 sm:h-16">
                                 </div>
 
                                 <hr>
@@ -1010,7 +1012,7 @@
                                     <p class="text-center text-[18px] lg:text-2xl text-[#6A9023]">Are you an <span
                                             class="text-[#FF3131]">Advisor</span><span class="text-[#6A9023]">?</span></p>
                                     <img src="{{ asset('src/assets/advisor.png') }}" alt="Advisor"
-                                        class="w-12 h-12 sm:w-16 sm:h-16 object-contain">
+                                        class="object-contain w-12 h-12 sm:w-16 sm:h-16">
                                 </div>
 
                                 <hr>
@@ -1300,7 +1302,7 @@
 
             </div>
             @include('web.components.footer')
-            <div class="fixed bottom-12 right-4 z-10 flex flex-col items-center hidden lg:block">
+            <div class="fixed z-10 flex flex-col items-center hidden bottom-12 right-4 lg:block">
                 <!-- WhatsApp floating button -->
                 <a href="https://wa.me/+919810440780" target="_blank" rel="noopener noreferrer" class="mb-4">
                     <button
@@ -1327,10 +1329,12 @@
 
         </div>
         @include('web.components.scripts')
+
+
         <script>
             function filterByCategory(category) {
-                const url = "{{ url()->current() }}?category=" + category; // Adjust URL based on the backend route.
-
+                const url = "{{ url()->current() }}?category=" + category;
+        
                 $.ajax({
                     url: url,
                     method: "GET",
@@ -1340,7 +1344,10 @@
                     success: function(response) {
                         // Update the content dynamically
                         $("#advisors-container").html(response);
-
+        
+                        // Reinitialize Swiper after updating the content
+                        initializeSwiper();
+        
                         // Update active category button style
                         updateActiveCategory(category);
                     },
@@ -1349,16 +1356,43 @@
                     }
                 });
             }
-
+        
             // Function to update the active category button style
             function updateActiveCategory(category) {
-                // Remove the active class from all category buttons
                 $(".tabButton").removeClass("bg-[#FF3131] text-[#FFFFFF]");
-
-                // Add the active class to the clicked category
                 $(`.tabButton:contains(${category})`).addClass("bg-[#FF3131] text-[#FFFFFF]");
             }
+        
+            // Function to initialize Swiper
+            function initializeSwiper() {
+                new Swiper(".swiper-meet-team", {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                    autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    },
+                    breakpoints: {
+                        640: {
+                            slidesPerView: 2,
+                            spaceBetween: 20,
+                        },
+                        768: {
+                            slidesPerView: 3,
+                            spaceBetween: 30,
+                        },
+                    },
+                });
+            }
+        
+            // Initialize Swiper on page load
+            $(document).ready(function() {
+                initializeSwiper();
+            });
         </script>
+
+
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 

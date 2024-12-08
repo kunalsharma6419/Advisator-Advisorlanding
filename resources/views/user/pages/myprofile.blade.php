@@ -88,7 +88,7 @@
 
                             <div class="mt-6 grow">
                                 <div class="w-full mb-6">
-                                    <label class="text-[#828282] font-normal text-base" for="full_name">Full Name</label>
+                                    <label class="text-[#828282] font-normal text-base" for="full_name">Full Name <span class="text-[#eb1e1e]">*</span></label>
                                     <input type="text" id="full_name" name="full_name"
                                         value="{{ old('full_name', $userprofile->full_name) }}"
                                         class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
@@ -97,7 +97,7 @@
                                     @enderror
                                 </div>
                                 <div class="w-full mb-6">
-                                    <label class="text-[#828282] font-normal text-base" for="Email">Email Address</label>
+                                    <label class="text-[#828282] font-normal text-base" for="Email">Email Address <span class="text-[#eb1e1e]">*</span></label>
                                     <input type="email" name="email" id="email"
                                         value="{{ old('email', $userprofile->email) }}"
                                         class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="w-full mb-6">
                                     <label class="text-[#828282] font-normal text-base" for="mobile_number">Mobile
-                                        Number</label>
+                                        Number<span class="text-[#eb1e1e]">*</span></label>
                                     <div
                                         class="flex gap-2 items-center font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
                                         <input type="text" id="mobile_number" name="mobile_number"
@@ -119,8 +119,8 @@
                                     </div>
                                 </div>
                                 <div class="w-full mb-6">
-                                    <label class="text-[#828282] font-normal text-base" for="location">Location</label>
-                                    <input type="text" id="location" name="location"
+                                    <label class="text-[#828282] font-normal text-base" for="location">Location <span class="text-[#eb1e1e]">*</span></label>
+                                    <input type="text" id="location" name="location" min="3"
                                         value="{{ old('location', $userprofile->location) }}"
                                         class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
                                     @error('location')
@@ -135,7 +135,7 @@
 
                                 <div class="w-full mt-8 mb-6">
                                     <label class="text-[#828282] font-normal text-base" for="about">Mention details
-                                        about yourself e.g. experience, expertise / Your Business</label>
+                                        about yourself e.g. experience, expertise / Your Business <span class="text-[#eb1e1e]">*</span></label>
                                     <br>
                                     <textarea id="about" name="about" rows="6"
                                         class="text-base font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%]  p-2">{{ old('about', $userprofile->about) }}</textarea>
@@ -380,7 +380,7 @@
                     <div class="flex flex-col gap-4 w-full md:w-[50%]">
 
                         <!-- profile -->
-                        <form action="{{ route('user.myprofile.update') }}" method="POST" enctype="multipart/form-data" id="profileForm"
+                        <form action="{{ route('user.myprofile.update') }}" method="POST" enctype="multipart/form-data" id="profileFormMobile"
                             class="w-full">
                             @csrf
                             @method('PUT')
@@ -499,7 +499,7 @@
                                                         Name
                                                     </h5>
 
-                                                    <input type="text" id="full_name" name="full_name"
+                                                    <input type="text" id="mobile_full_name" name="full_name"
                                                         value="{{ old('full_name', $userprofile->full_name) }}"
                                                         class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
                                                     @error('full_name')
@@ -509,7 +509,7 @@
                                                 <div class="w-full mb-2">
                                                     <h5 class="text-[#828282] font-normal text-xs sm:text-sm">Email
                                                     </h5>
-                                                    <input type="email" name="email" id="email"
+                                                    <input type="email" name="email" id="mobile_email"
                                                         value="{{ old('email', $userprofile->email) }}"
                                                         class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[100%] p-2">
                                                     @error('email')
@@ -522,7 +522,7 @@
                                                     </h5>
                                                     <div
                                                         class="flex gap-2 items-center font-medium rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
-                                                        <input type="text" id="mobile_number" name="mobile_number"
+                                                        <input type="text" id="mobile_mobile_number" name="mobile_number"
                                                             value="{{ old('mobile_number', $userprofile->mobile_number) }}"
                                                             class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base outline-none w-full">
                                                         @error('mobile_number')
@@ -534,7 +534,7 @@
                                                     <h5 class="text-[#828282] font-normal text-xs sm:text-sm">
                                                         Location
                                                     </h5>
-                                                    <input type="text" id="location" name="location"
+                                                    <input type="text" id="mobile_location" name="location"
                                                         value="{{ old('location', $userprofile->location) }}"
                                                         class="text-[#3A3A3A] placeholder:text-[#3A3A3A] text-base font-medium outline-none rounded-lg mt-[6px] bg-[#FFFFFF] border border-[#E1E9D3] shadow-md w-[95%] lg:w-[90%] p-2">
                                                     @error('location')
@@ -556,7 +556,7 @@
                                             <label class="text-[#828282] font-normal text-xs sm:text-sm"
                                                 for="Description">Mention details about yourself e.g. experience,
                                                 expertise</label>
-                                            <textarea id="about" name="about" rows="6"
+                                            <textarea id="mobile_about" name="about" rows="6"
                                                 class="text-[#2A2A2A] placeholder:text-[#2A2A2A] font-medium text-sm sm:text-base outline-none bg-transparent">{{ old('about', $userprofile->about) }}</textarea>
                                             @error('about')
                                                 <span class="text-sm text-red-500">{{ $message }}</span>
@@ -613,7 +613,7 @@
 
 
                                         <div class="flex justify-end w-full mt-6 mb-5 space-x-3">
-                                            <button type="submit"
+                                            <button type="submit" id="saveButtonmobile"
                                                 class="px-4 py-2 font-bold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-700">Save</button>
                                             <button type="reset"
                                                 class="px-4 py-2 font-bold text-gray-700 bg-gray-300 rounded-lg shadow-md hover:bg-gray-400">Cancel</button>
@@ -696,6 +696,8 @@
     @include('user.components.sidebar')
     </div>
 
+
+    
     <div id="ticketModal" class="fixed top-0 left-0 flex items-center justify-center hidden w-full h-full modal">
         <div class="absolute w-full h-full bg-black opacity-50 modal-overlay"></div>
 
@@ -743,34 +745,34 @@
 
     <div id="ticketModalmobile" class="fixed top-0 left-0 flex items-center justify-center hidden w-full h-full modal">
         <div class="absolute w-full h-full bg-black opacity-50 modal-overlay"></div>
-
+    
         <div
             class="modal-content bg-white p-8 rounded shadow-lg relative z-10 w-full h-full md:h-auto md:w-[70%] lg:w-[65%]">
             <div class="flex items-center justify-between">
                 <p class="text-[#526E1C] font-medium text-lg lg:text-xl">Raise a Ticket</p>
                 <button id="closeBtnmobile" class="w-6 h-6 cursor-pointer">&times;</button>
             </div>
-            <form id="ticketForm" action="{{ route('user.tickets.store') }}" method="POST"
+            <form id="ticketFormMobile" action="{{ route('user.tickets.store') }}" method="POST"
                 enctype="multipart/form-data" class="mt-[2rem]">
                 @csrf
                 <div class="flex flex-col gap-2">
-                    <label for="subject" class="text-base lg:text-lg font-medium text-[#3A3A3A]">Subject</label>
-                    <input type="text" id="subject" name="subject"
+                    <label for="subjectMobile" class="text-base lg:text-lg font-medium text-[#3A3A3A]">Subject</label>
+                    <input type="text" id="subjectMobile" name="subject"
                         class="border border-[#AFCB7A] outline-none shadow-md rounded-xl p-2 bg-[#FFFFFF] text-[#3A3A3A]">
                 </div>
                 <div class="flex flex-col gap-2 mt-4">
-                    <label for="description" class="text-base lg:text-lg font-medium text-[#3A3A3A]">Describe
+                    <label for="descriptionMobile" class="text-base lg:text-lg font-medium text-[#3A3A3A]">Describe
                         issue/query</label>
-                    <textarea id="description" name="description"
+                    <textarea id="descriptionMobile" name="description"
                         class="border border-[#AFCB7A] shadow-md rounded-xl p-2 bg-[#FFFFFF] text-[#3A3A3A]" rows="3"></textarea>
                 </div>
                 <div class="flex flex-col gap-2 mt-4">
-                    <label for="attachment" class="text-base lg:text-lg font-medium text-[#3A3A3A]">Attachments
+                    <label for="attachmentMobile" class="text-base lg:text-lg font-medium text-[#3A3A3A]">Attachments
                         (Attach files)</label>
                     <div
                         class="border flex justify-between items-center border-[#AFCB7A] shadow-md rounded-xl p-2 bg-[#FFFFFF]">
-                        <input type="file" id="attachment" name="attachment" class="outline-none text-[#3A3A3A]">
-                        <label for="attachment">
+                        <input type="file" id="attachmentMobile" name="attachment" class="outline-none text-[#3A3A3A]">
+                        <label for="attachmentMobile">
                             <img src="../src/assets/icons/file.png" alt="Attach File" class="w-5 h-5">
                         </label>
                     </div>
@@ -783,6 +785,8 @@
                 </div>
             </form>
         </div>
+    </div>
+    
         
     
     </div>
@@ -1457,7 +1461,9 @@
     </script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
     document.addEventListener('DOMContentLoaded', function() {
         const saveButton = document.getElementById('saveButton');
         const form = document.getElementById('profileForm');
@@ -1471,40 +1477,40 @@
             const email = document.getElementById('email').value.trim();
             const mobileNumber = document.getElementById('mobile_number').value.trim();
             const about = document.getElementById('about').value.trim();
-            const location = document.getElementById('location').value.trim(); // Added location field
+            const location = document.getElementById('location').value.trim();
 
-            // Validate Full Name (required and no numbers)
+            // Validate Full Name (required and only alphabets)
             if (!fullName) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Validation Error',
                     text: 'Full Name is required.'
                 });
-                return; // Stop further execution
-            } else if (/\d/.test(fullName)) {
+                return;
+            } else if (/[^a-zA-Z\s]/.test(fullName)) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Validation Error',
-                    text: 'Full Name should not contain numbers.'
+                    text: 'Full Name should only contain alphabets and spaces.'
                 });
-                return; // Stop further execution
+                return;
             }
 
-            // Validate Email (required and valid format)
+            // Validate Email (required, valid format, only one @ and one .)
             if (!email) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Validation Error',
                     text: 'Email is required.'
                 });
-                return; // Stop further execution
+                return;
             } else if (!validateEmail(email)) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Validation Error',
-                    text: 'Please enter a valid email address.'
+                    text: 'Email must be valid and should not contain special characters other than "@" and "."'
                 });
-                return; // Stop further execution
+                return;
             }
 
             // Validate Mobile Number (must start with + and contain exactly 10 digits)
@@ -1514,58 +1520,185 @@
                     title: 'Validation Error',
                     text: 'Mobile Number is required.'
                 });
-                return; // Stop further execution
+                return;
             } else if (!validateMobileNumber(mobileNumber)) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Validation Error',
                     text: 'Mobile Number must start with a country code (e.g., +91) and contain exactly 10 digits.'
                 });
-                return; // Stop further execution
+                return;
             }
 
-            // Validate About (required and no special characters)
+            // Validate About (required, minimum 10 characters)
             if (!about) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Validation Error',
                     text: 'Please provide some details about yourself.'
                 });
-                return; // Stop further execution
-            } else if (/[^a-zA-Z0-9\s]/.test(about)) {
+                return;
+            } else if (about.length < 10) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Validation Error',
-                    text: 'About should not contain special characters.'
+                    text: 'About must contain at least 10 characters.'
                 });
-                return; // Stop further execution
+                return;
             }
 
-            // Validate Location (required, no numbers, and no special characters)
+            // Validate Location (required, minimum 2 alphabetic characters)
             if (!location) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Validation Error',
                     text: 'Location is required.'
                 });
-                return; // Stop further execution
-            } else if (/[^a-zA-Z\s]/.test(location)) {
+                return;
+            } else if (!/[a-zA-Z]{2,}/.test(location)) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Validation Error',
-                    text: 'Location should not contain numbers or special characters.'
+                    text: 'Location must contain at least 2 alphabetic characters.'
                 });
-                return; // Stop further execution
+                return;
             }
 
             // No errors, proceed with form submission
-            form.submit(); // Now this submits the form
+            form.submit();
         });
 
         // Email validation function
         function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
+            // Email must contain only one @, one ., and no other special characters
+            const re = /^[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
+            const hasSingleAt = (email.match(/@/g) || []).length === 1;
+            const hasSingleDot = (email.match(/\./g) || []).length === 1;
+            return re.test(email) && hasSingleAt && hasSingleDot;
+        }
+
+        // Mobile number validation function
+        function validateMobileNumber(mobileNumber) {
+            // Ensure number starts with a '+' followed by a country code and 10 digits
+            const re = /^\+[1-9]\d{1,3}[1-9]\d{9}$/;
+            return re.test(mobileNumber);
+        }
+    });
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const saveButton = document.getElementById('saveButtonmobile');
+        const form = document.getElementById('profileFormMobile');
+
+        saveButton.addEventListener('click', function(event) {
+            // Prevent the form submission initially
+            event.preventDefault();
+
+            // Gather form data
+            const fullName = document.getElementById('mobile_full_name').value.trim();
+            const email = document.getElementById('mobile_email').value.trim();
+            const mobileNumber = document.getElementById('mobile_mobile_number').value.trim();
+            const about = document.getElementById('mobile_about').value.trim();
+            const location = document.getElementById('mobile_location').value.trim();
+
+            // Validate Full Name (required and only alphabets)
+            if (!fullName) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Full Name is required.'
+                });
+                return;
+            } else if (/[^a-zA-Z\s]/.test(fullName)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Full Name should only contain alphabets and spaces.'
+                });
+                return;
+            }
+
+            // Validate Email (required, valid format, only one @ and one .)
+            if (!email) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Email is required.'
+                });
+                return;
+            } else if (!validateEmail(email)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Email must be valid and should not contain special characters other than "@" and "."'
+                });
+                return;
+            }
+
+            // Validate Mobile Number (must start with + and contain exactly 10 digits)
+            if (!mobileNumber) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Mobile Number is required.'
+                });
+                return;
+            } else if (!validateMobileNumber(mobileNumber)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Mobile Number must start with a country code (e.g., +91) and contain exactly 10 digits.'
+                });
+                return;
+            }
+
+            // Validate About (required, minimum 10 characters)
+            if (!about) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Please provide some details about yourself.'
+                });
+                return;
+            } else if (about.length < 10) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'About must contain at least 10 characters.'
+                });
+                return;
+            }
+
+            // Validate Location (required, minimum 2 alphabetic characters)
+            if (!location) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Location is required.'
+                });
+                return;
+            } else if (!/[a-zA-Z]{2,}/.test(location)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Location must contain at least 2 alphabetic characters.'
+                });
+                return;
+            }
+
+            // No errors, proceed with form submission
+            form.submit();
+        });
+
+        // Email validation function
+        function validateEmail(email) {
+            // Email must contain only one @, one ., and no other special characters
+            const re = /^[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
+            const hasSingleAt = (email.match(/@/g) || []).length === 1;
+            const hasSingleDot = (email.match(/\./g) || []).length === 1;
+            return re.test(email) && hasSingleAt && hasSingleDot;
         }
 
         // Mobile number validation function
@@ -1579,7 +1712,77 @@
 
 
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Validate desktop modal
+        const desktopForm = document.getElementById('ticketForm');
+        const desktopSubject = document.getElementById('subject');
+        const desktopDescription = document.getElementById('description');
 
+        validateForm(desktopForm, desktopSubject, desktopDescription);
+
+        // Validate mobile modal
+        const mobileForm = document.getElementById('ticketFormMobile');
+        const mobileSubject = document.getElementById('subjectMobile');
+        const mobileDescription = document.getElementById('descriptionMobile');
+
+        validateForm(mobileForm, mobileSubject, mobileDescription);
+
+        // Validation function
+        function validateForm(form, subjectInput, descriptionInput) {
+            form.addEventListener('submit', function (event) {
+                const subject = subjectInput.value.trim();
+                const description = descriptionInput.value.trim();
+
+                // Validate Subject
+                if (!subject) {
+                    event.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Validation Error',
+                        text: 'Subject is required.'
+                    });
+                    return;
+                } else if (/[^a-zA-Z0-9\s]/.test(subject)) {
+                    event.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Validation Error',
+                        text: 'Subject should not contain special characters.'
+                    });
+                    return;
+                }
+
+                // Validate Description
+                if (!description) {
+                    event.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Validation Error',
+                        text: 'Describe issue/query is required.'
+                    });
+                    return;
+                } else if (description.length < 10) {
+                    event.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Validation Error',
+                        text: 'Describe issue/query must contain at least 10 characters.'
+                    });
+                    return;
+                } else if (/[^a-zA-Z0-9\s]/.test(description)) {
+                    event.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Validation Error',
+                        text: 'Describe issue/query should not contain special characters.'
+                    });
+                    return;
+                }
+            });
+        }
+    });
+</script>
 
 
 @endsection

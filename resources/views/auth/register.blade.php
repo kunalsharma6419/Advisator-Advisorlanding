@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <!-- User content -->
-                <div id="User" class="city w-full" style="display: block">
+                <div id="User" class="w-full city" style="display: block">
                     <div class="w-full mt-[44] rounded-t-lg lg:rounded-none bg-[#F6F8F1]">
                         <h2 class="text-[#3A3A3A] font-[500] text-[16px] lg:text-[20px] mt-[3px]">
                             Sign up User
@@ -77,13 +77,13 @@
                             <!-- input fields -->
                             <!-- input fields -->
                             <input id="full_name" class="p-[18px] mt-[18px] w-full rounded-[12px]"
-                                placeholder="Full Name" type="text" name="full_name" :value="old('full_name')"
+                                placeholder="Full Name*" type="text" name="full_name" :value="old('full_name')"
                                 required autofocus autocomplete="full_name" pattern="[A-Za-z\s]{4,}"
                                 title="Only letters and spaces are allowed, and at least 4 characters are required" />
 
 
                             <input id="email" class="p-[12px] mt-[18px] w-full rounded-[12px]"
-                                placeholder="Email Address" type="email" name="email" :value="old('email')"
+                                placeholder="Email Address*" type="email" name="email" :value="old('email')"
                                 required autocomplete="username"
                                 pattern="^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                                 title="Email must contain only letters, numbers, periods (.), and @ symbol" />
@@ -92,7 +92,7 @@
                                 
                             <!-- phone number input fields -->
                             <input id="phone_number" class="p-[12px] mt-[18px] w-full rounded-[12px]"
-                                placeholder="Moblie Number with Country Code" type="tel" name="phone_number"
+                                placeholder="Moblie Number with Country Code *" type="tel" name="phone_number"
                                 :value="old('phone_number')" required autocomplete="phone_number" />
 
                                 
@@ -102,7 +102,7 @@
                                 <div class="mt-4">
                                     <label for="terms" class="flex items-center">
                                         <input type="checkbox" name="terms" id="terms"
-                                            class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                                            class="w-4 h-4 text-indigo-600 transition duration-150 ease-in-out form-checkbox"
                                             required />
 
                                         <span class="ml-2 text-sm text-gray-600">
@@ -110,13 +110,13 @@
                                                 'terms_of_service' =>
                                                     '<a target="_blank" href="' .
                                                     route('terms.show') .
-                                                    '" class="underline text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-md">' .
+                                                    '" class="text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">' .
                                                     __('Terms of Service') .
                                                     '</a>',
                                                 'privacy_policy' =>
                                                     '<a target="_blank" href="' .
                                                     route('policy.show') .
-                                                    '" class="underline text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-md">' .
+                                                    '" class="text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">' .
                                                     __('Privacy Policy') .
                                                     '</a>',
                                             ]) !!}
@@ -138,7 +138,7 @@
                     </div>
                 </div>
                 <!-- Advisor content -->
-                <div id="Advisor" class="city w-full" style="display: none;">
+                <div id="Advisor" class="w-full city" style="display: none;">
                     <div class="w-full mt-[44] rounded-t-lg lg:rounded-none bg-[#F6F8F1]">
                         <h2 class="text-[#3A3A3A] font-[500] text-[16px] lg:text-[20px] mt-[3px]">
                             Sign up Advisor
@@ -147,18 +147,18 @@
                             @csrf
                             <!-- input fields -->
                             <input id="full_name" class="p-[18px] mt-[18px] w-full rounded-[12px]"
-                                placeholder="Full Name" type="text" name="full_name" :value="old('full_name')"
+                                placeholder="Full Name*" type="text" name="full_name" :value="old('full_name')"
                                 required autofocus autocomplete="full_name" pattern="[A-Za-z\s]{4,}"
                                 title="Only letters and spaces are allowed, and at least 4 characters are required" />
                             <!-- input fields -->
                             <input id="email" class="p-[12px] mt-[18px] w-full rounded-[12px]"
-                                placeholder="Email Address" type="email" name="email" :value="old('email')"
+                                placeholder="Email Address *" type="email" name="email" :value="old('email')"
                                 required autocomplete="username"
                               />
 
                             <!-- phone number input fields -->
                             <input id="phone_number" class="p-[12px] mt-[18px] w-full rounded-[12px]"
-                                placeholder="Moblie Number with Country Code" type="text" name="phone_number"
+                                placeholder="Moblie Number with Country Code *" type="text" name="phone_number"
                                 :value="old('phone_number')" required autocomplete="phone_number" />
                             <!-- hidden input for usertype -->
                             <input type="hidden" id="usertype" name="usertype" value="2">
@@ -167,7 +167,7 @@
                                 <div class="mt-4">
                                     <label for="terms" class="flex items-center">
                                         <input type="checkbox" name="terms" id="terms"
-                                            class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                                            class="w-4 h-4 text-indigo-600 transition duration-150 ease-in-out form-checkbox"
                                             required />
 
                                         <span class="ml-2 text-sm text-gray-600">
@@ -175,13 +175,13 @@
                                                 'terms_of_service' =>
                                                     '<a target="_blank" href="' .
                                                     route('terms.show') .
-                                                    '" class="underline text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-md">' .
+                                                    '" class="text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">' .
                                                     __('Terms of Service') .
                                                     '</a>',
                                                 'privacy_policy' =>
                                                     '<a target="_blank" href="' .
                                                     route('policy.show') .
-                                                    '" class="underline text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-md">' .
+                                                    '" class="text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">' .
                                                     __('Privacy Policy') .
                                                     '</a>',
                                             ]) !!}
@@ -457,27 +457,27 @@
 
             <div>
                 <x-label for="full_name" value="{{ __('Full Name') }}" />
-                <x-input id="full_name" class="block mt-1 w-full" type="text" name="full_name" :value="old('full_name')" required autofocus autocomplete="full_name" />
+                <x-input id="full_name" class="block w-full mt-1" type="text" name="full_name" :value="old('full_name')" required autofocus autocomplete="full_name" />
             </div>
 
             <div class="mt-4">
                 <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                <x-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')" required autocomplete="username" />
             </div>
 
             <div class="mt-4">
                 <x-label for="phone_number" value="{{ __('Phone') }}" />
-                <x-input id="phone_number" class="block mt-1 w-full" type="number" name="phone_number" :value="old('phone_number')" required autocomplete="phone_number" />
+                <x-input id="phone_number" class="block w-full mt-1" type="number" name="phone_number" :value="old('phone_number')" required autocomplete="phone_number" />
             </div>
 
             {{-- <div class="mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                <x-input id="password" class="block w-full mt-1" type="password" name="password" required autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
                 <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+                <x-input id="password_confirmation" class="block w-full mt-1" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div> -
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -488,8 +488,8 @@
 
                             <div class="ml-2">
                                 {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
+                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
+                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
                                 ]) !!}
                             </div>
                         </div>
@@ -498,7 +498,7 @@
             @endif
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+                <a class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
 

@@ -3,6 +3,9 @@
 <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
 <style>
     html,
     body {
@@ -244,22 +247,22 @@
                             @endauth
                         @endif
                         <!-- <a
-                                                                                                                                                                                                                                class="flex items-center gap-2 cursor-pointer"
-                                                                                                                                                                                                                                href="../Advisor pages/wallet.html"
-                                                                                                                                                                                                                              >
-                                                                                                                                                                                                                                <img
-                                                                                                                                                                                                                                  class="w-5 h-5"
-                                                                                                                                                                                                                                  src="./src/assets/img/iconWallet.png"
-                                                                                                                                                                                                                                  alt=""
-                                                                                                                                                                                                                                />
+                                                                                                                                                                                                                                    class="flex items-center gap-2 cursor-pointer"
+                                                                                                                                                                                                                                    href="../Advisor pages/wallet.html"
+                                                                                                                                                                                                                                  >
+                                                                                                                                                                                                                                    <img
+                                                                                                                                                                                                                                      class="w-5 h-5"
+                                                                                                                                                                                                                                      src="./src/assets/img/iconWallet.png"
+                                                                                                                                                                                                                                      alt=""
+                                                                                                                                                                                                                                    />
 
-                                                                                                                                                                                                                                <div
-                                                                                                                                                                                                                                  class="flex items-center font-sans text-sm sm:text-base text-[#DB9206] font-semibold"
-                                                                                                                                                                                                                                >
-                                                                                                                                                                                                                                  &#8377;
-                                                                                                                                                                                                                                  <p>1,229</p>
-                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                              </a> -->
+                                                                                                                                                                                                                                    <div
+                                                                                                                                                                                                                                      class="flex items-center font-sans text-sm sm:text-base text-[#DB9206] font-semibold"
+                                                                                                                                                                                                                                    >
+                                                                                                                                                                                                                                      &#8377;
+                                                                                                                                                                                                                                      <p>1,229</p>
+                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                  </a> -->
                     </div>
                     {{-- <div class="border border-[#DB9206] bg-[#FFF3DB] rounded sm:rounded-lg px-2 py-1 sm:py-2 sm:px-4">
                 <a class="flex items-center gap-2 cursor-pointer" href="../Advisor pages/wallet.html">
@@ -282,19 +285,21 @@
         </div>
 
         <!-- Search box for both mobile and desktop -->
-<form action="{{ route('consult-advisor') }}" method="GET">
-    <div class="flex flex-row lg:flex-row p-2 mt-4 mx-auto items-center bg-white border border-[#EAEAEA] rounded-[50px] justify-between w-full max-w-[80%]">
-        <input id="search-bar" name="search" class="bg-white rounded-[50px] w-full px-4 lg:py-3 lg:mb-0 text-sm lg:text-base" placeholder="Search Advisor" type="text" autocomplete="off" />
-        <button type="submit" class="flex items-center lg:w-auto bg-[#EDF6DB] p-2 lg:px-3  lg:py-3 rounded-full gap-4 justify-center text-center whitespace-nowrap">
-            <!-- Icon always visible -->
-            <svg class="w-5 h-5 text-[#000000]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-            </svg>
-            <!-- Text only visible on large screens and above -->
-            <p class="text-black hidden lg:block">Find Advisor</p>
-        </button>
-    </div>
-</form>
+        <form id="customSearchForm">
+            <div class="flex flex-row lg:flex-row p-2 mt-4 mx-auto items-center bg-white border border-[#EAEAEA] rounded-[50px] justify-between w-full max-w-[80%]">
+                <input id="custom-search-bar" name="search" class="bg-white rounded-[50px] w-full px-4 lg:py-3 lg:mb-0 text-sm lg:text-base" placeholder="Search Advisor" type="text" autocomplete="off" />
+                <button type="button" id="search-submit" class="flex items-center lg:w-auto bg-[#EDF6DB] p-2 lg:px-3 lg:py-3 rounded-full gap-4 justify-center text-center whitespace-nowrap">
+                    <!-- Icon always visible -->
+                    <svg class="w-5 h-5 text-[#000000]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                    <!-- Text only visible on large screens and above -->
+                    <p class="text-black hidden lg:block">Find Advisor</p>
+                </button>
+            </div>
+        </form>
+        
+
 
 
 
@@ -307,15 +312,17 @@
 
             <!-- image swipper -->
             <div class="w-full mt-[30px]">
-                <!-- Swiper -->
                 @if (!empty($advisor->highlighted_images) && count($advisor->highlighted_images) > 0)
                     <div class="swiper mySwiper1">
                         <div class="swiper-wrapper">
                             @foreach ($advisor->highlighted_images as $image)
                                 <div class="swiper-slide">
                                     <div>
-                                        <img class="w-[239px] h-[180px] shadow shadow-[#00000026] object-cover"
-                                            src="{{ Storage::url($image) }}" alt="Highlighted Image" />
+                                        <!-- Lightbox gallery integration -->
+                                        <a href="{{ Storage::url($image) }}" data-lightbox="highlighted-gallery">
+                                            <img class="w-[239px] h-[180px] shadow shadow-[#00000026] object-cover"
+                                                src="{{ Storage::url($image) }}" alt="Highlighted Image" />
+                                        </a>
                                     </div>
                                 </div>
                             @endforeach
@@ -323,10 +330,12 @@
                     </div>
                 @endif
 
-                <!-- next buttons -->
-                <!-- <div class="swiper-button-prev"></div>
-                                                                                                                                                                                                                                        <div class="swiper-button-next"></div> -->
             </div>
+
+
+
+
+
             <!-- content section -->
             <div class="w-full flex gap-[20px]">
                 <!-- left -->
@@ -708,13 +717,13 @@
                             </div>
                         </div>
                         @if ($advisor->is_founder)
-                        <h3 class="text-[12px] lg:text-[16px] font-[400]">
-                            Founder, <span class="font-bold text-[#6A9023]">{{ $advisor->company_name }}</span>
-                            <br class="lg:hidden">
-                            Website : 
-                            <a href="{{ $advisor->company_website }}" class="font-bold text-[#6A9023]">{{ $advisor->company_website }}</a>
-                        </h3>
-                        
+                            <h3 class="text-[12px] lg:text-[16px] font-[400]">
+                                Founder, <span class="font-bold text-[#6A9023]">{{ $advisor->company_name }}</span>
+                                <br class="lg:hidden">
+                                Website :
+                                <a href="{{ $advisor->company_website }}"
+                                    class="font-bold text-[#6A9023]">{{ $advisor->company_website }}</a>
+                            </h3>
                         @endif
 
                         <h4 class="text-[12px] lg:text-[16px]  font-bold">About</h4>
@@ -866,13 +875,17 @@
                         @foreach ($advisor->highlighted_images as $image)
                             <div class="swiper-slide">
                                 <div>
-                                    <img class="w-[100px] h-[80px] shadow shadow-[#00000026] object-cover"
-                                        src="{{ Storage::url($image) }}" alt="Highlighted Image" />
+
+                                    <a href="{{ Storage::url($image) }}" data-lightbox="highlighted-gallery">
+                                        <img class="w-[100px] h-[80px] shadow shadow-[#00000026] object-cover"
+                                            src="{{ Storage::url($image) }}" alt="Highlighted Image" />
+                                    </a>
                                 </div>
                             </div>
                         @endforeach
                     </div>
                 @endif
+
 
 
             </div>
@@ -915,20 +928,21 @@
                                             @endif
                                         </h2>
                                     </div>
-                                
+
                                     @if ($advisor->is_founder)
-                                    <h3 class="text-[12px] lg:text-[16px] font-[400] break-words w-28 sm:w-48 md:">
-                                            Founder, 
+                                        <h3 class="text-[12px] lg:text-[16px] font-[400] break-words w-28 sm:w-48 md:">
+                                            Founder,
                                             <span class="font-bold text-[#6A9023]">{{ $advisor->company_name }}</span>
                                             <br>
-                                            Website : 
-                                            <a href="{{ $advisor->company_website }}" class="font-bold text-[#6A9023] break-words w-full">
+                                            Website :
+                                            <a href="{{ $advisor->company_website }}"
+                                                class="font-bold text-[#6A9023] break-words w-full">
                                                 {{ $advisor->company_website }}
                                             </a>
                                         </h3>
                                     @endif
                                 </div>
-                                
+
                                 <!-- rating -->
                                 <div class="flex items-center gap-1">
                                     <i class="fa-solid fa-star" style="color: #ffd43b"></i>
@@ -946,7 +960,7 @@
                                         {{-- {{ $advisor->language_known ?? 'N/A' }} --}}
                                         English,Hindi
                                     </p>
-                                    
+
                                 </div>
                                 <div class="flex items-center gap-1">
                                     <img class="sm:w-[20px] sm:h-[20px] w-[15px] h-[15px]"
@@ -965,7 +979,7 @@
                                     </p>
                                 </div>
                             </div>
-                            
+
 
                         </div>
                         <div class="flex items-center gap-1 w-ful">
@@ -973,17 +987,16 @@
 
                             <p class="text-[12px] font-[500] text-[#C95555]">Notify me</p> --}}
                             <button id="notifyButton" type="button"
-                                    data-route="{{ route('notify.advisor', $advisor->user_id) }}"
-                                    data-advisor-id="{{ $advisor->user_id }}"
-                                    class="lg:text-[16px] text-[12px] font-[500] text-[#C95555] flex items-center gap-1 p-3">
-                                    <img class="w-[20px] h-[20px]" src="../src/assets/icons/Notify me.png"
-                                        alt="" />
-                                    Notify me
-                                </button>
+                                data-route="{{ route('notify.advisor', $advisor->user_id) }}"
+                                data-advisor-id="{{ $advisor->user_id }}"
+                                class="lg:text-[16px] text-[12px] font-[500] text-[#C95555] flex items-center gap-1 p-3">
+                                <img class="w-[20px] h-[20px]" src="../src/assets/icons/Notify me.png" alt="" />
+                                Notify me
+                            </button>
                         </div>
 
                         <div class="flex flex-col gap-[4px]">
-                            
+
                             <div class="flex flex-col gap-[4px] w-full justify-around sm:flex-row">
                                 <button onclick="handleDiscoveryCall('{{ $advisor->user_id }}')"
                                     class="bg-[#6a9023] w-full sm:w-auto text-white px-4 py-2 rounded-md hover:bg-green-600">
@@ -1540,6 +1553,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
     <!-- Include SweetAlert2 and Tailwind Modal Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -1554,7 +1568,7 @@
 
                     // Check if the user is logged in
                     const isLoggedIn =
-                    {{ auth()->check() ? 'true' : 'false' }}; // Authentication check
+                        {{ auth()->check() ? 'true' : 'false' }}; // Authentication check
 
                     if (!isLoggedIn) {
                         Swal.fire({
@@ -1569,7 +1583,7 @@
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 window.location.href =
-                                "{{ route('login') }}"; // Redirect to login
+                                    "{{ route('login') }}"; // Redirect to login
                             }
                         });
                         return; // Stop further execution if not logged in
@@ -2078,63 +2092,56 @@
                 });
             @endif
         }
-    </script>
+    </script><script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchForm = document.getElementById('customSearchForm');
+        const searchBar = document.getElementById('custom-search-bar');
+        const searchSubmitButton = document.getElementById('search-submit');
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchBar = document.getElementById('search-bar');
-            const suggestionsDropdown = document.getElementById('suggestions-dropdown');
+        if (!searchForm || !searchBar || !searchSubmitButton) {
+            console.error('Search form or elements not found.');
+            return;
+        }
 
-            if (!searchBar || !suggestionsDropdown) {
-                console.error('Search bar or suggestions dropdown element not found.');
-                return;
-            }
+        searchSubmitButton.addEventListener('click', function () {
+            // Prevent the default form submission
+            event.preventDefault();
 
-            searchBar.addEventListener('input', function() {
-                let searchQuery = this.value;
-
+            // Check if the user is authenticated
+            @if (Auth::check())
+                const searchQuery = searchBar.value.trim();
                 if (searchQuery.length > 2) {
-                    fetchSuggestions(searchQuery);
+                    // Redirect if search query is valid
+                    window.location.href = '{{ route('consult-advisor') }}?search=' + searchQuery;
                 } else {
-                    suggestionsDropdown.classList.add('hidden');
-                }
-            });
-
-            function fetchSuggestions(query) {
-                // Send an AJAX request to the server
-                fetch(`/advisor-suggestions?query=${query}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (!Array.isArray(data)) {
-                            console.error('Unexpected data format:', data);
-                            return;
-                        }
-
-                        suggestionsDropdown.innerHTML = '';
-
-                        if (data.length > 0) {
-                            data.forEach(advisor => {
-                                let option = document.createElement('div');
-                                option.className = 'p-2 cursor-pointer hover:bg-gray-100';
-                                option.innerText = advisor.full_name;
-                                option.addEventListener('click', function() {
-                                    searchBar.value = advisor.full_name;
-                                    suggestionsDropdown.classList.add('hidden');
-                                });
-                                suggestionsDropdown.appendChild(option);
-                            });
-                            suggestionsDropdown.classList.remove('hidden');
-                        } else {
-                            suggestionsDropdown.classList.add('hidden');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching suggestions:', error);
+                    // Show SweetAlert for invalid query
+                    Swal.fire({
+                        title: 'Invalid Search Query',
+                        text: 'Please enter at least 3 characters to search.',
+                        icon: 'error',
+                        confirmButtonText: 'OK',
                     });
-            }
+                }
+            @else
+                // User is not authenticated, show login prompt
+                Swal.fire({
+                    title: 'Login Required',
+                    text: 'Please log in to search for advisors.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Login',
+                    cancelButtonText: 'Cancel',
+                    confirmButtonColor: '#4CAF50', // Green color for confirm button
+                    cancelButtonColor: '#f44336', // Red color for cancel button
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Redirect to login page
+                        window.location.href = '{{ route('login') }}';
+                    }
+                });
+            @endif
         });
-    </script>
-
-
+    });
+</script>
 
 @endsection
