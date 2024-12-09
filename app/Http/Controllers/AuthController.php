@@ -182,22 +182,27 @@ class AuthController extends Controller
             }
 
             // Attempt to create a new user
-            $user = new User;
-            $user->full_name = $request->full_name;
-            $user->email = $request->email;
-            $user->phone_number = $request->phone_number;
-            $user->usertype = $request->usertype;
-            $uniqueId = substr($request->full_name, 0, 4) . rand(1000, 9999);
-            $collisionCount = 0;
-            while (User::where('unique_id', $uniqueId)->exists()) {
-                $uniqueId = substr($request->full_name, 0, 4) . rand(1000, 9999);
-                $collisionCount++;
-                if ($collisionCount >= 10) {
-                    throw new \RuntimeException('Failed to generate unique ID after multiple attempts.');
-                }
-            }
-            $user->unique_id = $uniqueId;
-            $user->save();
+$user = new User;
+$user->full_name = $request->full_name;
+$user->email = $request->email;
+$user->phone_number = $request->phone_number;
+$user->usertype = $request->usertype;
+
+// Remove spaces from full_name before generating unique ID
+$sanitizedName = str_replace(' ', '', $request->full_name);
+$uniqueId = substr($sanitizedName, 0, 4) . rand(1000, 9999);
+
+$collisionCount = 0;
+while (User::where('unique_id', $uniqueId)->exists()) {
+    $uniqueId = substr($sanitizedName, 0, 4) . rand(1000, 9999);
+    $collisionCount++;
+    if ($collisionCount >= 10) {
+        throw new \RuntimeException('Failed to generate unique ID after multiple attempts.');
+    }
+}
+
+$user->unique_id = $uniqueId;
+$user->save();
 
             // Call the authenticatecomet function after user creation
             $this->authenticatecomet($user);

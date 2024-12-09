@@ -36,6 +36,7 @@
                                 class="max-w-[40rem] mx-auto border border-[#DADADA] px-2 xl:px-4 py-2 rounded-[24px] shadow-md flex justify-between items-center gap-x-2 font-sans font-normal text-sm lg:text-base text-[#2A2A2A]">
                                 <div class="w-full">
                                     <input id="search-bar"
+                                    name="search"
                                         class="font-medium text-sm w-[95%] lg:text-base text-[#AFAFAF] placeholder:text-[#AFAFAF] outline-none bg-[#FFFFFF]"
                                         type="text" autocomplete="off" placeholder="What are you looking for?" />
                                 </div>
@@ -58,12 +59,12 @@
                             
                             
                             </div>
-
+{{-- 
                             <!-- Hidden inputs for different search parameters -->
                             <input type="hidden" id="business_function_id" name="business_function" value="">
                             <input type="hidden" id="sub_function_id" name="sub_function" value="">
                             <input type="hidden" id="industry_id" name="industry" value="">
-                            <input type="hidden" id="location_id" name="location" value="">
+                            <input type="hidden" id="location_id" name="location" value=""> --}}
                         </form>
                     </div>
 

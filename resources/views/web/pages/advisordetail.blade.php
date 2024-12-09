@@ -2092,7 +2092,11 @@
                 });
             @endif
         }
-    </script><script>
+    </script>
+    
+    
+    
+    <script>
     document.addEventListener('DOMContentLoaded', function () {
         const searchForm = document.getElementById('customSearchForm');
         const searchBar = document.getElementById('custom-search-bar');
@@ -2107,39 +2111,19 @@
             // Prevent the default form submission
             event.preventDefault();
 
-            // Check if the user is authenticated
-            @if (Auth::check())
-                const searchQuery = searchBar.value.trim();
-                if (searchQuery.length > 2) {
-                    // Redirect if search query is valid
-                    window.location.href = '{{ route('consult-advisor') }}?search=' + searchQuery;
-                } else {
-                    // Show SweetAlert for invalid query
-                    Swal.fire({
-                        title: 'Invalid Search Query',
-                        text: 'Please enter at least 3 characters to search.',
-                        icon: 'error',
-                        confirmButtonText: 'OK',
-                    });
-                }
-            @else
-                // User is not authenticated, show login prompt
+            const searchQuery = searchBar.value.trim();
+            if (searchQuery.length > 2) {
+                // Redirect if search query is valid
+                window.location.href = '{{ route('consult-advisor') }}?search=' + searchQuery;
+            } else {
+                // Show SweetAlert for invalid query
                 Swal.fire({
-                    title: 'Login Required',
-                    text: 'Please log in to search for advisors.',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Login',
-                    cancelButtonText: 'Cancel',
-                    confirmButtonColor: '#4CAF50', // Green color for confirm button
-                    cancelButtonColor: '#f44336', // Red color for cancel button
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Redirect to login page
-                        window.location.href = '{{ route('login') }}';
-                    }
+                    title: 'Invalid Search Query',
+                    text: 'Please enter at least 3 characters to search.',
+                    icon: 'error',
+                    confirmButtonText: 'OK',
                 });
-            @endif
+            }
         });
     });
 </script>
